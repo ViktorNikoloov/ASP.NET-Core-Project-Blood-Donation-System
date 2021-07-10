@@ -4,29 +4,28 @@
 
     public enum BloodType
     {
-        [Display(Name = "A+")]
+        [Display(Name = "A(+)")]
         APositive = 1,
 
-        [Display(Name = "A-")]
+        [Display(Name = "A(-)")]
         ANegative = 2,
 
-        [Display(Name = "B+")]
-        BPositive = 1,
+        [Display(Name = "B(+)")]
+        BPositive = 3,
 
-        [Display(Name = "B-")]
-        BNegative = 2,
+        [Display(Name = "B(-)")]
+        BNegative = 4,
 
-        [Display(Name = "AB+")]
-        ABPositive = 1,
+        [Display(Name = "AB(+)")]
+        ABPositive = 5,
 
-        [Display(Name = "AB-")]
-        ABNegative = 2,
+        [Display(Name = "AB(-)")]
+        ABNegative = 6,
 
-        [Display(Name = "0+")]
-        ZeroPositive = 1,
+        [Display(Name = "0(+)")]
+        ZeroPositive = 7,
 
-        [Display(Name = "0-")]
-        ZeroNegative = 2,
-
+        [Display(Name = "0(-)")]
+        ZeroNegative = 8,
     }
 }

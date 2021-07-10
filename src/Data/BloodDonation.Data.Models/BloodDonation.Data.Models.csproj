@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BloodDonation.Common\BloodDonation.Common.csproj" />
     <ProjectReference Include="..\BloodDonation.Data.Common\BloodDonation.Data.Common.csproj" />
   </ItemGroup>
   

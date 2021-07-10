@@ -12,19 +12,33 @@
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
+    public class BlooddonationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         private static readonly MethodInfo SetIsDeletedQueryFilterMethod =
-            typeof(ApplicationDbContext).GetMethod(
+            typeof(BlooddonationDbContext).GetMethod(
                 nameof(SetIsDeletedQueryFilter),
                 BindingFlags.NonPublic | BindingFlags.Static);
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public BlooddonationDbContext(DbContextOptions<BlooddonationDbContext> options)
             : base(options)
         {
         }
 
         public DbSet<Setting> Settings { get; set; }
+
+        public DbSet<Recipient> Recipients { get; set; }
+
+        public DbSet<Donor> Donors { get; set; }
+
+        public DbSet<Appointment> Appointments { get; set; }
+
+        public DbSet<Address> Addresses { get; set; }
+
+        public DbSet<QuestionAnswer> QuestionAnswers { get; set; }
+
+        public DbSet<Rating> Ratings { get; set; }
+
+        public DbSet<Massage> Massages { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

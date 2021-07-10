@@ -35,9 +35,9 @@
         [Fact]
         public async Task GetCountShouldReturnCorrectNumberUsingDbContext()
         {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            var options = new DbContextOptionsBuilder<BlooddonationDbContext>()
                 .UseInMemoryDatabase(databaseName: "SettingsTestDb").Options;
-            using var dbContext = new ApplicationDbContext(options);
+            using var dbContext = new BlooddonationDbContext(options);
             dbContext.Settings.Add(new Setting());
             dbContext.Settings.Add(new Setting());
             dbContext.Settings.Add(new Setting());

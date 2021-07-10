@@ -16,6 +16,9 @@ namespace BloodDonation.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+
+            // Application questions if the registered user or recipient is applying for Donor position
+            this.QuestionsAnswers = new HashSet<QuestionAnswer>();
         }
 
         // Audit info
@@ -27,6 +30,12 @@ namespace BloodDonation.Data.Models
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
+
+        public virtual Recipient Recipient { get; set; }
+
+        public virtual Donor Donor { get; set; }
+
+        public virtual ICollection<QuestionAnswer> QuestionsAnswers { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
