@@ -7,10 +7,13 @@
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/lazy.css">
+    <link rel="favicon" type="image/x-icon" href="~/favicon.ico" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        @*<nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -32,17 +35,71 @@
                     </ul>
                 </div>
             </div>
+        </nav>*@
+        <nav class="navbar navbar-expand-sm navbar-dark bg-primary border-bottom box-shadow">
+            <div class="container">
+                <img src="~/bloodHeroImg.png" class="favico" width="70" height="60" >
+                <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-3" aria-controls="navbarNavDropdown-3"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse mr-auto text-center" id="navbarNavDropdown-3">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-outline-danger btn-icon btn-sm">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                                    <i class="fas fa-medkit"></i> Начало
+                                </a>
+
+                            </button>
+                        </li>
+
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-outline-danger btn-icon btn-sm">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">
+                                    <i class="fas fa-hand-holding-heart"></i> Приемник
+                                </a>
+                            </button>
+                        </li>
+
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-outline-danger btn-icon btn-sm">
+                                <a class="nav-link" asp-area="" asp-controller="Settings" asp-action="Index">
+                                    <i class="fas fa-hand-holding-heart"></i> Донор
+                                </a>
+                            </button>
+                        </li>
+
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-outline-danger btn-icon btn-sm">
+                                <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Register">
+                                    <i class="fas fa-notes-medical"></i> Регистрация
+                                </a>
+                            </button>
+                        </li>
+
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-outline-danger btn-icon btn-sm">
+                                <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Login">
+                                    <i class="fas fa-walking"></i> Вход
+                                </a>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     </header>
-    
+
     <div class="container">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @this.RenderBody()
         </main>
     </div>
-    
-    <footer class="border-top footer text-muted">
+
+    <footer class="border-top footer text-muted bg-primary">
         <div class="container">
             &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
@@ -52,6 +109,8 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+    <script src="~/lib/popper/popper.min.js" asp-append-version="true"></script>
+    <script src="~/js/lazy.js" asp-append-version="true"></script>
     <script src="~/js/site.min.js" asp-append-version="true"></script>
     @await this.RenderSectionAsync("Scripts", required: false)
 </body>

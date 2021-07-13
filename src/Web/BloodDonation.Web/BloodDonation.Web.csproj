@@ -9,6 +9,10 @@
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\bloogimg.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
@@ -35,5 +39,21 @@
     <ProjectReference Include="..\..\Services\BloodDonation.Services\BloodDonation.Services.csproj" />
     <ProjectReference Include="..\BloodDonation.Web.Infrastructure\BloodDonation.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\BloodDonation.Web.ViewModels\BloodDonation.Web.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="wwwroot\bloogimg.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\bloodHeroImg.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\bloodimg.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\favicon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>
