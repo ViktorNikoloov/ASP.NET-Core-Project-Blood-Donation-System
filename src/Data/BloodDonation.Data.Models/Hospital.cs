@@ -13,9 +13,9 @@
         [MaxLength(HospitalNameMaxLength)]
         public string HospitalName { get; set; }
 
-        [Required]
-        [MaxLength(HospitalCityMaxLength)]
-        public string HospitalCity { get; set; }
+        public int TownId { get; set; }
+
+        public Town Town { get; set; }
 
         [Required]
         [MaxLength(HospitalWardNameMaxLength)]

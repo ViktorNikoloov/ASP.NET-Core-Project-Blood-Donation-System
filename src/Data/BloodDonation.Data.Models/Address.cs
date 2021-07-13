@@ -12,9 +12,9 @@
             this.Donors = new HashSet<Donor>();
         }
 
-        public int CountryId { get; set; }
+        public int TownId { get; set; }
 
-        public Country Country { get; set; }
+        public Town Town { get; set; }
 
         public virtual ICollection<Recipient> Recipients { get; set; }
 

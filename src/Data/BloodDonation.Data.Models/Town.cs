@@ -11,7 +11,8 @@
     {
         public Town()
         {
-            this.Countries = new HashSet<Country>();
+            this.Addresses = new HashSet<Address>();
+            this.Hospitals = new HashSet<Hospital>();
         }
 
         [Required]
@@ -21,6 +22,8 @@
         [MaxLength(PostCodeMaxLength)]
         public int PostCode { get; set; }
 
-        public virtual ICollection<Country> Countries { get; set; }
+        public virtual ICollection<Address> Addresses { get; set; }
+
+        public virtual ICollection<Hospital> Hospitals { get; set; }
     }
 }

@@ -40,8 +40,6 @@
 
         public DbSet<Massage> Massages { get; set; }
 
-        public DbSet<Country> Countries { get; set; }
-
         public DbSet<Town> Towns { get; set; }
 
         public DbSet<Hospital> Hospitals { get; set; }

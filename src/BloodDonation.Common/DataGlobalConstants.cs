@@ -35,8 +35,6 @@
 
             public const int HospitalWardNameMaxLength = 80;
 
-            public const int HospitalCityMaxLength = 20;
-
             public const int BloodBankCountMaxLength = 15;
         }
     }
