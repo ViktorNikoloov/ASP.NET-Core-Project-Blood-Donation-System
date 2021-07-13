@@ -26,6 +26,11 @@
 
         public static class AppointmentConstants
         {
+            public const int BloodBankCountMaxLength = 15;
+        }
+
+        public static class HospitalConstants
+        {
             public const int HospitalNameMaxLength = 50;
 
             public const int HospitalWardNameMaxLength = 80;

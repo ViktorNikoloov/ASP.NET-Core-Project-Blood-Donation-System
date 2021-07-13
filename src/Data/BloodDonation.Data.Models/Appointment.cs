@@ -26,17 +26,9 @@
 
         public Gender Gender { get; set; }
 
-        [Required]
-        [MaxLength(HospitalNameMaxLength)]
-        public string HospitalName { get; set; }
+        public int HospitalId { get; set; }
 
-        [Required]
-        [MaxLength(HospitalCityMaxLength)]
-        public string HospitalCity { get; set; }
-
-        [Required]
-        [MaxLength(HospitalWardNameMaxLength)]
-        public string HospitalWardName { get; set; }
+        public virtual Hospital Hospital { get; set; }
 
         [Required]
         [MaxLength(BloodBankCountMaxLength)]
