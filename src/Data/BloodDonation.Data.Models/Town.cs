@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    using System.ComponentModel.DataAnnotations.Schema;
     using BloodDonation.Data.Common.Models;
 
     using static BloodDonation.Common.DataGlobalConstants.AddressConstants;
@@ -20,9 +20,6 @@
 
         [MaxLength(PostCodeMaxLength)]
         public int PostCode { get; set; }
-
-        [MaxLength(StreetMaxLength)]
-        public string Street { get; set; }
 
         public virtual ICollection<Country> Countries { get; set; }
     }

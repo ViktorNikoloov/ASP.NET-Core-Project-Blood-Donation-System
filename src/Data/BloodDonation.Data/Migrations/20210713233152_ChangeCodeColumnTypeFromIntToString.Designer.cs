@@ -4,14 +4,16 @@ using BloodDonation.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BloodDonation.Data.Migrations
 {
     [DbContext(typeof(BlooddonationDbContext))]
-    partial class BlooddonationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210713233152_ChangeCodeColumnTypeFromIntToString")]
+    partial class ChangeCodeColumnTypeFromIntToString
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -606,6 +608,10 @@ namespace BloodDonation.Data.Migrations
                     b.Property<int>("PostCode")
                         .HasMaxLength(9)
                         .HasColumnType("int");
+
+                    b.Property<string>("Street")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
