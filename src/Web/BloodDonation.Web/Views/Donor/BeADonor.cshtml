@@ -1,0 +1,76 @@
+﻿@using BloodDonation.Web.ViewModels.Donor
+@model DonorFormViewModel
+@{
+    this.ViewData["Title"] = "Стани Донор";
+}
+
+<h1 class="alert alert-primary" role="alert">Тук и сега можете да станете героя, на когото всеки разчита. Станете безвъзмезден кръводарител. </h1>
+<div class="class="d-flex flex-column bd-highlight mb-3">
+    <form action="BeADonor" method="post" text-center">
+        <div asp-validation-summary="All" class="alert alert-primary" role="alert">Грешки възникнали при попълване на полетата:</div>
+
+        <div class="form-group">
+            <label asp-for="FirstName">Име</label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+
+            <label asp-for="MiddleName">Бащино име</label>
+            <input asp-for="MiddleName" class="form-control" />
+        </div>
+
+        <div class="form-group">
+
+            <label asp-for="LastName">Фамилия</label>
+            <input asp-for="LastName" class="form-control" />
+        </div>
+
+        <div class="form-group">
+
+            <label asp-for="ImageUrl">Url</label>
+            <input asp-for="ImageUrl" class="form-control" />
+        </div>
+
+        <div class="form-group">
+
+            <label asp-for="Gender">Пол</label>
+            <input asp-for="Gender" class="form-control" />
+        </div>
+
+        <div class="form-group">
+
+            <label asp-for="Address.Town.Name">Град</label>
+            <input asp-for="Address.Town.Name" class="form-control" />
+        </div>
+
+        <div class="form-group">
+
+            <label asp-for="Address.Town.PostCode">Пощенски код</label>
+            <input asp-for="Address.Town.PostCode" class="form-control" />
+        </div>
+
+        <div class="form-group">
+
+            <label asp-for="Address.Town.Street.Name">Улица</label>
+            <input asp-for="Address.Town.Street.Name" class="form-control" />
+        </div>
+
+        <div class="form-group">
+
+            <label asp-for="Address.Town.Street.Number">Номер</label>
+            <input asp-for="Address.Town.Street.Number" class="form-control" />
+        </div>
+
+        <div class="form-group">
+
+            <label asp-for="PhoneNumber">Телефонен номер</label>
+            <input asp-for="PhoneNumber" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>

@@ -21,6 +21,5 @@
         public int Number { get; set; }
 
         public virtual ICollection<Town> Towns { get; set; }
-
     }
 }

@@ -15,9 +15,15 @@
 
         public static class BasicUserInfoConstants
         {
+            public const int FirstNameMinLength = 3;
+
             public const int FirstNameMaxLength = 15;
 
-            public const int MiddleNameMaxLength = 10;
+            public const int MiddleNameMinLength = 5;
+
+            public const int MiddleNameMaxLength = 15;
+
+            public const int LastNameMinLength = 5;
 
             public const int LastNameMaxLength = 20;
 
