@@ -42,6 +42,8 @@
 
         public DbSet<Town> Towns { get; set; }
 
+        public DbSet<Street> Streets { get; set; }
+
         public DbSet<Hospital> Hospitals { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);

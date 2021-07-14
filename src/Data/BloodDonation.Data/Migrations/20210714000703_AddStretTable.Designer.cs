@@ -4,14 +4,16 @@ using BloodDonation.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BloodDonation.Data.Migrations
 {
     [DbContext(typeof(BlooddonationDbContext))]
-    partial class BlooddonationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210714000703_AddStretTable")]
+    partial class AddStretTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

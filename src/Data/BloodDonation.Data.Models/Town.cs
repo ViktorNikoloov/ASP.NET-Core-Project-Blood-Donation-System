@@ -22,6 +22,10 @@
         [MaxLength(PostCodeMaxLength)]
         public int PostCode { get; set; }
 
+        public int StreetId { get; set; }
+
+        public virtual Street Street { get; set; }
+
         public virtual ICollection<Address> Addresses { get; set; }
 
         public virtual ICollection<Hospital> Hospitals { get; set; }

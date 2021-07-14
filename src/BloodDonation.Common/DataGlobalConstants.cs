@@ -29,6 +29,14 @@
             public const int BloodBankCountMaxLength = 15;
         }
 
+        public static class StreetConstants
+        {
+            public const int StreetNameMaxLength = 50;
+            public const int StreetNumberMinValue = 0;
+            public const int StreetNumberMaxValue = 999;
+            public const int BloodBankCountMaxLength = 15;
+        }
+
         public static class HospitalConstants
         {
             public const int HospitalNameMaxLength = 50;
