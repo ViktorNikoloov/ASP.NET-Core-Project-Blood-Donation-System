@@ -19,8 +19,8 @@
         [MaxLength(CityMaxLength)]
         public string Name { get; set; }
 
-        [MaxLength(PostCodeMaxLength)]
-        public int PostCode { get; set; }
+        [MaxLength(PostCodeMaxValue)]
+        public int? PostCode { get; set; }
 
         public int StreetId { get; set; }
 

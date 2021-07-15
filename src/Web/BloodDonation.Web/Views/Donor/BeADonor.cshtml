@@ -1,4 +1,5 @@
 ﻿@using BloodDonation.Web.ViewModels.Donor
+@using BloodDonation.Data.Models.Enums
 @model DonorFormViewModel
 @{
     this.ViewData["Title"] = "Стани Донор";
@@ -10,63 +11,62 @@
         <div asp-validation-summary="All" class="alert alert-primary" role="alert">Грешки възникнали при попълване на полетата:</div>
 
         <div class="form-group">
-            <label asp-for="FirstName">Име</label>
-            <input asp-for="FirstName" class="form-control" />
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName" class="form-control" placeholder="Виктор"/>
             <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
 
         <div class="form-group">
+            <label asp-for="MiddleName"></label>
+            <input asp-for="MiddleName" class="form-control" placeholder="Георгиев"/>
+            <span asp-validation-for="MiddleName" class="text-danger"></span>
+        </div>
 
-            <label asp-for="MiddleName">Бащино име</label>
-            <input asp-for="MiddleName" class="form-control" />
+        <div class="form-group">
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" class="form-control" placeholder="Николов"/>
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ImageUrl"></label>
+            <input asp-for="ImageUrl" class="form-control" placeholder="https://...."/>
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Gender"></label>
+            <select asp-for="Gender" class="form-control" asp-items="Html.GetEnumSelectList<Gender>()">
+                <option selected="selected" value="">Моля изберете вашият пол</option>
+            </select>
+            <span asp-validation-for="Gender" class="text-danger"></span>
         </div>
 
         <div class="form-group">
 
-            <label asp-for="LastName">Фамилия</label>
-            <input asp-for="LastName" class="form-control" />
+            <label asp-for="CityName"></label>
+            <input asp-for="CityName" class="form-control" placeholder="Пловдив"/>
+            <span asp-validation-for="CityName" class="text-danger"></span>
         </div>
 
         <div class="form-group">
 
-            <label asp-for="ImageUrl">Url</label>
-            <input asp-for="ImageUrl" class="form-control" />
+            <label asp-for="PostCode"></label>
+            <input asp-for="PostCode" class="form-control" placeholder="4000"/>
+            <span asp-validation-for="PostCode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="StreetName"></label>
+            <input asp-for="StreetName" class="form-control" placeholder="Горно Броди №27"/>
+            <span asp-validation-for="StreetName" class="text-danger"></span>
         </div>
 
         <div class="form-group">
 
-            <label asp-for="Gender">Пол</label>
-            <input asp-for="Gender" class="form-control" />
-        </div>
-
-        <div class="form-group">
-
-            <label asp-for="Address.Town.Name">Град</label>
-            <input asp-for="Address.Town.Name" class="form-control" />
-        </div>
-
-        <div class="form-group">
-
-            <label asp-for="Address.Town.PostCode">Пощенски код</label>
-            <input asp-for="Address.Town.PostCode" class="form-control" />
-        </div>
-
-        <div class="form-group">
-
-            <label asp-for="Address.Town.Street.Name">Улица</label>
-            <input asp-for="Address.Town.Street.Name" class="form-control" />
-        </div>
-
-        <div class="form-group">
-
-            <label asp-for="Address.Town.Street.Number">Номер</label>
-            <input asp-for="Address.Town.Street.Number" class="form-control" />
-        </div>
-
-        <div class="form-group">
-
-            <label asp-for="PhoneNumber">Телефонен номер</label>
-            <input asp-for="PhoneNumber" class="form-control" />
+            <label asp-for="PhoneNumber"></label>
+            <input asp-for="PhoneNumber" class="form-control" placeholder="+359..."/>
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
         </div>
 
         <div class="form-group">

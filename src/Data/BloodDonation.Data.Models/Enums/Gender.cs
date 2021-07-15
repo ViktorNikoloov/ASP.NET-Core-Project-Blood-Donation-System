@@ -4,13 +4,13 @@
 
     public enum Gender
     {
-        [Display(Name = "Мъж.")]
+        [Display(Name = "Мъж")]
         Male = 1,
 
-        [Display(Name = "Жена.")]
+        [Display(Name = "Жена")]
         Female = 2,
 
-        [Display(Name = "Дете.")]
+        [Display(Name = "Дете")]
         Kid = 3,
     }
 }

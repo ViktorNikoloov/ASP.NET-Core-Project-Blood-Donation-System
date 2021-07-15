@@ -6,11 +6,15 @@
         {
             public const int CountryMaxLength = 30;
 
+            public const int CityMinLength = 3;
+
             public const int CityMaxLength = 20;
 
             public const int StreetMaxLength = 50;
 
-            public const int PostCodeMaxLength = 9;
+            public const int PostCodeMinValue = 1;
+
+            public const int PostCodeMaxValue = 9999;
         }
 
         public static class BasicUserInfoConstants
@@ -37,10 +41,13 @@
 
         public static class StreetConstants
         {
+            public const int StreetNameMinLength = 3;
+
             public const int StreetNameMaxLength = 50;
+
             public const int StreetNumberMinValue = 0;
+
             public const int StreetNumberMaxValue = 999;
-            public const int BloodBankCountMaxLength = 15;
         }
 
         public static class HospitalConstants

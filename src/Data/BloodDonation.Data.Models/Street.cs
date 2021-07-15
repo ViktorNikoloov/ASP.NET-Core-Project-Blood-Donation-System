@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using BloodDonation.Data.Common.Models;
 
@@ -17,6 +18,7 @@
         [MaxLength(StreetNameMaxLength)]
         public string Name { get; set; }
 
+        [NotMapped] // TODO: Make a related table with numbers.
         [Range(StreetNumberMinValue, StreetNumberMaxValue)]
         public int Number { get; set; }
 
