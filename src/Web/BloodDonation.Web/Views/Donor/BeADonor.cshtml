@@ -6,7 +6,7 @@
 }
 
 <h1 class="alert alert-primary" role="alert">Тук и сега можете да станете героя, на когото всеки разчита. Станете безвъзмезден кръводарител. </h1>
-<form action="BeADonor" method="post" text-center">
+<form method="post" text-center">
     <div class="class=" d-flex flex-column bd-highlight mb-3">
         <div asp-validation-summary="All" class="alert alert-primary" role="alert">Грешки възникнали при попълване на полетата:</div>
 
@@ -78,4 +78,3 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }
-

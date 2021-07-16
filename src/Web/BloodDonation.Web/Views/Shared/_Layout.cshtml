@@ -14,31 +14,31 @@
 <body>
     <header>
         @*<nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <partial name="_LoginPartial" />
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>*@
+            </nav>*@
         <nav class="navbar navbar-expand-sm navbar-dark bg-primary border-bottom box-shadow">
             <div class="container">
-                <img src="~/bloodHeroImg.png" class="favico" width="70" height="60" >
+                <img src="~/bloodHeroImg.png" class="favico" width="70" height="60">
                 <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-3" aria-controls="navbarNavDropdown-3"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +51,6 @@
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
                                     <i class="fas fa-medkit"></i> Начало
                                 </a>
-
                             </button>
                         </li>
 
@@ -71,21 +70,7 @@
                             </button>
                         </li>
 
-                        <li class="nav-item">
-                            <button type="button" class="btn btn-outline-danger btn-icon btn-sm">
-                                <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Register">
-                                    <i class="fas fa-notes-medical"></i> Регистрация
-                                </a>
-                            </button>
-                        </li>
-
-                        <li class="nav-item">
-                            <button type="button" class="btn btn-outline-danger btn-icon btn-sm">
-                                <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Login">
-                                    <i class="fas fa-walking"></i> Вход
-                                </a>
-                            </button>
-                        </li>
+                        <partial name="_LoginPartial" />
                     </ul>
                 </div>
             </div>

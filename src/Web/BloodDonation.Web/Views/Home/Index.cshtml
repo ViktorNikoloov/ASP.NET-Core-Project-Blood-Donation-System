@@ -1,7 +1,16 @@
 ﻿@using BloodDonation.Common
 @{
-    this.ViewData["Title"] = "Home Page";
+    this.ViewData["Title"] = "Начална страница";
 }
+
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        @this.TempData["Message"]
+    </div>
+}
+
 <section class="py-5">
     <div class="container">
         <h1 class="display-5 text-lg-center">Добре дошли в @GlobalConstants.SystemName!</h1>
@@ -9,7 +18,7 @@
         <div>
             <p class="lead text-center" style="font-size: 24px; font-style: italic;">
                 "Най-бързо развиващият се сайт за безвъзмездно кръводаряване в България."
-            <br>
+                <br>
                 "Ако се нуждаете от кръв за вас или ваш близък тук ще намерите вашите герои, които чакат за да Ви помогнат."
             </p>
         </div>
