@@ -11,7 +11,7 @@
     public class EfDeletableEntityRepository<TEntity> : EfRepository<TEntity>, IDeletableEntityRepository<TEntity>
         where TEntity : class, IDeletableEntity
     {
-        public EfDeletableEntityRepository(BlooddonationDbContext context)
+        public EfDeletableEntityRepository(BloodDonationDbContext context)
             : base(context)
         {
         }

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BloodDonation.Data.Migrations
 {
-    [DbContext(typeof(BlooddonationDbContext))]
+    [DbContext(typeof(BloodDonationDbContext))]
     [Migration("20210713232027_InitialCreate")]
     partial class InitialCreate
     {

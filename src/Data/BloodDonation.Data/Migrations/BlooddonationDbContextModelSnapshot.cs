@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BloodDonation.Data.Migrations
 {
-    [DbContext(typeof(BlooddonationDbContext))]
+    [DbContext(typeof(BloodDonationDbContext))]
     partial class BlooddonationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

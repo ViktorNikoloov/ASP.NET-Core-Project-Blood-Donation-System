@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BloodDonation.Data.Migrations
 {
-    [DbContext(typeof(BlooddonationDbContext))]
+    [DbContext(typeof(BloodDonationDbContext))]
     [Migration("20210713233152_ChangeCodeColumnTypeFromIntToString")]
     partial class ChangeCodeColumnTypeFromIntToString
     {
