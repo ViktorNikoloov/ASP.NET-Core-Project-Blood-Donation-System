@@ -12,7 +12,7 @@
 
     internal class RolesSeeder : ISeeder
     {
-        public async Task SeedAsync(BlooddonationDbContext dbContext, IServiceProvider serviceProvider)
+        public async Task SeedAsync(BloodDonationDbContext dbContext, IServiceProvider serviceProvider)
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
 

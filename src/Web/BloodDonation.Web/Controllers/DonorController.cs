@@ -14,12 +14,14 @@
         [HttpPost]
         public IActionResult BeADonor(DonorFormViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
                 return this.View();
             }
 
-            return RedirectToAction("Settings");
+            this.TempData["Message"] = "Вашата заявка за \"Кръводарител\" се изпрати успешно, моля изчакайте одобрение от \"Администратор\"";
+
+            return this.Redirect("/");
         }
     }
 }

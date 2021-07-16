@@ -12,14 +12,14 @@
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
-    public class BlooddonationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
+    public class BloodDonationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         private static readonly MethodInfo SetIsDeletedQueryFilterMethod =
-            typeof(BlooddonationDbContext).GetMethod(
+            typeof(BloodDonationDbContext).GetMethod(
                 nameof(SetIsDeletedQueryFilter),
                 BindingFlags.NonPublic | BindingFlags.Static);
 
-        public BlooddonationDbContext(DbContextOptions<BlooddonationDbContext> options)
+        public BloodDonationDbContext(DbContextOptions<BloodDonationDbContext> options)
             : base(options)
         {
         }

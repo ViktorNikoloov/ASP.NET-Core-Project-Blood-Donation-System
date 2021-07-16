@@ -5,6 +5,6 @@
 
     public interface ISeeder
     {
-        Task SeedAsync(BlooddonationDbContext dbContext, IServiceProvider serviceProvider);
+        Task SeedAsync(BloodDonationDbContext dbContext, IServiceProvider serviceProvider);
     }
 }

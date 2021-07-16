@@ -9,12 +9,12 @@
 
     public class DbQueryRunner : IDbQueryRunner
     {
-        public DbQueryRunner(BlooddonationDbContext context)
+        public DbQueryRunner(BloodDonationDbContext context)
         {
             this.Context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public BlooddonationDbContext Context { get; set; }
+        public BloodDonationDbContext Context { get; set; }
 
         public Task RunQueryAsync(string query, params object[] parameters)
         {

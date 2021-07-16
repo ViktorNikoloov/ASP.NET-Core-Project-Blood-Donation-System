@@ -33,7 +33,7 @@
             // Seed data on application startup
             using (var serviceScope = serviceProvider.CreateScope())
             {
-                var dbContext = serviceScope.ServiceProvider.GetRequiredService<BlooddonationDbContext>();
+                var dbContext = serviceScope.ServiceProvider.GetRequiredService<BloodDonationDbContext>();
                 dbContext.Database.Migrate();
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
@@ -68,12 +68,12 @@
 
             services.AddSingleton<IConfiguration>(configuration);
 
-            services.AddDbContext<BlooddonationDbContext>(
+            services.AddDbContext<BloodDonationDbContext>(
                 options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
                     .UseLoggerFactory(new LoggerFactory()));
 
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
-                .AddRoles<ApplicationRole>().AddEntityFrameworkStores<BlooddonationDbContext>();
+                .AddRoles<ApplicationRole>().AddEntityFrameworkStores<BloodDonationDbContext>();
 
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
