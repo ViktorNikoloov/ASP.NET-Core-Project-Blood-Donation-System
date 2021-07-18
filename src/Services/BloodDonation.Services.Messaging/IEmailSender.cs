@@ -12,5 +12,7 @@
             string subject,
             string htmlContent,
             IEnumerable<EmailAttachment> attachments = null);
+
+        // Task SendEmailAsync(string email, string name, object systemEmail, string title, string content);
     }
 }

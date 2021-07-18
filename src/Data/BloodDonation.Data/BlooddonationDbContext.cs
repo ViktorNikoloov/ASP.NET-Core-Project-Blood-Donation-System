@@ -46,6 +46,8 @@
 
         public DbSet<Hospital> Hospitals { get; set; }
 
+        public DbSet<ContactFormEntry> ContactFormEntry { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

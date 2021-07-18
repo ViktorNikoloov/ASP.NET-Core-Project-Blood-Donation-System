@@ -16,7 +16,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-primary border-bottom box-shadow">
             <div class="container">
-                <img src="~/bloodHeroImg.png" class="favico" width="70" height="60">
+                <img src="~/bloodHeroImg.png" class="pmg " width="70" height="60">
                 <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-3" aria-controls="navbarNavDropdown-3"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -47,6 +47,13 @@
                                 </a>
                             </button>
                         </li>
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-outline-danger btn-icon btn-sm">
+                                <a class="nav-link" asp-area="" asp-controller="Contacts" asp-action="Index">
+                                    <i class="fas fa-envelope-open-text"></i> Свържете се с нас
+                                </a>
+                            </button>
+                        </li>
                         <partial name="_LoginPartial" />
                     </ul>
                 </div>
@@ -56,7 +63,7 @@
 
     @this.RenderBody()
 
-    <footer class="border-top footer text-muted bg-primary">
+    <footer class="border-top bott footer text-muted bg-primary">
         <div class="container">
             <div class="card-body">
                 <div class="float-left"><a href="/">@GlobalConstants.SystemName</a> - <a asp-area="" asp-controller="Home" asp-action="Privacy">Политика за поверителност</a>  &copy; 2021-@(DateTime.UtcNow.Year) - <a href="https://github.com/NikolayIT/PressCenters.com" target="_blank">Open source system</a></div>
