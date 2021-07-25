@@ -55,6 +55,26 @@
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(
+                    "AdminUserWithState",
+                    policy => policy.RequireRole("Admin")
+                    .RequireClaim("state"));
+            });
+            services.AddAuthentication()
+                .AddGoogle(googleOptions =>
+                {
+                    googleOptions.ClientId = this.configuration["Authentication:Google:ClientId"];
+                    googleOptions.ClientSecret = this.configuration["Authentication:Google:ClientSecret"];
+                })
+                .AddFacebook(facebookOptions =>
+                {
+                    facebookOptions.AppId = this.configuration["Authentication:Facebook:AppId"];
+                    facebookOptions.AppSecret = this.configuration["Authentication:Facebook:AppSecret"];
+                    facebookOptions.AccessDeniedPath = "/AccessDeniedPathInfo";
+                });
+
             services.AddSingleton(this.configuration);
 
             // Data repositories
