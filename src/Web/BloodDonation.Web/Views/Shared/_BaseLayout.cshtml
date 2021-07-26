@@ -15,7 +15,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-primary border-bottom box-shadow">
-            <div class="container">
+            <div class="btn-group">
                 <img src="~/bloodHeroImg.png" class="pmg " width="70" height="60">
                 <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-3" aria-controls="navbarNavDropdown-3"
@@ -54,9 +54,13 @@
                                 </a>
                             </button>
                         </li>
-                        <partial name="_LoginPartial" />
                     </ul>
+
                 </div>
+            </div>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <partial name="_LoginPartial" />
+
             </div>
         </nav>
     </header>
@@ -66,7 +70,7 @@
     <footer class="border-top bott footer text-muted bg-primary">
         <div class="container">
             <div class="card-body">
-                <div class="float-left"><a href="/">@GlobalConstants.SystemName</a> - <a asp-area="" asp-controller="Home" asp-action="Privacy">Политика за поверителност</a>  &copy; 2021-@(DateTime.UtcNow.Year) - <a href="https://github.com/NikolayIT/PressCenters.com" target="_blank">Open source system</a></div>
+                <div class="float-left"><a href="/">@GlobalConstants.SystemName</a> - <a asp-area="" asp-controller="Home" asp-action="Privacy">Политика за поверителност</a>  &copy; 2021-@(DateTime.UtcNow.Year) - <a href="https://github.com/ViktorNikoloov/ASP.NET-Core-Project-Blood-Donation-System" target="_blank">Open source system</a></div>
             </div>
         </div>
     </footer>

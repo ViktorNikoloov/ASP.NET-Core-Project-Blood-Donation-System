@@ -1,5 +1,4 @@
-﻿@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
-@model BloodDonation.Web.ViewModels.Contacts.ContactFormViewModel
+﻿@model BloodDonation.Web.ViewModels.Contacts.ContactFormViewModel
 @{
     this.ViewData["Title"] = "Изпратете ни съобщение";
 }
@@ -34,14 +33,6 @@
     <button type="submit" class="btn btn-primary">Изпратете ни съобщение</button>
 </form>
 
-@section Scripts
-{
-    <script src="https://www.google.com/recaptcha/api.js?render=@this.Configuration["GoogleReCaptcha:Key"]"></script>
-    <script>
-        grecaptcha.ready(function () {
-            grecaptcha.execute('@this.Configuration["GoogleReCaptcha:Key"]', { action: 'contact_form' }).then(function (token) {
-                document.getElementById("RecaptchaValue").value = token;
-            });
-        });
-    </script>
+@section Scripts {
+    <partial name="_GoogleReCaptchaPartial" />
 }
