@@ -8,6 +8,8 @@
 
         public const string DonorRoleName = "Donor";
 
+        public const string RecipientRoleName = "Recipient";
+
         public const string SystemEmail = "blood-donation-bg@abv.bg";
     }
 }
