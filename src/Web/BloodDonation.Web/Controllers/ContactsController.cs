@@ -1,6 +1,5 @@
 ﻿namespace BloodDonation.Web.Controllers
 {
-    using System;
     using System.Text;
     using System.Threading.Tasks;
 
