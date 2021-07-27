@@ -10,6 +10,8 @@
 
         public const string RecipientRoleName = "Recipient";
 
+        public const string UnapprovedUserRoleName = "UnapprovedUser";
+
         public const string SystemEmail = "blood-donation-bg@abv.bg";
     }
 }
