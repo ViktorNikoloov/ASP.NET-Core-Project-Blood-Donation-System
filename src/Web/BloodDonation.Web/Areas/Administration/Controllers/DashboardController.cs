@@ -1,6 +1,6 @@
 ﻿namespace BloodDonation.Web.Areas.Administration.Controllers
 {
-    using BloodDonation.Services.Data;
+    using BloodDonation.Services.Data.Settings;
     using BloodDonation.Web.ViewModels.Administration.Dashboard;
 
     using Microsoft.AspNetCore.Mvc;

@@ -1,4 +1,4 @@
-﻿namespace BloodDonation.Services.Data
+﻿namespace BloodDonation.Services.Data.Settings
 {
     using System.Collections.Generic;
 

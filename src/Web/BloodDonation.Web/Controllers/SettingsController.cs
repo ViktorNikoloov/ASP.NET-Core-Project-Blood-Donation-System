@@ -5,7 +5,7 @@
 
     using BloodDonation.Data.Common.Repositories;
     using BloodDonation.Data.Models;
-    using BloodDonation.Services.Data;
+    using BloodDonation.Services.Data.Settings;
     using BloodDonation.Web.ViewModels.Settings;
 
     using Microsoft.AspNetCore.Mvc;

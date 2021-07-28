@@ -8,7 +8,7 @@
     using BloodDonation.Data.Models;
     using BloodDonation.Data.Repositories;
     using BloodDonation.Data.Seeding;
-    using BloodDonation.Services.Data;
+    using BloodDonation.Services.Data.Settings;
     using BloodDonation.Services.Mapping;
     using BloodDonation.Services.Messaging;
     using BloodDonation.Web.ViewModels;
