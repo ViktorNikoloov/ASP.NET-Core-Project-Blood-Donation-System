@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodDonation.Data.Migrations
 {
     [DbContext(typeof(BloodDonationDbContext))]
-    partial class BlooddonationDbContextModelSnapshot : ModelSnapshot
+    partial class BloodDonationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -406,17 +406,11 @@ namespace BloodDonation.Data.Migrations
                     b.Property<string>("Answer")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("DonorId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -427,13 +421,14 @@ namespace BloodDonation.Data.Migrations
                     b.Property<string>("Question")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("DonorId");
-
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("QuestionAnswers");
                 });
@@ -811,15 +806,11 @@ namespace BloodDonation.Data.Migrations
 
             modelBuilder.Entity("BloodDonation.Data.Models.QuestionAnswer", b =>
                 {
-                    b.HasOne("BloodDonation.Data.Models.ApplicationUser", null)
+                    b.HasOne("BloodDonation.Data.Models.ApplicationUser", "User")
                         .WithMany("QuestionsAnswers")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("UserId");
 
-                    b.HasOne("BloodDonation.Data.Models.Donor", "Donor")
-                        .WithMany()
-                        .HasForeignKey("DonorId");
-
-                    b.Navigation("Donor");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BloodDonation.Data.Models.Rating", b =>

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodDonation.Data.Migrations
 {
     [DbContext(typeof(BloodDonationDbContext))]
-    [Migration("20210713233819_RemoveStreetColumnFromTownTable")]
-    partial class RemoveStreetColumnFromTownTable
+    [Migration("20210729224751_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,9 +28,6 @@ namespace BloodDonation.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -43,11 +40,14 @@ namespace BloodDonation.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("TownId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CountryId");
-
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("TownId");
 
                     b.ToTable("Addresses");
                 });
@@ -222,8 +222,8 @@ namespace BloodDonation.Data.Migrations
 
                     b.Property<string>("MiddleName")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -260,43 +260,37 @@ namespace BloodDonation.Data.Migrations
                     b.ToTable("Appointments");
                 });
 
-            modelBuilder.Entity("BloodDonation.Data.Models.Country", b =>
+            modelBuilder.Entity("BloodDonation.Data.Models.ContactFormEntry", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Code")
+                    b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                    b.Property<string>("Ip")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TownId")
-                        .HasColumnType("int");
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("TownId");
-
-                    b.ToTable("Countries");
+                    b.ToTable("ContactFormEntry");
                 });
 
             modelBuilder.Entity("BloodDonation.Data.Models.Donor", b =>
@@ -335,8 +329,8 @@ namespace BloodDonation.Data.Migrations
 
                     b.Property<string>("MiddleName")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -376,11 +370,6 @@ namespace BloodDonation.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("HospitalCity")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
                     b.Property<string>("HospitalName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -397,9 +386,14 @@ namespace BloodDonation.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("TownId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("TownId");
 
                     b.ToTable("Hospitals");
                 });
@@ -414,17 +408,11 @@ namespace BloodDonation.Data.Migrations
                     b.Property<string>("Answer")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("DonorId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -435,13 +423,14 @@ namespace BloodDonation.Data.Migrations
                     b.Property<string>("Question")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("DonorId");
-
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("QuestionAnswers");
                 });
@@ -524,8 +513,8 @@ namespace BloodDonation.Data.Migrations
 
                     b.Property<string>("MiddleName")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -581,6 +570,36 @@ namespace BloodDonation.Data.Migrations
                     b.ToTable("Settings");
                 });
 
+            modelBuilder.Entity("BloodDonation.Data.Models.Street", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Streets");
+                });
+
             modelBuilder.Entity("BloodDonation.Data.Models.Town", b =>
                 {
                     b.Property<int>("Id")
@@ -605,13 +624,18 @@ namespace BloodDonation.Data.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("PostCode")
-                        .HasMaxLength(9)
+                    b.Property<int?>("PostCode")
+                        .HasMaxLength(9999)
+                        .HasColumnType("int");
+
+                    b.Property<int>("StreetId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("StreetId");
 
                     b.ToTable("Towns");
                 });
@@ -722,13 +746,13 @@ namespace BloodDonation.Data.Migrations
 
             modelBuilder.Entity("BloodDonation.Data.Models.Address", b =>
                 {
-                    b.HasOne("BloodDonation.Data.Models.Country", "Country")
+                    b.HasOne("BloodDonation.Data.Models.Town", "Town")
                         .WithMany("Addresses")
-                        .HasForeignKey("CountryId")
+                        .HasForeignKey("TownId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Country");
+                    b.Navigation("Town");
                 });
 
             modelBuilder.Entity("BloodDonation.Data.Models.Appointment", b =>
@@ -754,17 +778,6 @@ namespace BloodDonation.Data.Migrations
                     b.Navigation("Recipient");
                 });
 
-            modelBuilder.Entity("BloodDonation.Data.Models.Country", b =>
-                {
-                    b.HasOne("BloodDonation.Data.Models.Town", "Town")
-                        .WithMany("Countries")
-                        .HasForeignKey("TownId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Town");
-                });
-
             modelBuilder.Entity("BloodDonation.Data.Models.Donor", b =>
                 {
                     b.HasOne("BloodDonation.Data.Models.Address", "Address")
@@ -782,17 +795,24 @@ namespace BloodDonation.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("BloodDonation.Data.Models.Hospital", b =>
+                {
+                    b.HasOne("BloodDonation.Data.Models.Town", "Town")
+                        .WithMany("Hospitals")
+                        .HasForeignKey("TownId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Town");
+                });
+
             modelBuilder.Entity("BloodDonation.Data.Models.QuestionAnswer", b =>
                 {
-                    b.HasOne("BloodDonation.Data.Models.ApplicationUser", null)
+                    b.HasOne("BloodDonation.Data.Models.ApplicationUser", "User")
                         .WithMany("QuestionsAnswers")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("UserId");
 
-                    b.HasOne("BloodDonation.Data.Models.Donor", "Donor")
-                        .WithMany()
-                        .HasForeignKey("DonorId");
-
-                    b.Navigation("Donor");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BloodDonation.Data.Models.Rating", b =>
@@ -825,6 +845,17 @@ namespace BloodDonation.Data.Migrations
                     b.Navigation("Address");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BloodDonation.Data.Models.Town", b =>
+                {
+                    b.HasOne("BloodDonation.Data.Models.Street", "Street")
+                        .WithMany("Towns")
+                        .HasForeignKey("StreetId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Street");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -900,11 +931,6 @@ namespace BloodDonation.Data.Migrations
                     b.Navigation("Roles");
                 });
 
-            modelBuilder.Entity("BloodDonation.Data.Models.Country", b =>
-                {
-                    b.Navigation("Addresses");
-                });
-
             modelBuilder.Entity("BloodDonation.Data.Models.Donor", b =>
                 {
                     b.Navigation("Appointments");
@@ -924,9 +950,16 @@ namespace BloodDonation.Data.Migrations
                     b.Navigation("Rating");
                 });
 
+            modelBuilder.Entity("BloodDonation.Data.Models.Street", b =>
+                {
+                    b.Navigation("Towns");
+                });
+
             modelBuilder.Entity("BloodDonation.Data.Models.Town", b =>
                 {
-                    b.Navigation("Countries");
+                    b.Navigation("Addresses");
+
+                    b.Navigation("Hospitals");
                 });
 #pragma warning restore 612, 618
         }
