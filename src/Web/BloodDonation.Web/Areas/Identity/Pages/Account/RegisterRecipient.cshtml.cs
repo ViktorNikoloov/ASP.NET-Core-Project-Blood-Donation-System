@@ -28,25 +28,25 @@
     using static BloodDonation.Common.DataGlobalConstants.StreetConstants;
 
     [AllowAnonymous]
-    public class RegisterRecipient : PageModel
+    public class RegisterRecipientModel : PageModel
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly ILogger<RegisterModel> logger;
+        private readonly IEmailSender emailSender;
         private readonly IConfiguration configuration;
 
-        public RegisterRecipient(
+        public RegisterRecipientModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             IConfiguration configuration)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _logger = logger;
-            _emailSender = emailSender;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
+            this.logger = logger;
+            this.emailSender = emailSender;
             this.configuration = configuration;
         }
 
@@ -135,22 +135,20 @@
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            ReturnUrl = returnUrl;
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            this.ReturnUrl = returnUrl;
+            this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/Dogsitter/SuccessfullySentApplication");
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, PhoneNumber = Input.PhoneNumber };
+                var user = new ApplicationUser { UserName = this.Input.Email, Email = this.Input.Email, PhoneNumber = this.Input.PhoneNumber };
 
-                var result = await _userManager.CreateAsync(user, Input.Password);
-
-                var cloudinaryAccount = this.configuration.GetSection("Cloudinary");
+                var result = await this.userManager.CreateAsync(user, this.Input.Password);
 
                 Account account = new Account(
                     this.configuration["Cloudinary:CloudName"],
@@ -159,11 +157,11 @@
 
                 Cloudinary cloudinary = new Cloudinary(account);
 
-                var file = Input.ImageFile;
+                var file = this.Input.ImageFile;
 
                 var uploadResult = new ImageUploadResult();
 
-                var imageUrl = "";
+                var imageUrl = string.Empty;
 
                 if (file != null)
                 {
@@ -185,15 +183,15 @@
                 }
                 else
                 {
-                    imageUrl = Input.ImageUrl;
+                    imageUrl = this.Input.ImageUrl;
                 }
 
 
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
+                    this.logger.LogInformation("User created a new account with password.");
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
@@ -201,31 +199,30 @@
                         values: new { area = "Identity", userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    await this.emailSender.SendEmailAsync(this.Input.Email, "Confirm your email",
                         $"���� ���������� ���� ������ �� ��� <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'></a>.");
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    if (this.userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
+                        return this.RedirectToPage("RegisterConfirmation", new { email = this.Input.Email });
                     }
                     else
                     {
-                        await this._userManager.AddToRoleAsync(user, GlobalConstants.RecipientRoleName);
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        //await this.recipientService.CreateOwnerAsync(user, Input.Address, Input.FirstName, Input.MiddleName, Input.LastName, Input.Gender, imageUrl, Input.PhoneNumber, user.Id, Input.Description);
+                        await this.userManager.AddToRoleAsync(user, GlobalConstants.RecipientRoleName);
+                        await this.signInManager.SignInAsync(user, isPersistent: false);
 
-                        return LocalRedirect(returnUrl);
+                        return this.LocalRedirect(returnUrl);
                     }
                 }
 
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    this.ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
 
             // If we got this far, something failed, redisplay form
-            return Page();
+            return this.Page();
         }
     }
 }
