@@ -9,38 +9,121 @@
 <hr class=" alert-primary w-auto">
 
 <h4 class="text-center text-"><u>Тук и сега можете да станете героя, на когото всеки разчита. Станете безвъзмезден кръводарител.</u></h4>
-<form method="post" text-center">
-    <div class="class=" d-flex flex-column bd-highlight mb-3">
-        <div asp-validation-summary="All" class=" alert-primary" role="alert"></div>
 
-        <div class="form-group">
-            <label asp-for="Input.FirstName"></label>
-            <input asp-for="Input.FirstName" class="form-control" placeholder="Виктор" />
-            <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+<form method="post" text-center>
+    <div class="class=" d-flex flex-column bd-highlight mb-3>
+        <div asp-validation-summary="All" class=" alert-danger" role="alert"></div>
+
+        <div class="form-row form-group">
+
+            <div class="col form-group">
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" class="form-control" placeholder="viktor@example.com" />
+                <span asp-validation-for="Input.Email" class="red-text"></span>
+            </div>
+            <div class="col form-group">
+                <label asp-for="Input.PhoneNumber"></label>
+                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="0886 54 90 88" />
+                <span asp-validation-for="Input.PhoneNumber" class="red-text"></span>
+            </div>
+
         </div>
+        <div class="form-row form-group">
 
-        <div class="form-group">
-            <label asp-for="Input.MiddleName"></label>
-            <input asp-for="Input.MiddleName" class="form-control" placeholder="Георгиев" />
-            <span asp-validation-for="Input.MiddleName" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Input.LastName"></label>
-            <input asp-for="Input.LastName" class="form-control" placeholder="Николов" />
-            <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            <div class="col form-group">
+                <label asp-for="Input.Password"></label>
+                <input asp-for="Input.Password" class="form-control" />
+                <span asp-validation-for="Input.Password" class="red-text"></span>
+                <small class="form-text text-muted">
+                    Паролата не може да съдържа разстояния, специални символи и емотиконки.
+                </small>
+            </div>
+            <div class="col form-group">
+                <label asp-for="Input.ConfirmPassword"></label>
+                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="Input.ConfirmPassword" class="red-text"></span>
+            </div>
         </div>
     </div>
 
     <hr class=" alert-primary w-auto">
 
-    <p>
+    <h5 class="text-md-center"><u>Моле отговорете на следните въпроси преди да престъпите към изпращане на декларацията за одобрение.</u></h5>
+    <div class="form-group text-md-center">
+
+        <label asp-for="Input.Question1"></label>
+        <div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" asp-for="Input.Question1" id="inlineRadio1" value="true">
+                <label class="form-check-label" for="inlineRadio1">Да</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" asp-for="Input.Question1" id="inlineRadio2" value="false">
+                <label class="form-check-label" for="inlineRadio2">Не</label>
+            </div>
+        </div>
+
+        <label asp-for="Input.Question2"></label>
+        <div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" asp-for="Input.Question2" id="inlineRadio1" value="true">
+                <label class="form-check-label" for="inlineRadio1">Да</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" asp-for="Input.Question2" id="inlineRadio2" value="false">
+                <label class="form-check-label" for="inlineRadio2">Не</label>
+            </div>
+        </div>
+
+        <label asp-for="Input.Question3"></label>
+        <div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" asp-for="Input.Question3" id="inlineRadio1" value="true">
+                <label class="form-check-label" for="inlineRadio1">Да</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" asp-for="Input.Question3" id="inlineRadio2" value="false">
+                <label class="form-check-label" for="inlineRadio2">Не</label>
+            </div>
+        </div>
+
+        <label asp-for="Input.Question4"></label>
+        <div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" asp-for="Input.Question4" id="inlineRadio1" value="true">
+                <label class="form-check-label" for="inlineRadio1">Да</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" asp-for="Input.Question4" id="inlineRadio2" value="false">
+                <label class="form-check-label" for="inlineRadio2">Не</label>
+            </div>
+        </div>
+
+        <label asp-for="Input.Question5"></label>
+        <div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" asp-for="Input.Question5" id="inlineRadio1" value="true">
+                <label class="form-check-label" for="inlineRadio1">Да</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" asp-for="Input.Question5" id="inlineRadio2" value="false">
+                <label class="form-check-label" for="inlineRadio2">Не</label>
+            </div>
+        </div>
+    </div>
+
+    <p class="text-md-center">
         Натискайки бутона "Регистрация", вие потвърждавате, че сте запознати и съгласни с нашата
         <a href="/Home/Privacy">политика за опазване на личните данни</a>
     </p>
 
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Регистрация</button>
+        <button type="submit" class="btn btn-block btn-primary">Регистрация</button>
     </div>
 
 </form>
@@ -48,21 +131,4 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <partial name="_GoogleReCaptchaPartial" />
-
-    <script>
-        // Initialize text area
-        document.addEventListener('DOMContentLoaded', function () {
-            var textNeedCount = document.querySelectorAll('#input_text, #textarea1');
-            M.CharacterCounter.init(textNeedCount);
-        });
-    </script>
-
-    <script>
-        // Initialize materialize select form.
-        document.addEventListener('DOMContentLoaded', function () {
-            var elems = document.querySelectorAll('select');
-            var options = document.querySelectorAll('option');
-            var instances = M.FormSelect.init(elems, options);
-        });
-    </script>
 }

@@ -19,7 +19,6 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.WebUtilities;
-    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Logging;
 
     using static BloodDonation.Common.DataGlobalConstants.BasicUserInfoConstants;
@@ -99,24 +98,23 @@
 
             [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
             [Display(Name = "Вашата възраст между 18 и 65 години ли е ?")]
-            public bool Question1 { get; set; }
+            public bool? Question1 { get; set; }
 
             [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
             [Display(Name = "Вашето тегло над 50кг. ли е ?")]
-            public bool Question2 { get; set; }
+            public bool? Question2 { get; set; }
 
             [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
-            [Display(Name = "Страдате ли от късогледство над 5 диоптъра")]
-            public bool Question3 { get; set; }
+            [Display(Name = "Страдате ли от късогледство над 5 диоптъра ?")]
+            public bool? Question3 { get; set; }
 
             [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
-            [StringLength(500, MinimumLength = 50, ErrorMessage = "������ ������ �� ������� ����� 50 �� 500 �������")]
             [Display(Name = "Имате ли сериозни заболявания ?")]
-            public bool Question4 { get; set; }
+            public bool? Question4 { get; set; }
 
             [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
-            [Display(Name = "Страдате ли от тежки алергии")]
-            public bool Question5 { get; set; }
+            [Display(Name = "Страдате ли от тежки алергии ?")]
+            public bool? Question5 { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
