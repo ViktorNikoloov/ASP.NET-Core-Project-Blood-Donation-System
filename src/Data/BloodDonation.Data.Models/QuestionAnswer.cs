@@ -8,8 +8,8 @@
 
         public string Answer { get; set; }
 
-        public string DonorId { get; set; }
+        public string UserId { get; set; }
 
-        public virtual Donor Donor { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }
