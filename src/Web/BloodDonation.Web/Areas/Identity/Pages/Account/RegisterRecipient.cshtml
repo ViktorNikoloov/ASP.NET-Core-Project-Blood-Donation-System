@@ -20,12 +20,12 @@
             <div class="col form-group">
                 <label asp-for="Input.Email"></label>
                 <input asp-for="Input.Email" class="form-control" placeholder="viktor@example.com" />
-                <span asp-validation-for="Input.Email" class="red-text"></span>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="col form-group">
                 <label asp-for="Input.PhoneNumber"></label>
                 <input asp-for="Input.PhoneNumber" class="form-control" placeholder="0886 54 90 88" />
-                <span asp-validation-for="Input.PhoneNumber" class="red-text"></span>
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
 
         </div>
@@ -35,7 +35,7 @@
             <div class="col form-group">
                 <label asp-for="Input.Password"></label>
                 <input asp-for="Input.Password" class="form-control" />
-                <span asp-validation-for="Input.Password" class="red-text"></span>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
                 <small class="form-text text-muted">
                     Паролата не може да съдържа разстояния, специални символи и емотиконки.
                 </small>
@@ -43,7 +43,7 @@
             <div class="col form-group">
                 <label asp-for="Input.ConfirmPassword"></label>
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
-                <span asp-validation-for="Input.ConfirmPassword" class="red-text"></span>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
 
         </div>
@@ -71,22 +71,6 @@
         </div>
 
         <div class="form-row form-group">
-
-            <div class="col form-group">
-                <label asp-for="Input.FirstName"></label>
-                <input asp-for="Input.FirstName" class="form-control" placeholder="Виктор" />
-                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
-            </div>
-            <div class="col form-group">
-                <label asp-for="Input.MiddleName"></label>
-                <input asp-for="Input.MiddleName" class="form-control" placeholder="Георгиев" />
-                <span asp-validation-for="Input.MiddleName" class="text-danger"></span>
-            </div>
-            <div class="col form-group">
-                <label asp-for="Input.LastName"></label>
-                <input asp-for="Input.LastName" class="form-control" placeholder="Николов" />
-                <span asp-validation-for="Input.LastName" class="text-danger"></span>
-            </div>
 
 
             <div class="form-row form-group w-100">
@@ -129,28 +113,28 @@
             </div>
 
             <div class="form-row form-group w-100">
-
-                <div class="col form-group">
-                    <label asp-for="Input.ImageUrl"></label>
-                    <input asp-for="Input.ImageUrl" class="file-path validate" type="text" placeholder="Профилна снимка">
-                    <span asp-validation-for="Input.ImageUrl" class="text-danger"></span>
-                    <label class="alert-info"> Или прикачете вашия файл от бутна "browse" &#8595;</label>
-                </div>
-
-            </div>
-
-            <div class="col form-group w-100">
-                <div id="msg"></div>
-                <input type="file" name="img[]" class="file" accept="image/*">
-                <div class="input-group my-3">
-                    <input type="text" class="form-control" disabled placeholder="Upload File" id="file">
-                    <div class="input-group-append">
-                        <button type="button" class="browse btn btn-primary">Browse...</button>
+                <div class="file-field input-field">
+                    <div class="col form-group">
+                        <label asp-for="Input.ImageUrl"></label>
+                        <input asp-for="Input.ImageUrl" class="file-path validate" type="text" placeholder="Профилна снимка">
+                        <span asp-validation-for="Input.ImageUrl" class="text-danger"></span>
+                        <label class="alert-info"> Или прикачете вашия файл от бутна "browse" &#8595;</label>
                     </div>
+
+                    <div id="msg"></div>
+                    <input type="file" name="img[]" class="file" accept="image/*">
+                    <div class="input-group my-3">
+                        <input type="text" class="form-control" disabled placeholder="Upload File" id="file">
+                        <div class="input-group-append">
+                            <button type="button" class="browse btn btn-primary">Browse...</button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+
             <div class="ml-2 col-sm-6">
-                <img src="https://placehold.it/80x80" id="preview" class="img-thumbnail">
+                <img src="https://placehold.it/60x60" id="preview" class="img-thumbnail">
             </div>
 
         </div>

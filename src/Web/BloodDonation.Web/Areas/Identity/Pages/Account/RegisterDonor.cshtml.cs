@@ -71,28 +71,8 @@
             [Compare("Password", ErrorMessage = "\"Паролата\" и \"Потвърдената парола\" трябва да съвпадат")]
             public string ConfirmPassword { get; set; }
 
-            [Display(Name = "Име")]
-            [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
-            [MinLength(FirstNameMinLength)]
-            [MaxLength(FirstNameMaxLength)]
-            [StringLength(FirstNameMaxLength, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{2}\" и \"{1}\" символа.", MinimumLength = FirstNameMinLength)]
-            public string FirstName { get; set; }
-
-            [Display(Name = "Бащино име")]
-            [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
-            [MinLength(MiddleNameMinLength)]
-            [MaxLength(MiddleNameMaxLength)]
-            [StringLength(MiddleNameMaxLength, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{2}\" и \"{1}\" символа.", MinimumLength = MiddleNameMinLength)]
-            public string MiddleName { get; set; }
-
-            [Display(Name = "Фамилия")]
-            [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
-            [MinLength(LastNameMinLength)]
-            [MaxLength(LastNameMaxLength)]
-            [StringLength(LastNameMaxLength, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{2}\" и \"{1}\" символа.", MinimumLength = LastNameMinLength)]
-            public string LastName { get; set; }
-
             [Display(Name = "Телефонен номер")]
+            [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
             [RegularExpression(PhoneNumberRegex, ErrorMessage = "Тел. номер трябва да започва с \"+359\" или \"0\" и да съдържа общо \"10\" цифри.")]
             public string PhoneNumber { get; set; }
 
@@ -179,6 +159,7 @@
                             }
                         }
 
+                        this.TempData["Message"] = "Вашата заявка за \"Кръводарител\" се изпрати успешно, моля изчакайте одобрение от \"Администратор\"";
                         return this.LocalRedirect(returnUrl);
                     }
                 }

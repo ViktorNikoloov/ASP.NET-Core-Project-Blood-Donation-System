@@ -98,11 +98,11 @@
 
             [Display(Name = "Кръвна група")]
             [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
-            [Range(1, 2)]
+            [Range(1, 8)]
             public BloodType BloodType { get; set; }
 
             [Display(Name = "Url адрес")]
-            [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
+            //[Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
             [Url(ErrorMessage = "Невалиден \"Url\" адрес")]
             public string ImageUrl { get; set; }
 
@@ -133,6 +133,7 @@
             public string StreetName { get; set; }
 
             [Display(Name = "Телефонен номер")]
+            [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
             [RegularExpression(PhoneNumberRegex, ErrorMessage = "Тел. номер трябва да започва с \"+359\" или \"0\" и да съдържа общо \"10\" цифри.")]
             public string PhoneNumber { get; set; }
         }
