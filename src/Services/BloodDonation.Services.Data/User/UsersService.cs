@@ -1,13 +1,14 @@
-﻿using BloodDonation.Data.Common.Repositories;
-using BloodDonation.Data.Models;
-using Microsoft.AspNetCore.Identity;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BloodDonation.Services.Data.User
+﻿namespace BloodDonation.Services.Data.User
 {
-    public class UsersService
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using BloodDonation.Data.Common.Repositories;
+    using BloodDonation.Data.Models;
+    using Microsoft.AspNetCore.Identity;
+
+    public class UsersService : IUsersService
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
@@ -57,7 +58,7 @@ namespace BloodDonation.Services.Data.User
                                 .ToList();
         }
 
-        public Recipient GetCurrentSignedInOwner(string username)
+        public Recipient GetCurrentSignedInRecipient(string username)
         {
             var user = this.userManager.FindByNameAsync(username).GetAwaiter().GetResult();
 

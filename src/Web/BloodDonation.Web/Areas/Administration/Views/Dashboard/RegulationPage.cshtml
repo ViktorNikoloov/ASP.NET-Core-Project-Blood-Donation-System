@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "RegulationPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Администраторска страница</h1>
+
+<div class="row">
+    <div class="col-lg-4 d-flex align-items-stretch">
+        <div class="card">
+            <div class="card-body text-center align-items-stretch">
+                <span class="card-title">
+                    <i class="fas fa-user-plus fa-5x text-primary"></i>
+                </span>
+                <h5 class="card-title">Одобряване на кръводарители.</h5>
+                <p class="card-text">Тук можете да иправлявате всички подадени заявления за кръводарители.</p>
+                <div class="btn btn-outline-primary">
+                    <a class="nav-link" asp-area="Administration" asp-controller="Dashboard" asp-action="RegulateApplicants">Натисни тук</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 d-flex align-items-stretch">
+        <div class="card">
+            <div class="card-body text-center align-items-stretch">
+                <span class="card-title">
+                    <i class="fab fa-wpforms fa-5x text-primary"></i>
+                </span>
+                <h5 class="card-title">Добавяне на статия.</h5>
+                <p class="card-text">Тук може да добавяте, коригирате или изтривате блог статии.</p>
+                <div class="btn btn-outline-primary">
+                    <a class="nav-link" asp-area="" asp-controller="" asp-action="">Натисни тук</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 d-flex align-items-stretch align-items-stretch">
+        <div class="card">
+            <div class="card-body text-center">
+                <span class="card-title">
+                    <i class="far fa-calendar-plus fa-5x text-primary"></i>
+                </span>
+                <h5 class="card-title">Управление на заявления.</h5>
+                <p class="card-text">Тук може да коригирате или изтривате подадените заявления за кръв.</p>
+                <div class="btn btn-outline-primary">
+                    <a class="nav-link" asp-area="" asp-controller="" asp-action="">Натисни тук</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

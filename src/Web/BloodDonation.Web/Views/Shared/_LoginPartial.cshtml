@@ -7,7 +7,7 @@
 <ul class="navbar-nav">
     @if (this.SignInManager.IsSignedIn(this.User))
     {
-        <li class="nav-item m-0 m-md-2">
+        <li class="nav-item m-0 m-md-1">
             <button type="button" class="btn btn-outline-danger btn-icon btn-sm">
                 <a class="nav-link " asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
                     <i class="fas fa-user-md"></i> Акаунт
@@ -16,11 +16,16 @@
         </li>
         if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">Admin</a>
+
+            <li class="nav-item m-0 m-md-1">
+                <button type="button" class="btn btn-outline-danger btn-icon btn-sm">
+                    <a class="nav-link" asp-area="Administration" asp-controller="Dashboard" asp-action="RegulationPage" title="Admin">
+                        <i class="fas fa-user-shield"></i> Админ
+                    </a>
+                </button>
             </li>
         }
-        <li class="nav-item padding-right">
+        <li class="nav-item m-0 m-md-1">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
                 <button type="submit" class="nav-link btn btn-link btn-lg">
                     <i class="fas fa-door-open"></i>Изход
@@ -30,20 +35,6 @@
     }
     else
     {
-        @*<li class="nav-item">
-                <button type="button" class="btn btn-outline-danger btn-icon btn-sm">
-                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">
-                        Регистрация
-                    </a>
-                </button>
-            </li>
-            <li class="nav-item">
-                <button type="button" class="btn btn-outline-danger btn-icon btn-sm">
-                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">
-                        <i class="fas fa-notes-medical"></i> Вход
-                    </a>
-                </button>
-            </li>*@
         <li class=" font-weight-bold text-white-50 m-3">Влез като:</li>
         <li class="nav-item m-1">
             <button type="button" class="btn btn-outline-danger btn-icon btn-sm">
@@ -52,7 +43,7 @@
                 </a>
             </button>
         </li>
-        <li class="nav-item m-1">
+        <li class="nav-item m-0 m-md-1">
             <button type="button" class="btn btn-outline-danger btn-icon btn-sm">
                 <a class="nav-link" asp-area="Identity" asp-page="/Account/LoginDonor">
                     <i class="fas fa-hand-holding-heart"></i> Кръводарител

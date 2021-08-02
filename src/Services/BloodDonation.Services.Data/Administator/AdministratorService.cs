@@ -1,13 +1,11 @@
 ﻿namespace BloodDonation.Services.Data.Administator
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
     using BloodDonation.Data.Common.Repositories;
     using BloodDonation.Data.Models;
     using BloodDonation.Services.Mapping;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     public class AdministratorService : IAdministratorService
     {
