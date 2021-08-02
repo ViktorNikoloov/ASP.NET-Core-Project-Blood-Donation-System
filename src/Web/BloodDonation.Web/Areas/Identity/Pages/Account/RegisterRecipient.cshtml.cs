@@ -96,6 +96,11 @@
             [StringLength(LastNameMaxLength, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{2}\" и \"{1}\" символа.", MinimumLength = LastNameMinLength)]
             public string LastName { get; set; }
 
+            [Display(Name = "Кръвна група")]
+            [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
+            [Range(1, 2)]
+            public BloodType BloodType { get; set; }
+
             [Display(Name = "Url адрес")]
             [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
             [Url(ErrorMessage = "Невалиден \"Url\" адрес")]
@@ -141,7 +146,7 @@
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/Dogsitter/SuccessfullySentApplication");
+            returnUrl = returnUrl ?? Url.Content("~/Recipient/SuccessfullySentApplication");
             this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             if (this.ModelState.IsValid)
@@ -186,7 +191,6 @@
                     imageUrl = this.Input.ImageUrl;
                 }
 
-
                 if (result.Succeeded)
                 {
                     this.logger.LogInformation("User created a new account with password.");
@@ -197,10 +201,12 @@
                         "/Account/ConfirmEmail",
                         pageHandler: null,
                         values: new { area = "Identity", userId = user.Id, code = code },
-                        protocol: Request.Scheme);
+                        protocol: this.Request.Scheme);
 
                     await this.emailSender.SendEmailAsync(this.Input.Email, "Confirm your email",
-                        $"���� ���������� ���� ������ �� ��� <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'></a>.");
+                        $"Моля потвърдете вашият имейл адрес.<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'></a>.");
+
+                    this.TempData["Message"] = "Вашият акаунт беше създаден успешно.";
 
                     if (this.userManager.Options.SignIn.RequireConfirmedAccount)
                     {
@@ -221,7 +227,6 @@
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return this.Page();
         }
     }

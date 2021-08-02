@@ -9,86 +9,165 @@
 
 <hr class=" alert-primary w-auto">
 
+
 <h4 class="text-center text-"><u>Нуждаете се от кръв ? За вас или ваш близък ? Неможете да набавите необходимите банки ?.Попаднали сте на правилното място, регистрирайте се и подайте вашата молба за кръв.</u></h4>
-<form method="post" text-center">
-    <div class="class=" d-flex flex-column bd-highlight mb-3">
-        <div asp-validation-summary="All" class=" alert-primary" role="alert"></div>
+<form method="post" text-center>
+    <div class="class float-md-none" d-flex flex-column bd-highlight mb-3>
+        <div asp-validation-summary="All" class=" alert-danger" role="alert"></div>
 
-        <div class="form-group">
-            <label asp-for="Input.FirstName"></label>
-            <input asp-for="Input.FirstName" class="form-control" placeholder="Виктор" />
-            <span asp-validation-for="Input.FirstName" class="text-danger"></span>
-        </div>
+        <div class="form-row form-group">
 
-        <div class="form-group">
-            <label asp-for="Input.MiddleName"></label>
-            <input asp-for="Input.MiddleName" class="form-control" placeholder="Георгиев" />
-            <span asp-validation-for="Input.MiddleName" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Input.LastName"></label>
-            <input asp-for="Input.LastName" class="form-control" placeholder="Николов" />
-            <span asp-validation-for="Input.LastName" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Input.Gender"></label>
-            <select asp-for="Input.Gender" class="form-control" asp-items="Html.GetEnumSelectList<Gender>()">
-                <option selected="selected" value="">Моля изберете вашият пол</option>
-            </select>
-            <span asp-validation-for="Input.Gender" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-
-            <label asp-for="Input.CityName"></label>
-            <input asp-for="Input.CityName" class="form-control" placeholder="Пловдив" />
-            <span asp-validation-for="Input.CityName" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-
-            <label asp-for="Input.PostCode"></label>
-            <input asp-for="Input.PostCode" class="form-control" placeholder="4000" />
-            <span asp-validation-for="Input.PostCode" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Input.StreetName"></label>
-            <input asp-for="Input.StreetName" class="form-control" placeholder="Горно Броди №27" />
-            <span asp-validation-for="Input.StreetName" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-
-            <label asp-for="Input.PhoneNumber"></label>
-            <input asp-for="Input.PhoneNumber" class="form-control" placeholder="+359..." />
-            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Input.ImageUrl"></label>
-            <input asp-for="Input.ImageUrl" class="file-path validate" type="text" placeholder="Профилна снимка">
-            <span asp-validation-for="Input.ImageUrl" class="text-danger"></span>
-            <label class="alert-info"> Или прикачете вашия файл от бутна "browse" &#8595;</label>
+            <div class="col form-group">
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" class="form-control" placeholder="viktor@example.com" />
+                <span asp-validation-for="Input.Email" class="red-text"></span>
+            </div>
+            <div class="col form-group">
+                <label asp-for="Input.PhoneNumber"></label>
+                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="0886 54 90 88" />
+                <span asp-validation-for="Input.PhoneNumber" class="red-text"></span>
+            </div>
 
         </div>
-        <div>
-            <span class="form-group "></span>
-            <input type="file" asp-for="Input.ImageFile">
+
+        <div class="form-row form-group">
+
+            <div class="col form-group">
+                <label asp-for="Input.Password"></label>
+                <input asp-for="Input.Password" class="form-control" />
+                <span asp-validation-for="Input.Password" class="red-text"></span>
+                <small class="form-text text-muted">
+                    Паролата не може да съдържа разстояния, специални символи и емотиконки.
+                </small>
+            </div>
+            <div class="col form-group">
+                <label asp-for="Input.ConfirmPassword"></label>
+                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="Input.ConfirmPassword" class="red-text"></span>
+            </div>
+
         </div>
+
+        <hr class=" alert-primary w-auto">
+
+        <div class="form-row form-group">
+
+            <div class="col form-group">
+                <label asp-for="Input.FirstName"></label>
+                <input asp-for="Input.FirstName" class="form-control" placeholder="Виктор" />
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+            <div class="col form-group">
+                <label asp-for="Input.MiddleName"></label>
+                <input asp-for="Input.MiddleName" class="form-control" placeholder="Георгиев" />
+                <span asp-validation-for="Input.MiddleName" class="text-danger"></span>
+            </div>
+            <div class="col form-group">
+                <label asp-for="Input.LastName"></label>
+                <input asp-for="Input.LastName" class="form-control" placeholder="Николов" />
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+
+        </div>
+
+        <div class="form-row form-group">
+
+            <div class="col form-group">
+                <label asp-for="Input.FirstName"></label>
+                <input asp-for="Input.FirstName" class="form-control" placeholder="Виктор" />
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+            <div class="col form-group">
+                <label asp-for="Input.MiddleName"></label>
+                <input asp-for="Input.MiddleName" class="form-control" placeholder="Георгиев" />
+                <span asp-validation-for="Input.MiddleName" class="text-danger"></span>
+            </div>
+            <div class="col form-group">
+                <label asp-for="Input.LastName"></label>
+                <input asp-for="Input.LastName" class="form-control" placeholder="Николов" />
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-row form-group w-100">
+
+                <div class="col form-group">
+                    <label asp-for="Input.CityName"></label>
+                    <input asp-for="Input.CityName" class="form-control" placeholder="Пловдив" />
+                    <span asp-validation-for="Input.CityName" class="text-danger"></span>
+                </div>
+                <div class="col form-group">
+                    <label asp-for="Input.StreetName"></label>
+                    <input asp-for="Input.StreetName" class="form-control" placeholder="Горно Броди №27" />
+                    <span asp-validation-for="Input.StreetName" class="text-danger"></span>
+                </div>
+                <div class="col form-group">
+                    <label asp-for="Input.PostCode"></label>
+                    <input asp-for="Input.PostCode" class="form-control" placeholder="4000" />
+                    <span asp-validation-for="Input.PostCode" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="form-row form-group w-100">
+
+                <div class="col form-group">
+                    <label asp-for="Input.Gender"></label>
+                    <select asp-for="Input.Gender" class="form-control" asp-items="Html.GetEnumSelectList<Gender>()">
+                        <option selected="selected" value="">Моля изберете вашият пол</option>
+                    </select>
+                    <span asp-validation-for="Input.Gender" class="text-danger"></span>
+                </div>
+                <div class="col form-group">
+                    <label asp-for="Input.BloodType"></label>
+                    <select asp-for="Input.BloodType" class="form-control" asp-items="Html.GetEnumSelectList<BloodType>()">
+                        <option selected="selected" value="">Моля изберете кръвна група</option>
+                    </select>
+                    <span asp-validation-for="Input.Gender" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="form-row form-group w-100">
+
+                <div class="col form-group">
+                    <label asp-for="Input.ImageUrl"></label>
+                    <input asp-for="Input.ImageUrl" class="file-path validate" type="text" placeholder="Профилна снимка">
+                    <span asp-validation-for="Input.ImageUrl" class="text-danger"></span>
+                    <label class="alert-info"> Или прикачете вашия файл от бутна "browse" &#8595;</label>
+                </div>
+
+            </div>
+
+            <div class="col form-group w-100">
+                <div id="msg"></div>
+                <input type="file" name="img[]" class="file" accept="image/*">
+                <div class="input-group my-3">
+                    <input type="text" class="form-control" disabled placeholder="Upload File" id="file">
+                    <div class="input-group-append">
+                        <button type="button" class="browse btn btn-primary">Browse...</button>
+                    </div>
+                </div>
+            </div>
+            <div class="ml-2 col-sm-6">
+                <img src="https://placehold.it/80x80" id="preview" class="img-thumbnail">
+            </div>
+
+        </div>
+
+        <hr class=" alert-primary w-auto">
+
+        <p>
+            Натискайки бутона "Регистрация", вие потвърждавате, че сте запознати и съгласни с нашата
+            <a href="/Home/Privacy">политика за опазване на личните данни</a>
+        </p>
+
     </div>
 
     <hr class=" alert-primary w-auto">
 
-    <p>
-        Натискайки бутона "Регистрация", вие потвърждавате, че сте запознати и съгласни с нашата
-        <a href="/Home/Privacy">политика за опазване на личните данни</a>
-    </p>
-
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Регистрация</button>
+        <button type="submit" class="btn btn-block btn-primary">Регистрация</button>
     </div>
 
 </form>
@@ -96,21 +175,6 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <partial name="_GoogleReCaptchaPartial" />
-
-    <script>
-        // Initialize text area
-        document.addEventListener('DOMContentLoaded', function () {
-            var textNeedCount = document.querySelectorAll('#input_text, #textarea1');
-            M.CharacterCounter.init(textNeedCount);
-        });
-    </script>
-
-    <script>
-        // Initialize materialize select form.
-        document.addEventListener('DOMContentLoaded', function () {
-            var elems = document.querySelectorAll('select');
-            var options = document.querySelectorAll('option');
-            var instances = M.FormSelect.init(elems, options);
-        });
-    </script>
+    <script src="~/js/UploadImageView.js"></script>
+    <link href="~/css/UploadImageView.css" rel="stylesheet" />
 }
