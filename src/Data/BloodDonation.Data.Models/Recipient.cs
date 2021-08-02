@@ -32,7 +32,6 @@
         [MaxLength(LastNameMaxLength)]
         public string LastName { get; set; }
 
-        [Required]
         public string ImageUrl { get; set; }
 
         public Gender Gender { get; set; }
