@@ -20,7 +20,7 @@
         private static async Task SeedRecipientAsync(UserManager<ApplicationUser> userManager, string username)
         {
             var user = await userManager.FindByNameAsync(username);
-            if (user != null)
+            if (user == null)
             {
                 if (user.Recipient == null)
                 {
