@@ -4,11 +4,20 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
     public class ApplicationDbContextSeeder : ISeeder
     {
+        private readonly IConfiguration configuration;
+
+        public ApplicationDbContextSeeder(IConfiguration configuration)
+        {
+
+            this.configuration = configuration;
+        }
+
         public async Task SeedAsync(BloodDonationDbContext dbContext, IServiceProvider serviceProvider)
         {
             if (dbContext == null)
@@ -27,6 +36,9 @@
                           {
                               new RolesSeeder(),
                               new SettingsSeeder(),
+                              new UsersSeeder(this.configuration),
+                              new DonorSeeder(),
+                              new RecipientsSeeder(),
                           };
 
             foreach (var seeder in seeders)

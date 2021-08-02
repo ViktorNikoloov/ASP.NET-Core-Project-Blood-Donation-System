@@ -14,10 +14,10 @@
         {
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            await SeedOwnerAsync(userManager, "recipient@abv.bg");
+            await SeedRecipientAsync(userManager, "recipient@abv.bg");
         }
 
-        private static async Task SeedOwnerAsync(UserManager<ApplicationUser> userManager, string username)
+        private static async Task SeedRecipientAsync(UserManager<ApplicationUser> userManager, string username)
         {
             var user = await userManager.FindByNameAsync(username);
             if (user != null)
@@ -44,7 +44,7 @@
                                 },
                             },
                         },
-                        ImageUrl = "https://res.cloudinary.com/dvvbab0fs/image/upload/v1627247340/faoqwxe5cyxcadm0moks.jpg", // "https://res.cloudinary.com/ add cloud name here /image/upload/v1627247340/faoqwxe5cyxcadm0moks.jpg"
+                        ImageUrl = "https://res.cloudinary.com/dvvbab0fs/image/upload/v1627247340/faoqwxe5cyxcadm0moks.jpg", // Defaulf picture
                         PhoneNumber = user.PhoneNumber,
                     };
 
