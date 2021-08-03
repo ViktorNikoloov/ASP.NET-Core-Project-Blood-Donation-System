@@ -1,0 +1,78 @@
+﻿@model BloodDonation.Web.ViewModels.Administration.Dashboard.ApplicantViewModel
+@{
+    ViewData["Title"] = "ApplicantById";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="bs-example">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h5 class="card-title text-center"><span><i class="fas fa-at fa-7x" style="color:purple"></i></span></h5>
+                    <p class="card-text text-center">Имейл адре:</p>
+                    <a href="#" class="btn btn-block btn-icon btn-primary">@Model.Email</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body bg-light">
+                    <h5 class="card-title text-center"><span><i class="fas fa-mobile-alt fa-7x" style="color:purple"></i></span></h5>
+                    <p class="card-text text-center">Телефонен номер:</p>
+                    <a class="btn btn-block btn-icon btn-primary">@Model.PhoneNumber</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container bg-light">
+        <ul class="nav nav-tabs m-2 border-0" id="questionsAnswers">
+            @{var counter = 1;}
+
+            @foreach (var questionAnswer in Model.QuestionsAnswers)
+            {
+                var id = "a" + questionAnswer.Id;
+
+                <li class="nav-item">
+                    <a href="#@id" class="btn btn-outline-primary btn-icon " data-toggle="tab">Въпрос @counter</a>
+                </li>
+                counter++;
+            }
+
+        </ul>
+        <div class="tab-content">
+            @foreach (var questionAnswer in Model.QuestionsAnswers)
+            {
+                var id = "a" + questionAnswer.Id;
+
+                <div class="tab-pane fade" id="@id">
+                    <h4 class="mt-2 text-md-center">@questionAnswer.Question</h4>
+                    @if (questionAnswer.Answer == "True")
+                    {
+                        <h4 class="text-center"><span class="badge bg-success">Да</span></h4>
+                    }
+                    else
+                    {
+                        <h4 class="text-center"><span class="badge bg-danger">Не</span></h4>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<hr class="bg-primary w-auto">
+
+<div class="col text-center bg-light s2 right">
+    <a asp-area="Administration" asp-controller="Dashboard" asp-action="RegulateApplicants" class="btn btn-outline-info btn-icon btn-md" type="submit" name="action">
+        <i class="fas fa-arrow-left">Назад</i>
+    </a>
+
+    <a class="btn btn-outline-danger btn-icon btn-md" type="submit" href="#modal1">
+        <i class="fas fa-user-slash">Отхвърли</i>
+    </a>
+
+    <a class="btn btn-outline-success btn-icon btn-md" type="submit" href="#modal2">
+        <i class="fas fa-user-check">Одобри</i>
+    </a>
+</div>
