@@ -68,11 +68,52 @@
         <i class="fas fa-arrow-left">Назад</i>
     </a>
 
-    <a class="btn btn-outline-danger btn-icon btn-md" type="submit" href="#modal1">
+    <button type="button" class="btn btn btn-outline-danger btn-icon" data-toggle="modal" data-target="#rejectButton">
         <i class="fas fa-user-slash">Отхвърли</i>
-    </a>
+    </button>
 
-    <a class="btn btn-outline-success btn-icon btn-md" type="submit" href="#modal2">
+    <button type="button" class="btn btn-outline-success btn-icon" data-toggle="modal" data-target="#acceptButton">
         <i class="fas fa-user-check">Одобри</i>
-    </a>
+    </button>
+
+</div>
+
+<div class="modal fade" id="rejectButton" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-titlete text-center" id="staticBackdropLabel" style="color:darkred"><u>Изтриване на заявление!</u></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p bg-light>Сигурни ли сте, че искате да изтриете заявлението на "@Model.Email".</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Затвори</button>
+                <button type="button" class="btn btn-danger">Изтрий</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="acceptButton" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-titlete text-center" id="staticBackdropLabel" style="color:seagreen"><u>Одобряване на заявление!</u></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="bg-light">Сигурни ли сте, че искате да одобрите заявлението на "@Model.Email".</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Затвори</button>
+                <button type="button" class="btn btn-success">Одобри</button>
+            </div>
+        </div>
+    </div>
 </div>
