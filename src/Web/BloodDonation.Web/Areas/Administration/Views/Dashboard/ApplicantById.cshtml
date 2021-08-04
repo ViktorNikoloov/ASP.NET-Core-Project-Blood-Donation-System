@@ -3,29 +3,32 @@
     ViewData["Title"] = "ApplicantById";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container bg-light p-2 table-bordered">
+    <div class="bs-example">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h5 class="card-title text-center"><span><i class="fas fa-at fa-7x" style="color:purple"></i></span></h5>
+                        <p class="card-text text-center">Имейл адре:</p>
+                        <a href="#" class="btn btn-block btn-icon btn-primary">@Model.Email</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body bg-light">
+                        <h5 class="card-title text-center"><span><i class="fas fa-mobile-alt fa-7x" style="color:purple"></i></span></h5>
+                        <p class="card-text text-center">Телефонен номер:</p>
+                        <a class="btn btn-block btn-icon btn-primary">@Model.PhoneNumber</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<div class="bs-example">
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="card bg-light">
-                <div class="card-body">
-                    <h5 class="card-title text-center"><span><i class="fas fa-at fa-7x" style="color:purple"></i></span></h5>
-                    <p class="card-text text-center">Имейл адре:</p>
-                    <a href="#" class="btn btn-block btn-icon btn-primary">@Model.Email</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body bg-light">
-                    <h5 class="card-title text-center"><span><i class="fas fa-mobile-alt fa-7x" style="color:purple"></i></span></h5>
-                    <p class="card-text text-center">Телефонен номер:</p>
-                    <a class="btn btn-block btn-icon btn-primary">@Model.PhoneNumber</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container bg-light">
+        <hr class="bg-primary w-auto">
+
+
         <ul class="nav nav-tabs m-2 border-0" id="questionsAnswers">
             @{var counter = 1;}
 
@@ -41,9 +44,28 @@
 
         </ul>
         <div class="tab-content">
+            @{var activeCounter = 0;}
+            
             @foreach (var questionAnswer in Model.QuestionsAnswers)
             {
                 var id = "a" + questionAnswer.Id;
+
+                if (activeCounter == 0)
+                {
+                    <div class="tab-pane fade show active" id="@id">
+                        <h4 class="mt-2 text-md-center">@questionAnswer.Question</h4>
+                        @if (questionAnswer.Answer == "True")
+                        {
+                            <h4 class="text-center"><span class="badge bg-success">Да</span></h4>
+                        }
+                        else
+                        {
+                            <h4 class="text-center"><span class="badge bg-danger">Не</span></h4>
+                        }
+                    </div>
+                    activeCounter++;
+                    continue;
+                }
 
                 <div class="tab-pane fade" id="@id">
                     <h4 class="mt-2 text-md-center">@questionAnswer.Question</h4>
@@ -58,41 +80,44 @@
                 </div>
             }
         </div>
+
     </div>
-</div>
 
-<hr class="bg-primary w-auto">
+    <hr class="bg-primary w-auto">
 
-<div class="col text-center bg-light s2 right">
-    <a asp-area="Administration" asp-controller="Dashboard" asp-action="RegulateApplicants" class="btn btn-outline-info btn-icon btn-md" type="submit" name="action">
-        <i class="fas fa-arrow-left">Назад</i>
-    </a>
+    <div class="col text-center bg-light s2 right">
+        <a asp-area="Administration" asp-controller="Dashboard" asp-action="RegulateApplicants" class="btn btn-outline-info btn-icon btn-md" type="submit" name="action">
+            <i class="fas fa-arrow-left">Назад</i>
+        </a>
 
-    <button type="button" class="btn btn btn-outline-danger btn-icon" data-toggle="modal" data-target="#rejectButton">
-        <i class="fas fa-user-slash">Отхвърли</i>
-    </button>
+        <button type="button" class="btn btn btn-outline-danger btn-icon" data-toggle="modal" data-target="#rejectButton">
+            <i class="fas fa-user-slash">Отхвърли</i>
+        </button>
 
-    <button type="button" class="btn btn-outline-success btn-icon" data-toggle="modal" data-target="#acceptButton">
-        <i class="fas fa-user-check">Одобри</i>
-    </button>
+        <button type="button" class="btn btn-outline-success btn-icon" data-toggle="modal" data-target="#acceptButton">
+            <i class="fas fa-user-check">Одобри</i>
+        </button>
 
-</div>
+    </div>
 
-<div class="modal fade" id="rejectButton" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog ">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-titlete text-center" id="staticBackdropLabel" style="color:darkred"><u>Изтриване на заявление!</u></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p bg-light>Сигурни ли сте, че искате да изтриете заявлението на "@Model.Email".</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal">Затвори</button>
-                <button type="button" class="btn btn-danger">Изтрий</button>
+    <div class="modal fade" id="rejectButton" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-titlete text-center" id="staticBackdropLabel" style="color:darkred"><u>Изтриване на заявление!</u></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="bg-light">Сигурни ли сте, че искате да изтриете заявлението на "@Model.Email".</p>
+                </div>
+                <div class="modal-footer">
+                    <form method="post" asp-action="RejectApplicant" asp-route-id="@Model.Id">
+                        <button type="button" class="btn btn-info btn-icon" data-dismiss="modal">Затвори</button>
+                        <button type="submit" class="btn btn-danger btn-icon">Изтрий</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -111,8 +136,10 @@
                 <p class="bg-light">Сигурни ли сте, че искате да одобрите заявлението на "@Model.Email".</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal">Затвори</button>
-                <button type="button" class="btn btn-success">Одобри</button>
+                <form method="post" asp-action="ApproveApplicant" asp-route-id="@Model.Id">
+                    <button type="button" class="btn btn-info btn-icon" data-dismiss="modal">Затвори</button>
+                    <button type="submit" class="btn btn-success btn-icon">Одобри</button>
+                </form>
             </div>
         </div>
     </div>
