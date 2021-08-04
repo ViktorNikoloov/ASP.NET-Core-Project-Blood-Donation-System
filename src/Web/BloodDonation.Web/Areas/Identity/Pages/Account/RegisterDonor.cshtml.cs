@@ -56,8 +56,7 @@
         public class InputModel
         {
             [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
-            [EmailAddress]
-            [Display(Name = "Имейл")]
+            [EmailAddress(ErrorMessage = "Невалиден имейл адрес.")]
             public string Email { get; set; }
 
             [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]

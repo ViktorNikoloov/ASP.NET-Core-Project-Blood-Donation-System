@@ -43,15 +43,18 @@
 
         public class InputModel
         {
-            [Required(ErrorMessage = "�������� �����")]
-            [EmailAddress(ErrorMessage = "������� �� � �������")]
+            [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
+            [EmailAddress(ErrorMessage = "Невалиден имейл адрес.")]
+            [Display(Name = "Имейл")]
             public string Email { get; set; }
 
-            [Required(ErrorMessage = "�������� ������")]
+            [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
+            [StringLength(100, ErrorMessage = "Полето \"{0}\" трябва да е между \"{2}\" и \"{1}\" символа.", MinimumLength = 6)]
             [DataType(DataType.Password)]
+            [Display(Name = "Парола")]
             public string Password { get; set; }
 
-            [Display(Name = "������� ��?")]
+            [Display(Name = "Запомни ме?")]
             public bool RememberMe { get; set; }
         }
 
@@ -101,12 +104,12 @@
 
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
+                    _logger.LogWarning("Акаунтът е заключен");
                     return RedirectToPage("./Lockout");
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "������������ ���� ��� �������� �� ������.");
+                    ModelState.AddModelError(string.Empty, "Невалиден опит за влизане!");
                     await _signInManager.SignOutAsync();
                     return Page();
                 }

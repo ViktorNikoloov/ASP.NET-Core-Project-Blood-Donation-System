@@ -60,7 +60,7 @@
         public class InputModel
         {
             [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
-            [EmailAddress]
+            [EmailAddress(ErrorMessage = "Невалиден имейл адрес.")]
             [Display(Name = "Имейл")]
             public string Email { get; set; }
 
@@ -211,6 +211,7 @@
 
                     if (this.userManager.Options.SignIn.RequireConfirmedAccount)
                     {
+
                         return this.RedirectToPage("RegisterConfirmation", new { email = this.Input.Email });
                     }
                     else
