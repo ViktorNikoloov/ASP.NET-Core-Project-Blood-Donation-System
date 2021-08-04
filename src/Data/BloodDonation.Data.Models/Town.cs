@@ -15,7 +15,6 @@
             this.Hospitals = new HashSet<Hospital>();
         }
 
-        [Required]
         [MaxLength(CityMaxLength)]
         public string Name { get; set; }
 

@@ -20,31 +20,32 @@
             this.Massages = new HashSet<Massage>();
         }
 
-        [Required]
         [MaxLength(FirstNameMaxLength)]
         public string FirstName { get; set; }
 
-        [Required]
         [MaxLength(MiddleNameMaxLength)]
         public string MiddleName { get; set; }
 
-        [Required]
         [MaxLength(LastNameMaxLength)]
         public string LastName { get; set; }
 
-        [Required]
         public string ImageUrl { get; set; }
 
-        public Gender Gender { get; set; }
+        public Gender? Gender { get; set; }
+
+        public BloodType? BloodType { get; set; }
+
+        public int? DonationCount { get; set; }
 
         public int AddressId { get; set; }
 
         public Address Address { get; set; }
 
+        [Required]
         [RegularExpression(PhoneNumberRegex)]
         public string PhoneNumber { get; set; }
 
-        public decimal WageRate { get; set; }
+        public decimal? WageRate { get; set; }
 
         public string UserId { get; set; }
 

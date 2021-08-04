@@ -2,7 +2,7 @@
 {
     using BloodDonation.Data.Common.Models;
 
-    public class QuestionAnswer : BaseDeletableModel<int>
+    public class QuestionAnswer : BaseModel<int>
     {
         public string Question { get; set; }
 

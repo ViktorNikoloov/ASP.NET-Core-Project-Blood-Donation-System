@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodDonation.Data.Migrations
 {
     [DbContext(typeof(BloodDonationDbContext))]
-    [Migration("20210802093726_ChangeImageUrlToNotRequiredField")]
-    partial class ChangeImageUrlToNotRequiredField
+    [Migration("20210804102009_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -298,7 +298,10 @@ namespace BloodDonation.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("AddressId")
+                    b.Property<int?>("AddressId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BloodType")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -307,28 +310,27 @@ namespace BloodDonation.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("DonationCount")
+                        .HasColumnType("int");
+
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<int>("Gender")
+                    b.Property<int?>("Gender")
                         .HasColumnType("int");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("MiddleName")
-                        .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
@@ -336,12 +338,13 @@ namespace BloodDonation.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<decimal>("WageRate")
+                    b.Property<decimal?>("WageRate")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -411,12 +414,6 @@ namespace BloodDonation.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
@@ -427,8 +424,6 @@ namespace BloodDonation.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("UserId");
 
@@ -619,7 +614,6 @@ namespace BloodDonation.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -627,7 +621,7 @@ namespace BloodDonation.Data.Migrations
                         .HasMaxLength(9999)
                         .HasColumnType("int");
 
-                    b.Property<int>("StreetId")
+                    b.Property<int?>("StreetId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -781,9 +775,7 @@ namespace BloodDonation.Data.Migrations
                 {
                     b.HasOne("BloodDonation.Data.Models.Address", "Address")
                         .WithMany("Donors")
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("AddressId");
 
                     b.HasOne("BloodDonation.Data.Models.ApplicationUser", "User")
                         .WithOne("Donor")
@@ -850,9 +842,7 @@ namespace BloodDonation.Data.Migrations
                 {
                     b.HasOne("BloodDonation.Data.Models.Street", "Street")
                         .WithMany("Towns")
-                        .HasForeignKey("StreetId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("StreetId");
 
                     b.Navigation("Street");
                 });
