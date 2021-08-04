@@ -101,7 +101,7 @@
 
             if (result.Succeeded)
             {
-                this.TempData["isSuccessful"] = $"Успешно отхвърлихте кандидат {applicant.Email}";
+                this.TempData["isRejected"] = $"Успешно отхвърлихте кандидат {applicant.Email}";
 
                 return this.RedirectToAction("RegulateApplicants");
             }

@@ -7,6 +7,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (this.TempData.ContainsKey("isSuccessful"))
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        @this.TempData["isSuccessful"]
+    </div>
+}
+
+@if (this.TempData.ContainsKey("isRejected"))
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        @this.TempData["isRejected"]
+    </div>
+}
+
 <h2 class="center">Регулиране на кандидати</h2>
 
 <table class="table table-responsive-sm table-active table-hover table-bordered border-primary">

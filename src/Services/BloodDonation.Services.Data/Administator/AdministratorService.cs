@@ -10,9 +10,9 @@
     public class AdministratorService : IAdministratorService
     {
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
-        private readonly IDeletableEntityRepository<QuestionAnswer> questionsRepository;
+        private readonly IRepository<QuestionAnswer> questionsRepository;
 
-        public AdministratorService(IDeletableEntityRepository<ApplicationUser> usersRepository, IDeletableEntityRepository<QuestionAnswer> questionsRepository)
+        public AdministratorService(IDeletableEntityRepository<ApplicationUser> usersRepository, IRepository<QuestionAnswer> questionsRepository)
         {
             this.usersRepository = usersRepository;
             this.questionsRepository = questionsRepository;
@@ -22,9 +22,25 @@
         {
             var user = this.usersRepository.All().FirstOrDefault(u => u.Id == id);
 
-            var dogsitter = new Donor();
-            user.Donor = dogsitter;
-            user.Donor.PhoneNumber = user.PhoneNumber;
+            var donor = new Donor
+            {
+                Address = new Address
+                {
+                    Town = new Town
+                    {
+                        Name = "Липсва",
+                        Street = new Street
+                        {
+                            Name = "Липсва",
+                            Number = 4,
+                        },
+                    },
+                },
+                ImageUrl = "https://res.cloudinary.com/dvvbab0fs/image/upload/v1627247340/faoqwxe5cyxcadm0moks.jpg", // Defaulf picture
+                PhoneNumber = user.PhoneNumber,
+                WageRate = 10,
+            };
+            user.Donor = donor;
 
             await this.usersRepository.SaveChangesAsync();
         }
