@@ -11,7 +11,7 @@
 
 
 <h4 class="text-center text-"><u>Нуждаете се от кръв ? За вас или ваш близък ? Неможете да набавите необходимите банки ?.Попаднали сте на правилното място, регистрирайте се и подайте вашата молба за кръв.</u></h4>
-<form method="post" text-center>
+<form asp-route-returnUrl="@Model.ReturnUrl" enctype="multipart/form-data" method="post" text-center>
     <div class="class float-md-none" d-flex flex-column bd-highlight mb-3>
         <div asp-validation-summary="All" class=" alert-danger" role="alert"></div>
 
@@ -112,31 +112,25 @@
 
             </div>
 
-            <div class="form-row form-group w-100">
+            <div class="row form-group w-100">
                 <div class="file-field input-field">
-                    <div class="col form-group">
+                    <div class=" form-group file-path-wrapper" style="margin: 0px 30px;">
                         <label asp-for="Input.ImageUrl"></label>
                         <input asp-for="Input.ImageUrl" class="file-path validate" type="text" placeholder="Профилна снимка">
-                        <span asp-validation-for="Input.ImageUrl" class="text-danger"></span>
                         <label class="alert-info"> Или прикачете вашия файл от бутна "browse" &#8595;</label>
                     </div>
 
-                    <div id="msg"></div>
-                    <input type="file" name="img[]" class="file" accept="image/*">
-                    <div class="input-group my-3">
-                        <input type="text" class="form-control" disabled placeholder="Upload File" id="file">
-                        <div class="input-group-append">
-                            <button type="button" class="browse btn btn-primary">Browse...</button>
-                        </div>
+                    <div class="btn btn-block btn-outline-primary m-2">
+                        <span>Изберете файл</span>
+                        <input type="file" asp-for="Input.ImageFile">
                     </div>
-
+                    <span asp-validation-for="Input.ImageUrl" class="text-danger"></span>
                 </div>
             </div>
+        </div>
 
-            <div class="ml-2 col-sm-6">
-                <img src="https://placehold.it/60x60" id="preview" class="img-thumbnail">
-            </div>
-
+        <div class="ml-4 col-sm-4">
+            <img src="https://placehold.it/60x60" id="preview" class="img-thumbnail">
         </div>
 
         <hr class=" alert-primary w-auto">

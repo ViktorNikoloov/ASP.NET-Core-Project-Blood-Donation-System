@@ -10,6 +10,7 @@
     using BloodDonation.Common;
     using BloodDonation.Data.Models;
     using BloodDonation.Data.Models.Enums;
+    using BloodDonation.Services.Data.Recipient;
     using CloudinaryDotNet;
     using CloudinaryDotNet.Actions;
     using Microsoft.AspNetCore.Authentication;
@@ -35,19 +36,22 @@
         private readonly ILogger<RegisterModel> logger;
         private readonly IEmailSender emailSender;
         private readonly IConfiguration configuration;
+        private readonly IRecipientsService recipientsService;
 
         public RegisterRecipientModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IRecipientsService recipientsService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
             this.emailSender = emailSender;
             this.configuration = configuration;
+            this.recipientsService = recipientsService;
         }
 
         [BindProperty]
@@ -82,7 +86,7 @@
             [StringLength(FirstNameMaxLength, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{2}\" и \"{1}\" символа.", MinimumLength = FirstNameMinLength)]
             public string FirstName { get; set; }
 
-            [Display(Name = "Бащино име")]
+            [Display(Name = "Презиме")]
             [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
             [MinLength(MiddleNameMinLength)]
             [MaxLength(MiddleNameMaxLength)]
@@ -102,7 +106,7 @@
             public BloodType BloodType { get; set; }
 
             [Display(Name = "Url адрес")]
-            //[Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
+            // [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
             [Url(ErrorMessage = "Невалиден \"Url\" адрес")]
             public string ImageUrl { get; set; }
 
@@ -138,7 +142,6 @@
             public string PhoneNumber { get; set; }
         }
 
-
         public async Task OnGetAsync(string returnUrl = null)
         {
             this.ReturnUrl = returnUrl;
@@ -147,7 +150,7 @@
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/Recipient/SuccessfullySentApplication");
+            returnUrl = returnUrl ?? this.Url.Content("~/");
             this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             if (this.ModelState.IsValid)
@@ -185,10 +188,15 @@
                         }
                     }
 
-                    imageUrl = uploadResult.Uri.ToString();
+                    imageUrl = uploadResult.Url.ToString();
                 }
                 else
                 {
+                    if (this.Input.ImageUrl == null)
+                    {
+                        imageUrl = "https://res.cloudinary.com/dvvbab0fs/image/upload/v1627247340/faoqwxe5cyxcadm0moks.jpg"; // default picture
+                    }
+
                     imageUrl = this.Input.ImageUrl;
                 }
 
@@ -218,6 +226,7 @@
                     {
                         await this.userManager.AddToRoleAsync(user, GlobalConstants.RecipientRoleName);
                         await this.signInManager.SignInAsync(user, isPersistent: false);
+                        await this.recipientsService.CreateRecipientAsync(user, user.Id, this.Input.FirstName, this.Input.MiddleName, this.Input.LastName, this.Input.CityName, this.Input.StreetName, this.Input.PostCode, this.Input.Gender, this.Input.BloodType, imageUrl, this.Input.PhoneNumber);
 
                         return this.LocalRedirect(returnUrl);
                     }
