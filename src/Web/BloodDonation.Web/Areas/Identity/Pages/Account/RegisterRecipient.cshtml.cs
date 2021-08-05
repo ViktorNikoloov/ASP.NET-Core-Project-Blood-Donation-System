@@ -106,7 +106,7 @@
             public BloodType BloodType { get; set; }
 
             [Display(Name = "Url адрес")]
-            // [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
+            //[Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
             [Url(ErrorMessage = "Невалиден \"Url\" адрес")]
             public string ImageUrl { get; set; }
 
@@ -196,8 +196,10 @@
                     {
                         imageUrl = "https://res.cloudinary.com/dvvbab0fs/image/upload/v1627247340/faoqwxe5cyxcadm0moks.jpg"; // default picture
                     }
-
-                    imageUrl = this.Input.ImageUrl;
+                    else
+                    {
+                        imageUrl = this.Input.ImageUrl;
+                    }
                 }
 
                 if (result.Succeeded)

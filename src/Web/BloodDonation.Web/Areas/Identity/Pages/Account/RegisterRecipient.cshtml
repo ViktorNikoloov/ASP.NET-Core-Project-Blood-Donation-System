@@ -119,12 +119,12 @@
                         <input asp-for="Input.ImageUrl" class="file-path validate" type="text" placeholder="Профилна снимка">
                         <label class="alert-info"> Или прикачете вашия файл от бутна "browse" &#8595;</label>
                     </div>
+                    <span asp-validation-for="Input.ImageUrl" class="text-danger"></span>
 
                     <div class="btn btn-block btn-outline-primary m-2">
                         <span>Изберете файл</span>
                         <input type="file" asp-for="Input.ImageFile">
                     </div>
-                    <span asp-validation-for="Input.ImageUrl" class="text-danger"></span>
                 </div>
             </div>
         </div>
