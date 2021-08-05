@@ -9,6 +9,7 @@
     using BloodDonation.Data.Repositories;
     using BloodDonation.Data.Seeding;
     using BloodDonation.Services.Data.Administator;
+    using BloodDonation.Services.Data.Recipient;
     using BloodDonation.Services.Data.Settings;
     using BloodDonation.Services.Data.User;
     using BloodDonation.Services.Mapping;
@@ -87,8 +88,9 @@
             // Application services
             services.AddTransient<IEmailSender>(x => new SendGridEmailSender(this.configuration["SendGrid:ApiKey"]));
             services.AddTransient<ISettingsService, SettingsService>();
-            services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<IAdministratorService, AdministratorService>();
+            services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<IRecipientsService, RecipientsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

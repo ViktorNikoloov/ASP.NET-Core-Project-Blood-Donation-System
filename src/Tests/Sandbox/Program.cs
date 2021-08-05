@@ -12,6 +12,7 @@
     using BloodDonation.Data.Repositories;
     using BloodDonation.Data.Seeding;
     using BloodDonation.Services.Data;
+    using BloodDonation.Services.Data.Settings;
     using BloodDonation.Services.Messaging;
 
     using CommandLine;
@@ -35,7 +36,7 @@
             {
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<BloodDonationDbContext>();
                 dbContext.Database.Migrate();
-                new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+                //new ApplicationDbContextSeeder(configuration).SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
 
             using (var serviceScope = serviceProvider.CreateScope())
