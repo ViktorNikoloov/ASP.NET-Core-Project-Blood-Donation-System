@@ -97,14 +97,14 @@
 
                 <div class="col form-group">
                     <label asp-for="Input.Gender"></label>
-                    <select asp-for="Input.Gender" class="form-control" asp-items="Html.GetEnumSelectList<Gender>()">
+                    <select asp-for="Input.Gender" class="form-control" asp-items="Html.GetEnumSelectList<Gender>().Skip(2)">
                         <option selected="selected" value="">Моля изберете вашият пол</option>
                     </select>
                     <span asp-validation-for="Input.Gender" class="text-danger"></span>
                 </div>
                 <div class="col form-group">
                     <label asp-for="Input.BloodType"></label>
-                    <select asp-for="Input.BloodType" class="form-control" asp-items="Html.GetEnumSelectList<BloodType>()">
+                    <select asp-for="Input.BloodType" class="form-control" asp-items="Html.GetEnumSelectList<BloodType>().Skip(1)">
                         <option selected="selected" value="">Моля изберете кръвна група</option>
                     </select>
                     <span asp-validation-for="Input.Gender" class="text-danger"></span>
@@ -153,6 +153,7 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <partial name="_GoogleReCaptchaPartial" />
+
     <script src="~/js/UploadImageView.js"></script>
     <link href="~/css/UploadImageView.css" rel="stylesheet" />
 }

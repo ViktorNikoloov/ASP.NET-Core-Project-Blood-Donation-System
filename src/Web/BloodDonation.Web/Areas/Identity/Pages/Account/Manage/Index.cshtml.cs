@@ -91,7 +91,7 @@
             //[Range(1, 8)]
             public BloodType BloodType { get; set; }
 
-            public int DonationCount { get;}
+            public int DonationCount { get; set; }
 
             [Display(Name = "Пол")]
             //[Required(ErrorMessage = "Полето \"{0}\" е задължително.")] // The attribute is put on Enum type, only to set random error message.
@@ -159,6 +159,8 @@
                     CityName = recipient.CityName,
                     StreetName = recipient.StreetName,
                     PostCode = recipient.PostCode,
+                    Gender = recipient.Gender,
+                    BloodType = recipient.BloodType,
                     PhoneNumber = phoneNumber,
                     ImageUrl = recipient.ImageUrl,
                 };

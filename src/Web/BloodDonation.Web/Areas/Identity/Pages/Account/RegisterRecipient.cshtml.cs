@@ -116,7 +116,7 @@
             [Display(Name = "Пол")]
             [Required(ErrorMessage = "Полето \"{0}\" е задължително.")] // The attribute is put on Enum type, only to set random error message.
             [EnumDataType(typeof(Gender))]
-            [Range(1, 2, ErrorMessage = "Полето \"{0}\" трябва да съдържа \"{1}\" или \"{2}\".")]
+            [Range(2, 3, ErrorMessage = "Полето \"{0}\" трябва да съдържа \"{1}\" или \"{2}\".")]
             public Gender Gender { get; set; }
 
             [Display(Name = "Град")]

@@ -68,7 +68,7 @@
             return this.recipientRepository
                 .AllAsNoTracking()
                 .Where(r => r.UserId == id)
-                .Select(x=> new GetRecipientByIdDto
+                .Select(x => new GetRecipientByIdDto
                 {
                     UserId = x.UserId,
                     FirstName = x.FirstName,
@@ -78,6 +78,8 @@
                     ImageUrl = x.ImageUrl,
                     CityName = x.Address.Town.Name,
                     PostCode = x.Address.Town.PostCode,
+                    Gender = x.Gender,
+                    BloodType = x.BloodType,
                     StreetName = x.Address.Town.Street.Name,
                 }) //.To<GetRecipientByIdDto>()
                 .FirstOrDefault();

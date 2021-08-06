@@ -7,10 +7,13 @@
         [Display(Name = "Липсва")]
         Unknown = 0,
 
+        [Display(Name = "Дете")]
+        Kid = 1,
+
         [Display(Name = "Мъж")]
-        Male = 1,
+        Male = 2,
 
         [Display(Name = "Жена")]
-        Female = 2,
+        Female = 3,
     }
 }
