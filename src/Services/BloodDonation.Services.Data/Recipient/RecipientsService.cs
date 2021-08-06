@@ -83,40 +83,29 @@
                 .FirstOrDefault();
         }
 
+        public async Task UpdateCurrentLoggedInUserInfoAsync(string id, string firstName, string middleName, string lastName, string cityName, string streetName, int? postCode, string phoneNumber, string imageUrl)
+        {
+            var recipient = this.recipientRepository.All().FirstOrDefault(o => o.UserId == id);
 
+            recipient.FirstName = firstName;
+            recipient.MiddleName = middleName;
+            recipient.LastName = lastName;
+            recipient.Address = new Address
+            {
+                Town = new Town
+                {
+                    Name = cityName,
+                    PostCode = postCode,
+                    Street = new Street
+                    {
+                        Name = streetName,
+                    },
+                },
+            };
+            recipient.PhoneNumber = phoneNumber;
+            recipient.ImageUrl = imageUrl;
 
-
-
-
-
-
-
-
-
-
-
-        //public async Task UpdateCurrentLoggedInUserInfoAsync(string id, string firstName, string middleName, string lastName, string address, string description, string cityName, int? postCode, string streetName, string imageUrl)
-        //{
-        //    var recipient = this.recipientRepository.All().FirstOrDefault(o => o.UserId == id);
-
-        //    recipient.FirstName = firstName;
-        //    recipient.MiddleName = middleName;
-        //    recipient.LastName = lastName;
-        //    recipient.Address = new Address
-        //    {
-        //        Town = new Town
-        //        {
-        //            Name = cityName,
-        //            PostCode = postCode,
-        //            Street = new Street
-        //            {
-        //                Name = streetName,
-        //            },
-        //        },
-        //    };
-        //    recipient.ImageUrl = imageUrl;
-
-        //    await this.recipientRepository.SaveChangesAsync();
-        //}
+            await this.recipientRepository.SaveChangesAsync();
+        }
     }
 }

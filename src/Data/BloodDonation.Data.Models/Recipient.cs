@@ -15,7 +15,6 @@
         {
             this.Id = Guid.NewGuid().ToString();
 
-            this.Rating = new HashSet<Rating>();
             this.Appointments = new HashSet<Appointment>();
             this.Massages = new HashSet<Massage>();
         }
@@ -36,6 +35,8 @@
 
         public Gender Gender { get; set; }
 
+        public BloodType BloodType { get; set; }
+
         public int AddressId { get; set; }
 
         public Address Address { get; set; }
@@ -46,8 +47,6 @@
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
-
-        public virtual ICollection<Rating> Rating { get; set; }
 
         public virtual ICollection<Appointment> Appointments { get; set; }
 

@@ -2,7 +2,9 @@
 {
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
+
     using BloodDonation.Data.Models;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -91,7 +93,7 @@
 
             await _signInManager.RefreshSignInAsync(user);
             _logger.LogInformation("User changed their password successfully.");
-            StatusMessage = "Паролата ви беше сменена успешно.";
+            this.StatusMessage = "Паролата ви беше сменена успешно.";
 
             return RedirectToPage();
         }

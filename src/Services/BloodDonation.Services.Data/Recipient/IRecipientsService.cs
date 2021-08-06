@@ -14,6 +14,6 @@
 
         GetRecipientByIdDto GetRecipientrById(string id);
 
-        //Task UpdateCurrentLoggedInUserInfoAsync(string id, string firstName, string middleName, string lastName, string address, string description, string imageUrl);
+        Task UpdateCurrentLoggedInUserInfoAsync(string id, string firstName, string middleName, string lastName, string cityName, string streetName, int? postCode, string phoneNumber, string imageUrl);
     }
 }

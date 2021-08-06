@@ -8,13 +8,15 @@
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
-<h4 style="margin: 0px 250px;">@ViewData["Title"]</h4>
-<div style="margin: 0px 250px;">
-    <img src="@Model.Input.ImageUrl" alt="Avatar" class="avatar rounded-circle">
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<h4 class="text-md-center">@ViewData["Title"]</h4>
+
+<div class="text-md-center">
+    <img src="@Model.Input.ImageUrl" alt="Avatar" class="avatar rounded-circle" style='width:20%;height:20%'>
 
 </div>
 
-<partial name="_StatusMessage" model="Model.StatusMessage" />
 <div class="row">
     <div class="col-md-10">
         <form id="profile-form" enctype="multipart/form-data" method="post">
@@ -87,7 +89,8 @@
                             </div>
                             <div class="col form-group">
                                 <label asp-for="Input.Gender"></label>
-                                <input asp-for="Input.Gender" class="form-control" type="text" disabled readonly>
+                                <select asp-for="Input.BloodType" class="form-control" asp-items="Html.GetEnumSelectList<Gender>()" disabled readonly></select>
+
                             </div>
 
 
@@ -156,7 +159,7 @@
                 </div>
             }
 
-            <button id="update-profile-button" type="submit" class="btn btn-primary">Запази</button>
+            <button id="update-profile-button" type="submit" class="btn btn-primary btn-block">Запази</button>
         </form>
     </div>
 </div>

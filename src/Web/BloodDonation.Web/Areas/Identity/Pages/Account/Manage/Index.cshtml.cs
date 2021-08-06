@@ -1,7 +1,6 @@
 ﻿namespace BloodDonation.Web.Areas.Identity.Pages.Account.Manage
 {
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using BloodDonation.Common;
@@ -123,7 +122,6 @@
             var isDonor = await this.userManager.IsInRoleAsync(user, GlobalConstants.DonorRoleName);
             var isRecipient = await this.userManager.IsInRoleAsync(user, GlobalConstants.RecipientRoleName);
 
-
             if (isDonor)
             {
                 //var donor = this.donorsService.GetDonorByUserId(user.Id);
@@ -181,7 +179,7 @@
             var user = await this.userManager.GetUserAsync(this.User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{this.userManager.GetUserId(this.User)}'.");
+                return this.NotFound($"Unable to load user with ID '{this.userManager.GetUserId(this.User)}'.");
             }
 
             if (!this.ModelState.IsValid)
@@ -196,7 +194,7 @@
                 var setPhoneResult = await this.userManager.SetPhoneNumberAsync(user, this.Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
                 {
-                    this.StatusMessage = "Unexpected error when trying to set phone number.";
+                    this.StatusMessage = "Нещо се случи докато се опитвахме да променим телефонния ви номер";
                     return this.RedirectToPage();
                 }
             }
@@ -230,17 +228,24 @@
                     }
                 }
 
-               // imageUrl = this.uploadResult.Uri.ToString();
+                imageUrl = uploadResult.Url.ToString();
             }
             else
             {
                 imageUrl = this.Input.ImageUrl;
             }
 
-            
+            if (this.User.IsInRole(GlobalConstants.DonorRoleName))
+            {
+            }
+            else if (this.User.IsInRole(GlobalConstants.RecipientRoleName))
+            {
+                await this.recipientService.UpdateCurrentLoggedInUserInfoAsync(user.Id, this.Input.FirstName, this.Input.MiddleName, this.Input.LastName, this.Input.CityName, this.Input.StreetName, this.Input.PostCode, this.Input.PhoneNumber, imageUrl);
+            }
+
             this.TempData["SuccessfullyUpdated"] = "Успешно запазихте промените";
             await this.signInManager.RefreshSignInAsync(user);
-            this.StatusMessage = "Your profile has been updated";
+            this.StatusMessage = "Успешно запазихте промените";
             return this.RedirectToPage();
         }
     }
