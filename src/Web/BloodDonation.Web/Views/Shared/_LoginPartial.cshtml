@@ -7,20 +7,40 @@
 <ul class="navbar-nav">
     @if (this.SignInManager.IsSignedIn(this.User))
     {
-        <li class="nav-item m-0 m-md-1">
-            <button type="button" class="btn btn-outline-danger btn-icon btn-sm">
-                <a class="nav-link " asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                    <i class="fas fa-user-md"></i> Акаунт
-                </a>
-            </button>
-        </li>
+    <li class="nav-item m-0 m-md-1">
+        @*<div>
+            <img src="@SignInManager.Model.Input.ImageUrl" alt="Avatar" class="avatar rounded-circle">
+        </div>*@
+        <button type="button" class="btn btn-outline-danger btn-icon btn-sm">
+            <a class="nav-link " asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                <i class="fas fa-user-md"></i>
+                @if (this.User.IsInRole(GlobalConstants.RecipientRoleName))
+                {
+                    <span class="text-white">Реципиент</span>
+
+                }
+                else if (this.User.IsInRole(GlobalConstants.DonorRoleName))
+                {
+                    <span class="text-white">Дарител</span>
+                }
+                else
+                {
+                    <span class="text-white">Администратор</span>
+                }
+            </a>
+
+        </button>
+        
+
+    </li>
+
         if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
 
             <li class="nav-item m-0 m-md-1">
                 <button type="button" class="btn btn-outline-danger btn-icon btn-sm">
                     <a class="nav-link" asp-area="Administration" asp-controller="Dashboard" asp-action="RegulationPage" title="Admin">
-                        <i class="fas fa-user-shield"></i> Админ
+                        <i class="fas fa-user-shield"></i> Админ панел
                     </a>
                 </button>
             </li>
