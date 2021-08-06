@@ -5,6 +5,7 @@
 
     using BloodDonation.Data.Common.Repositories;
     using BloodDonation.Data.Models;
+    using BloodDonation.Data.Models.Enums;
     using BloodDonation.Services.Data.DTO;
 
     public class DonorsService : IDonorsService
@@ -16,18 +17,20 @@
             this.donorRepository = donorRepository;
         }
 
-        public async Task AddDonorInfo(string userId, string firstName, string middleName, string lastName, string townName, int postCode, string streetName, string imageUrl)
+        public async Task FirstTimeDonorAddInfo(string id, string firstName, string middleName, string lastName, string cityName, string streetName, int postCode, string phoneNumber, Gender gender, BloodType bloodType, string imageUrl)
         {
-            var donor = this.donorRepository.All().Where(d => d.UserId == userId).FirstOrDefault();
+            var donor = this.donorRepository.All().FirstOrDefault(d => d.UserId == id);
 
             donor.FirstName = firstName;
             donor.MiddleName = middleName;
             donor.LastName = lastName;
+            donor.Gender = gender;
+            donor.BloodType = bloodType;
             donor.Address = new Address
             {
                 Town = new Town
                 {
-                    Name = townName,
+                    Name = cityName,
                     PostCode = postCode,
                     Street = new Street
                     {
@@ -35,6 +38,7 @@
                     },
                 },
             };
+            donor.PhoneNumber = phoneNumber;
             donor.ImageUrl = imageUrl;
 
             await this.donorRepository.SaveChangesAsync();
@@ -60,6 +64,31 @@
                     ImageUrl = x.ImageUrl,
                 }) //.To<GetRecipientByIdDto>()
                 .FirstOrDefault();
+        }
+
+        public async Task UpdateSingInDonorInfoAsync(string id, string firstName, string middleName, string lastName, string cityName, string streetName, int postCode, string phoneNumber, string imageUrl)
+        {
+            var donor = this.donorRepository.All().FirstOrDefault(o => o.UserId == id);
+
+            donor.FirstName = firstName;
+            donor.MiddleName = middleName;
+            donor.LastName = lastName;
+            donor.Address = new Address
+            {
+                Town = new Town
+                {
+                    Name = cityName,
+                    PostCode = postCode,
+                    Street = new Street
+                    {
+                        Name = streetName,
+                    },
+                },
+            };
+            donor.PhoneNumber = phoneNumber;
+            donor.ImageUrl = imageUrl;
+
+            await this.donorRepository.SaveChangesAsync();
         }
     }
 }

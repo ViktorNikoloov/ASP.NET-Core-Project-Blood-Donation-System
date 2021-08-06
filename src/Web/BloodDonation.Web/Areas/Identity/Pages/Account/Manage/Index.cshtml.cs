@@ -249,13 +249,29 @@
 
             if (this.User.IsInRole(GlobalConstants.DonorRoleName))
             {
+                var donor = this.donorsService.GetDonorById(user.Id);
+
+                if (donor.FirstName == "Липсва" &&
+                    donor.MiddleName == "Липсва" &&
+                    donor.LastName == "Липсва" &&
+                    donor.StreetName == "Липсва" &&
+                    donor.PostCode == 0 &&
+                    donor.Gender == Gender.Unknown &&
+                    donor.BloodType == BloodType.Unknown)
+                {
+                await this.donorsService.FirstTimeDonorAddInfo(user.Id, this.Input.FirstName, this.Input.MiddleName, this.Input.LastName, this.Input.CityName, this.Input.StreetName, this.Input.PostCode, this.Input.PhoneNumber, this.Input.Gender, this.Input.BloodType, imageUrl);
+                }
+                else
+                {
+                    await this.donorsService.UpdateSingInDonorInfoAsync(user.Id, this.Input.FirstName, this.Input.MiddleName, this.Input.LastName, this.Input.CityName, this.Input.StreetName, this.Input.PostCode, this.Input.PhoneNumber, imageUrl);
+                }
             }
             else if (this.User.IsInRole(GlobalConstants.RecipientRoleName))
             {
-                await this.recipientService.UpdateCurrentLoggedInUserInfoAsync(user.Id, this.Input.FirstName, this.Input.MiddleName, this.Input.LastName, this.Input.CityName, this.Input.StreetName, this.Input.PostCode, this.Input.PhoneNumber, imageUrl);
+                await this.recipientService.UpdateCurrentLoggedInRecipientInfoAsync(user.Id, this.Input.FirstName, this.Input.MiddleName, this.Input.LastName, this.Input.CityName, this.Input.StreetName, this.Input.PostCode, this.Input.PhoneNumber, imageUrl);
             }
 
-            this.TempData["SuccessfullyUpdated"] = "Успешно запазихте промените";
+            //this.TempData["SuccessfullyUpdated"] = "Успешно запазихте промените";
             await this.signInManager.RefreshSignInAsync(user);
             this.StatusMessage = "Успешно запазихте промените";
             return this.RedirectToPage();

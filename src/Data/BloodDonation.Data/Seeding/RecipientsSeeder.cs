@@ -41,7 +41,6 @@
                                 Street = new Street
                                 {
                                     Name = "Горно Броди",
-                                    Number = 27,
                                 },
                             },
                         },

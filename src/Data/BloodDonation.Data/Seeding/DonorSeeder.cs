@@ -42,7 +42,6 @@
                                 Street = new Street
                                 {
                                     Name = "Д-р Заменхов",
-                                    Number = 4,
                                 },
                             },
                         },
