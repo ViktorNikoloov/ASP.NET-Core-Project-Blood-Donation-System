@@ -31,6 +31,7 @@
                         MiddleName = "Георгиев",
                         LastName = "Николов",
                         Gender = Gender.Male,
+                        BloodType = BloodType.BPositive,
                         Address = new Address
                         {
                             Town = new Town

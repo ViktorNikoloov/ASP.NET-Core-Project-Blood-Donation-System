@@ -31,6 +31,8 @@
                         MiddleName = "Тодоров",
                         LastName = "Лудов",
                         Gender = Gender.Male,
+                        BloodType = BloodType.ZeroPositive,
+                        DonationCount = 0,
                         Address = new Address
                         {
                             Town = new Town
