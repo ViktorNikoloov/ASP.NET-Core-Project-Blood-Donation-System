@@ -46,7 +46,6 @@
                         },
                         ImageUrl = "https://res.cloudinary.com/dvvbab0fs/image/upload/v1627247340/faoqwxe5cyxcadm0moks.jpg", // Defaulf picture
                         PhoneNumber = user.PhoneNumber,
-                        WageRate = 10,
                     };
 
                     user.Donor = donor;

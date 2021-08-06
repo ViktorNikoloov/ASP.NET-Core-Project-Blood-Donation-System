@@ -6,6 +6,7 @@
     using BloodDonation.Common;
     using BloodDonation.Data.Models;
     using BloodDonation.Data.Models.Enums;
+    using BloodDonation.Services.Data.Donor;
     using BloodDonation.Services.Data.Recipient;
     using CloudinaryDotNet;
     using CloudinaryDotNet.Actions;
@@ -25,17 +26,20 @@
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IConfiguration configuration;
         private readonly IRecipientsService recipientService;
+        private readonly IDonorsService donorsService;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IConfiguration configuration,
-            IRecipientsService recipientService)
+            IRecipientsService recipientService,
+            IDonorsService donorsService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.configuration = configuration;
             this.recipientService = recipientService;
+            this.donorsService = donorsService;
         }
 
         public string Username { get; set; }
@@ -85,13 +89,13 @@
             [Display(Name = "Кръвна група")]
             //[Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
             //[Range(1, 8)]
-            public BloodType BloodType { get; set; }
+            public BloodType? BloodType { get; set; }
 
             [Display(Name = "Пол")]
             //[Required(ErrorMessage = "Полето \"{0}\" е задължително.")] // The attribute is put on Enum type, only to set random error message.
             //[EnumDataType(typeof(Gender))]
             //[Range(1, 2, ErrorMessage = "Полето \"{0}\" трябва да съдържа \"{1}\" или \"{2}\".")]
-            public Gender Gender { get; set; }
+            public Gender? Gender { get; set; }
 
             [Display(Name = "Град")]
             [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
@@ -124,17 +128,21 @@
 
             if (isDonor)
             {
-                //var donor = this.donorsService.GetDonorByUserId(user.Id);
+                var donor = this.donorsService.GetDonorById(user.Id);
 
-                //this.Input = new InputModel
-                //{
-                //    PhoneNumber = phoneNumber,
-                //    FirstName = donor.FirstName,
-                //    MiddleName = donor.MiddleName,
-                //    LastName = donor.LastName,
-                //    Address = donor.Address,
-                //    ImageUrl = donor.ImageUrl,
-                //};
+                this.Input = new InputModel
+                {
+                    FirstName = donor.FirstName,
+                    MiddleName = donor.MiddleName,
+                    LastName = donor.LastName,
+                    CityName = donor.CityName,
+                    StreetName = donor.StreetName,
+                    PostCode = donor.PostCode,
+                    Gender = donor.Gender,
+                    BloodType = donor.BloodType,
+                    PhoneNumber = phoneNumber,
+                    ImageUrl = donor.ImageUrl,
+                };
 
                 return;
             }
@@ -146,10 +154,10 @@
                     FirstName = recipient.FirstName,
                     MiddleName = recipient.MiddleName,
                     LastName = recipient.LastName,
-                    PhoneNumber = phoneNumber,
                     CityName = recipient.CityName,
                     StreetName = recipient.StreetName,
                     PostCode = recipient.PostCode,
+                    PhoneNumber = phoneNumber,
                     ImageUrl = recipient.ImageUrl,
                 };
 
