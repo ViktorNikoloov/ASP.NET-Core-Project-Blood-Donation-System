@@ -128,7 +128,7 @@
 
             [Display(Name = "Пощенски код")]
             [Range(PostCodeMinValue, PostCodeMaxValue, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{1}\" и \"{2}\" символа.")]
-            public int? PostCode { get; set; }
+            public int PostCode { get; set; }
 
             [Display(Name = "Улица")]
             [MinLength(StreetNameMinLength)]

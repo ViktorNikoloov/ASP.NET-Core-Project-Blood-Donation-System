@@ -16,7 +16,7 @@
             this.donorRepository = donorRepository;
         }
 
-        public async Task AddDonorInfo(string userId, string firstName, string middleName, string lastName, string townName, int postCode, string streetName, int number, string imageUrl)
+        public async Task AddDonorInfo(string userId, string firstName, string middleName, string lastName, string townName, int postCode, string streetName, string imageUrl)
         {
             var donor = this.donorRepository.All().Where(d => d.UserId == userId).FirstOrDefault();
 

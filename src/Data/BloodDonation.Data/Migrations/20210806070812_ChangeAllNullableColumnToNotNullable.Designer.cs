@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodDonation.Data.Migrations
 {
     [DbContext(typeof(BloodDonationDbContext))]
-    [Migration("20210804102009_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210806070812_ChangeAllNullableColumnToNotNullable")]
+    partial class ChangeAllNullableColumnToNotNullable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -298,10 +298,10 @@ namespace BloodDonation.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("AddressId")
+                    b.Property<int>("AddressId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BloodType")
+                    b.Property<int>("BloodType")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -310,14 +310,14 @@ namespace BloodDonation.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("DonationCount")
+                    b.Property<int>("DonationCount")
                         .HasColumnType("int");
 
                     b.Property<string>("FirstName")
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<int?>("Gender")
+                    b.Property<int>("Gender")
                         .HasColumnType("int");
 
                     b.Property<string>("ImageUrl")
@@ -343,9 +343,6 @@ namespace BloodDonation.Data.Migrations
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<decimal?>("WageRate")
-                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -430,54 +427,15 @@ namespace BloodDonation.Data.Migrations
                     b.ToTable("QuestionAnswers");
                 });
 
-            modelBuilder.Entity("BloodDonation.Data.Models.Rating", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DonorId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("RecipientId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Score")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SentBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DonorId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("RecipientId");
-
-                    b.ToTable("Ratings");
-                });
-
             modelBuilder.Entity("BloodDonation.Data.Models.Recipient", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AddressId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BloodType")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -617,11 +575,11 @@ namespace BloodDonation.Data.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int?>("PostCode")
+                    b.Property<int>("PostCode")
                         .HasMaxLength(9999)
                         .HasColumnType("int");
 
-                    b.Property<int?>("StreetId")
+                    b.Property<int>("StreetId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -775,7 +733,9 @@ namespace BloodDonation.Data.Migrations
                 {
                     b.HasOne("BloodDonation.Data.Models.Address", "Address")
                         .WithMany("Donors")
-                        .HasForeignKey("AddressId");
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("BloodDonation.Data.Models.ApplicationUser", "User")
                         .WithOne("Donor")
@@ -806,21 +766,6 @@ namespace BloodDonation.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BloodDonation.Data.Models.Rating", b =>
-                {
-                    b.HasOne("BloodDonation.Data.Models.Donor", "Donor")
-                        .WithMany("Rating")
-                        .HasForeignKey("DonorId");
-
-                    b.HasOne("BloodDonation.Data.Models.Recipient", "Recipient")
-                        .WithMany("Rating")
-                        .HasForeignKey("RecipientId");
-
-                    b.Navigation("Donor");
-
-                    b.Navigation("Recipient");
-                });
-
             modelBuilder.Entity("BloodDonation.Data.Models.Recipient", b =>
                 {
                     b.HasOne("BloodDonation.Data.Models.Address", "Address")
@@ -842,7 +787,9 @@ namespace BloodDonation.Data.Migrations
                 {
                     b.HasOne("BloodDonation.Data.Models.Street", "Street")
                         .WithMany("Towns")
-                        .HasForeignKey("StreetId");
+                        .HasForeignKey("StreetId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Street");
                 });
@@ -923,8 +870,6 @@ namespace BloodDonation.Data.Migrations
             modelBuilder.Entity("BloodDonation.Data.Models.Donor", b =>
                 {
                     b.Navigation("Appointments");
-
-                    b.Navigation("Rating");
                 });
 
             modelBuilder.Entity("BloodDonation.Data.Models.Hospital", b =>
@@ -935,8 +880,6 @@ namespace BloodDonation.Data.Migrations
             modelBuilder.Entity("BloodDonation.Data.Models.Recipient", b =>
                 {
                     b.Navigation("Appointments");
-
-                    b.Navigation("Rating");
                 });
 
             modelBuilder.Entity("BloodDonation.Data.Models.Street", b =>

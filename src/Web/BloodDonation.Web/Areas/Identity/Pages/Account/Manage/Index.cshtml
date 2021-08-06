@@ -171,7 +171,7 @@
                                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                             </div>
                             <div class="col form-group">
-                                @if (Model.Input.BloodType == null)
+                                @if (Model.Input.BloodType == 0)
                                 {
                                     <label asp-for="Input.BloodType"></label>
                                     <select asp-for="Input.BloodType" class="form-control" asp-items="Html.GetEnumSelectList<BloodType>()">
@@ -187,7 +187,7 @@
 
                             </div>
                             <div class="col form-group">
-                                @if (Model.Input.Gender == null)
+                                @if (Model.Input.Gender == 0)
                                 {
                                     <label asp-for="Input.Gender"></label>
                                     <select asp-for="Input.Gender" class="form-control" asp-items="Html.GetEnumSelectList<Gender>()">

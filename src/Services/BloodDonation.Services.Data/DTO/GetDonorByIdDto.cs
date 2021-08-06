@@ -14,15 +14,15 @@
 
         public string LastName { get; set; }
 
-        public Gender? Gender { get; set; }
+        public Gender Gender { get; set; }
 
-        public BloodType? BloodType { get; set; }
+        public BloodType BloodType { get; set; }
 
         public string CityName { get; set; }
 
         public string StreetName { get; set; }
 
-        public int? PostCode { get; set; }
+        public int PostCode { get; set; }
 
         public string ImageUrl { get; set; }
 

@@ -19,7 +19,7 @@
         public string Name { get; set; }
 
         [MaxLength(PostCodeMaxValue)]
-        public int? PostCode { get; set; }
+        public int PostCode { get; set; }
 
         public int StreetId { get; set; }
 

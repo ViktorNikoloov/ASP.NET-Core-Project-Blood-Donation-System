@@ -89,13 +89,15 @@
             [Display(Name = "Кръвна група")]
             //[Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
             //[Range(1, 8)]
-            public BloodType? BloodType { get; set; }
+            public BloodType BloodType { get; set; }
+
+            public int DonationCount { get;}
 
             [Display(Name = "Пол")]
             //[Required(ErrorMessage = "Полето \"{0}\" е задължително.")] // The attribute is put on Enum type, only to set random error message.
             //[EnumDataType(typeof(Gender))]
             //[Range(1, 2, ErrorMessage = "Полето \"{0}\" трябва да съдържа \"{1}\" или \"{2}\".")]
-            public Gender? Gender { get; set; }
+            public Gender Gender { get; set; }
 
             [Display(Name = "Град")]
             [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
@@ -106,7 +108,7 @@
 
             [Display(Name = "Пощенски код")]
             [Range(PostCodeMinValue, PostCodeMaxValue, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{1}\" и \"{2}\" символа.")]
-            public int? PostCode { get; set; }
+            public int PostCode { get; set; }
 
             [Display(Name = "Улица")]
             [MinLength(StreetNameMinLength)]

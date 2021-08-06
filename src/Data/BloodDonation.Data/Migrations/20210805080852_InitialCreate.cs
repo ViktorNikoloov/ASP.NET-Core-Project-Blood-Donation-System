@@ -245,7 +245,7 @@ namespace BloodDonation.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     PostCode = table.Column<int>(type: "int", maxLength: 9999, nullable: true),
-                    StreetId = table.Column<int>(type: "int", nullable: true),
+                    StreetId = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -322,9 +322,8 @@ namespace BloodDonation.Data.Migrations
                     Gender = table.Column<int>(type: "int", nullable: true),
                     BloodType = table.Column<int>(type: "int", nullable: true),
                     DonationCount = table.Column<int>(type: "int", nullable: true),
-                    AddressId = table.Column<int>(type: "int", nullable: true),
+                    AddressId = table.Column<int>(type: "int", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WageRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -358,6 +357,7 @@ namespace BloodDonation.Data.Migrations
                     LastName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Gender = table.Column<int>(type: "int", nullable: false),
+                    BloodType = table.Column<int>(type: "int", nullable: false),
                     AddressId = table.Column<int>(type: "int", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
@@ -427,38 +427,6 @@ namespace BloodDonation.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Appointments_Recipients_RecipientId",
-                        column: x => x.RecipientId,
-                        principalTable: "Recipients",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Ratings",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DonorId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    RecipientId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Score = table.Column<int>(type: "int", nullable: false),
-                    SentBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Ratings", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Ratings_Donors_DonorId",
-                        column: x => x.DonorId,
-                        principalTable: "Donors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Ratings_Recipients_RecipientId",
                         column: x => x.RecipientId,
                         principalTable: "Recipients",
                         principalColumn: "Id",
@@ -577,21 +545,6 @@ namespace BloodDonation.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ratings_DonorId",
-                table: "Ratings",
-                column: "DonorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Ratings_IsDeleted",
-                table: "Ratings",
-                column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Ratings_RecipientId",
-                table: "Ratings",
-                column: "RecipientId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Recipients_AddressId",
                 table: "Recipients",
                 column: "AddressId");
@@ -656,22 +609,19 @@ namespace BloodDonation.Data.Migrations
                 name: "QuestionAnswers");
 
             migrationBuilder.DropTable(
-                name: "Ratings");
-
-            migrationBuilder.DropTable(
                 name: "Settings");
-
-            migrationBuilder.DropTable(
-                name: "Hospitals");
-
-            migrationBuilder.DropTable(
-                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Donors");
 
             migrationBuilder.DropTable(
+                name: "Hospitals");
+
+            migrationBuilder.DropTable(
                 name: "Recipients");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Addresses");

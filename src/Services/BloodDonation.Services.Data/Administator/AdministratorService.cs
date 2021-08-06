@@ -24,11 +24,17 @@
 
             var donor = new Donor
             {
+                FirstName = "Липсва",
+                MiddleName = "Липсва",
+                LastName = "Липсва",
+                Gender = 0,
+                BloodType = 0,
                 Address = new Address
                 {
                     Town = new Town
                     {
                         Name = "Липсва",
+                        PostCode = 0,
                         Street = new Street
                         {
                             Name = "Липсва",
@@ -36,6 +42,7 @@
                         },
                     },
                 },
+                DonationCount = 0,
                 ImageUrl = "https://res.cloudinary.com/dvvbab0fs/image/upload/v1627247340/faoqwxe5cyxcadm0moks.jpg", // Defaulf picture
                 PhoneNumber = user.PhoneNumber,
             };

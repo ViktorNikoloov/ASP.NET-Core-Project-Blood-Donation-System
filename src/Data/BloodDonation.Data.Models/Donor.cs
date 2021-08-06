@@ -15,7 +15,6 @@
         {
             this.Id = Guid.NewGuid().ToString();
 
-            this.Rating = new HashSet<Rating>();
             this.Appointments = new HashSet<Appointment>();
             this.Massages = new HashSet<Massage>();
         }
@@ -31,11 +30,11 @@
 
         public string ImageUrl { get; set; }
 
-        public Gender? Gender { get; set; }
+        public Gender Gender { get; set; }
 
-        public BloodType? BloodType { get; set; }
+        public BloodType BloodType { get; set; }
 
-        public int? DonationCount { get; set; }
+        public int DonationCount { get; set; }
 
         public int AddressId { get; set; }
 
@@ -45,13 +44,9 @@
         [RegularExpression(PhoneNumberRegex)]
         public string PhoneNumber { get; set; }
 
-        public decimal? WageRate { get; set; }
-
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
-
-        public virtual ICollection<Rating> Rating { get; set; }
 
         public virtual ICollection<Appointment> Appointments { get; set; }
 

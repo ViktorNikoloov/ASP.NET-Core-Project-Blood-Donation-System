@@ -4,6 +4,9 @@
 
     public enum BloodType
     {
+        [Display(Name = "Липсва")]
+        Unknown = 0,
+
         [Display(Name = "A(+)")]
         APositive = 1,
 

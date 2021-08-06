@@ -36,8 +36,6 @@
 
         public DbSet<QuestionAnswer> QuestionAnswers { get; set; }
 
-        public DbSet<Rating> Ratings { get; set; }
-
         public DbSet<Massage> Massages { get; set; }
 
         public DbSet<Town> Towns { get; set; }
