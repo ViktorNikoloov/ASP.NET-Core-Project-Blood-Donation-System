@@ -35,7 +35,6 @@
                     Town = new Town
                     {
                         Name = "Липсва",
-                        PostCode = 0,
                         Street = new Street
                         {
                             Name = "Липсва",
