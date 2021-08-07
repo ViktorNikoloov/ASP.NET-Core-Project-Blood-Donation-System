@@ -5,6 +5,7 @@
 
     using BloodDonation.Data.Common.Repositories;
     using BloodDonation.Data.Models;
+    using BloodDonation.Data.Models.Enums;
     using BloodDonation.Services.Mapping;
 
     public class AdministratorService : IAdministratorService
@@ -27,8 +28,8 @@
                 FirstName = "Липсва",
                 MiddleName = "Липсва",
                 LastName = "Липсва",
-                Gender = 0,
-                BloodType = 0,
+                Gender = Gender.Unknown,
+                BloodType = BloodType.Unknown,
                 Address = new Address
                 {
                     Town = new Town
@@ -38,7 +39,6 @@
                         Street = new Street
                         {
                             Name = "Липсва",
-                            Number = 4,
                         },
                     },
                 },

@@ -17,7 +17,7 @@
             this.donorRepository = donorRepository;
         }
 
-        public async Task FirstTimeDonorAddInfo(string id, string firstName, string middleName, string lastName, string cityName, string streetName, int postCode, string phoneNumber, Gender gender, BloodType bloodType, string imageUrl)
+        public async Task FirstTimeDonorAddInfo(string id, string firstName, string middleName, string lastName, string cityName, string streetName, int? postCode, string phoneNumber, Gender gender, BloodType bloodType, string imageUrl)
         {
             var donor = this.donorRepository.All().FirstOrDefault(d => d.UserId == id);
 
@@ -66,7 +66,7 @@
                 .FirstOrDefault();
         }
 
-        public async Task UpdateSingInDonorInfoAsync(string id, string firstName, string middleName, string lastName, string cityName, string streetName, int postCode, string phoneNumber, string imageUrl)
+        public async Task UpdateSingInDonorInfoAsync(string id, string firstName, string middleName, string lastName, string cityName, string streetName, int? postCode, string phoneNumber, string imageUrl)
         {
             var donor = this.donorRepository.All().FirstOrDefault(o => o.UserId == id);
 

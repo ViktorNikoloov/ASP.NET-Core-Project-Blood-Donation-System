@@ -18,7 +18,7 @@
 
         public string StreetName { get; set; }
 
-        public int PostCode { get; set; }
+        public int? PostCode { get; set; }
 
         public Gender Gender { get; set; }
 

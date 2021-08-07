@@ -22,7 +22,7 @@
 
         public string StreetName { get; set; }
 
-        public int PostCode { get; set; }
+        public int? PostCode { get; set; }
 
         public string ImageUrl { get; set; }
 
