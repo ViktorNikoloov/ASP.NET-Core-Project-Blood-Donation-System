@@ -33,7 +33,7 @@
             return instance;
         }
 
-        public async Task CreateRecipientAsync(ApplicationUser user, string userId, string firstName, string middleName, string lastName, string cityName, string streetName, int postCode, Gender gender, BloodType bloodType, string imageUrl, string phoneNumber)
+        public async Task CreateRecipientAsync(ApplicationUser user, string userId, string firstName, string middleName, string lastName, string cityName, string streetName, int? postCode, Gender gender, BloodType bloodType, string imageUrl, string phoneNumber)
         {
             var recipient = new Recipient
             {
@@ -85,7 +85,7 @@
                 .FirstOrDefault();
         }
 
-        public async Task UpdateCurrentLoggedInUserInfoAsync(string id, string firstName, string middleName, string lastName, string cityName, string streetName, int postCode, string phoneNumber, string imageUrl)
+        public async Task UpdateCurrentLoggedInRecipientInfoAsync(string id, string firstName, string middleName, string lastName, string cityName, string streetName, int? postCode, string phoneNumber, string imageUrl)
         {
             var recipient = this.recipientRepository.All().FirstOrDefault(o => o.UserId == id);
 
