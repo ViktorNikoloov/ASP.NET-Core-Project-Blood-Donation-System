@@ -40,7 +40,7 @@
 
         public int AddressId { get; set; }
 
-        public Address Address { get; set; }
+        public virtual Address Address { get; set; }
 
         [Required]
         [RegularExpression(PhoneNumberRegex)]

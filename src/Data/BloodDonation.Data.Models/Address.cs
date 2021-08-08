@@ -14,7 +14,7 @@
 
         public int TownId { get; set; }
 
-        public Town Town { get; set; }
+        public virtual Town Town { get; set; }
 
         public virtual ICollection<Recipient> Recipients { get; set; }
 

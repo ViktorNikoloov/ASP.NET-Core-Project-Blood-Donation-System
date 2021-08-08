@@ -39,7 +39,7 @@
 
         public int AddressId { get; set; }
 
-        public Address Address { get; set; }
+        public virtual Address Address { get; set; }
 
         [RegularExpression(PhoneNumberRegex)]
         public string PhoneNumber { get; set; }
