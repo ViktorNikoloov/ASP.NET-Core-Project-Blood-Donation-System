@@ -8,6 +8,8 @@
     using BloodDonation.Data.Models.Enums;
     using BloodDonation.Services.Mapping;
 
+    using static BloodDonation.Common.GlobalConstants;
+
     public class AdministratorService : IAdministratorService
     {
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
@@ -42,9 +44,10 @@
                     },
                 },
                 DonationCount = 0,
-                ImageUrl = "https://res.cloudinary.com/dvvbab0fs/image/upload/v1627247340/faoqwxe5cyxcadm0moks.jpg", // Defaulf picture
+                ImageUrl = DefaulPicturetUrl, // Defaulf picture
                 PhoneNumber = user.PhoneNumber,
             };
+
             user.Donor = donor;
 
             await this.usersRepository.SaveChangesAsync();

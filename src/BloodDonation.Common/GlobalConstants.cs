@@ -13,5 +13,8 @@
         public const string UnapprovedUserRoleName = "UnapprovedUser";
 
         public const string SystemEmail = "blood-donation-bg@abv.bg";
+
+        public const string DefaulPicturetUrl = "https://res.cloudinary.com/dvvbab0fs/image/upload/v1627247340/faoqwxe5cyxcadm0moks.jpg";
+
     }
 }

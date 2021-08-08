@@ -136,6 +136,7 @@
                     {
                         await this.userManager.AddToRoleAsync(user, GlobalConstants.UnapprovedUserRoleName);
 
+                        // TODO: make a question related table
                         Type clsType = typeof(InputModel);
                         PropertyInfo[] mInfo = clsType.GetProperties();
 

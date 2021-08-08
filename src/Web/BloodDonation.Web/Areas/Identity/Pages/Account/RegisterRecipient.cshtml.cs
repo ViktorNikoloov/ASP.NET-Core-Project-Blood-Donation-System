@@ -11,8 +11,10 @@
     using BloodDonation.Data.Models;
     using BloodDonation.Data.Models.Enums;
     using BloodDonation.Services.Data.Recipient;
+
     using CloudinaryDotNet;
     using CloudinaryDotNet.Actions;
+
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
@@ -27,6 +29,7 @@
     using static BloodDonation.Common.DataGlobalConstants.AddressConstants;
     using static BloodDonation.Common.DataGlobalConstants.BasicUserInfoConstants;
     using static BloodDonation.Common.DataGlobalConstants.StreetConstants;
+    using static BloodDonation.Common.GlobalConstants;
 
     [AllowAnonymous]
     public class RegisterRecipientModel : PageModel
@@ -81,22 +84,19 @@
 
             [Display(Name = "Име")]
             [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
-            [MinLength(FirstNameMinLength)]
-            [MaxLength(FirstNameMaxLength)]
+            [RegularExpression("[А-я]+", ErrorMessage = "Полето \"{0}\" трябва да е на кирилица")]
             [StringLength(FirstNameMaxLength, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{2}\" и \"{1}\" символа.", MinimumLength = FirstNameMinLength)]
             public string FirstName { get; set; }
 
             [Display(Name = "Презиме")]
             [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
-            [MinLength(MiddleNameMinLength)]
-            [MaxLength(MiddleNameMaxLength)]
+            [RegularExpression("[А-я]+", ErrorMessage = "Полето \"{0}\" трябва да е на кирилица")]
             [StringLength(MiddleNameMaxLength, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{2}\" и \"{1}\" символа.", MinimumLength = MiddleNameMinLength)]
             public string MiddleName { get; set; }
 
             [Display(Name = "Фамилия")]
             [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
-            [MinLength(LastNameMinLength)]
-            [MaxLength(LastNameMaxLength)]
+            [RegularExpression("[А-я]+", ErrorMessage = "Полето \"{0}\" трябва да е на кирилица")]
             [StringLength(LastNameMaxLength, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{2}\" и \"{1}\" символа.", MinimumLength = LastNameMinLength)]
             public string LastName { get; set; }
 
@@ -121,8 +121,7 @@
 
             [Display(Name = "Град")]
             [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
-            [MinLength(CityMinLength)]
-            [MaxLength(CityMaxLength)]
+            [RegularExpression("[А-я]+", ErrorMessage = "Полето \"{0}\" трябва да е на кирилица")]
             [StringLength(CityMaxLength, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{2}\" и \"{1}\" символа.", MinimumLength = CityMinLength)]
             public string CityName { get; set; }
 
@@ -131,8 +130,7 @@
             public int? PostCode { get; set; }
 
             [Display(Name = "Улица")]
-            [MinLength(StreetNameMinLength)]
-            [MaxLength(StreetNameMaxLength)]
+            [RegularExpression("[А-я]+", ErrorMessage = "Полето \"{0}\" трябва да е на кирилица")]
             [StringLength(StreetNameMaxLength, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{2}\" и \"{1}\" символа.", MinimumLength = StreetNameMinLength)]
             public string StreetName { get; set; }
 
@@ -194,7 +192,7 @@
                 {
                     if (this.Input.ImageUrl == null)
                     {
-                        imageUrl = "https://res.cloudinary.com/dvvbab0fs/image/upload/v1627247340/faoqwxe5cyxcadm0moks.jpg"; // default picture
+                        imageUrl = DefaulPicturetUrl; // default picture
                     }
                     else
                     {

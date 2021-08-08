@@ -5,8 +5,11 @@
 
     using BloodDonation.Data.Models;
     using BloodDonation.Data.Models.Enums;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
+
+    using static BloodDonation.Common.GlobalConstants;
 
     public class DonorSeeder : ISeeder
     {
@@ -41,11 +44,11 @@
                                 PostCode = 4300,
                                 Street = new Street
                                 {
-                                    Name = "Д-р Заменхов",
+                                    Name = "Д-р Заменхов 4a",
                                 },
                             },
                         },
-                        ImageUrl = "https://res.cloudinary.com/dvvbab0fs/image/upload/v1627247340/faoqwxe5cyxcadm0moks.jpg", // Defaulf picture
+                        ImageUrl = DefaulPicturetUrl, // Defaulf picture
                         PhoneNumber = user.PhoneNumber,
                     };
 

@@ -8,8 +8,10 @@
     using BloodDonation.Data.Models.Enums;
     using BloodDonation.Services.Data.Donor;
     using BloodDonation.Services.Data.Recipient;
+
     using CloudinaryDotNet;
     using CloudinaryDotNet.Actions;
+
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -59,24 +61,18 @@
             [Required(ErrorMessage = "Моля въведете име")]
             [RegularExpression("[А-я]+", ErrorMessage = "Името трябва да на кирилица")]
             [Display(Name = "Име")]
-            [MinLength(FirstNameMinLength)]
-            [MaxLength(FirstNameMaxLength)]
             [StringLength(FirstNameMaxLength, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{2}\" и \"{1}\" символа.", MinimumLength = FirstNameMinLength)]
             public string FirstName { get; set; }
 
             [Required(ErrorMessage = "Моля въведете презиме")]
             [RegularExpression("[А-я]+", ErrorMessage = "Презимето трябва да на кирилица")]
             [Display(Name = "Презиме")]
-            [MinLength(MiddleNameMinLength)]
-            [MaxLength(MiddleNameMaxLength)]
             [StringLength(MiddleNameMaxLength, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{2}\" и \"{1}\" символа.", MinimumLength = MiddleNameMinLength)]
             public string MiddleName { get; set; }
 
             [Required(ErrorMessage = "Моля въведете фамилия")]
             [RegularExpression("[А-я]+", ErrorMessage = "Фамилията трябва да на кирилица")]
             [Display(Name = "Фамилия")]
-            [MinLength(LastNameMinLength)]
-            [MaxLength(LastNameMaxLength)]
             [StringLength(LastNameMaxLength, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{2}\" и \"{1}\" символа.", MinimumLength = LastNameMinLength)]
             public string LastName { get; set; }
 
@@ -87,22 +83,20 @@
             public IFormFile ImageFile { get; set; }
 
             [Display(Name = "Кръвна група")]
-            //[Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
+            [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
             //[Range(1, 8)]
             public BloodType BloodType { get; set; }
 
             public int DonationCount { get; set; }
 
             [Display(Name = "Пол")]
-            //[Required(ErrorMessage = "Полето \"{0}\" е задължително.")] // The attribute is put on Enum type, only to set random error message.
-            //[EnumDataType(typeof(Gender))]
-            //[Range(1, 2, ErrorMessage = "Полето \"{0}\" трябва да съдържа \"{1}\" или \"{2}\".")]
+            [Required(ErrorMessage = "Полето \"{0}\" е задължително.")] // The attribute is put on Enum type, only to set random error message.
+            [EnumDataType(typeof(Gender))]
+            //[Range(2, 3, ErrorMessage = "Полето \"{0}\" трябва да съдържа \"{1}\" или \"{2}\".")]
             public Gender Gender { get; set; }
 
             [Display(Name = "Град")]
             [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
-            [MinLength(CityMinLength)]
-            [MaxLength(CityMaxLength)]
             [StringLength(CityMaxLength, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{2}\" и \"{1}\" символа.", MinimumLength = CityMinLength)]
             public string CityName { get; set; }
 
@@ -111,8 +105,6 @@
             public int? PostCode { get; set; }
 
             [Display(Name = "Улица")]
-            [MinLength(StreetNameMinLength)]
-            [MaxLength(StreetNameMaxLength)]
             [StringLength(StreetNameMaxLength, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{2}\" и \"{1}\" символа.", MinimumLength = StreetNameMinLength)]
             public string StreetName { get; set; }
 
@@ -259,7 +251,7 @@
                     donor.Gender == Gender.Unknown &&
                     donor.BloodType == BloodType.Unknown)
                 {
-                await this.donorsService.FirstTimeDonorAddInfo(user.Id, this.Input.FirstName, this.Input.MiddleName, this.Input.LastName, this.Input.CityName, this.Input.StreetName, this.Input.PostCode, this.Input.PhoneNumber, this.Input.Gender, this.Input.BloodType, imageUrl);
+                await this.donorsService.FirstTimeDonorAddInfoAsync(user.Id, this.Input.FirstName, this.Input.MiddleName, this.Input.LastName, this.Input.CityName, this.Input.StreetName, this.Input.PostCode, this.Input.PhoneNumber, this.Input.Gender, this.Input.BloodType, imageUrl);
                 }
                 else
                 {
@@ -271,7 +263,6 @@
                 await this.recipientService.UpdateCurrentLoggedInRecipientInfoAsync(user.Id, this.Input.FirstName, this.Input.MiddleName, this.Input.LastName, this.Input.CityName, this.Input.StreetName, this.Input.PostCode, this.Input.PhoneNumber, imageUrl);
             }
 
-            //this.TempData["SuccessfullyUpdated"] = "Успешно запазихте промените";
             await this.signInManager.RefreshSignInAsync(user);
             this.StatusMessage = "Успешно запазихте промените";
             return this.RedirectToPage();
