@@ -11,6 +11,7 @@
 
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Proxies;
 
     public class BloodDonationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
@@ -63,6 +64,11 @@
         {
             this.ApplyAuditInfoRules();
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
