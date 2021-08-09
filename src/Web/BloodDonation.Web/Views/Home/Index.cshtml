@@ -42,9 +42,7 @@
     </div>
 
     <div id="bigBubble" class="bubble blinking bg-primary border-info text-center">
-        <span>
-            <b>"@GlobalConstants.DonorHasNotInformationBigBubble"</b>
-        <span>
+        <span><b>"@GlobalConstants.DonorHasNotInformationBigBubble"</b><span>
     </div>
 }
 
@@ -142,13 +140,10 @@
 
     @if (this.User.IsInRole("Donor") && !hasInfo)
     {
-
         <script src="./buuble.js"></script>
         <script src="/buuble.js" type="module"></script>
 
         <script src="~/js/NotificationBubleBlinking.js"></script>
         <link href="~/css/NotificationBubleBlinking.css" rel="stylesheet" />
-
-
     }
 }
