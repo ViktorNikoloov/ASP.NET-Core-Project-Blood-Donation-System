@@ -59,19 +59,19 @@
             public string PhoneNumber { get; set; }
 
             [Required(ErrorMessage = "Моля въведете име")]
-            [RegularExpression("[А-я]+", ErrorMessage = "Името трябва да на кирилица")]
+            [RegularExpression("[А-я]+", ErrorMessage = "Името трябва да e на кирилица")]
             [Display(Name = "Име")]
             [StringLength(FirstNameMaxLength, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{2}\" и \"{1}\" символа.", MinimumLength = FirstNameMinLength)]
             public string FirstName { get; set; }
 
             [Required(ErrorMessage = "Моля въведете презиме")]
-            [RegularExpression("[А-я]+", ErrorMessage = "Презимето трябва да на кирилица")]
+            [RegularExpression("[А-я]+", ErrorMessage = "Презимето трябва да e на кирилица")]
             [Display(Name = "Презиме")]
             [StringLength(MiddleNameMaxLength, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{2}\" и \"{1}\" символа.", MinimumLength = MiddleNameMinLength)]
             public string MiddleName { get; set; }
 
             [Required(ErrorMessage = "Моля въведете фамилия")]
-            [RegularExpression("[А-я]+", ErrorMessage = "Фамилията трябва да на кирилица")]
+            [RegularExpression("[А-я]+", ErrorMessage = "Фамилията трябва да e на кирилица")]
             [Display(Name = "Фамилия")]
             [StringLength(LastNameMaxLength, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{2}\" и \"{1}\" символа.", MinimumLength = LastNameMinLength)]
             public string LastName { get; set; }
@@ -247,7 +247,6 @@
                     donor.MiddleName == "Липсва" &&
                     donor.LastName == "Липсва" &&
                     donor.StreetName == "Липсва" &&
-                    donor.PostCode == 0 &&
                     donor.Gender == Gender.Unknown &&
                     donor.BloodType == BloodType.Unknown)
                 {

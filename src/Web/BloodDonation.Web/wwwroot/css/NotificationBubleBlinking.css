@@ -1,0 +1,64 @@
+﻿
+body {
+    display: inherit;
+    justify-content: center;
+}
+
+.bubble {
+    border: 1px solid lightcoral;
+    border-radius: 12px;
+    background: lightpink;
+    width: 100%;
+    height: 60px;
+    color: rgb(238, 27, 27);
+    font-size: 25px;
+    font-weight: 500;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.9;
+    display: flex;
+    box-shadow: 0px 0px 25px 2px rgba(0,0,0,0.9);
+    
+}
+
+.blinking {
+    animation: blinkingText 1.5s infinite;
+}
+
+@keyframes blinkingText {
+    0% {
+        color: rgb(238, 27, 27);
+    }
+
+    49% {
+        color: rgb(238, 27, 27);
+    }
+
+    60% {
+        color: transparent;
+    }
+
+    99% {
+        color: transparent;
+    }
+
+    100% {
+        color: rgb(238, 27, 27);
+    }
+}
+
+.small {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border: 2px solid lightcoral;
+    border-radius: 15px;
+    background: lightpink;
+    font-size: 19px;
+    width: 100%;
+    height: 52px;
+    opacity: 0;
+    font-weight: 800;
+    box-shadow: 0px 0px 25px 2px rgba(0,0,0,0.9);
+}

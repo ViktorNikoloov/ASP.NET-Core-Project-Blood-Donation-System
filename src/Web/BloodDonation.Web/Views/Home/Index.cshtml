@@ -1,32 +1,77 @@
 ﻿@using BloodDonation.Common
+@using BloodDonation.Data.Models
+@using BloodDonation.Data.Models.Enums
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
 @{
-    this.ViewData["Title"] = "Начална страница";
+    this.ViewData["Title"] = GlobalConstants.MainPageName;
+
+    if (this.TempData.ContainsKey("Message"))
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            @this.TempData["Message"]
+        </div>
+    }
+
+    var hasInfo = false;
+    if (this.User.IsInRole("Donor"))
+    {
+        var user = await UserManager.GetUserAsync(this.User);
+
+        var donor = user.Donor;
+        hasInfo =
+        user.Donor.FirstName != "Липсва" ? true :
+        user.Donor.MiddleName != "Липсва" ? true :
+        user.Donor.LastName != "Липсва" ? true :
+        hasInfo = user.Donor.Address.Town.Name != "Липсва" ? true :
+        hasInfo = user.Donor.Address.Town.Street.Name != "Липсва" ? true :
+        hasInfo = user.Donor.Gender != Gender.Unknown ? true :
+        hasInfo = user.Donor.BloodType != BloodType.Unknown ? true : false;
+    }
 }
 
-@if (this.TempData.ContainsKey("Message"))
+@if (this.User.IsInRole("Donor") && !hasInfo)
 {
-    <div class="alert alert-success alert-dismissible fade show">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        @this.TempData["Message"]
+    <div id="smallBubble" class=" blinking small bg-primary border-info text-center">
+        <span>"@GlobalConstants.DonorHasNotInformationSmallBubble"</span>
+        <a class="nav-link text-white btn-outline-success rounded-pill " asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><big>&#8594;</big></a>
+    </div>
+
+    <div id="bigBubble" class="bubble blinking bg-primary border-info text-center">
+        <span>
+            <b>"@GlobalConstants.DonorHasNotInformationBigBubble"</b>
+        <span>
     </div>
 }
 
-@*<div class="bg-image" style=" background-image: url('https://healthmatters.nyp.org/wp-content/uploads/2020/01/Heart-Article-Hero-1200x500.gif'); height: 65vh; ">*@
-        <h1 class="display-5 text-md-center bgw">Добре дошли в @GlobalConstants.SystemName!</h1>
-        <hr class="bg-primary w-auto">
-        <div>
-            <p class="lead text-center" style="font-size: 24px; font-style: italic;">
-                "Най-бързо развиващият се сайт за безвъзмездно кръводаряване в България."
-                <br>
-                "Ако се нуждаете от кръв за вас или ваш близък тук ще намерите вашите герои, които чакат за да Ви помогнат."
-            </p>
-        </div>
-@*</div>*@
-    
 
-    <hr class="bg-primary w-auto" >
+@*<div class="bg-image" style=" background-image: url('https://healthmatters.nyp.org/wp-content/uploads/2020/01/Heart-Article-Hero-1200x500.gif'); height: 65vh; ">
+*@
+<h1 class="display-5 text-md-center bgw">Добре дошли в @GlobalConstants.SystemName!</h1>
+
+<hr class="bg-primary w-auto">
+
+<div>
+
+    <p class="lead text-center" style="font-size: 24px; font-style: italic;">
+        "Най-бързо развиващият се сайт за безвъзмездно кръводаряване в България."
+        <br>
+        "Ако се нуждаете от кръв за вас или ваш близък тук ще намерите вашите герои, които чакат за да Ви помогнат."
+    </p>
+</div>
+@*
+    </div>*@
+
+
+<hr class="bg-primary w-auto">
+
 
 <div class="container container-fluid bg-neutral ">
+
     <h3 class="display-4 text-md-center">Блог статии</h3>
     <div class="row row-cols-1 row-cols-md-4 g-4">
         <div class="col mb-3">
@@ -91,3 +136,19 @@
         </div>
     </div>
 </div>
+
+
+@section Scripts{
+
+    @if (this.User.IsInRole("Donor") && !hasInfo)
+    {
+
+        <script src="./buuble.js"></script>
+        <script src="/buuble.js" type="module"></script>
+
+        <script src="~/js/NotificationBubleBlinking.js"></script>
+        <link href="~/css/NotificationBubleBlinking.css" rel="stylesheet" />
+
+
+    }
+}
