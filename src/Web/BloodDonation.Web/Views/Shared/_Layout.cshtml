@@ -7,98 +7,23 @@
     <partial name="_CookieConsentPartial" />
     <main role="main" class="pb-3">
         <div class="row">
-            <div class="col-lg-8 g-mb-30 g-mb-0--lg">
+            <div class="col-md-8 g-mb-30 g-mb-0--lg">
                 @this.RenderBody()
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-md-4">
+
                 <div class="g-mb-20">
-                    <cache expires-after="@TimeSpan.FromSeconds(10)">
-                        <vc:donors-ranking></vc:donors-ranking>
-                    </cache>
-                    <div class="u-heading-v2-3--bottom g-brd-primary g-mb-10 table-responsive-sm">
-                        <table class="table table-striped table-bordered table-sm">
-                            <tbody class="text-center">
-                                <tr>
-                                    <th colspan="2">
-                                        <h1 class="h4 g-color-black mb-0">Статистика за сайта:</h1>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">Посещения:</th>
-                                    <td scope="col">52</td>
-                                </tr>
-                                <tr>
-                                    <th scope="col">Потребители:</th>
-                                    <td scope="col">38</td>
-                                </tr>
-                                <tr>
-                                    <th>Дарители:</th>
-                                    <td>12</td>
-                                </tr>
-                                <tr>
-                                    <th scope="col">Реципиенти:</th>
-                                    <td>26</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <partial name="_UserRankingPartial" />
                 </div>
 
                 <div class="g-mb-20">
-                    <div class="u-heading-v2-3--bottom g-brd-primary g-mb-10 table-responsive-sm">
-                        <table class="table table-striped table-bordered table-sm">
-                            <thead>
-                            <tbody class="text-center">
-                                <tr>
-                                    <th colspan="4">
-                                        <h3 class="h4 g-color-black mb-0">Топ 10 Дарителя</h3>
-                                    </th>
-                                </tr>
-                            </tbody>
 
-                            <thead class="text-center">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Име</th>
-                                    <th scope="col">Банки/бр.</th>
-                                    <th scope="col">Последно дарил</th>
-                                </tr>
-                            </thead>
-
-                            <tbody class="text-center">
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Виктор</td>
-                                    <td>9/бр.</td>
-                                    <td>15.07.2021</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Стоян</td>
-                                    <td>5/бр.</td>
-                                    <td>25.06.2021</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Иван</td>
-                                    <td>2/бр.</td>
-                                    <td>03.06.2021</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="u-heading-v2-3--bottom g-brd-primary g-mb-10 mb-3">
+                        <h3 class="h5 g-color-black mb-0 text-sm-center " style="background-color:royalblue"><u><b>Времето</b></u></h3>
+                        <partial name="_WeatherWidgetPartial" />
                     </div>
-                </div>
 
-                <div class="g-mb-20">
-                    <div class="u-heading-v2-3--bottom g-brd-primary g-mb-10">
-                        <h3 class="h5 g-color-black mb-0 text-sm-center">Времето</h3>
-                    </div>
-                    <article class="media g-mb-10">
-                        <iframe src="https://forecabox.foreca.com/get/44840" width="300" height="250" marginwidth="0"
-                                marginheight="0" frameborder="1" scrolling="no" allowtransparency="true" title="Времето">
-                        </iframe>
-                    </article>
                 </div>
             </div>
         </div>

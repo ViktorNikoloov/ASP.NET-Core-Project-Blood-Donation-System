@@ -1,0 +1,70 @@
+﻿@using BloodDonation.Common
+@inject BloodDonation.Services.Data.Home.IStatisticsService GetCount
+@{ var counter = 1;}
+
+<div class="u-heading-v2-3--bottom g-brd-primary g-mb-10 table-responsive-sm mt-2">
+    <table class="table table-striped table-bordered table-sm">
+        <tbody class="text-center">
+            <tr>
+                <th colspan="2">
+                    <h1 class="h4 g-color-black mb-0"><u><b>Статистика за сайта:</u></b></h1>
+                </th>
+            </tr>
+            <tr>
+                <th scope="col">Посещения:</th>
+                <td scope="col">20</td>
+            </tr>
+            <tr>
+                <th scope="col">Потребители:</th>
+                <td scope="col">@GetCount.GetCounts().AllUsers</td>
+            </tr>
+            <tr>
+                <th>Дарители:</th>
+                <td>@GetCount.GetCounts().DonorsCount</td>
+            </tr>
+            <tr>
+                <th scope="col">Реципиенти:</th>
+                <td>@GetCount.GetCounts().RecipientsCount</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="g-mb-20">
+    <div class="u-heading-v2-3--bottom g-brd-primary g-mb-10 table-responsive-sm">
+        <table class="table table-striped table-bordered table-sm">
+            <thead>
+            <tbody class="text-center">
+                <tr>
+                    <th colspan="4">
+                        <h3 class="h4 g-color-black mb-0"><u><b>Топ @GlobalConstants.TopDonationsCount; Дарителя</u></b></h3>
+                    </th>
+                </tr>
+            </tbody>
+
+            <thead class="text-center">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Име:</th>
+                    <th scope="col">Банки/бр.</th>
+                    <th scope="col">Последно дарил на:</th>
+                </tr>
+            </thead>
+
+            <tbody class="text-center">
+
+
+                @foreach (var donors in GetCount.GetTopDonations(@GlobalConstants.TopDonationsCount))
+                {
+                    <tr>
+                        <th scope="row">@counter</th>
+                        <td>@donors.FirstName</td>
+                        <td>@donors.DonationCount.ToString()/бр.</td>
+                        <td>@donors.LastDonation.ToLocalTime().ToShortDateString()</td>
+                    </tr>
+                    counter++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

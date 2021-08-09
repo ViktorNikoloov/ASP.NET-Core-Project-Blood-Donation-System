@@ -20,6 +20,8 @@
 
         public const string DonorHasNotInformationSmallBubble = "Вашият профил не е попълнен ! Моля, попълнете Своите данни, kато влезете в профила си.";
 
+        public const int TopDonationsCount = 10;
+
         public const string DefaulPicturetUrl = "https://res.cloudinary.com/dvvbab0fs/image/upload/v1627247340/faoqwxe5cyxcadm0moks.jpg";
 
     }
