@@ -1,6 +1,5 @@
 ﻿namespace BloodDonation.Web.Controllers
 {
-    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using BloodDonation.Data.Models;
@@ -34,7 +33,7 @@
                 return this.View(model);
             }
 
-            //var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            // var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var currentUser = await this.userMenager.GetUserAsync(this.User);
             var currentRecipientId = currentUser.Recipient.Id;
 
@@ -42,9 +41,18 @@
             return this.Redirect("/");
         }
 
-        public IActionResult All()
+        public IActionResult All(int id = 1)
         {
-            return this.View();
+            const int ItemPerPage = 4;
+            var viewModel = new AppointmentsListViewModel
+            {
+                ItemPerPage = ItemPerPage,
+                PageNumber = id,
+                AppointmentsCount = this.appointmnetsService.GetCount(),
+                Appointments = this.appointmnetsService.GetAll(id, ItemPerPage),
+            };
+
+            return this.View(viewModel);
         }
     }
 }
