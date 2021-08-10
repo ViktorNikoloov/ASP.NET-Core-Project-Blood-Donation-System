@@ -193,9 +193,6 @@ namespace BloodDonation.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DonorId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int?>("HospitalId")
                         .HasColumnType("int");
 
@@ -220,8 +217,6 @@ namespace BloodDonation.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DonorId");
-
                     b.HasIndex("HospitalId");
 
                     b.HasIndex("IsDeleted");
@@ -229,6 +224,28 @@ namespace BloodDonation.Data.Migrations
                     b.HasIndex("RecipientId");
 
                     b.ToTable("Appointments");
+                });
+
+            modelBuilder.Entity("BloodDonation.Data.Models.AppointmetsDonors", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AppointmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DonorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppointmentId");
+
+                    b.HasIndex("DonorId");
+
+                    b.ToTable("AppointmetsDonors");
                 });
 
             modelBuilder.Entity("BloodDonation.Data.Models.ContactFormEntry", b =>
@@ -682,10 +699,6 @@ namespace BloodDonation.Data.Migrations
 
             modelBuilder.Entity("BloodDonation.Data.Models.Appointment", b =>
                 {
-                    b.HasOne("BloodDonation.Data.Models.Donor", "Donor")
-                        .WithMany("Appointments")
-                        .HasForeignKey("DonorId");
-
                     b.HasOne("BloodDonation.Data.Models.Hospital", "Hospital")
                         .WithMany("Appointments")
                         .HasForeignKey("HospitalId");
@@ -694,11 +707,26 @@ namespace BloodDonation.Data.Migrations
                         .WithMany("Appointments")
                         .HasForeignKey("RecipientId");
 
-                    b.Navigation("Donor");
-
                     b.Navigation("Hospital");
 
                     b.Navigation("Recipient");
+                });
+
+            modelBuilder.Entity("BloodDonation.Data.Models.AppointmetsDonors", b =>
+                {
+                    b.HasOne("BloodDonation.Data.Models.Appointment", "Appointment")
+                        .WithMany("Appointments")
+                        .HasForeignKey("AppointmentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("BloodDonation.Data.Models.Donor", "Donor")
+                        .WithMany("Appointments")
+                        .HasForeignKey("DonorId");
+
+                    b.Navigation("Appointment");
+
+                    b.Navigation("Donor");
                 });
 
             modelBuilder.Entity("BloodDonation.Data.Models.Donor", b =>
@@ -837,6 +865,11 @@ namespace BloodDonation.Data.Migrations
                     b.Navigation("Recipient");
 
                     b.Navigation("Roles");
+                });
+
+            modelBuilder.Entity("BloodDonation.Data.Models.Appointment", b =>
+                {
+                    b.Navigation("Appointments");
                 });
 
             modelBuilder.Entity("BloodDonation.Data.Models.Donor", b =>

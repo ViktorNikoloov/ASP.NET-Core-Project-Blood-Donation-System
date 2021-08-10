@@ -1,6 +1,7 @@
 ﻿namespace BloodDonation.Data.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using BloodDonation.Data.Common.Models;
@@ -9,6 +10,11 @@
 
     public class Appointment : BaseDeletableModel<int>
     {
+        public Appointment()
+        {
+            this.Appointments = new HashSet<AppointmetsDonors>();
+        }
+
         public virtual Hospital Hospital { get; set; }
 
         [Required]
@@ -26,12 +32,11 @@
 
         public string AdditionalInfo { get; set; }
 
-        public string DonorId { get; set; }
-
-        public virtual Donor Donor { get; set; }
-
         public string RecipientId { get; set; }
 
         public virtual Recipient Recipient { get; set; }
+
+        public virtual ICollection<AppointmetsDonors> Appointments { get; set; }
+
     }
 }

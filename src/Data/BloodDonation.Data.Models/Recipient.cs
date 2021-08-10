@@ -33,9 +33,9 @@
 
         public string ImageUrl { get; set; }
 
-        public Gender Gender { get; set; }
+        public virtual Gender Gender { get; set; }
 
-        public BloodType BloodType { get; set; }
+        public virtual BloodType BloodType { get; set; }
 
         public int AddressId { get; set; }
 

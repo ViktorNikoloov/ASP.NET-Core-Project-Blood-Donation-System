@@ -319,9 +319,10 @@ namespace BloodDonation.Data.Migrations
                     MiddleName = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<int>(type: "int", nullable: true),
-                    BloodType = table.Column<int>(type: "int", nullable: true),
-                    DonationCount = table.Column<int>(type: "int", nullable: true),
+                    Gender = table.Column<int>(type: "int", nullable: false),
+                    BloodType = table.Column<int>(type: "int", nullable: false),
+                    DonationCount = table.Column<int>(type: "int", nullable: false),
+                    LastDonation = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AddressId = table.Column<int>(type: "int", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
@@ -389,21 +390,13 @@ namespace BloodDonation.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    MiddleName = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Gender = table.Column<int>(type: "int", nullable: false),
-                    HospitalId = table.Column<int>(type: "int", nullable: false),
+                    HospitalId = table.Column<int>(type: "int", nullable: true),
                     BloodBankCount = table.Column<int>(type: "int", maxLength: 15, nullable: false),
-                    BloodType = table.Column<int>(type: "int", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SendingAddressInfo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PublishedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeadLine = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    SentBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DonorId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    IsApproved = table.Column<bool>(type: "bit", nullable: false),
+                    AdditionalInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RecipientId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -414,12 +407,6 @@ namespace BloodDonation.Data.Migrations
                 {
                     table.PrimaryKey("PK_Appointments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Appointments_Donors_DonorId",
-                        column: x => x.DonorId,
-                        principalTable: "Donors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Appointments_Hospitals_HospitalId",
                         column: x => x.HospitalId,
                         principalTable: "Hospitals",
@@ -429,6 +416,32 @@ namespace BloodDonation.Data.Migrations
                         name: "FK_Appointments_Recipients_RecipientId",
                         column: x => x.RecipientId,
                         principalTable: "Recipients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppointmetsDonors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DonorId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    AppointmentId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppointmetsDonors", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppointmetsDonors_Appointments_AppointmentId",
+                        column: x => x.AppointmentId,
+                        principalTable: "Appointments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_AppointmetsDonors_Donors_DonorId",
+                        column: x => x.DonorId,
+                        principalTable: "Donors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -444,11 +457,6 @@ namespace BloodDonation.Data.Migrations
                 column: "TownId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Appointments_DonorId",
-                table: "Appointments",
-                column: "DonorId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Appointments_HospitalId",
                 table: "Appointments",
                 column: "HospitalId");
@@ -462,6 +470,16 @@ namespace BloodDonation.Data.Migrations
                 name: "IX_Appointments_RecipientId",
                 table: "Appointments",
                 column: "RecipientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppointmetsDonors_AppointmentId",
+                table: "AppointmetsDonors",
+                column: "AppointmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppointmetsDonors_DonorId",
+                table: "AppointmetsDonors",
+                column: "DonorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -585,7 +603,7 @@ namespace BloodDonation.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Appointments");
+                name: "AppointmetsDonors");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -612,16 +630,19 @@ namespace BloodDonation.Data.Migrations
                 name: "Settings");
 
             migrationBuilder.DropTable(
+                name: "Appointments");
+
+            migrationBuilder.DropTable(
                 name: "Donors");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Hospitals");
 
             migrationBuilder.DropTable(
                 name: "Recipients");
-
-            migrationBuilder.DropTable(
-                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Addresses");

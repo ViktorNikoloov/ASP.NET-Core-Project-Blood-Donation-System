@@ -15,7 +15,7 @@
         {
             this.Id = Guid.NewGuid().ToString();
 
-            this.Appointments = new HashSet<Appointment>();
+            this.Appointments = new HashSet<AppointmetsDonors>();
             this.Massages = new HashSet<Massage>();
         }
 
@@ -30,13 +30,13 @@
 
         public string ImageUrl { get; set; }
 
-        public Gender Gender { get; set; }
+        public virtual Gender Gender { get; set; }
 
-        public BloodType BloodType { get; set; }
+        public virtual BloodType BloodType { get; set; }
 
         public int DonationCount { get; set; }
 
-        public DateTime LastDonation { get; set; }
+        public virtual DateTime LastDonation { get; set; }
 
         public int AddressId { get; set; }
 
@@ -50,7 +50,7 @@
 
         public virtual ApplicationUser User { get; set; }
 
-        public virtual ICollection<Appointment> Appointments { get; set; }
+        public virtual ICollection<AppointmetsDonors> Appointments { get; set; }
 
         public virtual ICollection<Massage> Massages { get; set; }
     }
