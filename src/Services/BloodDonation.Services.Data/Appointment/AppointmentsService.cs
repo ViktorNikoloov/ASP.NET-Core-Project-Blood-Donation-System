@@ -7,7 +7,6 @@
 
     using BloodDonation.Data.Common.Repositories;
     using BloodDonation.Data.Models;
-    using BloodDonation.Data.Models.Enums;
     using BloodDonation.Web.ViewModels.Appointment;
 
 

@@ -89,7 +89,7 @@
                             </div>
                             <div class="col form-group">
                                 <label asp-for="Input.Gender"></label>
-                                <select asp-for="Input.BloodType" class="form-control" asp-items="Html.GetEnumSelectList<Gender>()" disabled readonly></select>
+                                <select asp-for="Input.Gender" class="form-control" asp-items="Html.GetEnumSelectList<Gender>()" disabled readonly></select>
 
                             </div>
 
@@ -177,7 +177,7 @@
                                     <select asp-for="Input.BloodType" class="form-control" asp-items="Html.GetEnumSelectList<BloodType>().Skip(1)">
                                         <option selected="selected" value="">Моля изберете кръвна група</option>
                                     </select>
-                                    <span asp-validation-for="Input.Gender" class="text-danger"></span>
+                                    <span asp-validation-for="Input.BloodType" class="text-danger"></span>
                                 }
                                 else
                                 {
@@ -198,7 +198,7 @@
                                 else
                                 {
                                     <label asp-for="Input.Gender"></label>
-                                    <select asp-for="Input.BloodType" class="form-control" asp-items="Html.GetEnumSelectList<Gender>()" disabled readonly></select>
+                                    <select asp-for="Input.Gender" class="form-control" asp-items="Html.GetEnumSelectList<Gender>()" disabled readonly></select>
                                 }
 
                             </div>

@@ -130,7 +130,7 @@
             public int? PostCode { get; set; }
 
             [Display(Name = "Улица")]
-            [RegularExpression("[А-я]+", ErrorMessage = "Полето \"{0}\" трябва да е на кирилица")]
+            [RegularExpression(@"[А-я]+\s*[А-я]*\s*[0-9]*", ErrorMessage = "Полето \"{0}\" трябва да е на кирилица")]
             [StringLength(StreetNameMaxLength, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{2}\" и \"{1}\" символа.", MinimumLength = StreetNameMinLength)]
             public string StreetName { get; set; }
 
