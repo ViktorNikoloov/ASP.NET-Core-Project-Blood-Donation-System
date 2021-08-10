@@ -7,16 +7,21 @@
 
     using BloodDonation.Data.Common.Repositories;
     using BloodDonation.Data.Models;
+    using BloodDonation.Data.Models.Enums;
     using BloodDonation.Web.ViewModels.Appointment;
 
 
     public class AppointmentsService : IAppointmentsService
     {
         private readonly IDeletableEntityRepository<Appointment> appointmetsRepository;
+        private readonly IDeletableEntityRepository<Recipient> recipientRepository;
 
-        public AppointmentsService(IDeletableEntityRepository<Appointment> appointmetsRepository)
+        public AppointmentsService(
+            IDeletableEntityRepository<Appointment> appointmetsRepository,
+            IDeletableEntityRepository<Recipient> recipientRepository)
         {
             this.appointmetsRepository = appointmetsRepository;
+            this.recipientRepository = recipientRepository;
         }
 
         public async Task CreateAsync(AppointmentCreateInputModel model, string recipientId)
@@ -74,6 +79,11 @@
         public int GetCount()
         {
             return this.appointmetsRepository.AllAsNoTracking().Count();
+        }
+
+        public string GetRecipientIdByUserId(string userId)
+        {
+            return this.recipientRepository.AllAsNoTracking().FirstOrDefault(x => x.UserId == userId).Id;
         }
     }
 }

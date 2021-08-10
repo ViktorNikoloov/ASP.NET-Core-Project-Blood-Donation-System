@@ -12,5 +12,7 @@
         IEnumerable<AppointmentInListViewModel> GetAll(int page, int itemsPerPage = 4);
 
         int GetCount();
+
+        string GetRecipientIdByUserId(string userId);
     }
 }

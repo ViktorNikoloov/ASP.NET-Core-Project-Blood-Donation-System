@@ -41,12 +41,12 @@
         public DateTime DeadLine { get; set; }
 
         [Display(Name = "Начин и адрес за получаване")]
-        //[RegularExpression("[А-я]+[<>]*", ErrorMessage = "Полето \"{0}\" трябва да е на кирилица")]
+        [RegularExpression(@"[А-я]+.*\s*[А-я]*", ErrorMessage = "Полето \"{0}\" трябва да е на кирилица")]
         [StringLength(150, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{2}\" и \"{1}\" символа.", MinimumLength = 0)]
         public string SendingAddressInfo { get; set; }
 
         [Display(Name = "Допълнителна информация")]
-        //[RegularExpression("[А-я]+[<>]", ErrorMessage = "Полето \"{0}\" трябва да е на кирилица")]
+        [RegularExpression(@"[А-я]+.*\s*[А-я]*", ErrorMessage = "Полето \"{0}\" трябва да е на кирилица")]
         [StringLength(300, ErrorMessage = "Полето \"{0}\" трябва да съдържа между \"{2}\" и \"{1}\" символа.", MinimumLength = 0)]
         public string AdditionalInfo { get; set; }
     }

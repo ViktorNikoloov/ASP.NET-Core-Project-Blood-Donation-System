@@ -2,22 +2,19 @@
 {
     using System.Threading.Tasks;
 
-    using BloodDonation.Data.Models;
     using BloodDonation.Services.Data.Appointment;
+    using BloodDonation.Web.Infrastructure;
     using BloodDonation.Web.ViewModels.Appointment;
 
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     public class AppointmentController : Controller
     {
         private readonly IAppointmentsService appointmnetsService;
-        private readonly UserManager<ApplicationUser> userMenager;
 
-        public AppointmentController(IAppointmentsService appointmnetsService, UserManager<ApplicationUser> userMenager)
+        public AppointmentController(IAppointmentsService appointmnetsService)
         {
             this.appointmnetsService = appointmnetsService;
-            this.userMenager = userMenager;
         }
 
         public IActionResult Create()
@@ -32,12 +29,9 @@
             {
                 return this.View(model);
             }
+            var recipientId = this.appointmnetsService.GetRecipientIdByUserId(this.User.GetId());
 
-            // var currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var currentUser = await this.userMenager.GetUserAsync(this.User);
-            var currentRecipientId = currentUser.Recipient.Id;
-
-            await this.appointmnetsService.CreateAsync(model, currentRecipientId);
+            await this.appointmnetsService.CreateAsync(model, recipientId);
             return this.Redirect("/");
         }
 
