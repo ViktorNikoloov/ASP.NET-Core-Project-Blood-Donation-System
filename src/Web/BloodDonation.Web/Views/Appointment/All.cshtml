@@ -14,38 +14,70 @@
 
         @foreach (var appointment in this.Model.Appointments)
         {
-            <div class="col mb-3 text-center">
-                <div class="card h-100 m-auto bg-primary">
-                    <img src="@appointment.ImageUrl" class="card-img-top mr-3 pb-2 pl-2 pr-2 pt-2" alt="profile picture">
-                    <div class="card-body text-center text-white">
-                        <div class="card-title">
-                            <p class="card-text">От: @appointment.RecipientFirstName</p>
+        <div class="col mb-3 text-center">
+            <div class="card h-100 m-auto bg-primary">
+                <img src="@appointment.ImageUrl" class="card-img-top mr-3 pb-2 pl-2 pr-2 pt-2" alt="profile picture">
+                <div class="card-body text-center text-white">
+                    <div class="card-title">
+                        <p class="card-text">От: @appointment.RecipientFirstName</p>
 
-                            <hr class="bg-white w-auto">
+                        <hr class="bg-white w-auto">
 
-                            <p class="card-text">Група: @appointment.BloodType</p>
+                        <p class="card-text">Група: @appointment.BloodType</p>
 
-                            <hr class="bg-white w-auto">
+                        <hr class="bg-white w-auto">
 
-                            <p class="card-text">Брой банки: @appointment.BloodBankCount</p>
+                        <p class="card-text">Брой банки: @appointment.BloodBankCount</p>
 
-                            @*<hr class="bg-white w-auto">
+                        @*<hr class="bg-white w-auto">
 
-                                <text class="card-text">@appointment.AdditionalInfo</text>*@
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-danger">Краен срок: @appointment.DeadLine.ToLocalTime().ToShortDateString()</small>
-                    </div>
-                    <div class="d-grid d-md-flex justify-content-center">
-                        <a href="#" class="btn btn-outline-success btn-icon mb-3 ml-2 mr-2">Виж молбата</a>
+                        <text class="card-text">@appointment.AdditionalInfo</text>*@
                     </div>
                 </div>
+                <div class="card-footer">
+                    <small class="text-danger">Краен срок: @appointment.DeadLine.ToLocalTime().ToShortDateString()</small>
+                </div>
+                <div class="d-grid d-md-flex justify-content-center">
+                    <a href="#" class="btn btn-outline-success btn-icon mb-3 ml-2 mr-2">Виж молбата</a>
+                </div>
             </div>
+        </div>
         }
 
     </div>
 </div>
+
+<hr class=" bg-primary w-auto">
+
+<nav aria-label="...">
+    <ul class="pagination justify-content-center">
+        <li class="page-item @if (!Model.HasPreviousPage) { <text>disabled</text> }">
+            <a class="page-link" asp-action="All" asp-route-id="@Model.PreviousPageNumber">Previous</a>
+        </li>
+        @for (int i = Model.PageNumber - 2; i < Model.PageNumber; i++)
+        {
+            if (i > 0)
+            {
+                <li class="page-item"><a class="page-link" asp-action="All" asp-route-id="@i">@i</a></li>
+            }
+        }
+        <li class="page-item active" aria-current="page">
+            <span class="page-link">
+                @Model.PageNumber
+            </span>
+        </li>
+        @for (int i = Model.PageNumber + 1; i < Model.PageNumber + 3; i++)
+        {
+            if (i <= Model.PagesCount)
+            {
+                <li class="page-item"><a class="page-link" asp-action="All" asp-route-id="@i">@i</a></li>
+            }
+        }
+        <li class="page-item @if (!Model.HasNextPage) { <text>disabled</text> }">
+            <a class="page-link" asp-action="All" asp-route-id="@Model.NextPageNumber">Next</a>
+        </li>
+    </ul>
+</nav>
 
 
 @section Scripts{
