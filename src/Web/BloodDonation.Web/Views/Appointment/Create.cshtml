@@ -1,0 +1,109 @@
+﻿@using BloodDonation.Web.ViewModels.Appointment
+@using BloodDonation.Data.Models.Enums
+@model AppointmentCreateInputModel
+
+@{
+    this.ViewData["Title"] = "Молба за кръв";
+}
+
+
+
+<div class="class float-md-none" d-flex flex-column bd-highlight mb-3>
+    <div asp-validation-summary="All" class=" alert-danger" role="alert"></div>
+    <form method="post" text-center>
+        <div class="card text-white bg-danger mb-3">
+            <div class="card-header text-center">
+                <h1>@ViewData["Title"]</h1>
+            </div>
+
+            <hr class=" bg-primary w-auto">
+            
+            <div class="card-body text-center">
+                <div class="card-title">
+                    <div class="form-row form-group">
+
+                        <div class="col form-group">
+                            <label asp-for="Hospital"></label>
+                            <input asp-for="Hospital" class="form-control" placeholder="Пример: Св Георги" />
+                            <span asp-validation-for="Hospital" class="text-danger"></span>
+                        </div>
+
+                        <div class="col form-group">
+                            <label asp-for="HospitalWard"></label>
+                            <input asp-for="HospitalWard" class="form-control" placeholder="Пример: Вътрешно отделение" />
+                            <span asp-validation-for="HospitalWard" class="text-danger"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row form-group">
+
+                        <div class="col form-group">
+                            <label asp-for="HospitalCity"></label>
+                            <input asp-for="HospitalCity" class="form-control" placeholder="Пример: Св Георги" />
+                            <span asp-validation-for="HospitalCity" class="text-danger"></span>
+                        </div>
+
+                        <div class="col form-group">
+                            <label asp-for="BloodBankCount"></label>
+                            <input asp-for="BloodBankCount" class="form-control" placeholder="Пример: 4" />
+                            <span asp-validation-for="BloodBankCount" class="text-danger"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row form-group">
+
+                        <div class="col form-group">
+                            <label asp-for="StartDate"></label>
+                            <input asp-for="StartDate" class="form-control" />
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="col form-group">
+                            <label asp-for="DeadLine"></label>
+                            <input asp-for="DeadLine" class="form-control" />
+                            <span asp-validation-for="DeadLine" class="text-danger"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row form-group">
+
+                        <div class="col form-group">
+                            <label asp-for="SendingAddressInfo"></label>
+                            <textarea asp-for="SendingAddressInfo" class="form-control" placeholder="Пример: гр.Пловдив, oфис на Спиди - 2-ра градска болница."> </textarea>
+                            <span asp-validation-for="SendingAddressInfo" class="text-danger"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row form-group">
+
+                        <div class="col form-group">
+                            <label asp-for="AdditionalInfo"></label>
+                            <textarea asp-for="AdditionalInfo" class="form-control " placeholder="Пример: Здавейте, мили хора, вчера на посочета по-горе дата ще ме приемат в болница за спешна операция и се нуждая от описаното количество банки кръв. Сърдечно Ви благодаря !"> </textarea>
+                            <span asp-validation-for="AdditionalInfo" class="text-danger"></span>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class=" card-footer">
+                <p>
+                    Натискайки бутона "Регистрация", вие потвърждавате, че сте запознати и съгласни с нашата
+                    <a href="/Home/Privacy">политика за опазване на личните данни</a>
+                </p>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-block btn-primary">Регистрация</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <partial name="_GoogleReCaptchaPartial" />
+}

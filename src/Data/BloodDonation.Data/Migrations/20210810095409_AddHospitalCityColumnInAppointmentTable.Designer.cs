@@ -4,14 +4,16 @@ using BloodDonation.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BloodDonation.Data.Migrations
 {
     [DbContext(typeof(BloodDonationDbContext))]
-    partial class BloodDonationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210810095409_AddHospitalCityColumnInAppointmentTable")]
+    partial class AddHospitalCityColumnInAppointmentTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -196,8 +198,17 @@ namespace BloodDonation.Data.Migrations
                     b.Property<string>("DonorId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Hospital")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HospitalCity")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("HospitalId")
                         .HasColumnType("int");
+
+                    b.Property<string>("HospitalWard")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsApproved")
                         .HasColumnType("bit");
@@ -686,7 +697,7 @@ namespace BloodDonation.Data.Migrations
                         .WithMany("Appointments")
                         .HasForeignKey("DonorId");
 
-                    b.HasOne("BloodDonation.Data.Models.Hospital", "Hospital")
+                    b.HasOne("BloodDonation.Data.Models.Hospital", null)
                         .WithMany("Appointments")
                         .HasForeignKey("HospitalId");
 
@@ -695,8 +706,6 @@ namespace BloodDonation.Data.Migrations
                         .HasForeignKey("RecipientId");
 
                     b.Navigation("Donor");
-
-                    b.Navigation("Hospital");
 
                     b.Navigation("Recipient");
                 });

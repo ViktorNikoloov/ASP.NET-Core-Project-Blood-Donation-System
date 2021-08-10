@@ -4,14 +4,16 @@ using BloodDonation.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BloodDonation.Data.Migrations
 {
     [DbContext(typeof(BloodDonationDbContext))]
-    partial class BloodDonationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210810070450_ReformingAppointmentTable")]
+    partial class ReformingAppointmentTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -195,6 +197,9 @@ namespace BloodDonation.Data.Migrations
 
                     b.Property<string>("DonorId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Hospital")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("HospitalId")
                         .HasColumnType("int");
@@ -686,7 +691,7 @@ namespace BloodDonation.Data.Migrations
                         .WithMany("Appointments")
                         .HasForeignKey("DonorId");
 
-                    b.HasOne("BloodDonation.Data.Models.Hospital", "Hospital")
+                    b.HasOne("BloodDonation.Data.Models.Hospital", null)
                         .WithMany("Appointments")
                         .HasForeignKey("HospitalId");
 
@@ -695,8 +700,6 @@ namespace BloodDonation.Data.Migrations
                         .HasForeignKey("RecipientId");
 
                     b.Navigation("Donor");
-
-                    b.Navigation("Hospital");
 
                     b.Navigation("Recipient");
                 });

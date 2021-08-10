@@ -9,6 +9,7 @@
     using BloodDonation.Data.Repositories;
     using BloodDonation.Data.Seeding;
     using BloodDonation.Services.Data.Administator;
+    using BloodDonation.Services.Data.Appointment;
     using BloodDonation.Services.Data.Donor;
     using BloodDonation.Services.Data.Home;
     using BloodDonation.Services.Data.Recipient;
@@ -95,6 +96,7 @@
             services.AddTransient<IRecipientsService, RecipientsService>();
             services.AddTransient<IDonorsService, DonorsService>();
             services.AddTransient<IStatisticsService, StatisticsService>();
+            services.AddTransient<IAppointmentsService, AppointmentsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
