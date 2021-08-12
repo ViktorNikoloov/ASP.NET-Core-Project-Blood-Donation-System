@@ -6,6 +6,7 @@
 <h1>Администраторска страница</h1>
 <div class="container bg-light p-2 table-bordered border-primary">
     <div class="row">
+
         <div class="col-lg-4 d-flex align-items-stretch">
             <div class="card">
                 <div class="card-body text-center bg-light table-bordered border-primary w-100">
@@ -20,20 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 d-flex align-items-stretch">
-            <div class="card">
-                <div class="card-body text-center bg-light table-bordered border-primary w-100">
-                    <span class="card-title">
-                        <i class="fab fa-wpforms fa-5x text-primary"></i>
-                    </span>
-                    <h5 class="card-title">Добавяне на статия.</h5>
-                    <p class="card-text">Тук може да добавяте, коригирате или изтривате блог статии.</p>
-                    <div class="btn btn-outline-primary">
-                        <a class="nav-link" asp-area="" asp-controller="" asp-action="">Натисни тук</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <div class="col-lg-4 d-flex align-items-stretch">
             <div class="card">
                 <div class="card-body text-center bg-light table-bordered border-primary w-100">
@@ -42,6 +30,21 @@
                     </span>
                     <h5 class="card-title">Управление на заявления.</h5>
                     <p class="card-text">Тук може да коригирате или изтривате подадените заявления за кръв.</p>
+                    <div class="btn btn-outline-primary">
+                        <a class="nav-link" asp-area="" asp-controller="Appointment" asp-action="All">Натисни тук</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 d-flex align-items-stretch">
+            <div class="card">
+                <div class="card-body text-center bg-light table-bordered border-primary w-100">
+                    <span class="card-title">
+                        <i class="fab fa-wpforms fa-5x text-primary"></i>
+                    </span>
+                    <h5 class="card-title">Добавяне на статия.</h5>
+                    <p class="card-text">Тук може да добавяте, коригирате или изтривате блог статии.</p>
                     <div class="btn btn-outline-primary">
                         <a class="nav-link" asp-area="" asp-controller="" asp-action="">Натисни тук</a>
                     </div>
