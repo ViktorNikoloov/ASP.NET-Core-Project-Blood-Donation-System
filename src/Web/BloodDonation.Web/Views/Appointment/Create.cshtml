@@ -2,7 +2,7 @@
 @model AppointmentCreateInputModel
 
 @{
-    this.ViewData["Title"] = "Молба за кръв";
+    this.ViewData["Title"] = "Подаване на молба за кръв";
 }
 
 
@@ -89,11 +89,16 @@
 
                 </div>
             </div>
+
             <div class=" card-footer">
+                <hr class=" bg-primary w-auto">
+
                 <p>
-                    Натискайки бутона "Регистрация", вие потвърждавате, че сте запознати и съгласни с нашата
-                    <a href="/Home/Privacy">политика за опазване на личните данни</a>
+                    Натискайки бутона "<u>Подай молба</u>", вие потвърждавате, че сте запознати и съгласни с нашата
+                    <a asp-controller="Home" asp-action="Privacy">политика за опазване на личните данни</a>
                 </p>
+                <hr class=" bg-primary w-auto">
+
                 <div class="form-group">
                     <button type="submit" class="btn btn-block btn-primary">Подай молба</button>
                 </div>
