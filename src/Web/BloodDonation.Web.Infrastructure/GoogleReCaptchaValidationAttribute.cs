@@ -1,4 +1,4 @@
-﻿namespace PressCenters.Web.Infrastructure
+﻿namespace BloodDonation.Web.Infrastructure
 {
     using System;
     using System.Collections.Generic;

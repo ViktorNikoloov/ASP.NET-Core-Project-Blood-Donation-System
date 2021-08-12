@@ -3,24 +3,32 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using System.Threading.Tasks;
 
     using BloodDonation.Data.Common.Repositories;
     using BloodDonation.Data.Models;
     using BloodDonation.Web.ViewModels.Appointment;
 
-
     public class AppointmentsService : IAppointmentsService
     {
+        const int PaginationItemsPerPage = 6;
+
         private readonly IDeletableEntityRepository<Appointment> appointmetsRepository;
         private readonly IDeletableEntityRepository<Recipient> recipientRepository;
+        private readonly IDeletableEntityRepository<Donor> donorRepository;
+        private readonly IRepository<AppointmetsDonors> appointmentsDonorsRepository;
 
         public AppointmentsService(
             IDeletableEntityRepository<Appointment> appointmetsRepository,
-            IDeletableEntityRepository<Recipient> recipientRepository)
+            IDeletableEntityRepository<Recipient> recipientRepository,
+            IDeletableEntityRepository<Donor> donorRepository,
+            IRepository<AppointmetsDonors> appointmentsDonorsRepository)
         {
             this.appointmetsRepository = appointmetsRepository;
             this.recipientRepository = recipientRepository;
+            this.donorRepository = donorRepository;
+            this.appointmentsDonorsRepository = appointmentsDonorsRepository;
         }
 
         public async Task CreateAsync(AppointmentCreateInputModel model, string recipientId)
@@ -53,12 +61,12 @@
             await this.appointmetsRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<AppointmentInListViewModel> GetAll(int page, int itemsPerPage = 6)
+        public IEnumerable<AppointmentInListViewModel> GetAll(int page, int itemsPerPage = PaginationItemsPerPage)
         {
             var appointment = this.appointmetsRepository.AllAsNoTracking()
-                .Where(x => x.DeadLine >= DateTime.UtcNow)
-                .OrderByDescending(x => x.Id)
-                .Skip((page - 1) * itemsPerPage)
+                .Where(x => x.DeadLine >= DateTime.UtcNow && x.IsApproved == false)
+                .OrderByDescending(x => x.StartDate)
+                .Skip((page - 1) * itemsPerPage) // Pages formula
                 .Take(itemsPerPage)
                 .Select(x => new AppointmentInListViewModel
                 {
@@ -66,7 +74,7 @@
                     BloodBankCount = x.BloodBankCount,
                     RecipientFirstName = x.Recipient.FirstName,
                     BloodType = x.Recipient.BloodType,
-                    AdditionalInfo = x.AdditionalInfo.Substring(0, 60) + "...",
+                    //AdditionalInfo = x.AdditionalInfo.Substring(0, 60) + "...",
                     DeadLine = x.DeadLine,
                     ImageUrl = x.Recipient.ImageUrl,
                 })
@@ -75,14 +83,50 @@
             return appointment;
         }
 
-        public int GetCount()
+        public AppointmentByIdViewModel GetAppoinmentAllInfo(int id)
         {
-            return this.appointmetsRepository.AllAsNoTracking().Count();
+            var currentAppointment = this.appointmetsRepository.All().Where(x => x.Id == id).FirstOrDefault();
+
+            return new AppointmentByIdViewModel
+            {
+                Id = id,
+                StartDate = currentAppointment.StartDate,
+                DeadLine = currentAppointment.DeadLine,
+                BloodType = currentAppointment.Recipient.BloodType,
+                BloodBankCount = currentAppointment.BloodBankCount,
+                RecipientFullName = $"{currentAppointment.Recipient.FirstName} {currentAppointment.Recipient.MiddleName} {currentAppointment.Recipient.LastName}",
+                PhoneNumber = currentAppointment.Recipient.PhoneNumber,
+                CityName = currentAppointment.Recipient.Address.Town.Name,
+                Email = currentAppointment.Recipient.User.Email,
+                HospitalName = currentAppointment.Hospital.HospitalName,
+                HospitalWard = currentAppointment.Hospital.HospitalWardName,
+                HospitalCity = currentAppointment.Hospital.Town.Name,
+                SendingAddressInfo = currentAppointment.SendingAddressInfo,
+                AdditionalInfo = currentAppointment.AdditionalInfo,
+                ImageUrl = currentAppointment.Recipient.ImageUrl,
+            };
         }
 
-        public string GetRecipientIdByUserId(string userId)
+        public async Task TakeAppointmentByDonor(string userId, int appointmentId)
         {
-            return this.recipientRepository.AllAsNoTracking().FirstOrDefault(x => x.UserId == userId).Id;
+            var currentDonorId = this.GetDonorIdByUserId(userId);
+            var appointmetsDonors = new AppointmetsDonors
+            {
+                DonorId = currentDonorId,
+                AppointmentId = appointmentId,
+            };
+
+            await this.appointmentsDonorsRepository.AddAsync(appointmetsDonors);
+            await this.appointmentsDonorsRepository.SaveChangesAsync();
         }
+
+        public int GetCount()
+        => this.appointmetsRepository.AllAsNoTracking().Count();
+
+        public string GetRecipientIdByUserId(string userId)
+        => this.recipientRepository.AllAsNoTracking().FirstOrDefault(x => x.UserId == userId).Id;
+
+        public string GetDonorIdByUserId(string userId)
+        => this.donorRepository.AllAsNoTracking().FirstOrDefault(x => x.UserId == userId).Id;
     }
 }

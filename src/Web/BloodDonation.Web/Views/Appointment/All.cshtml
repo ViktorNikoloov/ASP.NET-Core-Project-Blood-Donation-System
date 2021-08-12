@@ -38,7 +38,7 @@
                     <small class="text-danger">Краен срок: @appointment.DeadLine.ToLocalTime().ToShortDateString()</small>
                 </div>
                 <div class="d-grid d-md-flex justify-content-center">
-                    <a href="#" class="btn btn-outline-success btn-icon mb-3 ml-2 mr-2">Виж молбата</a>
+                    <a asp-action="AppointmentById" asp-controller="Appointment" asp-route-id="@appointment.Id"class="btn btn-outline-success btn-icon mb-3 ml-2 mr-2">Виж молбата</a>
                 </div>
             </div>
         </div>

@@ -66,6 +66,14 @@
                 .FirstOrDefault();
         }
 
+        public string GetDonorEmailByUserId(string userId)
+        {
+            var curruntDonorId = this.GetDonorIdByUserId(userId);
+            var currentDonor = this.donorRepository.All().Where(x => x.UserId == userId).FirstOrDefault();
+
+            return currentDonor.User.Email;
+        }
+
         public async Task UpdateSingInDonorInfoAsync(string id, string firstName, string middleName, string lastName, string cityName, string streetName, int? postCode, string phoneNumber, string imageUrl)
         {
             var donor = this.donorRepository.All().FirstOrDefault(o => o.UserId == id);
@@ -90,5 +98,8 @@
 
             await this.donorRepository.SaveChangesAsync();
         }
+
+        public string GetDonorIdByUserId(string userId)
+        => this.donorRepository.AllAsNoTracking().FirstOrDefault(x => x.UserId == userId).Id;
     }
 }

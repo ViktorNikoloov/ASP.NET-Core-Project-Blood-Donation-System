@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using PressCenters.Web.Infrastructure;
+    using BloodDonation.Web.Infrastructure;
 
     public class ContactFormViewModel
     {

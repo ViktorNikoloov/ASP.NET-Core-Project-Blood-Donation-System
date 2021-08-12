@@ -14,5 +14,9 @@
         int GetCount();
 
         string GetRecipientIdByUserId(string userId);
+
+        AppointmentByIdViewModel GetAppoinmentAllInfo(int id);
+
+        Task TakeAppointmentByDonor(string id, int appointmentId);
     }
 }

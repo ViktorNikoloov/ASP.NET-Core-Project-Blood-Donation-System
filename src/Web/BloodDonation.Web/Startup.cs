@@ -15,6 +15,7 @@
     using BloodDonation.Services.Data.Recipient;
     using BloodDonation.Services.Data.Settings;
     using BloodDonation.Services.Data.User;
+    using BloodDonation.Services.Data.ViewRenderService;
     using BloodDonation.Services.Mapping;
     using BloodDonation.Services.Messaging;
     using BloodDonation.Web.ViewModels;
@@ -97,6 +98,7 @@
             services.AddTransient<IDonorsService, DonorsService>();
             services.AddTransient<IStatisticsService, StatisticsService>();
             services.AddTransient<IAppointmentsService, AppointmentsService>();
+            services.AddTransient<IViewRenderService, ViewRenderService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

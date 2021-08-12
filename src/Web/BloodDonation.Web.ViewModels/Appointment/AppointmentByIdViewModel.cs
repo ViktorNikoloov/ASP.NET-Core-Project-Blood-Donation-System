@@ -5,12 +5,17 @@
 
     using BloodDonation.Data.Models.Enums;
 
-    public class AppointmentInListViewModel
+    public class AppointmentByIdViewModel
     {
         public int Id { get; set; }
 
-        [Display(Name = "Име")]
-        public string RecipientFirstName { get; set; }
+        [Display(Name = "Необходимо от")]
+        [DataType(DataType.Date)]
+        public DateTime StartDate { get; set; }
+
+        [Display(Name = "Краен срок")]
+        [DataType(DataType.Date)]
+        public DateTime DeadLine { get; set; }
 
         [Display(Name = "Кръвна група")]
         public BloodType BloodType { get; set; }
@@ -18,10 +23,31 @@
         [Display(Name = "Банки кръв")]
         public int BloodBankCount { get; set; }
 
-        [Display(Name = "Краен срок")]
-        public DateTime DeadLine { get; set; }
+        [Display(Name = "Имена на ресипиента")]
+        public string RecipientFullName { get; set; }
 
-        [Display(Name = "Допълнителна информация")]
+        [Display(Name = "Телефонен номер")]
+        public string PhoneNumber { get; set; }
+
+        [Display(Name = "Град")]
+        public string CityName { get; set; }
+
+        [Display(Name = "Имейл адрес")]
+        public string Email { get; set; }
+
+        [Display(Name = "Име на Болница")]
+        public string HospitalName { get; set; }
+
+        [Display(Name = "Болнично отделение")]
+        public string HospitalWard { get; set; }
+
+        [Display(Name = "Града на Болницата")]
+        public string HospitalCity { get; set; }
+
+        [Display(Name = "Начин и адрес за получаване")]
+        public string SendingAddressInfo { get; set; }
+
+        [Display(Name = "Допълнителна информация за молбата")]
         public string AdditionalInfo { get; set; }
 
         public string ImageUrl { get; set; }
