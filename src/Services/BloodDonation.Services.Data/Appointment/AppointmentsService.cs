@@ -100,7 +100,6 @@
                 .ToList();
 
             return unapprovalAppointments;
-
         }
 
         public AppointmentByIdViewModel GetAppoinmentAllInfo(int id)

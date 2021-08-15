@@ -10,6 +10,9 @@
     {
         public int Id { get; set; }
 
+        [Display(Name = "Имена на ресипиента")]
+        public string RecipientFullName { get; set; }
+
         [Display(Name = "Необходимо от")]
         [DataType(DataType.Date)]
         [DateValidation]

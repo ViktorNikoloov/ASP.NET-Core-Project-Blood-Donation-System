@@ -7,6 +7,7 @@
     using BloodDonation.Data.Models;
     using BloodDonation.Data.Models.Enums;
     using BloodDonation.Services.Mapping;
+    using BloodDonation.Web.ViewModels.Administration.Dashboard;
 
     using static BloodDonation.Common.GlobalConstants;
 
@@ -67,11 +68,6 @@
             return user;
         }
 
-        public T AppointmentDetailsById<T>(string id)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public async Task RemoveQuestionsAnswersFromUserAsync(string userId)
         {
             var questionAnswers = this.questionsRepository.All().Where(qa => qa.UserId == userId);
@@ -83,5 +79,45 @@
 
             await this.questionsRepository.SaveChangesAsync();
         }
+
+        public AppointmentViewModel GetAppoinmentAllInfo(int id)
+        {
+            var currentAppointment = this.appointmetsRepository.All().Where(x => x.Id == id).FirstOrDefault();
+
+            return new AppointmentViewModel
+            {
+                Id = id,
+                RecipientFullName = $"{currentAppointment.Recipient.FirstName} {currentAppointment.Recipient.MiddleName} {currentAppointment.Recipient.LastName}",
+                StartDate = currentAppointment.StartDate,
+                DeadLine = currentAppointment.DeadLine,
+                BloodType = currentAppointment.Recipient.BloodType,
+                BloodBankCount = currentAppointment.BloodBankCount,
+                HospitalName = currentAppointment.Hospital.HospitalName,
+                HospitalWard = currentAppointment.Hospital.HospitalWardName,
+                HospitalCity = currentAppointment.Hospital.Town.Name,
+                SendingAddressInfo = currentAppointment.SendingAddressInfo,
+                AdditionalInfo = currentAppointment.AdditionalInfo,
+                ImageUrl = currentAppointment.Recipient.ImageUrl,
+            };
+        }
+
+        public async Task ApproveAppointmentAsync(int id)
+        {
+            var currAppointment = this.GetCurrentAppointment(id);
+            currAppointment.IsApproved = true;
+
+            await this.appointmetsRepository.SaveChangesAsync();
+        }
+
+        public async Task RejectAppointmentAsync(int id)
+        {
+            var currAppointment = this.GetCurrentAppointment(id);
+
+            this.appointmetsRepository.Delete(currAppointment);
+            await this.appointmetsRepository.SaveChangesAsync();
+        }
+
+        private Appointment GetCurrentAppointment(int id)
+        => this.appointmetsRepository.All().FirstOrDefault(x => x.Id == id);
     }
 }

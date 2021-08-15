@@ -2,18 +2,32 @@
 @model AppointmentsListViewModel
 @{
     this.ViewData["Title"] = "Молби за кръв";
+
+    if (this.TempData.ContainsKey("NotFoundMessage"))
+    {
+        <div class="alert alert-success alert-danger fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            @this.TempData["NotFoundMessage"]
+        </div>
+    }
+    else if (this.TempData.ContainsKey("isApproved"))
+    {
+        <div class="alert alert-success alert-success fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            @this.TempData["isApproved"]
+        </div>
+    }
+    else if (this.TempData.ContainsKey("isRejected"))
+    {
+        <div class="alert alert-success alert-danger fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            @this.TempData["isRejected"]
+        </div>
+    }
 }
 
 <div class="container container-fluid bg-neutral ">
-    @{
-        if (this.TempData.ContainsKey("NotFoundMessage"))
-        {
-            <div class="alert alert-success alert-danger fade show">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                @this.TempData["NotFoundMessage"]
-            </div>
-        }
-    }
+
     <h3 class="display-4 text-md-center">@ViewData["Title"]</h3>
 
     <hr class="bg-primary w-auto">
@@ -39,14 +53,14 @@
 
                             <hr class="bg-white w-auto">
 
-                                <text class="card-text">@appointment.AdditionalInfo</text>
+                            <text class="card-text">@appointment.AdditionalInfo</text>
                         </div>
                     </div>
                     <div class="card-footer">
                         <small class="text-danger">Краен срок: @appointment.DeadLine.ToLocalTime().ToShortDateString()</small>
                     </div>
                     <div class="d-grid d-md-flex justify-content-center">
-                        <a asp-action="AppointmentById" asp-controller="Appointment" asp-route-id="@appointment.Id" class="btn btn-outline-success btn-icon mb-3 ml-2 mr-2">Виж молбата</a>
+                        <a asp-area="Administration" asp-controller="Dashboard" asp-action="AppointmentById" asp-route-id="@appointment.Id" class="btn btn-outline-success btn-icon mb-3 ml-2 mr-2">Виж молбата</a>
                     </div>
                 </div>
             </div>
@@ -57,4 +71,4 @@
 
 <hr class=" bg-primary w-auto">
 
-<partial name="_PagingPartial" model="@Model"/>
+<partial name="_PagingPartial" model="@Model" />

@@ -73,20 +73,6 @@
             return this.View(applicantViewModel);
         }
 
-        public IActionResult All(int id = GlobalConstants.PaginationStartPageNumber)
-        {
-            const int ItemPerPage = 4;
-            var viewModel = new AppointmentsListViewModel
-            {
-                ItemPerPage = ItemPerPage,
-                PageNumber = id,
-                AppointmentsCount = this.appointmentsService.GetCount(false),
-                Appointments = this.appointmentsService.GetAll(id, ItemPerPage, "Admin"),
-            };
-
-            return this.View(viewModel);
-        }
-
         [HttpPost]
         public async Task<IActionResult> ApproveApplicant(string id)
         {
@@ -129,6 +115,47 @@
             }
 
             return this.View("RegulateApplicants");
+        }
+
+        public IActionResult All(int id = GlobalConstants.PaginationStartPageNumber)
+        {
+            const int ItemPerPage = 4;
+            var viewModel = new AppointmentsListViewModel
+            {
+                ItemPerPage = ItemPerPage,
+                PageNumber = id,
+                AppointmentsCount = this.appointmentsService.GetCount(false),
+                Appointments = this.appointmentsService.GetAll(id, ItemPerPage, "Admin"),
+            };
+
+            return this.View(viewModel);
+        }
+
+        public IActionResult AppointmentById(int id)
+        {
+            var viewModel = this.administratorService.GetAppoinmentAllInfo(id);
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ApproveAppoinment(int id)
+        {
+            await this.administratorService.ApproveAppointmentAsync(id);
+
+            this.TempData["isApproved"] = $"Молбата беше одобрена.";
+
+            return this.RedirectToAction(nameof(this.All));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RejectAppoinment(int id)
+        {
+            await this.administratorService.RejectAppointmentAsync(id);
+
+            this.TempData["isRejected"] = $"Молбата беше Отхвърлена.";
+
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }
