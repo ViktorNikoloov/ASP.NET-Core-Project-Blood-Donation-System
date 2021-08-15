@@ -2,14 +2,14 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using BloodDonation.Services.Data.DTO;
+
     using BloodDonation.Web.ViewModels.Appointment;
 
     public interface IAppointmentsService
     {
         Task CreateAsync(AppointmentCreateInputModel model, string recipientId);
 
-        IEnumerable<AppointmentInListViewModel> GetAll(int page, int itemsPerPage = 4);
+        IEnumerable<AppointmentInListViewModel> GetAll(int page, int itemsPerPage = 4, string userRole = "Donor");
 
         int GetCount();
 

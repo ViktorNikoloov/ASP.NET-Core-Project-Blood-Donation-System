@@ -3,6 +3,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    using BloodDonation.Common;
     using BloodDonation.Services.Data.Appointment;
     using BloodDonation.Services.Data.Donor;
     using BloodDonation.Services.Data.ViewRenderService;
@@ -14,8 +15,6 @@
 
     public class AppointmentController : Controller
     {
-        const int PaginationStartPageNumber = 1;
-
         private readonly IAppointmentsService appointmnetsService;
         private readonly IDonorsService donorsService;
         private readonly IViewRenderService viewRenderService;
@@ -52,7 +51,7 @@
             return this.Redirect("/");
         }
 
-        public IActionResult All(int id = PaginationStartPageNumber)
+        public IActionResult All(int id = GlobalConstants.PaginationStartPageNumber)
         {
             const int ItemPerPage = 4;
             var viewModel = new AppointmentsListViewModel

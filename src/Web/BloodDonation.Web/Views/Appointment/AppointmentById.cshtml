@@ -192,7 +192,7 @@ else if (this.User.IsInRole("Administrator"))
                                         <div class="col-sm">
                                             <label asp-for="@Model.BloodType"></label>
                                             <select asp-for="@Model.BloodType" class="form-control" asp-items="Html.GetEnumSelectList<BloodType>().Skip(1)"> </select>
-                                            <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
+                                            <span asp-validation-for="@Model.BloodType" class="text-danger"></span>
                                         </div>
 
                                     </div>

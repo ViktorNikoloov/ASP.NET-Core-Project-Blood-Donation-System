@@ -3,12 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
     using BloodDonation.Data.Common.Repositories;
     using BloodDonation.Data.Models;
-    using BloodDonation.Services.Data.DTO;
     using BloodDonation.Web.ViewModels.Appointment;
 
     public class AppointmentsService : IAppointmentsService
@@ -62,10 +60,12 @@
             await this.appointmetsRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<AppointmentInListViewModel> GetAll(int page, int itemsPerPage = PaginationItemsPerPage)
+        public IEnumerable<AppointmentInListViewModel> GetAll(int page, int itemsPerPage = PaginationItemsPerPage, string userRole = "Donor")
         {
-            var appointment = this.appointmetsRepository.AllAsNoTracking()
-                .Where(x => x.DeadLine >= DateTime.UtcNow && x.BloodBankCount != 0 && x.IsApproved == false)
+            if (userRole == "Donor")
+            {
+                var approvalAppointments = this.appointmetsRepository.AllAsNoTracking()
+                .Where(x => x.DeadLine >= DateTime.UtcNow && x.BloodBankCount != 0 && x.IsApproved == true)
                 .OrderBy(x => x.StartDate)
                 .Skip((page - 1) * itemsPerPage) // Pages formula
                 .Take(itemsPerPage)
@@ -81,7 +81,28 @@
                 })
                 .ToList();
 
-            return appointment;
+                return approvalAppointments;
+            }
+
+            var unapprovalAppointments = this.appointmetsRepository.AllAsNoTracking()
+                .Where(x => x.IsApproved == false)
+                .OrderBy(x => x.CreatedOn)
+                .Skip((page - 1) * itemsPerPage) // Pages formula
+                .Take(itemsPerPage)
+                .Select(x => new AppointmentInListViewModel
+                {
+                    Id = x.Id,
+                    BloodBankCount = x.BloodBankCount,
+                    RecipientFirstName = x.Recipient.FirstName,
+                    BloodType = x.Recipient.BloodType,
+                    AdditionalInfo = x.AdditionalInfo.Substring(0, 60) + "...",
+                    DeadLine = x.DeadLine,
+                    ImageUrl = x.Recipient.ImageUrl,
+                })
+                .ToList();
+
+            return unapprovalAppointments;
+
         }
 
         public AppointmentByIdViewModel GetAppoinmentAllInfo(int id)

@@ -6,8 +6,10 @@
     using BloodDonation.Common;
     using BloodDonation.Data.Models;
     using BloodDonation.Services.Data.Administator;
+    using BloodDonation.Services.Data.Appointment;
     using BloodDonation.Services.Data.Settings;
     using BloodDonation.Web.ViewModels.Administration.Dashboard;
+    using BloodDonation.Web.ViewModels.Appointment;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
@@ -15,12 +17,18 @@
     {
         private readonly ISettingsService settingsService;
         private readonly IAdministratorService administratorService;
+        private readonly IAppointmentsService appointmentsService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public DashboardController(ISettingsService settingsService, IAdministratorService administratorService, UserManager<ApplicationUser> userManager)
+        public DashboardController(
+            ISettingsService settingsService,
+            IAdministratorService administratorService,
+            IAppointmentsService appointmentsService,
+            UserManager<ApplicationUser> userManager)
         {
             this.settingsService = settingsService;
             this.administratorService = administratorService;
+            this.appointmentsService = appointmentsService;
             this.userManager = userManager;
         }
 
@@ -63,6 +71,20 @@
             var applicantViewModel = this.administratorService.ApplicantDetailsById<ApplicantViewModel>(id);
 
             return this.View(applicantViewModel);
+        }
+
+        public IActionResult All(int id = GlobalConstants.PaginationStartPageNumber)
+        {
+            const int ItemPerPage = 4;
+            var viewModel = new AppointmentsListViewModel
+            {
+                ItemPerPage = ItemPerPage,
+                PageNumber = id,
+                AppointmentsCount = this.appointmentsService.GetCount(),
+                Appointments = this.appointmentsService.GetAll(id, ItemPerPage, "Admin"),
+            };
+
+            return this.View(viewModel);
         }
 
         [HttpPost]

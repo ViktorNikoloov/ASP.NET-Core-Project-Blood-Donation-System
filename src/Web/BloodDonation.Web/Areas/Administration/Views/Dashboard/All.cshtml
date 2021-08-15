@@ -1,0 +1,60 @@
+﻿@using BloodDonation.Web.ViewModels.Appointment
+@model AppointmentsListViewModel
+@{
+    this.ViewData["Title"] = "Молби за кръв";
+}
+
+<div class="container container-fluid bg-neutral ">
+    @{
+        if (this.TempData.ContainsKey("NotFoundMessage"))
+        {
+            <div class="alert alert-success alert-danger fade show">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                @this.TempData["NotFoundMessage"]
+            </div>
+        }
+    }
+    <h3 class="display-4 text-md-center">@ViewData["Title"]</h3>
+
+    <hr class="bg-primary w-auto">
+
+    <div class="row row-cols-sm-4 g-3">
+
+        @foreach (var appointment in this.Model.Appointments)
+        {
+            <div class="col mb-3 text-center">
+                <div class="card h-100 m-auto bg-primary">
+                    <img src="@appointment.ImageUrl" class="card-img-top mr-3 pb-2 pl-2 pr-2 pt-2" alt="profile picture">
+                    <div class="card-body text-center text-white">
+                        <div class="card-title">
+                            <p class="card-text">От: @appointment.RecipientFirstName</p>
+
+                            <hr class="bg-white w-auto">
+
+                            <p class="card-text">Група: @appointment.EnumDisplayName</p>
+
+                            <hr class="bg-white w-auto">
+
+                            <p class="card-text">Брой банки: @appointment.BloodBankCount</p>
+
+                            <hr class="bg-white w-auto">
+
+                                <text class="card-text">@appointment.AdditionalInfo</text>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-danger">Краен срок: @appointment.DeadLine.ToLocalTime().ToShortDateString()</small>
+                    </div>
+                    <div class="d-grid d-md-flex justify-content-center">
+                        <a asp-action="AppointmentById" asp-controller="Appointment" asp-route-id="@appointment.Id" class="btn btn-outline-success btn-icon mb-3 ml-2 mr-2">Виж молбата</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+<hr class=" bg-primary w-auto">
+
+<partial name="_PagingPartial" model="@Model"/>

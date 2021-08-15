@@ -14,11 +14,16 @@
     {
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
         private readonly IRepository<QuestionAnswer> questionsRepository;
+        private readonly IDeletableEntityRepository<Appointment> appointmetsRepository;
 
-        public AdministratorService(IDeletableEntityRepository<ApplicationUser> usersRepository, IRepository<QuestionAnswer> questionsRepository)
+        public AdministratorService(
+            IDeletableEntityRepository<ApplicationUser> usersRepository,
+            IRepository<QuestionAnswer> questionsRepository,
+            IDeletableEntityRepository<Appointment> appointmetsRepository)
         {
             this.usersRepository = usersRepository;
             this.questionsRepository = questionsRepository;
+            this.appointmetsRepository = appointmetsRepository;
         }
 
         public async Task AddDonorAsync(string id)
@@ -60,6 +65,11 @@
                  .To<T>().FirstOrDefault();
 
             return user;
+        }
+
+        public T AppointmentDetailsById<T>(string id)
+        {
+            throw new System.NotImplementedException();
         }
 
         public async Task RemoveQuestionsAnswersFromUserAsync(string userId)
