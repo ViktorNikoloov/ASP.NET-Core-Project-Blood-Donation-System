@@ -8,6 +8,7 @@
 
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+    <StartupObject>BloodDonation.Web.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

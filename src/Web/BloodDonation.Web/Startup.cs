@@ -129,11 +129,13 @@
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseStatusCodePagesWithRedirects("Home/StatusCodeError?errorCode={0}");
                 app.UseMigrationsEndPoint();
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseStatusCodePagesWithRedirects("Home/StatusCodeError?errorCode={0}");
+                app.UseExceptionHandler("/Home/StatusCodeError");
                 app.UseHsts();
             }
 

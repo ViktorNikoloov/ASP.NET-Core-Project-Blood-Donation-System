@@ -1,0 +1,55 @@
+﻿@using BloodDonation.Common
+@{
+    ViewData["Title"] = "Несъществуваща Страница";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="col align-self-start">
+            <div class="loading-mask text-center" title="Loading...">
+                <span class="loading-spinner-container">
+                    <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> <b><u>Не намираме такава страница...</u></b>
+                </span>
+            </div>
+            <h5 class="text-center">
+                Страницата ,която търсите, не беше намерена.
+            </h5>
+            <img title="Profile" width="500" src="@GlobalConstants.NotFoundPictureUrl" alt="404 Page Not Found Picture" />
+
+        </div>
+        <div class="col align-self-center">
+            
+            <div class="btn-group-vertical">
+                <button type="button" class="btn btn-primary btn-icon btn-sm">
+                    <h5 class="text-center text-info">Помощно табло</h5>
+                </button>
+                
+                <button type="button" class="btn btn-outline-primary btn-icon btn-sm">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-medkit"></i> Начало
+                    </a>
+                </button>
+                <button type="button" class="btn btn-outline-primary btn-icon btn-sm">
+                    <a class="nav-link" asp-controller="Contacts" asp-action="Index">
+                        <i class="fas fa-envelope-open-text"></i> Свържете се с нас
+                    </a>
+                </button>
+                <button type="button" class="btn btn-outline-primary btn-icon btn-sm">
+                    <a class="nav-link" asp-area="Identity" asp-page="/Account/RegisterRecipient">
+                        <i class="fas fa-syringe"></i> Стани Реципиент
+                    </a>
+                </button>
+                <button type="button" class="btn btn-outline-primary btn-icon btn-sm">
+                    <a class="nav-link" asp-area="Identity" asp-page="/Account/RegisterDonor">
+                        <i class="fas fa-hand-holding-heart"></i> Стани Кръводарител
+                    </a>
+                </button>
+            </div>
+            
+        </div>
+
+    </div>
+</div>

@@ -28,5 +28,7 @@
 
         public const string DefaulPicturetUrl = "https://res.cloudinary.com/dvvbab0fs/image/upload/v1627247340/faoqwxe5cyxcadm0moks.jpg";
 
+        public const string NotFoundPictureUrl = "https://res.cloudinary.com/dvvbab0fs/image/upload/v1628995020/samples/404animation_akbyvk.gif";
+
     }
 }
