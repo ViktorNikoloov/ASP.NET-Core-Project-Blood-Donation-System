@@ -69,6 +69,13 @@
         public IActionResult AppointmentById(int id)
         {
             var viewModel = this.appointmnetsService.GetAppoinmentAllInfo(id);
+            var isDonorExistInDonorsAppointmetns = this.appointmnetsService.IsDonorExistInDonorsAppointmetns(id, this.User.GetId());
+
+            if (isDonorExistInDonorsAppointmetns)
+            {
+                this.TempData["NotFoundMessage"] = $"Вече сте се отзовали на тази молба.";
+                return this.RedirectToAction(nameof(this.All));
+            }
 
             return this.View(viewModel);
         }

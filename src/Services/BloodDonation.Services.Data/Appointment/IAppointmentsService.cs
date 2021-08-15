@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using BloodDonation.Services.Data.DTO;
     using BloodDonation.Web.ViewModels.Appointment;
 
     public interface IAppointmentsService
@@ -18,5 +18,7 @@
         AppointmentByIdViewModel GetAppoinmentAllInfo(int id);
 
         Task TakeAppointmentByDonor(string id, int appointmentId);
+
+        bool IsDonorExistInDonorsAppointmetns(int appointmentId, string userId);
     }
 }

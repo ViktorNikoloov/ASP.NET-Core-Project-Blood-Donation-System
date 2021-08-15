@@ -8,6 +8,7 @@
 
     using BloodDonation.Data.Common.Repositories;
     using BloodDonation.Data.Models;
+    using BloodDonation.Services.Data.DTO;
     using BloodDonation.Web.ViewModels.Appointment;
 
     public class AppointmentsService : IAppointmentsService
@@ -64,8 +65,8 @@
         public IEnumerable<AppointmentInListViewModel> GetAll(int page, int itemsPerPage = PaginationItemsPerPage)
         {
             var appointment = this.appointmetsRepository.AllAsNoTracking()
-                .Where(x => x.DeadLine >= DateTime.UtcNow && x.IsApproved == false)
-                .OrderByDescending(x => x.StartDate)
+                .Where(x => x.DeadLine >= DateTime.UtcNow && x.BloodBankCount != 0 && x.IsApproved == false)
+                .OrderBy(x => x.StartDate)
                 .Skip((page - 1) * itemsPerPage) // Pages formula
                 .Take(itemsPerPage)
                 .Select(x => new AppointmentInListViewModel
@@ -110,23 +111,49 @@
         public async Task TakeAppointmentByDonor(string userId, int appointmentId)
         {
             var currentDonorId = this.GetDonorIdByUserId(userId);
+            var curruntDonor = this.donorRepository.All().FirstOrDefault(x => x.Id == currentDonorId);
+            var currAppointment = this.appointmetsRepository.All().FirstOrDefault(x => x.Id == appointmentId);
+
             var appointmetsDonors = new AppointmetsDonors
             {
                 DonorId = currentDonorId,
                 AppointmentId = appointmentId,
             };
 
+            curruntDonor.LastDonation = DateTime.UtcNow;
+            curruntDonor.DonationCount += 1;
+
+            currAppointment.BloodBankCount -= 1;
+
             await this.appointmentsDonorsRepository.AddAsync(appointmetsDonors);
             await this.appointmentsDonorsRepository.SaveChangesAsync();
+
+            await this.appointmetsRepository.SaveChangesAsync();
+            await this.donorRepository.SaveChangesAsync();
         }
 
         public int GetCount()
-        => this.appointmetsRepository.AllAsNoTracking().Count();
+        => this.appointmetsRepository.AllAsNoTracking().Where(x => x.DeadLine >= DateTime.Now).Count();
 
         public string GetRecipientIdByUserId(string userId)
         => this.recipientRepository.AllAsNoTracking().FirstOrDefault(x => x.UserId == userId).Id;
 
         public string GetDonorIdByUserId(string userId)
         => this.donorRepository.AllAsNoTracking().FirstOrDefault(x => x.UserId == userId).Id;
+
+        public bool IsDonorExistInDonorsAppointmetns(int appointmentId, string userId)
+        {
+            var donorId = this.donorRepository.All().FirstOrDefault(x => x.UserId == userId).Id;
+            var isDonorExistInDonorsAppointmetns = this.appointmentsDonorsRepository.All().Where(a => a.AppointmentId == appointmentId)
+                .ToList().FirstOrDefault(x => x.DonorId == donorId);
+
+
+            if (isDonorExistInDonorsAppointmetns != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
