@@ -92,7 +92,17 @@
             var appointmentAllInfo = this.appointmnetsService.GetAppoinmentAllInfo(id);
             var donorEmail = this.donorsService.GetDonorEmailByUserId(this.User.GetId());
             var subject = $"Молба за кръв на {appointmentAllInfo.RecipientFullName}";
+            var emailHtm = this.ConvertToEmailHtml(appointmentAllInfo, subject);
 
+            await this.emailSender.SendEmailAsync(Common.GlobalConstants.SystemEmail, Common.GlobalConstants.SystemName, donorEmail, subject, emailHtm);
+
+            this.TempData["Message"] = $"Желана молба за кръв беше успешно изпратена на имейл: \"{donorEmail}\"";
+
+            return this.RedirectToAction(nameof(this.AppointmentById), new { id });
+        }
+
+        private string ConvertToEmailHtml(AppointmentByIdViewModel appointmentAllInfo, string subject)
+        {
             var html = new StringBuilder();
             html.AppendLine($"<h1>{subject}</h1>")
                 .AppendLine("<hr>")
@@ -116,11 +126,7 @@
                 .AppendLine("<h3>Допълнителна информация:</h3>")
                 .AppendLine($"<h5>Начин и адрес за получаване: {appointmentAllInfo.SendingAddressInfo}</h5>")
                 .AppendLine($"<h5>Допълнителна информация: {appointmentAllInfo.AdditionalInfo}</h5>");
-
-            await this.emailSender.SendEmailAsync(Common.GlobalConstants.SystemEmail, Common.GlobalConstants.SystemName, donorEmail, subject, html.ToString());
-            this.TempData["Message"] = $"Желана молба за кръв беше успешно изпратена на имейл: \"{donorEmail}\"";
-
-            return this.RedirectToAction(nameof(this.AppointmentById), new { id });
+            return html.ToString();
         }
 
         private string GetCurrentRecipientId()

@@ -58,9 +58,9 @@
             await this.appointmetsRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<AppointmentInListViewModel> GetAll(int page, int itemsPerPage, string userRole = "Donor")
+        public IEnumerable<AppointmentInListViewModel> GetAll(int page, int itemsPerPage, string userRole = "Approved")
         {
-            if (userRole == "Donor")
+            if (userRole == "Approved")
             {
                 var approvalAppointments = this.appointmetsRepository.AllAsNoTracking()
                 .Where(x => x.DeadLine >= DateTime.UtcNow && x.BloodBankCount != 0 && x.IsApproved == true)
@@ -73,7 +73,6 @@
                     BloodBankCount = x.BloodBankCount,
                     RecipientFirstName = x.Recipient.FirstName,
                     BloodType = x.Recipient.BloodType,
-                    //AdditionalInfo = x.AdditionalInfo.Substring(0, 60) + "...",
                     DeadLine = x.DeadLine,
                     ImageUrl = x.Recipient.ImageUrl,
                 })
@@ -82,7 +81,7 @@
                 return approvalAppointments;
             }
 
-            var unapprovalAppointments = this.appointmetsRepository.AllAsNoTracking()
+            var notapprovalAppointments = this.appointmetsRepository.AllAsNoTracking()
                 .Where(x => x.IsApproved == false)
                 .OrderBy(x => x.CreatedOn)
                 .Skip((page - 1) * itemsPerPage) // Pages formula
@@ -99,7 +98,7 @@
                 })
                 .ToList();
 
-            return unapprovalAppointments;
+            return notapprovalAppointments;
         }
 
         public AppointmentByIdViewModel GetAppoinmentAllInfo(int id)

@@ -9,7 +9,7 @@
     {
         Task CreateAsync(AppointmentCreateInputModel model, string recipientId);
 
-        IEnumerable<AppointmentInListViewModel> GetAll(int page, int itemsPerPage = 4, string userRole = "Donor");
+        IEnumerable<AppointmentInListViewModel> GetAll(int page, int itemsPerPage = 4, string userRole = "Approved");
 
         int GetCount(bool isApproved);
 

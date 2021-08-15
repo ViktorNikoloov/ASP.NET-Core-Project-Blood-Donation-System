@@ -23,6 +23,7 @@
             </div>
         </div>
 
+        @*Modal #makeAChoice*@
         <div class="col-lg-4 d-flex align-items-stretch">
             <div class="card">
                 <div class="card-body text-center bg-light table-bordered border-primary w-100">
@@ -31,9 +32,9 @@
                     </span>
                     <h5 class="card-title">Управление на молби.</h5>
                     <p class="card-text">Тук може да коригирате, одобрявате или изтривате подадените молби за кръв.</p>
-                    <div class="btn btn-outline-primary">
-                        <a class="nav-link" asp-area="Administration" asp-controller="Dashboard" asp-action="All">Натисни тук</a>
-                    </div>
+                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#makeAChoice">
+                        <a class="nav-link">Натисни тук</a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -47,10 +48,41 @@
                     <h5 class="card-title">Добавяне на статия.</h5>
                     <p class="card-text">Тук може да добавяте, коригирате или изтривате блог статии.</p>
                     <div class="btn btn-outline-primary">
-                        <a class="nav-link" asp-area="" asp-controller="" asp-action="">Натисни тук</a>
+                        <a class="nav-link">Натисни тук</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+@*Modal #makeAChoice*@
+<div class="modal fade" id="makeAChoice" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-titlete text-center" id="staticBackdropLabel" style="color:darkred"><u>Редактиране, одобрение и изтриване на молба.</u></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li>
+                        <p class="bg-light">При избиране на бутона \"Редактиране\" ще видите всички одобрени молби, които можете да редактирате.</p>
+                    </li>
+                    <li>
+                        <p class="bg-light">При избиране на бутона \"Одобри\Отхвърли\" ще видите всички неодобрени молби, които можете да одобрите или отхвърлите.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <form method="post" asp-action="RejectAppoinment" asp-route-id="Model.Id">
+                    <button type="button" class="btn btn-info btn-icon" data-dismiss="modal">Затвори</button>
+                    <button type="submit" class="btn btn-secondary btn-icon" asp-area="Administration" asp-controller="Dashboard" asp-action="AllApproved">Редактиране</button>
+                    <button type="submit" class="btn btn-success btn-icon" asp-area="Administration" asp-controller="Dashboard" asp-action="AllNotApproved">Одобри\Отхвърли</button>
+                </form>
+            </div>
+        </div>
     </div>
+</div>

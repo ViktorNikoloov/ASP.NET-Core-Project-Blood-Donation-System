@@ -45,7 +45,7 @@
         </ul>
         <div class="tab-content">
             @{var activeCounter = 0;}
-            
+
             @foreach (var questionAnswer in Model.QuestionsAnswers)
             {
                 var id = "a" + questionAnswer.Id;
@@ -90,16 +90,19 @@
             <i class="fas fa-arrow-left">Назад</i>
         </a>
 
+        @*Modal #rejectButton*@
         <button type="button" class="btn btn btn-outline-danger btn-icon" data-toggle="modal" data-target="#rejectButton">
             <i class="fas fa-user-slash">Отхвърли</i>
         </button>
 
+        @*Modal #acceptButton*@
         <button type="button" class="btn btn-outline-success btn-icon" data-toggle="modal" data-target="#acceptButton">
             <i class="fas fa-user-check">Одобри</i>
         </button>
 
     </div>
 
+    @*Modal #rejectButton*@
     <div class="modal fade" id="rejectButton" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog ">
             <div class="modal-content">
@@ -123,6 +126,7 @@
     </div>
 </div>
 
+@*Modal #acceptButton*@
 <div class="modal fade" id="acceptButton" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

@@ -117,7 +117,25 @@
             return this.View("RegulateApplicants");
         }
 
-        public IActionResult All(int id = GlobalConstants.PaginationStartPageNumber)
+        public IActionResult AllNotApproved(int id = GlobalConstants.PaginationStartPageNumber)
+        {
+            const int ItemPerPage = 4;
+            var appointmentStatus = "NotApproved";
+
+            var viewModel = new AppointmentsListViewModel
+            {
+                ItemPerPage = ItemPerPage,
+                PageNumber = id,
+                AppointmentsCount = this.appointmentsService.GetCount(false),
+                Appointments = this.appointmentsService.GetAll(id, ItemPerPage, appointmentStatus),
+            };
+
+            this.TempData["ForApproval"] = appointmentStatus;
+
+            return this.View("All", viewModel);
+        }
+
+        public IActionResult AllApproved(int id = GlobalConstants.PaginationStartPageNumber)
         {
             const int ItemPerPage = 4;
             var viewModel = new AppointmentsListViewModel
@@ -125,10 +143,10 @@
                 ItemPerPage = ItemPerPage,
                 PageNumber = id,
                 AppointmentsCount = this.appointmentsService.GetCount(false),
-                Appointments = this.appointmentsService.GetAll(id, ItemPerPage, "Admin"),
+                Appointments = this.appointmentsService.GetAll(id, ItemPerPage, "Approved"),
             };
 
-            return this.View(viewModel);
+            return this.View("All", viewModel);
         }
 
         public IActionResult AppointmentById(int id)
@@ -145,7 +163,7 @@
 
             this.TempData["isApproved"] = $"Молбата беше одобрена.";
 
-            return this.RedirectToAction(nameof(this.All));
+            return this.RedirectToAction(nameof(this.AllNotApproved));
         }
 
         [HttpPost]
@@ -155,7 +173,7 @@
 
             this.TempData["isRejected"] = $"Молбата беше Отхвърлена.";
 
-            return this.RedirectToAction(nameof(this.All));
+            return this.RedirectToAction(nameof(this.AllNotApproved));
         }
     }
 }
