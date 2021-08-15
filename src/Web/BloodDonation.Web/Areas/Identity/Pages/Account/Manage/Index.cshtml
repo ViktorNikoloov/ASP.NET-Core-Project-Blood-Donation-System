@@ -30,89 +30,93 @@
             }
             else if (this.User.IsInRole(GlobalConstants.RecipientRoleName))
             {
-                <div class="class float-md-none" d-flex flex-column bd-highlight mb-3>
-                    <div asp-validation-summary="All" class=" alert-danger" role="alert"></div>
+        <div class="class float-md-none" d-flex flex-column bd-highlight mb-3>
+            <div asp-validation-summary="All" class=" alert-danger" role="alert"></div>
 
-                    <hr class=" alert-primary w-auto">
+            <hr class=" alert-primary w-auto">
 
-                    <div class="form-row form-group">
+            <div class="form-row form-group">
 
-                        <div class="col form-group">
-                            <label asp-for="Input.FirstName"></label>
-                            <input asp-for="Input.FirstName" class="form-control" />
-                            <span asp-validation-for="Input.FirstName" class="text-danger"></span>
-                        </div>
-                        <div class="col form-group">
-                            <label asp-for="Input.MiddleName"></label>
-                            <input asp-for="Input.MiddleName" class="form-control" />
-                            <span asp-validation-for="Input.MiddleName" class="text-danger"></span>
-                        </div>
-                        <div class="col form-group">
-                            <label asp-for="Input.LastName"></label>
-                            <input asp-for="Input.LastName" class="form-control" />
-                            <span asp-validation-for="Input.LastName" class="text-danger"></span>
-                        </div>
+                <div class="col form-group">
+                    <label asp-for="Input.FirstName"></label>
+                    <input asp-for="Input.FirstName" class="form-control" />
+                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                </div>
+                <div class="col form-group">
+                    <label asp-for="Input.MiddleName"></label>
+                    <input asp-for="Input.MiddleName" class="form-control" />
+                    <span asp-validation-for="Input.MiddleName" class="text-danger"></span>
+                </div>
+                <div class="col form-group">
+                    <label asp-for="Input.LastName"></label>
+                    <input asp-for="Input.LastName" class="form-control" />
+                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                </div>
 
+            </div>
+
+            <div class="form-row form-group">
+
+                <div class="form-row form-group w-100">
+
+                    <div class="col form-group">
+                        <label asp-for="Input.CityName"></label>
+                        <input asp-for="Input.CityName" class="form-control" />
+                        <span asp-validation-for="Input.CityName" class="text-danger"></span>
                     </div>
-
-                    <div class="form-row form-group">
-
-                        <div class="form-row form-group w-100">
-
-                            <div class="col form-group">
-                                <label asp-for="Input.CityName"></label>
-                                <input asp-for="Input.CityName" class="form-control" />
-                                <span asp-validation-for="Input.CityName" class="text-danger"></span>
-                            </div>
-                            <div class="col form-group">
-                                <label asp-for="Input.StreetName"></label>
-                                <input asp-for="Input.StreetName" class="form-control" />
-                                <span asp-validation-for="Input.StreetName" class="text-danger"></span>
-                            </div>
-                            <div class="col form-group">
-                                <label asp-for="Input.PostCode"></label>
-                                <input asp-for="Input.PostCode" class="form-control" />
-                                <span asp-validation-for="Input.PostCode" class="text-danger"></span>
-                            </div>
-
-                        </div>
-
-                        <div class="form-row form-group w-100">
-                            <div class="col form-group">
-                                <label asp-for="Input.PhoneNumber">Телефон</label>
-                                <input asp-for="Input.PhoneNumber" class="form-control" />
-                                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-                            </div>
-                            <div class="col form-group">
-                                <label asp-for="Input.BloodType"></label>
-                                <select asp-for="Input.BloodType" class="form-control" asp-items="Html.GetEnumSelectList<BloodType>()" disabled readonly></select>
-                            </div>
-                            <div class="col form-group">
-                                <label asp-for="Input.Gender"></label>
-                                <select asp-for="Input.Gender" class="form-control" asp-items="Html.GetEnumSelectList<Gender>()" disabled readonly></select>
-
-                            </div>
-
-                        </div>
-
-                        <div class="row form-group w-100">
-                            <div class=" form-group file-path-wrapper w-100" style="margin: 0px 10px;">
-                                <label asp-for="Input.ImageUrl"></label>
-                                <input asp-for="Input.ImageUrl" class="file-path validate w-100" type="text" placeholder="Профилна снимка">
-                            </div>
-                            <span asp-validation-for="Input.ImageUrl" class="text-danger"></span>
-
-                            <div class="btn btn-block btn-outline-primary m-2">
-                                <span>Прикачете файл</span>
-                                <input type="file" asp-for="Input.ImageFile">
-                            </div>
-                        </div>
-
+                    <div class="col form-group">
+                        <label asp-for="Input.StreetName"></label>
+                        <input asp-for="Input.StreetName" class="form-control" />
+                        <span asp-validation-for="Input.StreetName" class="text-danger"></span>
                     </div>
-
-                    <hr class=" alert-primary w-auto">
+                    <div class="col form-group">
+                        <label asp-for="Input.PostCode"></label>
+                        <input asp-for="Input.PostCode" class="form-control" />
+                        <span asp-validation-for="Input.PostCode" class="text-danger"></span>
+                    </div>
 
                 </div>
+
+                <div class="form-row form-group w-100">
+                    <div class="col form-group">
+                        <label asp-for="Input.PhoneNumber">Телефон</label>
+                        <input asp-for="Input.PhoneNumber" class="form-control" />
+                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="col form-group">
+                        <label asp-for="Input.BloodType"></label>
+                        <select asp-for="Input.BloodType" class="form-control" asp-items="Html.GetEnumSelectList<BloodType>()" disabled readonly></select>
+                    </div>
+                    <div class="col form-group">
+                        <label asp-for="Input.Gender"></label>
+                        <select asp-for="Input.Gender" class="form-control" asp-items="Html.GetEnumSelectList<Gender>()" disabled readonly></select>
+
+                    </div>
+
+                </div>
+
+                <div class="row form-group w-100">
+                    <div class=" form-group file-path-wrapper w-100" style="margin: 0px 10px;">
+                        <label asp-for="Input.ImageUrl"></label>
+                        <input asp-for="Input.ImageUrl" class="file-path validate w-100" type="text" placeholder="Профилна снимка">
+                    </div>
+                    <span asp-validation-for="Input.ImageUrl" class="text-danger"></span>
+
+                    <div class="btn btn-block btn-outline-primary m-2">
+                        <span>Прикачете файл</span>
+                        <input type="file" asp-for="Input.ImageFile">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="ml-4 col-sm-4">
+                <img src="https://placehold.it/60x60" id="preview" class="img-thumbnail">
+            </div>
+
+            <hr class=" alert-primary w-auto">
+
+        </div>
 
             }
             else
@@ -220,6 +224,10 @@
 
                     </div>
 
+                    <div class="ml-4 col-sm-4">
+                        <img src="https://placehold.it/60x60" id="preview" class="img-thumbnail">
+                    </div>
+
                     <hr class=" alert-primary w-auto">
 
                 </div>
@@ -232,7 +240,7 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <partial name="_ValidationScriptsPartial" />
+
     <script src="~/js/UploadImageView.js"></script>
     <link href="~/css/UploadImageView.css" rel="stylesheet" />
 }

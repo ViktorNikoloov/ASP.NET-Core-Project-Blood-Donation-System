@@ -10,10 +10,8 @@
     using BloodDonation.Common;
     using BloodDonation.Data.Models;
     using BloodDonation.Data.Models.Enums;
+    using BloodDonation.Services.Data.Cloudinary;
     using BloodDonation.Services.Data.Recipient;
-
-    using CloudinaryDotNet;
-    using CloudinaryDotNet.Actions;
 
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
@@ -23,7 +21,6 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.WebUtilities;
-    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Logging;
 
     using static BloodDonation.Common.DataGlobalConstants.AddressConstants;
@@ -38,23 +35,23 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<RegisterModel> logger;
         private readonly IEmailSender emailSender;
-        private readonly IConfiguration configuration;
         private readonly IRecipientsService recipientsService;
+        private readonly ICloudinaryService cloudinaryService;
 
         public RegisterRecipientModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            IConfiguration configuration,
-            IRecipientsService recipientsService)
+            IRecipientsService recipientsService,
+            ICloudinaryService cloudinaryService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
             this.emailSender = emailSender;
-            this.configuration = configuration;
             this.recipientsService = recipientsService;
+            this.cloudinaryService = cloudinaryService;
         }
 
         [BindProperty]
@@ -157,16 +154,7 @@
 
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
 
-                Account account = new Account(
-                    this.configuration["Cloudinary:CloudName"],
-                    this.configuration["Cloudinary:APIKey"],
-                    this.configuration["Cloudinary:APISecret"]);
-
-                Cloudinary cloudinary = new Cloudinary(account);
-
                 var file = this.Input.ImageFile;
-
-                var uploadResult = new ImageUploadResult();
 
                 var imageUrl = string.Empty;
 
@@ -174,19 +162,10 @@
                 {
                     if (file.Length > 0)
                     {
-                        using (var stream = file.OpenReadStream())
-                        {
-                            var uploadParams = new ImageUploadParams()
-                            {
-                                File = new FileDescription(file.Name, stream),
-                                Transformation = new Transformation().Width(100).Height(100).Gravity("face").Radius("max").Border("2px_solid_white").Crop("thumb"),
-                            };
+                        var picturesFolderName = "Recipients";
 
-                            uploadResult = cloudinary.Upload(uploadParams);
-                        }
+                        imageUrl = await this.cloudinaryService.UploadPictureAsync(file, picturesFolderName);
                     }
-
-                    imageUrl = uploadResult.Url.ToString();
                 }
                 else
                 {
@@ -206,7 +185,7 @@
 
                     var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
+                    var callbackUrl = this.Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
                         values: new { area = "Identity", userId = user.Id, code = code },

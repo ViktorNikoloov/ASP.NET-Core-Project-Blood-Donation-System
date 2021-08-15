@@ -6,17 +6,14 @@
     using BloodDonation.Common;
     using BloodDonation.Data.Models;
     using BloodDonation.Data.Models.Enums;
+    using BloodDonation.Services.Data.Cloudinary;
     using BloodDonation.Services.Data.Donor;
     using BloodDonation.Services.Data.Recipient;
-
-    using CloudinaryDotNet;
-    using CloudinaryDotNet.Actions;
 
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
-    using Microsoft.Extensions.Configuration;
 
     using static BloodDonation.Common.DataGlobalConstants.AddressConstants;
     using static BloodDonation.Common.DataGlobalConstants.BasicUserInfoConstants;
@@ -26,22 +23,22 @@
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
-        private readonly IConfiguration configuration;
         private readonly IRecipientsService recipientService;
         private readonly IDonorsService donorsService;
+        private readonly ICloudinaryService cloudinaryService;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IConfiguration configuration,
             IRecipientsService recipientService,
-            IDonorsService donorsService)
+            IDonorsService donorsService,
+            ICloudinaryService cloudinaryService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.configuration = configuration;
             this.recipientService = recipientService;
             this.donorsService = donorsService;
+            this.cloudinaryService = cloudinaryService;
         }
 
         public string Username { get; set; }
@@ -203,16 +200,7 @@
                 }
             }
 
-            Account account = new Account(
-                     this.configuration["Cloudinary:CloudName"],
-                     this.configuration["Cloudinary:APIKey"],
-                     this.configuration["Cloudinary:APISecret"]);
-
-            Cloudinary cloudinary = new Cloudinary(account);
-
             var file = this.Input.ImageFile;
-
-            var uploadResult = new ImageUploadResult();
 
             var imageUrl = string.Empty;
 
@@ -220,19 +208,9 @@
             {
                 if (file.Length > 0)
                 {
-                    using (var stream = file.OpenReadStream())
-                    {
-                        var uploadParams = new ImageUploadParams()
-                        {
-                            File = new FileDescription(file.Name, stream),
-                            Transformation = new Transformation().Width(100).Height(100).Gravity("face").Radius("max").Border("2px_solid_white").Crop("thumb"),
-                        };
-
-                        uploadResult = cloudinary.Upload(uploadParams);
-                    }
+                    var picturesFolderName = "Donors";
+                    imageUrl = await this.cloudinaryService.UploadPictureAsync(file, picturesFolderName);
                 }
-
-                imageUrl = uploadResult.Url.ToString();
             }
             else
             {

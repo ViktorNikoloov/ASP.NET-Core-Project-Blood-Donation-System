@@ -10,6 +10,7 @@
     using BloodDonation.Data.Seeding;
     using BloodDonation.Services.Data.Administator;
     using BloodDonation.Services.Data.Appointment;
+    using BloodDonation.Services.Data.Cloudinary;
     using BloodDonation.Services.Data.Donor;
     using BloodDonation.Services.Data.Home;
     using BloodDonation.Services.Data.Recipient;
@@ -19,7 +20,7 @@
     using BloodDonation.Services.Mapping;
     using BloodDonation.Services.Messaging;
     using BloodDonation.Web.ViewModels;
-
+    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -45,7 +46,15 @@
                 options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
-                .AddRoles<ApplicationRole>().AddEntityFrameworkStores<BloodDonationDbContext>();
+                .AddRoles<ApplicationRole>()
+                .AddEntityFrameworkStores<BloodDonationDbContext>();
+
+            var cloudinaryCredentials = new Account(
+                    this.configuration["Cloudinary:CloudName"],
+                    this.configuration["Cloudinary:APIKey"],
+                    this.configuration["Cloudinary:APISecret"]);
+
+            var cloudinaryUtility = new Cloudinary(cloudinaryCredentials);
 
             services.Configure<CookiePolicyOptions>(
                 options =>
@@ -82,6 +91,7 @@
                     facebookOptions.AccessDeniedPath = "/AccessDeniedPathInfo";
                 });
 
+            services.AddSingleton(cloudinaryUtility);
             services.AddSingleton(this.configuration);
 
             // Data repositories
@@ -99,6 +109,7 @@
             services.AddTransient<IStatisticsService, StatisticsService>();
             services.AddTransient<IAppointmentsService, AppointmentsService>();
             services.AddTransient<IViewRenderService, ViewRenderService>();
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
