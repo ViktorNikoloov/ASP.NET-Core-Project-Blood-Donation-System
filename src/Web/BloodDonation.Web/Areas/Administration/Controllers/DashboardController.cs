@@ -80,7 +80,7 @@
             {
                 ItemPerPage = ItemPerPage,
                 PageNumber = id,
-                AppointmentsCount = this.appointmentsService.GetCount(),
+                AppointmentsCount = this.appointmentsService.GetCount(false),
                 Appointments = this.appointmentsService.GetAll(id, ItemPerPage, "Admin"),
             };
 

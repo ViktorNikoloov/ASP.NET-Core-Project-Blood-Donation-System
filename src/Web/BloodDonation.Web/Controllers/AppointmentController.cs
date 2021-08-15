@@ -58,7 +58,7 @@
             {
                 ItemPerPage = ItemPerPage,
                 PageNumber = id,
-                AppointmentsCount = this.appointmnetsService.GetCount(),
+                AppointmentsCount = this.appointmnetsService.GetCount(true),
                 Appointments = this.appointmnetsService.GetAll(id, ItemPerPage),
             };
 

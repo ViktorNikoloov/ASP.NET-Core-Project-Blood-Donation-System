@@ -11,8 +11,6 @@
 
     public class AppointmentsService : IAppointmentsService
     {
-        const int PaginationItemsPerPage = 6;
-
         private readonly IDeletableEntityRepository<Appointment> appointmetsRepository;
         private readonly IDeletableEntityRepository<Recipient> recipientRepository;
         private readonly IDeletableEntityRepository<Donor> donorRepository;
@@ -60,7 +58,7 @@
             await this.appointmetsRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<AppointmentInListViewModel> GetAll(int page, int itemsPerPage = PaginationItemsPerPage, string userRole = "Donor")
+        public IEnumerable<AppointmentInListViewModel> GetAll(int page, int itemsPerPage, string userRole = "Donor")
         {
             if (userRole == "Donor")
             {
@@ -153,8 +151,8 @@
             await this.donorRepository.SaveChangesAsync();
         }
 
-        public int GetCount()
-        => this.appointmetsRepository.AllAsNoTracking().Where(x => x.DeadLine >= DateTime.Now).Count();
+        public int GetCount(bool isApproved)
+        => this.appointmetsRepository.AllAsNoTracking().Where(x => x.DeadLine >= DateTime.Now && x.IsApproved == isApproved).Count();
 
         public string GetRecipientIdByUserId(string userId)
         => this.recipientRepository.AllAsNoTracking().FirstOrDefault(x => x.UserId == userId).Id;
@@ -167,7 +165,6 @@
             var donorId = this.donorRepository.All().FirstOrDefault(x => x.UserId == userId).Id;
             var isDonorExistInDonorsAppointmetns = this.appointmentsDonorsRepository.All().Where(a => a.AppointmentId == appointmentId)
                 .ToList().FirstOrDefault(x => x.DonorId == donorId);
-
 
             if (isDonorExistInDonorsAppointmetns != null)
             {

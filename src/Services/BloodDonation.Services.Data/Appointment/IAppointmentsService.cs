@@ -11,7 +11,7 @@
 
         IEnumerable<AppointmentInListViewModel> GetAll(int page, int itemsPerPage = 4, string userRole = "Donor");
 
-        int GetCount();
+        int GetCount(bool isApproved);
 
         string GetRecipientIdByUserId(string userId);
 
