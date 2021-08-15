@@ -1,5 +1,6 @@
 ﻿namespace BloodDonation.Web.ViewModels.Appointment
 {
+    using BloodDonation.Web.Infrastructure;
     using System;
     using System.ComponentModel.DataAnnotations;
 
@@ -27,17 +28,19 @@
 
         [Display(Name = "Банки кръв")]
         [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
-        [Range(1, BloodBankCountMaxLength)]
+        [Range(1, BloodBankCountMaxLength, ErrorMessage = "Можете да изберете от {1} до {2} {0} кръв.")]
         public int BloodBankCount { get; set; }
 
         [Display(Name = "Начален срок")]
         [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
         [DataType(DataType.Date)]
+        [DateValidation]
         public DateTime StartDate { get; set; }
 
         [Display(Name = "Краен срок")]
         [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
         [DataType(DataType.Date)]
+        [EndTimeValidation("StartDate")]
         public DateTime DeadLine { get; set; }
 
         [Display(Name = "Начин и адрес за получаване")]
