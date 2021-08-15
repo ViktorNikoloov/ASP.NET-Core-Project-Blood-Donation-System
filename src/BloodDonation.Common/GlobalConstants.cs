@@ -14,11 +14,15 @@
 
         public const string UnapprovedUserRoleName = "UnapprovedUser";
 
-        public const string SystemEmail = "blood-donation-bg@abv.bg";
+        public const string SystemEmail = "skorpions_1@abv.bg";
 
         public const string DonorHasNotInformationBigBubble = "Вашият профил не е попълнен !";
 
         public const string DonorHasNotInformationSmallBubble = "Вашият профил не е попълнен ! Моля, попълнете Своите данни, kато влезете в профила си.";
+
+        public const string DateValidationAttributeMessage = "Началният срок трябва да е минимум от днес до след 1 месец";
+
+        public const string EndTimeValidationAttributeMessage = "Крайният срок не трябва да бъде преди началния";
 
         public const int TopDonationsCount = 10;
 
