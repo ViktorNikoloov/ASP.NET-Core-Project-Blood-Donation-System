@@ -1,5 +1,6 @@
 ﻿namespace BloodDonation.Services.Data.Donor
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -57,6 +58,7 @@
                     LastName = x.LastName,
                     Gender = x.Gender,
                     BloodType = x.BloodType,
+                    LastDonation = x.LastDonation,
                     CityName = x.Address.Town.Name,
                     PostCode = x.Address.Town.PostCode,
                     StreetName = x.Address.Town.Street.Name,
@@ -101,6 +103,12 @@
         }
 
         public string GetDonorIdByUserId(string userId)
-        => this.donorRepository.AllAsNoTracking().FirstOrDefault(x => x.UserId == userId).Id;
+        => this.donorRepository.All().FirstOrDefault(x => x.UserId == userId).Id;
+
+        public DateTime GetLastTimeDonorDonaton(string userId)
+        => this.GetDonorById(userId).LastDonation;
+
+        public int GetWhenDonorCouldDonateAgain(DateTime lastDonation)
+        => DateTime.UtcNow.Subtract(lastDonation).Days;
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace BloodDonation.Services.Data.Donor
 {
+    using System;
     using System.Threading.Tasks;
 
     using BloodDonation.Data.Models.Enums;
@@ -14,5 +15,9 @@
         Task UpdateSingInDonorInfoAsync(string id, string firstName, string middleName, string lastName, string cityName, string streetName, int? postCode, string phoneNumber, string imageUrl);
 
         string GetDonorEmailByUserId(string userId);
+
+        DateTime GetLastTimeDonorDonaton(string userId);
+
+        int GetWhenDonorCouldDonateAgain(DateTime lastDonation);
     }
 }

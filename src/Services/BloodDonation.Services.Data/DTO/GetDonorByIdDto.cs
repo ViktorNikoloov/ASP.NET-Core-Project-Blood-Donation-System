@@ -1,5 +1,7 @@
 ﻿namespace BloodDonation.Services.Data.DTO
 {
+    using System;
+
     using BloodDonation.Data.Models;
     using BloodDonation.Data.Models.Enums;
     using BloodDonation.Services.Mapping;
@@ -17,6 +19,8 @@
         public Gender Gender { get; set; }
 
         public BloodType BloodType { get; set; }
+
+        public DateTime LastDonation { get; set; }
 
         public string CityName { get; set; }
 

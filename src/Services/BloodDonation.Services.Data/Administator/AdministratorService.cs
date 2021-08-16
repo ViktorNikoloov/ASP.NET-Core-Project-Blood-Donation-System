@@ -6,6 +6,7 @@
     using BloodDonation.Data.Common.Repositories;
     using BloodDonation.Data.Models;
     using BloodDonation.Data.Models.Enums;
+    using BloodDonation.Services.Data.DTO;
     using BloodDonation.Services.Mapping;
     using BloodDonation.Web.ViewModels.Administration.Dashboard;
 
@@ -114,6 +115,21 @@
             var currAppointment = this.GetCurrentAppointment(id);
 
             this.appointmetsRepository.Delete(currAppointment);
+            await this.appointmetsRepository.SaveChangesAsync();
+        }
+
+        public async Task UpdateAppoinmentAsync(GetAppointmentById model)
+        {
+            var currAppointment = this.GetCurrentAppointment(model.Id);
+            currAppointment.StartDate = model.StartDate;
+            currAppointment.DeadLine = model.DeadLine;
+            currAppointment.BloodBankCount = model.BloodBankCount;
+            currAppointment.Hospital.HospitalName = model.HospitalName;
+            currAppointment.Hospital.HospitalWardName = model.HospitalWardName;
+            currAppointment.Hospital.Town.Name = model.HospitalTownName;
+            currAppointment.AdditionalInfo = model.AdditionalInfo;
+            currAppointment.SendingAddressInfo = model.SendingAddressInfo;
+
             await this.appointmetsRepository.SaveChangesAsync();
         }
 

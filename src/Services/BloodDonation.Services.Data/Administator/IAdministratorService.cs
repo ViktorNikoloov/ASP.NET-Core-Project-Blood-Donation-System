@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
 
+    using BloodDonation.Services.Data.DTO;
     using BloodDonation.Web.ViewModels.Administration.Dashboard;
 
     public interface IAdministratorService
@@ -17,5 +18,7 @@
         Task ApproveAppointmentAsync(int id);
 
         Task RejectAppointmentAsync(int id);
+
+        Task UpdateAppoinmentAsync(GetAppointmentById model);
     }
 }
