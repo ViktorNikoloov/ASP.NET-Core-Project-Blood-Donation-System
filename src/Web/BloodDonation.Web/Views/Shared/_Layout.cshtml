@@ -14,14 +14,19 @@
             <div class="col-md-4">
 
                 <div class="g-mb-20">
-                    <partial name="_StatisticsPartial" />
+                    <cache expires-after="@TimeSpan.FromMinutes(2)">
+                        <partial name="_StatisticsPartial" />
+                    </cache>
                 </div>
 
                 <div class="g-mb-20">
 
                     <div class="u-heading-v2-3--bottom g-brd-primary g-mb-10 mb-3">
                         <h3 class="h5 g-color-black mb-0 text-sm-center " style="background-color:royalblue"><u><b>Времето</b></u></h3>
-                        <partial name="_WeatherWidgetPartial" />
+                        <cache expires-after="@TimeSpan.FromMinutes(5)">
+                            <partial name="_WeatherWidgetPartial" />
+                        </cache>
+                        
                     </div>
 
                 </div>
