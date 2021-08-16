@@ -16,7 +16,6 @@
     using BloodDonation.Web.ViewModels.Appointment;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
     public class DashboardController : AdministrationController
     {
@@ -104,7 +103,7 @@
             var subject = "Вашата кандидатура за Кръводарител беше успешно одобрена";
             var content = GlobalConstants.DonorApproveApplicantResponse;
 
-            await this.GenerateEmail(applicant, subject, content);
+            await this.GenerateEmail(applicant, subject, content, "Applicant");
 
             this.TempData["isSuccessful"] = $"Успешно одобрихте кандидат {applicant.Email}";
 
@@ -136,7 +135,7 @@
             var subject = "Вашата кандидатура за Кръводарител беше отхвърлена";
             var content = GlobalConstants.DonorRejectApplicantResponse;
 
-            await this.GenerateEmail(applicant, subject, content);
+            await this.GenerateEmail(applicant, subject, content, "Applicant");
 
             return this.View("RegulateApplicants");
         }
@@ -191,7 +190,7 @@
             var subject = "Вашата молба за кръв беше успешно одобрена.";
             var content = GlobalConstants.RecipientApprovedAppointmentResponse;
 
-            await this.GenerateEmail(null, subject, content, recipientEmail);
+            await this.GenerateEmail(null, subject, content, "Appointment", recipientEmail);
 
             return this.RedirectToAction(nameof(this.AllNotApproved));
         }
@@ -207,14 +206,22 @@
             var subject = "Вашата молба за кръв беше отхвърлена";
             var content = GlobalConstants.RecipientRejectedAppointmentResponse;
 
-            await this.GenerateEmail(null, subject, content, recipientEmail);
+            await this.GenerateEmail(null, subject, content, "Appointment", recipientEmail);
 
             return this.RedirectToAction(nameof(this.AllNotApproved));
         }
 
-        private async Task GenerateEmail(ApplicationUser? model, string subject, string content, string email = "")
+        private async Task GenerateEmail(ApplicationUser? model, string subject, string content, string toWhom, string email = "")
         {
-            var emailHtml = this.emailsService.GenerateEmailApplicantResponseHtmlContent(model, subject, content);
+            var emailHtml = string.Empty;
+            if (toWhom == "Applicant")
+            {
+                emailHtml = this.emailsService.GenerateEmailApplicantResponseHtmlContent(model, subject, content);
+            }
+            else if (toWhom == "Appointment")
+            {
+                emailHtml = this.emailsService.GenerateEmailAppoinmentResponseHtmlContent(model, subject, content);
+            }
 
             await this.emailSender.SendEmailAsync(GlobalConstants.SystemEmail, GlobalConstants.SystemName, model.Email, subject, emailHtml);
         }

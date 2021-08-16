@@ -61,6 +61,7 @@
                     PostCode = x.Address.Town.PostCode,
                     StreetName = x.Address.Town.Street.Name,
                     PhoneNumber = x.PhoneNumber,
+                    Email = x.User.Email,
                     ImageUrl = x.ImageUrl,
                 }) //.To<GetRecipientByIdDto>()
                 .FirstOrDefault();

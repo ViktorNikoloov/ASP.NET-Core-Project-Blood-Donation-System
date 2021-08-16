@@ -3,6 +3,7 @@
     using System.Text;
 
     using BloodDonation.Data.Models;
+    using BloodDonation.Services.Data.DTO;
     using BloodDonation.Web.ViewModels.Appointment;
 
     public class EmailsService : IEmailsService
@@ -14,6 +15,18 @@
             htmlContent.AppendLine($"<h1>{subject}</h1>")
                 .AppendLine("<hr>")
                 .AppendLine("<h3>Информация за Кандидатурата:</h3>")
+                .AppendLine($"<h5>{content}</h5>");
+
+            return htmlContent.ToString();
+        }
+
+        public string GenerateEmailAppoinmentResponseHtmlContent(ApplicationUser? model, string subject, string content, string email = "")
+        {
+            var htmlContent = new StringBuilder();
+
+            htmlContent.AppendLine($"<h1>{subject}</h1>")
+                .AppendLine("<hr>")
+                .AppendLine("<h3>Информация за Молбата за кръв:</h3>")
                 .AppendLine($"<h5>{content}</h5>");
 
             return htmlContent.ToString();
@@ -49,9 +62,22 @@
             return htmlContent.ToString();
         }
 
-        public string GenerateEmailAppointmentHtmlContent(AppointmentByIdViewModel appointmentAllInfo, string subject)
+        public string GenerateEmailDonorTakeAnAppointmentHtmlContent(GetDonorByIdDto model, string subject)
         {
-            throw new System.NotImplementedException();
+            var htmlContent = new StringBuilder();
+
+            htmlContent.AppendLine($"<h1>{subject}</h1>")
+                .AppendLine("<hr>")
+                .AppendLine("<h3>Информация за Молбата:</h3>")
+                .AppendLine($"<h5>{subject} от {model.FirstName} {model.LastName}</h5>")
+                .AppendLine("<hr>")
+                .AppendLine("<h3>Информация за Кръводарителя:</h3>")
+                .AppendLine($"<h5>Имена: {model.FirstName} {model.LastName}</h5>")
+                .AppendLine($"<h5>Телефонен номер: {model.PhoneNumber}</h5>")
+                .AppendLine($"<h5>Имейл адрес: {model.Email}</h5>")
+                .AppendLine($"<h5>Град: {model.CityName}</h5>");
+
+            return htmlContent.ToString();
         }
     }
 }

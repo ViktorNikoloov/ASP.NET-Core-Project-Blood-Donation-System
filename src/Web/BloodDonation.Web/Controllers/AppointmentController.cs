@@ -1,12 +1,13 @@
 ﻿namespace BloodDonation.Web.Controllers
 {
-    using System.Text;
     using System.Threading.Tasks;
 
     using BloodDonation.Common;
+    using BloodDonation.Data.Models;
     using BloodDonation.Services.Data.Appointment;
     using BloodDonation.Services.Data.Donor;
     using BloodDonation.Services.Data.Email;
+    using BloodDonation.Services.Data.Recipient;
     using BloodDonation.Services.Data.ViewRenderService;
     using BloodDonation.Services.Messaging;
     using BloodDonation.Web.Infrastructure;
@@ -18,6 +19,7 @@
     {
         private readonly IAppointmentsService appointmnetsService;
         private readonly IDonorsService donorsService;
+        private readonly IRecipientsService recipientsService;
         private readonly IViewRenderService viewRenderService;
         private readonly IEmailsService emailsService;
         private readonly IEmailSender emailSender;
@@ -25,6 +27,7 @@
         public AppointmentController(
             IAppointmentsService appointmnetsService,
             IDonorsService donorsService,
+            IRecipientsService recipientsService,
             IViewRenderService viewRenderService,
             IEmailSender emailSender,
             IEmailsService emailsService
@@ -32,6 +35,7 @@
         {
             this.appointmnetsService = appointmnetsService;
             this.donorsService = donorsService;
+            this.recipientsService = recipientsService;
             this.viewRenderService = viewRenderService;
             this.emailsService = emailsService;
             this.emailSender = emailSender;
@@ -73,7 +77,7 @@
         public IActionResult AppointmentById(int id)
         {
             var viewModel = this.appointmnetsService.GetAppoinmentAllInfo(id);
-            var isDonorExistInDonorsAppointmetns = this.appointmnetsService.IsDonorExistInDonorsAppointmetns(id, this.User.GetId());
+            var isDonorExistInDonorsAppointmetns = this.appointmnetsService.IsDonorExistInDonorsAppointmetns(id, this.CurrUserId());
 
             if (isDonorExistInDonorsAppointmetns)
             {
@@ -86,7 +90,14 @@
 
         public async Task<IActionResult> TakeAppointmentByDonor(int id)
         {
-            await this.appointmnetsService.TakeAppointmentByDonor(this.User.GetId(), id);
+            await this.appointmnetsService.TakeAppointmentByDonor(this.CurrUserId(), id);
+
+            var currDonor = this.donorsService.GetDonorById(this.CurrUserId());
+            var currRecipientEmail = this.recipientsService.GetRecipientEmail(this.CurrUserId());
+
+            var subject = $"Вашата молба за кръв беше взета";
+            var emailHtml = this.emailsService.GenerateEmailDonorTakeAnAppointmentHtmlContent(currDonor, subject);
+            await this.emailSender.SendEmailAsync(GlobalConstants.SystemEmail, GlobalConstants.SystemName, currRecipientEmail, subject, emailHtml);
 
             return this.Redirect("/");
         }
@@ -95,7 +106,7 @@
         {
             // var email = this.viewRenderService.RenderToStringAsync(); //string viewName, object model
             var appointmentAllInfo = this.appointmnetsService.GetAppoinmentAllInfo(id);
-            var donorEmail = this.donorsService.GetDonorEmailByUserId(this.User.GetId());
+            var donorEmail = this.donorsService.GetDonorEmailByUserId(this.CurrUserId());
 
             var subject = $"Молба за кръв на {appointmentAllInfo.RecipientFullName}";
             var emailHtml = this.emailsService.GenerateEmailAppointmentHtmlContent(appointmentAllInfo, subject);
@@ -107,7 +118,17 @@
             return this.RedirectToAction(nameof(this.AppointmentById), new { id });
         }
 
+        private async Task GenerateEmail(ApplicationUser? model, string subject, string content, string email = "")
+        {
+            var emailHtml = this.emailsService.GenerateEmailApplicantResponseHtmlContent(model, subject, content);
+
+            await this.emailSender.SendEmailAsync(GlobalConstants.SystemEmail, GlobalConstants.SystemName, model.Email, subject, emailHtml);
+        }
+
         private string GetCurrentRecipientId()
-        => this.appointmnetsService.GetRecipientIdByUserId(this.User.GetId());
+        => this.appointmnetsService.GetRecipientIdByUserId(this.CurrUserId());
+
+        private string CurrUserId()
+            => this.User.GetId();
     }
 }

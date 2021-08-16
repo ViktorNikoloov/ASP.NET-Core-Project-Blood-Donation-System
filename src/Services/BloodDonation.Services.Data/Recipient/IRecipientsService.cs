@@ -15,4 +15,7 @@
         GetRecipientByIdDto GetRecipientrById(string id);
 
         Task UpdateCurrentLoggedInRecipientInfoAsync(string id, string firstName, string middleName, string lastName, string cityName, string streetName, int? postCode, string phoneNumber, string imageUrl);
+
+        string GetRecipientEmail(string userId);
+    }
 }

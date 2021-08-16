@@ -81,6 +81,7 @@
                     Gender = x.Gender,
                     BloodType = x.BloodType,
                     StreetName = x.Address.Town.Street.Name,
+                    Email = x.User.Email,
                 }) //.To<GetRecipientByIdDto>()
                 .FirstOrDefault();
         }
@@ -109,5 +110,8 @@
 
             await this.recipientRepository.SaveChangesAsync();
         }
+
+        public string GetRecipientEmail(string userId)
+        => this.GetRecipientrById(userId).Email;
     }
 }
