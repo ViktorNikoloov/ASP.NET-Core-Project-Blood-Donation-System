@@ -12,6 +12,7 @@
     using BloodDonation.Services.Data.Appointment;
     using BloodDonation.Services.Data.Cloudinary;
     using BloodDonation.Services.Data.Donor;
+    using BloodDonation.Services.Data.Email;
     using BloodDonation.Services.Data.Home;
     using BloodDonation.Services.Data.Recipient;
     using BloodDonation.Services.Data.Settings;
@@ -108,8 +109,9 @@
             services.AddTransient<IDonorsService, DonorsService>();
             services.AddTransient<IStatisticsService, StatisticsService>();
             services.AddTransient<IAppointmentsService, AppointmentsService>();
-            services.AddTransient<IViewRenderService, ViewRenderService>();
+            services.AddTransient<IEmailsService, EmailsService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
+            services.AddTransient<IViewRenderService, ViewRenderService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

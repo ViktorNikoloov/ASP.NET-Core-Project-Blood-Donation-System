@@ -56,7 +56,7 @@
         public class InputModel
         {
             [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
-            [EmailAddress(ErrorMessage = "Невалиден имейл адрес.")]
+            [EmailAddress(ErrorMessage = "Имейл адресът\"{0}\" вече е зает.")]
             public string Email { get; set; }
 
             [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
@@ -159,7 +159,7 @@
                             }
                         }
 
-                        this.TempData["Message"] = "Вашата заявка за \"Кръводарител\" се изпрати успешно, моля изчакайте одобрение от \"Администратор\"";
+                        this.TempData["Message"] = "Вашата заявка за \"Кръводарител\" се изпрати успешно, моля изчакайте получаването на имейл за одобрение от \"Администратор\"";
                         return this.LocalRedirect(returnUrl);
                     }
                 }

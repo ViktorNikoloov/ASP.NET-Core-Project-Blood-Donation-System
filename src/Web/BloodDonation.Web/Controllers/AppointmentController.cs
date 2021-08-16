@@ -6,6 +6,7 @@
     using BloodDonation.Common;
     using BloodDonation.Services.Data.Appointment;
     using BloodDonation.Services.Data.Donor;
+    using BloodDonation.Services.Data.Email;
     using BloodDonation.Services.Data.ViewRenderService;
     using BloodDonation.Services.Messaging;
     using BloodDonation.Web.Infrastructure;
@@ -18,17 +19,21 @@
         private readonly IAppointmentsService appointmnetsService;
         private readonly IDonorsService donorsService;
         private readonly IViewRenderService viewRenderService;
+        private readonly IEmailsService emailsService;
         private readonly IEmailSender emailSender;
 
         public AppointmentController(
             IAppointmentsService appointmnetsService,
             IDonorsService donorsService,
             IViewRenderService viewRenderService,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IEmailsService emailsService
+            )
         {
             this.appointmnetsService = appointmnetsService;
             this.donorsService = donorsService;
             this.viewRenderService = viewRenderService;
+            this.emailsService = emailsService;
             this.emailSender = emailSender;
         }
 
@@ -91,42 +96,15 @@
             // var email = this.viewRenderService.RenderToStringAsync(); //string viewName, object model
             var appointmentAllInfo = this.appointmnetsService.GetAppoinmentAllInfo(id);
             var donorEmail = this.donorsService.GetDonorEmailByUserId(this.User.GetId());
-            var subject = $"Молба за кръв на {appointmentAllInfo.RecipientFullName}";
-            var emailHtm = this.ConvertToEmailHtml(appointmentAllInfo, subject);
 
-            await this.emailSender.SendEmailAsync(Common.GlobalConstants.SystemEmail, Common.GlobalConstants.SystemName, donorEmail, subject, emailHtm);
+            var subject = $"Молба за кръв на {appointmentAllInfo.RecipientFullName}";
+            var emailHtml = this.emailsService.GenerateEmailAppointmentHtmlContent(appointmentAllInfo, subject);
+
+            await this.emailSender.SendEmailAsync(Common.GlobalConstants.SystemEmail, Common.GlobalConstants.SystemName, donorEmail, subject, emailHtml);
 
             this.TempData["Message"] = $"Желана молба за кръв беше успешно изпратена на имейл: \"{donorEmail}\"";
 
             return this.RedirectToAction(nameof(this.AppointmentById), new { id });
-        }
-
-        private string ConvertToEmailHtml(AppointmentByIdViewModel appointmentAllInfo, string subject)
-        {
-            var html = new StringBuilder();
-            html.AppendLine($"<h1>{subject}</h1>")
-                .AppendLine("<hr>")
-                .AppendLine("<h3>Информация за Молбата:</h3>")
-                .AppendLine($"<h5>Начало на събитието: {appointmentAllInfo.StartDate}</h5>")
-                .AppendLine($"<h5>Краен срок: {appointmentAllInfo.DeadLine}</h5>")
-                .AppendLine($"<h5>Кръвна група: {appointmentAllInfo.BloodType}</h5>")
-                .AppendLine($"<h5>Банки кръв: {appointmentAllInfo.BloodBankCount}/бр.</h5>")
-                .AppendLine("<hr>")
-                .AppendLine("<h3>Информация за Реципиента:</h3>")
-                .AppendLine($"<h5>Имена: {appointmentAllInfo.RecipientFullName}</h5>")
-                .AppendLine($"<h5>Телефонен номер: {appointmentAllInfo.PhoneNumber}</h5>")
-                .AppendLine($"<h5>Имейл адрес: {appointmentAllInfo.Email}</h5>")
-                .AppendLine($"<h5>Град: {appointmentAllInfo.CityName}</h5>")
-                .AppendLine("<hr>")
-                .AppendLine("<h3>Информация за Болницата:</h3>")
-                .AppendLine($"<h5>Име на Болница: {appointmentAllInfo.HospitalName}</h5>")
-                .AppendLine($"<h5>Болнично отделение: {appointmentAllInfo.HospitalWard}</h5>")
-                .AppendLine($"<h5>Града на Болницата: {appointmentAllInfo.HospitalCity}</h5>")
-                .AppendLine("<hr>")
-                .AppendLine("<h3>Допълнителна информация:</h3>")
-                .AppendLine($"<h5>Начин и адрес за получаване: {appointmentAllInfo.SendingAddressInfo}</h5>")
-                .AppendLine($"<h5>Допълнителна информация: {appointmentAllInfo.AdditionalInfo}</h5>");
-            return html.ToString();
         }
 
         private string GetCurrentRecipientId()
