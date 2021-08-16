@@ -57,6 +57,9 @@
             var recipientId = this.GetCurrentRecipientId();
 
             await this.appointmnetsService.CreateAsync(model, recipientId);
+
+            this.TempData["Message"] = $"Вашата молба беше изпратена успешно. Ще получите имейл след разглеждането й от \"Администратор\"";
+
             return this.Redirect("/");
         }
 
@@ -93,7 +96,7 @@
             await this.appointmnetsService.TakeAppointmentByDonor(this.CurrUserId(), id);
 
             var currDonor = this.donorsService.GetDonorById(this.CurrUserId());
-            var currRecipientEmail = this.recipientsService.GetRecipientEmail(this.CurrUserId());
+            var currRecipientEmail = this.appointmnetsService.GetRecipientEmailByAppointmentId(id);
 
             var subject = $"Вашата молба за кръв беше взета";
             var emailHtml = this.emailsService.GenerateEmailDonorTakeAnAppointmentHtmlContent(currDonor, subject);

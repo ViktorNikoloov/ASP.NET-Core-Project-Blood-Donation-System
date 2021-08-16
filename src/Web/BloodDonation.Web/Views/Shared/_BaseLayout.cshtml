@@ -1,4 +1,9 @@
 ﻿@using BloodDonation.Common
+@using BloodDonation.Data.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
 <!DOCTYPE html>
 <html lang="bg">
 <head>
@@ -16,13 +21,17 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-primary border-bottom box-shadow">
             <div class="btn-group">
+
                 <img src="~/bloodHeroImg.png" class="pmg " width="70" height="60">
                 <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-3" aria-controls="navbarNavDropdown-3"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse mr-auto text-center" id="navbarNavDropdown-3">
+
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <button type="button" class="btn btn-outline-danger btn-icon btn-sm  m-0 m-md-1">
@@ -32,21 +41,30 @@
                             </button>
                         </li>
 
-                        <li class="nav-item">
-                            <button type="button" class="btn btn-outline-danger btn-icon btn-sm  m-0 m-md-1">
-                                <a class="nav-link" asp-area="" asp-controller="Appointment" asp-action="Create">
-                                    <i class="fas fa-hand-holding-heart"></i> Молба за кръв
-                                </a>
-                            </button>
-                        </li>
+                        @if (this.SignInManager.IsSignedIn(this.User))
+                        {
+                            if (this.User.IsInRole(GlobalConstants.RecipientRoleName))
+                            {
+                                <li class="nav-item">
+                                    <button type="button" class="btn btn-outline-danger btn-icon btn-sm  m-0 m-md-1">
+                                        <a class="nav-link" asp-area="" asp-controller="Appointment" asp-action="Create">
+                                            <i class="fas fa-hand-holding-heart"></i> Молба за кръв
+                                        </a>
+                                    </button>
+                                </li>
+                            }
+                            else if (this.User.IsInRole(GlobalConstants.DonorRoleName))
+                            {
+                                <li class="nav-item">
+                                    <button type="button" class="btn btn-outline-danger btn-icon btn-sm  m-0 m-md-1">
+                                        <a class="nav-link" asp-area="" asp-controller="Appointment" asp-action="All">
+                                            <i class="fas fa-hand-holding-heart"></i> Всички молби
+                                        </a>
+                                    </button>
+                                </li>
+                            }
 
-                        <li class="nav-item">
-                            <button type="button" class="btn btn-outline-danger btn-icon btn-sm  m-0 m-md-1">
-                                <a class="nav-link" asp-area="" asp-controller="Appointment" asp-action="All">
-                                    <i class="fas fa-hand-holding-heart"></i> Всички молби
-                                </a>
-                            </button>
-                        </li>
+                        }
 
                         <li class="nav-item">
                             <button type="button" class="btn btn-outline-danger btn-icon btn-sm  m-0 m-md-1">

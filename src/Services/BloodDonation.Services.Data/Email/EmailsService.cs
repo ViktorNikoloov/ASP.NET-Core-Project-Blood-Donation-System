@@ -68,9 +68,6 @@
 
             htmlContent.AppendLine($"<h1>{subject}</h1>")
                 .AppendLine("<hr>")
-                .AppendLine("<h3>Информация за Молбата:</h3>")
-                .AppendLine($"<h5>{subject} от {model.FirstName} {model.LastName}</h5>")
-                .AppendLine("<hr>")
                 .AppendLine("<h3>Информация за Кръводарителя:</h3>")
                 .AppendLine($"<h5>Имена: {model.FirstName} {model.LastName}</h5>")
                 .AppendLine($"<h5>Телефонен номер: {model.PhoneNumber}</h5>")

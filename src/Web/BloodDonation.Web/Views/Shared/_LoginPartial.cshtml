@@ -11,15 +11,6 @@
 
         var user = await UserManager.GetUserAsync(this.User);
         var userImgUrl = string.Empty;
-        @if (this.User.IsInRole(GlobalConstants.RecipientRoleName))
-        {
-            userImgUrl = user.Recipient.ImageUrl;
-
-        }
-        else if (this.User.IsInRole(GlobalConstants.DonorRoleName))
-        {
-            userImgUrl = user.Donor.ImageUrl;
-        }
 
         <li class="nav-item m-0 m-md-1">
 
@@ -27,12 +18,13 @@
                 <a class="nav-link " asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
                     @if (this.User.IsInRole(GlobalConstants.RecipientRoleName))
                     {
+                        userImgUrl = user.Recipient.ImageUrl;
                         <img src="@userImgUrl" alt="Avatar" class="avatar rounded-circle " style='width:15%;height:15%'>
                         <span class="text-white">Реципиент</span>
-
                     }
                     else if (this.User.IsInRole(GlobalConstants.DonorRoleName))
                     {
+                        userImgUrl = user.Donor.ImageUrl;
                         <img src="@userImgUrl" alt="Avatar" class="avatar rounded-circle " style='width:15%;height:15%'>
                         <span class="text-white">Дарител</span>
                     }
@@ -43,7 +35,6 @@
                 </a>
 
             </button>
-
 
         </li>
 

@@ -35,6 +35,7 @@
         {
 
             var topDonations = this.donorsRespository.AllAsNoTrackingWithDeleted()
+                .Where(x => x.FirstName != "Липсва")
                 .Select(x => new GetTopDonationsViewModel
                 {
                     FirstName = x.FirstName,

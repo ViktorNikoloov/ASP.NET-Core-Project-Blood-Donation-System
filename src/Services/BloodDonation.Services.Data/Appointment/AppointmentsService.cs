@@ -7,6 +7,7 @@
 
     using BloodDonation.Data.Common.Repositories;
     using BloodDonation.Data.Models;
+    using BloodDonation.Services.Data.DTO;
     using BloodDonation.Web.ViewModels.Appointment;
 
     public class AppointmentsService : IAppointmentsService
@@ -158,6 +159,9 @@
         public string GetDonorIdByUserId(string userId)
         => this.donorRepository.AllAsNoTracking().FirstOrDefault(x => x.UserId == userId).Id;
 
+        //public Appointment GetCurrentAppointment(int id)
+        //=> this.appointmetsRepository.All().FirstOrDefault(x => x.Id == id);
+
         public bool IsDonorExistInDonorsAppointmetns(int appointmentId, string userId)
         {
             var donorId = this.donorRepository.All().FirstOrDefault(x => x.UserId == userId).Id;
@@ -171,5 +175,31 @@
 
             return false;
         }
+
+        public GetAppointmentById GetCurrentAppointment(int id)
+        {
+            return this.appointmetsRepository
+                .All()
+                .Where(r => r.Id == id)
+                .Select(x => new GetAppointmentById
+                {
+                    Id = x.Id,
+                    StartDate = x.StartDate,
+                    DeadLine = x.DeadLine,
+                    BloodBankCount = x.BloodBankCount,
+                    HospitalName = x.Hospital.HospitalName,
+                    HospitalWardName = x.Hospital.HospitalWardName,
+                    HospitalTownName = x.Hospital.Town.Name,
+                    AdditionalInfo = x.AdditionalInfo,
+                    SendingAddressInfo = x.SendingAddressInfo,
+                })
+                .FirstOrDefault();
+        }
+
+        public string GetRecipientEmailByAppointmentId(int id)
+        => this.appointmetsRepository
+                .All()
+                .Where(x => x.Id == id)
+                .Select(x => x.Recipient.User.Email).FirstOrDefault();
     }
 }

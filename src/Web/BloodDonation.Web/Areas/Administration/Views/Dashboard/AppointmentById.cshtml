@@ -10,7 +10,7 @@
 @if ((string)TempData["ForApproval"] == "NotApproved")
 {
 <div class="container bg-light p-2 table-bordered mb-3 mt-2">
-    <div class="text-center btn btn-primary btn-block"><h3 class="text-white">@ViewData["Title"] на <u>@Model.RecipientFullName</u></h3></div>
+    <div class="text-center btn btn-primary btn-block"><h3 class="text-white"> Неодобрени @ViewData["Title"] на <u>@Model.RecipientFullName</u></h3></div>
 
     <hr class=" bg-primary w-auto">
 
@@ -180,7 +180,7 @@
 else
 {
 <div class="container bg-light p-2 table-bordered mb-3 mt-2">
-    <div class="text-center btn btn-primary btn-block"><h3 class="text-white">@ViewData["Title"] на <u>@Model.RecipientFullName</u></h3></div>
+    <div class="text-center btn btn-primary btn-block"><h3 class="text-white">Одобрени @ViewData["Title"] на <u>@Model.RecipientFullName</u></h3></div>
 
     <hr class=" bg-primary w-auto">
 
@@ -204,9 +204,8 @@ else
                                 </div>
 
                                 <div class="col-sm">
-                                    <label asp-for="@Model.BloodType"></label>
-                                    <select asp-for="@Model.BloodType" class="form-control" asp-items="Html.GetEnumSelectList<BloodType>().Skip(1)"> </select>
-                                    <span asp-validation-for="@Model.BloodType" class="text-danger"></span>
+                                    <label asp-for="BloodType"></label>
+                                    <p class="btn btn-block btn-icon btn-primary">@Model.EnumDisplayName</p>
                                 </div>
 
                             </div>
@@ -269,18 +268,18 @@ else
                         <div class="form-row form-group">
 
                             <div class="col form-group">
-                                <label asp-for="SendingAddressInfo"></label>
-                                <textarea asp-for="SendingAddressInfo" class="form-control" placeholder="Пример: гр.Пловдив, oфис на Спиди - 2-ра градска болница."> </textarea>
-                                <span asp-validation-for="SendingAddressInfo" class="text-danger"></span>
+                                <label asp-for="@Model.SendingAddressInfo"></label>
+                                <textarea asp-for="@Model.SendingAddressInfo" class="form-control" placeholder="Пример: гр.Пловдив, oфис на Спиди - 2-ра градска болница."> </textarea>
+                                <span asp-validation-for="@Model.SendingAddressInfo" class="text-danger"></span>
                             </div>
 
                         </div>
                         <div class="form-row form-group">
 
                             <div class="col form-group">
-                                <label asp-for="AdditionalInfo"></label>
-                                <textarea asp-for="AdditionalInfo" class="form-control " placeholder="Пример: Здавейте, мили хора, вчера на посочета по-горе дата ще ме приемат в болница за спешна операция и се нуждая от описаното количество банки кръв. Сърдечно Ви благодаря !"> </textarea>
-                                <span asp-validation-for="AdditionalInfo" class="text-danger"></span>
+                                <label asp-for="@Model.AdditionalInfo"></label>
+                                <textarea asp-for="@Model.AdditionalInfo" class="form-control " placeholder="Пример: Здавейте, мили хора, вчера на посочета по-горе дата ще ме приемат в болница за спешна операция и се нуждая от описаното количество банки кръв. Сърдечно Ви благодаря !"> </textarea>
+                                <span asp-validation-for="@Model.AdditionalInfo" class="text-danger"></span>
                             </div>
 
                         </div>
@@ -298,9 +297,9 @@ else
         </a>
 
         @*Modal Update*@
-        <button type="button" class="btn btn btn-outline-secondary btn-icon" data-toggle="modal" data-target="#updateButton">
-            <i class="fas fa-user-slash">Редактирай</i>
-        </button>
+    <button type="button" class="btn btn btn-outline-secondary btn-icon" data-toggle="modal" data-target="#updateButton">
+        <i class="fas fa-user-edit">Редактирай</i>
+    </button>
 
 
     </div>
