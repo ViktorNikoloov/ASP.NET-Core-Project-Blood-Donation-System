@@ -181,6 +181,7 @@
             app.UseEndpoints(
                 endpoints =>
                     {
+                        endpoints.MapControllerRoute(name: "AppointmentById", pattern: "/Appointment/AppointmentById/{id}/{information}", defaults: new { controller = "Appointment", action = "All" });
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
