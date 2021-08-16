@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using BloodDonation.Common;
     using BloodDonation.Data.Common.Repositories;
     using BloodDonation.Data.Models;
     using BloodDonation.Data.Models.Enums;
@@ -109,6 +110,6 @@
         => this.GetDonorById(userId).LastDonation;
 
         public int GetWhenDonorCouldDonateAgain(DateTime lastDonation)
-        => DateTime.UtcNow.Subtract(lastDonation).Days;
+        => DateTime.UtcNow.AddMonths(GlobalConstants.DonationMinimumPeriod).Subtract(lastDonation.ToUniversalTime()).Days;
     }
 }
