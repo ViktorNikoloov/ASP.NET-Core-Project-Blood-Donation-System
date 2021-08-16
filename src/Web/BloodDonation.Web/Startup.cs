@@ -1,5 +1,6 @@
 ﻿namespace BloodDonation.Web
 {
+    using System;
     using System.Reflection;
 
     using BloodDonation.Data;
@@ -20,8 +21,12 @@
     using BloodDonation.Services.Data.ViewRenderService;
     using BloodDonation.Services.Mapping;
     using BloodDonation.Services.Messaging;
+    using BloodDonation.Web.Infrastructure.Filters;
     using BloodDonation.Web.ViewModels;
     using CloudinaryDotNet;
+    using CronJobs;
+    using Hangfire;
+    using Hangfire.SqlServer;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -49,6 +54,21 @@
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<BloodDonationDbContext>();
+
+            services.AddHangfire(config =>
+            {
+                config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                .UseSqlServerStorage(
+                this.configuration.GetConnectionString("DefaultConnection"),
+                new SqlServerStorageOptions
+                {
+                    PrepareSchemaIfNecessary = true,
+                    QueuePollInterval = TimeSpan.Zero,
+                    UseRecommendedIsolationLevel = true,
+                    UsePageLocksOnDequeue = true,
+                    DisableGlobalLocks = true,
+                });
+            });
 
             var cloudinaryCredentials = new Account(
                     this.configuration["Cloudinary:CloudName"],
@@ -115,7 +135,7 @@
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IRecurringJobManager recurringJobManager)
         {
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
@@ -126,6 +146,7 @@
                 dbContext.Database.Migrate();
 
                 new ApplicationDbContextSeeder(this.configuration).SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+                this.SeedHangfireJobs(recurringJobManager, dbContext);
             }
 
             if (env.IsDevelopment())
@@ -145,10 +166,17 @@
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            app.UseResponseCaching();
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseHangfireDashboard("/Administrator/Statistic", new DashboardOptions
+            {
+                Authorization = new[] { new HangFireAuthorizationFilter() },
+            });
+            app.UseHangfireServer();
 
             app.UseEndpoints(
                 endpoints =>
@@ -157,6 +185,11 @@
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });
+        }
+
+        private void SeedHangfireJobs(IRecurringJobManager recurringJobManager, BloodDonationDbContext dbContext)
+        {
+            recurringJobManager.AddOrUpdate<DeletedAppointments>("DeletedAppointments", x => x.Work(), Cron.Daily);
         }
     }
 }

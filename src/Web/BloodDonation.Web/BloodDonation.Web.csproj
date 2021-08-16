@@ -20,6 +20,8 @@
 
   <ItemGroup>
     <PackageReference Include="CloudinaryDotNet" Version="1.15.2" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.24" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.7.24" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="5.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="5.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.8" />
@@ -45,6 +47,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BloodDonation.Common\BloodDonation.Common.csproj" />
+    <ProjectReference Include="..\..\CronJobs\CronJobs.csproj" />
     <ProjectReference Include="..\..\Data\BloodDonation.Data.Models\BloodDonation.Data.Models.csproj" />
     <ProjectReference Include="..\..\Data\BloodDonation.Data\BloodDonation.Data.csproj" />
     <ProjectReference Include="..\..\Services\BloodDonation.Services.Data\BloodDonation.Services.Data.csproj" />
