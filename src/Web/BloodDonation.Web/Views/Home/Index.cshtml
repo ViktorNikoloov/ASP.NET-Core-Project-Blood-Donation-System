@@ -16,6 +16,13 @@
             @this.TempData["Message"]
         </div>
     }
+    else if (this.TempData.ContainsKey("NotFoundMessage"))
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            @this.TempData["NotFoundMessage"]
+        </div>
+    }
 
     var hasInfo = false;
     if (this.User.IsInRole("Donor"))
@@ -59,8 +66,8 @@
                 <li> <h5 class="text-center text-white bg-primary rounded">"Нуждаете от кръв ? Тук ще намерите вашите герои, които чакат за да Ви помогнат !"</h5></li>
                 <li> <h5 class="text-center text-white bg-primary rounded">"Искате да бъдете нечии герой ? Направете го тук, кръводерете безвъзмездно на нуждаещ се !."</h5></li>
             </ul>
-           
-           
+
+
         </p>
     </div>
     <hr class="bg-white w-auto">

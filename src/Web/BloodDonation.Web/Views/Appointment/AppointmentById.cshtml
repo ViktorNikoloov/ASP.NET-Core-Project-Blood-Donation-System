@@ -40,13 +40,14 @@
                                 <div class="row">
 
                                     <div class="col-sm text-center">
+
                                         <div class="col-sm">
-                                            <label asp-for="StartDate"></label>
+                                            <label asp-for="@Model.StartDate"></label>
                                             <p class="btn btn-block btn-icon btn-primary">@Model.StartDate.ToLocalTime().ToShortDateString()</p>
                                         </div>
 
                                         <div class="col-sm">
-                                            <label asp-for="BloodType"></label>
+                                            <label asp-for="@Model.BloodType"></label>
                                             <p class="btn btn-block btn-icon btn-primary">@Model.EnumDisplayName</p>
 
                                         </div>
@@ -55,11 +56,11 @@
 
                                     <div class="col-sm text-center">
                                         <div class="col-sm">
-                                            <label asp-for="DeadLine"></label>
+                                            <label asp-for="@Model.DeadLine"></label>
                                             <p class="btn btn-block btn-icon btn-primary">@Model.DeadLine.ToLocalTime().ToShortDateString()</p>
                                         </div>
                                         <div class="col-sm">
-                                            <label asp-for="BloodBankCount"></label>
+                                            <label asp-for="@Model.BloodBankCount"></label>
                                             <p class="btn btn-block btn-icon btn-primary">@Model.BloodBankCount/бр.</p>
                                         </div>
                                     </div>
@@ -78,16 +79,16 @@
                             </div>
                             <div class="card-body">
                                 <div class="card-text text-center">
-                                    <label asp-for="RecipientFullName"></label>
+                                    <label asp-for="@Model.RecipientFullName"></label>
                                     <p class="btn btn-block btn-icon btn-primary">@Model.RecipientFullName</p>
 
-                                    <label asp-for="PhoneNumber"></label>
+                                    <label asp-for="@Model.PhoneNumber"></label>
                                     <p class="btn btn-block btn-icon btn-primary">@Model.PhoneNumber</p>
 
-                                    <label asp-for="Email"></label>
+                                    <label asp-for="@Model.Email"></label>
                                     <p class="btn btn-block btn-icon btn-primary">@Model.Email</p>
 
-                                    <label asp-for="CityName"></label>
+                                    <label asp-for="@Model.CityName"></label>
                                     <p class="btn btn-block btn-icon btn-primary">@Model.CityName</p>
                                 </div>
                             </div>
@@ -103,13 +104,13 @@
                             </div>
                             <div class="card-body">
                                 <div class="card-text text-center">
-                                    <label asp-for="HospitalName"></label>
+                                    <label asp-for="@Model.HospitalName"></label>
                                     <p class="btn btn-block btn-icon btn-primary">@Model.HospitalName</p>
 
-                                    <label asp-for="HospitalWard"></label>
+                                    <label asp-for="@Model.HospitalWard"></label>
                                     <p class="btn btn-block btn-icon btn-primary">@Model.HospitalWard</p>
 
-                                    <label asp-for="HospitalCity"></label>
+                                    <label asp-for="@Model.HospitalCity"></label>
                                     <p class="btn btn-block btn-icon btn-primary">@Model.HospitalCity</p>
 
                                 </div>
@@ -126,10 +127,10 @@
                             </div>
                             <div class="card-body">
                                 <div class="card-text text-center">
-                                    <label asp-for="SendingAddressInfo"></label>
+                                    <label asp-for="@Model.SendingAddressInfo"></label>
                                     <p class="btn btn-block btn-icon btn-primary">@Model.SendingAddressInfo</p>
 
-                                    <label asp-for="AdditionalInfo"></label>
+                                    <label asp-for="@Model.AdditionalInfo"></label>
                                     <p class="btn btn-block btn-icon btn-primary">@Model.AdditionalInfo</p>
 
                                 </div>

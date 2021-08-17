@@ -38,7 +38,7 @@
 
             <li class="nav-item">
                 <button type="button" class="btn btn-outline-danger btn-icon btn-sm  m-0 m-md-1">
-                    <a class="nav-link" asp-area="" asp-controller="Donor" asp-action="AppointmentsTakeByDonor">
+                    <a class="nav-link" asp-area="" asp-controller="Donor" asp-action="All">
                         <i class="fas fa-hand-holding-heart"></i> Взети молби
                     </a>
                 </button>
@@ -60,16 +60,21 @@
         {
             var currUserId = UserManager.GetUserId(this.User);
             var donorLastDonation = DonorsService.GetLastTimeDonorDonaton(currUserId);
-            var donorNextDonation = DonorsService.GetWhenDonorCouldDonateAgain(donorLastDonation);
-            var whenDonorCouldDonateAgain = DonorsService.GetDonorRemainingDaysToDonation(donorLastDonation);
-            <li class="nav-item">
-                <i class="btn btn-success btn-icon btn-pill m-md-2 p-2">
-                    Последно кръводаряване на: <span class="badge bg-primary text-success">@donorLastDonation.ToShortDateString()</span>
-                </i>
-            </li>
 
-            if (donorNextDonation >= DateTime.UtcNow)
+
+            if (donorLastDonation != DateTime.MinValue)
             {
+                var donorNextDonation = DonorsService.GetWhenDonorCouldDonateAgain(donorLastDonation);
+                var whenDonorCouldDonateAgain = DonorsService.GetDonorRemainingDaysToDonation(donorLastDonation);
+                <li class="nav-item">
+                    <i class="btn btn-success btn-icon btn-pill m-md-2 p-2">
+                        Последно кръводаряване на: <span class="badge bg-primary text-success">@donorLastDonation.ToShortDateString()</span>
+                    </i>
+                </li>
+
+
+                if (donorNextDonation >= DateTime.UtcNow)
+                {
                 <li class="nav-item ">
                     <button type="button" class="btn btn-secondary btn-pill btn-icon m-md-2 p-2">
                         Следващо кръводаряване след:
@@ -78,8 +83,8 @@
                         </i>
                     </button>
                 </li>
+                }
             }
-
         }
     }
 

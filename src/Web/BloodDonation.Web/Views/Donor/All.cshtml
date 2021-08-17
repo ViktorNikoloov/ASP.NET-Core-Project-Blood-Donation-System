@@ -1,0 +1,115 @@
+﻿@using BloodDonation.Web.ViewModels.Donor
+@model AllAppointmentsListViewModel
+
+@{
+    ViewData["Title"] = "Молби взети от кръводарителя";
+
+}
+
+<div class="container bg-light p-2 table-bordered mb-3 mt-2">
+    @{
+        if (this.TempData.ContainsKey("Message"))
+        {
+            <div class="alert alert-success alert-info fade show">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                @this.TempData["Message"]
+            </div>
+        }
+        else if (this.TempData.ContainsKey("NotFoundMessage"))
+        {
+            <div class="alert alert-danger alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                @this.TempData["NotFoundMessage"]
+            </div>
+        }
+    }
+
+    <div class="text-center btn btn-primary btn-block"><h3 class="text-white">@ViewData["Title"]</h3></div>
+
+    <hr class=" bg-primary w-auto">
+
+    <div class="bs-example">
+        @if (@Model.Appointments.Count() == 0)
+        {
+            <div class="d-grid d-sm-flex justify-content-center">
+                <a asp-action="All" asp-controller="Appointment" class="btn btn-outline-danger btn-icon btn-block mb-3 ml-2 mr-2">Все още не сте кръводарявали. Направете го тук !</a>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-sm-12">
+
+                @foreach (var appointment in @Model.Appointments)
+                {
+                    var isOver = appointment.DeadLine.CompareTo(@DateTime.UtcNow);
+
+                    <div class="card border border-dark mb-2 badge-@if (isOver <= 0) { <text>info</text> } else { <text>success</text> }">
+                        <div class="card-header text-center">
+                            <div class="col-sm">
+                                <label asp-for=" @appointment.RecipientName"></label>
+                                <p class="btn btn-block btn-icon btn-primary">Молба от @appointment.RecipientName</p>
+                            </div>
+
+                            <hr class=" bg-primary w-auto">
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="col-sm text-center">
+                                    <div class="col-sm">
+                                        <label asp-for=" @appointment.RecipientBloodType"></label>
+                                        <p class="btn btn-block btn-icon btn-primary">@appointment.EnumDisplayName</p>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-sm text-center">
+                                    <div class="col-sm">
+                                        <label asp-for=" @appointment.StartDate"></label>
+                                        <p class="btn btn-block btn-icon btn-primary">@appointment.StartDate.Date</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm text-center">
+                                    <div class="col-sm">
+                                        <label asp-for=" @appointment.DeadLine"></label>
+                                        <p class="btn btn-block btn-icon btn-primary">@appointment.DeadLine.Date</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-sm text-center">
+                                    <div class="col-sm">
+                                        <label asp-for=" @appointment.RecipientPhone"></label>
+                                        <p class="btn btn-block btn-icon btn-primary">@appointment.RecipientPhone</p>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-sm text-center">
+                                    <div class="col-sm">
+                                        <label asp-for=" @appointment.RecipientEmail"></label>
+                                        <p class="btn btn-block btn-icon btn-primary">@appointment.RecipientEmail</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr class=" bg-primary w-auto">
+
+                        <div class="d-grid d-sm-flex justify-content-center">
+                            <a asp-action="AppointmentById" asp-controller="Appointment" asp-route-id="@appointment.Id" class="btn btn-outline-primary btn-icon btn-block mb-3 ml-2 mr-2">Виж молбата</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class=" bg-primary w-auto">
+
+<partial name="_PagingPartial" model="@Model" />

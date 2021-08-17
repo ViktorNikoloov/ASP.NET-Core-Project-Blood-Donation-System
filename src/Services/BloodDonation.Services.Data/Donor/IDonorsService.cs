@@ -28,7 +28,7 @@
 
         public bool CheckDonorExist(string userId);
 
-        public int GetAllAppointmentsTakeByDonorCount();
+        public int GetAllAppointmentsTakeByDonorCount(string donorId);
 
         public IEnumerable<AllAppointmentsInListViewModel> GetAll(string userId, int page, int itemsPerPage);
     }

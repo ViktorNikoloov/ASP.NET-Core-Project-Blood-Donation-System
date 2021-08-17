@@ -18,40 +18,23 @@
             this.donorsService = donorsService;
         }
 
-        public IActionResult BeADonor()
-        {
-            return this.View();
-        }
-
-        [HttpPost]
-        public IActionResult BeADonor(DonorFormViewModel model)
-        {
-            if (!this.ModelState.IsValid)
-            {
-                return this.View();
-            }
-
-            this.TempData["Message"] = "Вашата заявка за \"Кръводарител\" се изпрати успешно, моля изчакайте одобрение от \"Администратор\"";
-
-            return this.Redirect("/");
-        }
-
-        public IActionResult AppointmentsTakeByDonor(int id = GlobalConstants.PaginationStartPageNumber)
+        public IActionResult All(int id = GlobalConstants.PaginationStartPageNumber)
         {
             var userId = this.User.GetId();
             var isDonorExist = this.donorsService.CheckDonorExist(userId);
+            var donorId = this.donorsService.GetDonorIdByUserId(userId);
 
             if (!isDonorExist)
             {
                 return this.Redirect("/Home/StatusCodeError");
             }
 
-            const int ItemPerPage = 4;
+            const int ItemPerPage = 2;
             var viewModel = new AllAppointmentsListViewModel
             {
                 ItemPerPage = ItemPerPage,
                 PageNumber = id,
-                AppointmentsCount = this.donorsService.GetAllAppointmentsTakeByDonorCount(),
+                AppointmentsCount = this.donorsService.GetAllAppointmentsTakeByDonorCount(donorId),
                 Appointments = this.donorsService.GetAll(userId, id, ItemPerPage),
             };
 

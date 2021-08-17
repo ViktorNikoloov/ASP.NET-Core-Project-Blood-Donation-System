@@ -66,6 +66,16 @@
 
         public IActionResult All(int id = GlobalConstants.PaginationStartPageNumber)
         {
+            var donorLastDonation = this.donorsService.GetLastTimeDonorDonaton(this.CurrUserId());
+            var donorNextDonation = this.donorsService.GetWhenDonorCouldDonateAgain(donorLastDonation);
+            var daysRemaining = this.donorsService.GetDonorRemainingDaysToDonation(donorLastDonation);
+            if (donorNextDonation >= DateTime.UtcNow)
+            {
+                this.TempData["NotFoundMessage"] = $"Кръводарявал сте на \"{donorLastDonation.ToLocalTime().ToShortDateString()}\". Ще можете да кръводарявате отново след \"{daysRemaining}\" дни.";
+
+                return this.Redirect("/");
+            }
+
             const int ItemPerPage = 4;
             var viewModel = new AppointmentsListViewModel
             {
@@ -80,30 +90,20 @@
 
         public IActionResult AppointmentById(int id)
         {
-            var donorLastDonation = this.donorsService.GetLastTimeDonorDonaton(this.CurrUserId());
-            var donorNextDonation = this.donorsService.GetWhenDonorCouldDonateAgain(donorLastDonation);
-            var daysRemaining = this.donorsService.GetDonorRemainingDaysToDonation(donorLastDonation);
-            if (donorNextDonation >= DateTime.UtcNow)
-            {
-                this.TempData["NotFoundMessage"] = $"Кръводарявал сте на \"{donorLastDonation.ToLocalTime().ToShortDateString()}\". Ще можете да кръводарявате отново след \"{daysRemaining}\" дни.";
-
-                return this.RedirectToAction(nameof(this.All));
-            }
-
-            var isDonorExistInDonorsAppointmetns = this.appointmnetsService.IsDonorExistInDonorsAppointmetns(id, this.CurrUserId());
-            if (isDonorExistInDonorsAppointmetns)
-            {
-                this.TempData["NotFoundMessage"] = $"Вече сте се отзовали на тази молба.";
-
-                return this.RedirectToAction(nameof(this.All));
-            }
-
             var viewModel = this.appointmnetsService.GetAppoinmentAllInfo(id);
             return this.View(viewModel);
         }
 
         public async Task<IActionResult> TakeAppointmentByDonor(int id)
         {
+            var isDonorExistInDonorsAppointmetns = this.appointmnetsService.IsDonorExistInDonorsAppointmetns(id, this.CurrUserId());
+            if (isDonorExistInDonorsAppointmetns)
+            {
+                this.TempData["NotFoundMessage"] = $"Вече сте се отзовали на тази.";
+
+                return this.Redirect("/Donor/All");
+            }
+
             await this.appointmnetsService.TakeAppointmentByDonor(this.CurrUserId(), id);
 
             var currDonor = this.donorsService.GetDonorById(this.CurrUserId());

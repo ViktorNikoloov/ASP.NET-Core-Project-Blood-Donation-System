@@ -117,6 +117,7 @@
             var donorId = this.GetDonorIdByUserId(userId);
             var appointmentsTakeByDonor = this.appointmentsDonorsRepository.All()
             .Where(x => x.DonorId == donorId)
+            .OrderByDescending(x => x.Appointment.DeadLine)
             .Skip((page - 1) * itemsPerPage) // Pages formula
             .Take(itemsPerPage)
             .Select(x => new AllAppointmentsInListViewModel
@@ -134,8 +135,8 @@
             return appointmentsTakeByDonor;
         }
 
-        public int GetAllAppointmentsTakeByDonorCount()
-        => this.appointmentsDonorsRepository.AllAsNoTracking().Count();
+        public int GetAllAppointmentsTakeByDonorCount(string donorId)
+        => this.appointmentsDonorsRepository.AllAsNoTracking().Where(x => x.DonorId == donorId).Count();
 
         public string GetDonorIdByUserId(string userId)
         => this.donorRepository.All().FirstOrDefault(x => x.UserId == userId).Id;
