@@ -18,6 +18,8 @@
 
         DateTime GetLastTimeDonorDonaton(string userId);
 
-        int GetWhenDonorCouldDonateAgain(DateTime lastDonation);
+        int GetDonorRemainingDaysToDonation(DateTime lastDonation);
+
+        DateTime GetWhenDonorCouldDonateAgain(DateTime lastDonation);
     }
 }

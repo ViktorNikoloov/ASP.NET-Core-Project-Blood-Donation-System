@@ -1,0 +1,79 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using BloodDonation.Data.Models
+@using BloodDonation.Common
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject BloodDonation.Services.Data.Donor.IDonorsService DonorsService
+
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+        <button type="button" class="btn btn-outline-danger btn-icon btn-sm  m-0 m-md-1">
+            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                <i class="fas fa-medkit"></i> Начало
+            </a>
+        </button>
+    </li>
+
+    @if (this.SignInManager.IsSignedIn(this.User))
+    {
+        if (this.User.IsInRole(GlobalConstants.RecipientRoleName))
+        {
+            <li class="nav-item">
+                <button type="button" class="btn btn-outline-danger btn-icon btn-sm  m-0 m-md-1">
+                    <a class="nav-link" asp-area="" asp-controller="Appointment" asp-action="Create">
+                        <i class="fas fa-hand-holding-heart"></i> Молба за кръв
+                    </a>
+                </button>
+            </li>
+        }
+        else if (this.User.IsInRole(GlobalConstants.DonorRoleName))
+        {
+            <li class="nav-item">
+                <button type="button" class="btn btn-outline-danger btn-icon btn-sm  m-0 m-md-1">
+                    <a class="nav-link" asp-area="" asp-controller="Appointment" asp-action="All">
+                        <i class="fas fa-hand-holding-heart"></i> Всички молби
+                    </a>
+                </button>
+            </li>
+
+        }
+
+    }
+
+    <li class="nav-item">
+        <button type="button" class="btn btn-outline-danger btn-icon btn-sm  m-0 m-md-1">
+            <a class="nav-link" asp-area="" asp-controller="Contacts" asp-action="Index">
+                <i class="fas fa-envelope-open-text"></i> Свържете се с нас
+            </a>
+        </button>
+    </li>
+    @if (SignInManager.IsSignedIn(this.User))
+    {
+        if (this.User.IsInRole(GlobalConstants.DonorRoleName))
+        {
+            var currUserId = UserManager.GetUserId(this.User);
+            var donorLastDonation = DonorsService.GetLastTimeDonorDonaton(currUserId);
+            var donorNextDonation = DonorsService.GetWhenDonorCouldDonateAgain(donorLastDonation);
+            var whenDonorCouldDonateAgain = DonorsService.GetDonorRemainingDaysToDonation(donorLastDonation);
+            <li class="nav-item">
+                <i class="btn btn-success btn-icon btn-pill m-md-2 p-2">
+                    Последно кръводаряване на: <span class="badge bg-success text-primary">@donorLastDonation.ToShortDateString()</span>
+                </i>
+            </li>
+
+            if (donorNextDonation >= DateTime.UtcNow)
+            {
+                <li class="nav-item ">
+                    <button type="button" class="btn btn-secondary btn-pill btn-icon m-md-2 p-2">
+                        Следващо кръводаряване след:
+                        <i class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-primary bg-success">
+                            @whenDonorCouldDonateAgain дни
+                        </i>
+                    </button>
+                </li>
+            }
+
+        }
+    }
+
+</ul>

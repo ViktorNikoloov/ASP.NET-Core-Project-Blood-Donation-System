@@ -28,7 +28,7 @@
 
         public const int PaginationStartPageNumber = 1;
 
-        public const int DonationMinimumPeriod = 2; // A person could donate blood every two months
+        public const int DonationMinimumPeriod = 60; // A person could donate blood every sixty days
 
         public const string DonorApproveApplicantResponse = "Искаме да ви уведомим, че вашата кандидатура за кръводарител беше успешно одобрена. Вече можете да влезете в профила си. <hr> Моля не забравяйте да попълните данните си, за да можете да търсите молби за кръв. <hr> Лек и успешен ден.";
 

@@ -109,7 +109,11 @@
         public DateTime GetLastTimeDonorDonaton(string userId)
         => this.GetDonorById(userId).LastDonation;
 
-        public int GetWhenDonorCouldDonateAgain(DateTime lastDonation)
-        => DateTime.UtcNow.AddMonths(GlobalConstants.DonationMinimumPeriod).Subtract(lastDonation.ToUniversalTime()).Days;
+        public int GetDonorRemainingDaysToDonation(DateTime lastDonation)
+        => lastDonation.AddDays(GlobalConstants.DonationMinimumPeriod).ToUniversalTime().Subtract(DateTime.UtcNow).Days;
+
+        public DateTime GetWhenDonorCouldDonateAgain(DateTime lastDonation)
+        => lastDonation.AddDays(GlobalConstants.DonationMinimumPeriod).Date;
+
     }
 }

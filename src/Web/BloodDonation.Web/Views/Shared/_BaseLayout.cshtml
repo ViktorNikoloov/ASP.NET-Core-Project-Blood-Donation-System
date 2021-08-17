@@ -1,8 +1,4 @@
 ﻿@using BloodDonation.Common
-@using BloodDonation.Data.Models
-@using Microsoft.AspNetCore.Identity
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
 
 <!DOCTYPE html>
 <html lang="bg">
@@ -32,48 +28,7 @@
 
                 <div class="collapse navbar-collapse mr-auto text-center" id="navbarNavDropdown-3">
 
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <button type="button" class="btn btn-outline-danger btn-icon btn-sm  m-0 m-md-1">
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
-                                    <i class="fas fa-medkit"></i> Начало
-                                </a>
-                            </button>
-                        </li>
-
-                        @if (this.SignInManager.IsSignedIn(this.User))
-                        {
-                            if (this.User.IsInRole(GlobalConstants.RecipientRoleName))
-                            {
-                                <li class="nav-item">
-                                    <button type="button" class="btn btn-outline-danger btn-icon btn-sm  m-0 m-md-1">
-                                        <a class="nav-link" asp-area="" asp-controller="Appointment" asp-action="Create">
-                                            <i class="fas fa-hand-holding-heart"></i> Молба за кръв
-                                        </a>
-                                    </button>
-                                </li>
-                            }
-                            else if (this.User.IsInRole(GlobalConstants.DonorRoleName))
-                            {
-                                <li class="nav-item">
-                                    <button type="button" class="btn btn-outline-danger btn-icon btn-sm  m-0 m-md-1">
-                                        <a class="nav-link" asp-area="" asp-controller="Appointment" asp-action="All">
-                                            <i class="fas fa-hand-holding-heart"></i> Всички молби
-                                        </a>
-                                    </button>
-                                </li>
-                            }
-
-                        }
-
-                        <li class="nav-item">
-                            <button type="button" class="btn btn-outline-danger btn-icon btn-sm  m-0 m-md-1">
-                                <a class="nav-link" asp-area="" asp-controller="Contacts" asp-action="Index">
-                                    <i class="fas fa-envelope-open-text"></i> Свържете се с нас
-                                </a>
-                            </button>
-                        </li>
-                    </ul>
+                    <partial name="_AllNavigateButtons" />
 
                 </div>
             </div>
