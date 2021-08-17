@@ -25,13 +25,21 @@
                     </a>
                 </button>
             </li>
+
+            <li class="nav-item">
+                <button type="button" class="btn btn-outline-danger btn-icon btn-sm  m-0 m-md-1">
+                    <a class="nav-link" asp-area="" asp-controller="Recipient" asp-action="All">
+                        <i class="fas fa-tasks"></i> Пуснати молби
+                    </a>
+                </button>
+            </li>
         }
         else if (this.User.IsInRole(GlobalConstants.DonorRoleName))
         {
             <li class="nav-item">
                 <button type="button" class="btn btn-outline-danger btn-icon btn-sm  m-0 m-md-1">
                     <a class="nav-link" asp-area="" asp-controller="Appointment" asp-action="All">
-                        <i class="fas fa-hand-holding-heart"></i> Всички молби
+                        <i class="fas fa-tasks"></i>> Всички молби
                     </a>
                 </button>
             </li>
@@ -75,14 +83,14 @@
 
                 if (donorNextDonation >= DateTime.UtcNow)
                 {
-                <li class="nav-item ">
-                    <button type="button" class="btn btn-secondary btn-pill btn-icon m-md-2 p-2">
-                        Следващо кръводаряване след:
-                        <i class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-primary bg-success">
-                            @whenDonorCouldDonateAgain дни
-                        </i>
-                    </button>
-                </li>
+                    <li class="nav-item ">
+                        <button type="button" class="btn btn-secondary btn-pill btn-icon m-md-2 p-2">
+                            Следващо кръводаряване след:
+                            <i class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-primary bg-success">
+                                @whenDonorCouldDonateAgain дни
+                            </i>
+                        </button>
+                    </li>
                 }
             }
         }

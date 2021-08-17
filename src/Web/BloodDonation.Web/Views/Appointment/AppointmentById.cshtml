@@ -1,4 +1,5 @@
-﻿@using BloodDonation.Web.ViewModels.Appointment
+﻿@using BloodDonation.Common
+@using BloodDonation.Web.ViewModels.Appointment
 @model AppointmentByIdViewModel
 
 @{
@@ -12,19 +13,21 @@
         </div>
     }
 }
-    <form method="post" text-center>
-        <div class="container bg-light p-2 table-bordered mb-3 mt-2">
-            <div class="text-center btn btn-primary btn-block"><h1 class="text-white">@ViewData["Title"]</h1></div>
+<form method="post" text-center>
+    <div class="container bg-light p-2 table-bordered mb-3 mt-2">
+        <div class="text-center btn btn-primary btn-block"><h1 class="text-white">@ViewData["Title"]</h1></div>
 
-            <hr class=" bg-primary w-auto">
+        <hr class=" bg-primary w-auto">
 
-            <div class="bs-example">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="card bg-white border border-dark mb-2">
-                            <div class="card-header text-center">
-                                <span><i class="far fa-calendar-check fa-3x text-left" style="color:purple"></i></span>
-                                <h5>Информация за Молбата</h5>
+        <div class="bs-example">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card bg-white border border-dark mb-2">
+                        <div class="card-header text-center">
+                            <span><i class="far fa-calendar-check fa-3x text-left" style="color:purple"></i></span>
+                            <h5>Информация за Молбата</h5>
+                            @if (this.User.IsInRole(GlobalConstants.DonorRoleName))
+                            {
                                 <div class="row justify-content-sm-center">
                                     <span class="single-meta mr-2">
                                         <a asp-action="SendToEmail" asp-route-id="@Model.Id" class="btn btn-outline-warning">Send to Email</a>
@@ -35,113 +38,116 @@
                                     </span>
                                 </div>
                                 <hr class=" bg-primary w-auto">
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
+                            }
 
-                                    <div class="col-sm text-center">
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
 
-                                        <div class="col-sm">
-                                            <label asp-for="@Model.StartDate"></label>
-                                            <p class="btn btn-block btn-icon btn-primary">@Model.StartDate.ToLocalTime().ToShortDateString()</p>
-                                        </div>
+                                <div class="col-sm text-center">
 
-                                        <div class="col-sm">
-                                            <label asp-for="@Model.BloodType"></label>
-                                            <p class="btn btn-block btn-icon btn-primary">@Model.EnumDisplayName</p>
+                                    <div class="col-sm">
+                                        <label asp-for="@Model.StartDate"></label>
+                                        <p class="btn btn-block btn-icon btn-primary">@Model.StartDate.ToLocalTime().ToShortDateString()</p>
+                                    </div>
 
-                                        </div>
+                                    <div class="col-sm">
+                                        <label asp-for="@Model.BloodType"></label>
+                                        <p class="btn btn-block btn-icon btn-primary">@Model.EnumDisplayName</p>
 
                                     </div>
 
-                                    <div class="col-sm text-center">
-                                        <div class="col-sm">
-                                            <label asp-for="@Model.DeadLine"></label>
-                                            <p class="btn btn-block btn-icon btn-primary">@Model.DeadLine.ToLocalTime().ToShortDateString()</p>
-                                        </div>
-                                        <div class="col-sm">
-                                            <label asp-for="@Model.BloodBankCount"></label>
-                                            <p class="btn btn-block btn-icon btn-primary">@Model.BloodBankCount/бр.</p>
-                                        </div>
+                                </div>
+
+                                <div class="col-sm text-center">
+                                    <div class="col-sm">
+                                        <label asp-for="@Model.DeadLine"></label>
+                                        <p class="btn btn-block btn-icon btn-primary">@Model.DeadLine.ToLocalTime().ToShortDateString()</p>
                                     </div>
-
+                                    <div class="col-sm">
+                                        <label asp-for="@Model.BloodBankCount"></label>
+                                        <p class="btn btn-block btn-icon btn-primary">@Model.BloodBankCount/бр.</p>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-sm-6 mb-2">
-                        <div class="card bg-white border border-dark h-100">
-                            <div class="card-header text-center">
-                                <span><i class="fas fa-procedures fa-3x text-left" style="color:purple"></i></span>
-                                <h5 class="text-center">Информация за Реципиента</h5>
-                                <hr class=" bg-primary w-auto">
-                            </div>
-                            <div class="card-body">
-                                <div class="card-text text-center">
-                                    <label asp-for="@Model.RecipientFullName"></label>
-                                    <p class="btn btn-block btn-icon btn-primary">@Model.RecipientFullName</p>
+                <div class="col-sm-6 mb-2">
+                    <div class="card bg-white border border-dark h-100">
+                        <div class="card-header text-center">
+                            <span><i class="fas fa-procedures fa-3x text-left" style="color:purple"></i></span>
+                            <h5 class="text-center">Информация за Реципиента</h5>
+                            <hr class=" bg-primary w-auto">
+                        </div>
+                        <div class="card-body">
+                            <div class="card-text text-center">
+                                <label asp-for="@Model.RecipientFullName"></label>
+                                <p class="btn btn-block btn-icon btn-primary">@Model.RecipientFullName</p>
 
-                                    <label asp-for="@Model.PhoneNumber"></label>
-                                    <p class="btn btn-block btn-icon btn-primary">@Model.PhoneNumber</p>
+                                <label asp-for="@Model.PhoneNumber"></label>
+                                <p class="btn btn-block btn-icon btn-primary">@Model.PhoneNumber</p>
 
-                                    <label asp-for="@Model.Email"></label>
-                                    <p class="btn btn-block btn-icon btn-primary">@Model.Email</p>
+                                <label asp-for="@Model.Email"></label>
+                                <p class="btn btn-block btn-icon btn-primary">@Model.Email</p>
 
-                                    <label asp-for="@Model.CityName"></label>
-                                    <p class="btn btn-block btn-icon btn-primary">@Model.CityName</p>
-                                </div>
+                                <label asp-for="@Model.CityName"></label>
+                                <p class="btn btn-block btn-icon btn-primary">@Model.CityName</p>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-sm-6 mb-2">
-                        <div class="card bg-light border border-dark h-100">
-                            <div class="card-header text-center">
-                                <span><i class="fas fa-hospital-alt fa-3x text-left" style="color:purple"></i></span>
-                                <h5 class="text-center"> Информация за Болницата </h5>
-                                <hr class=" bg-primary w-auto">
-                            </div>
-                            <div class="card-body">
-                                <div class="card-text text-center">
-                                    <label asp-for="@Model.HospitalName"></label>
-                                    <p class="btn btn-block btn-icon btn-primary">@Model.HospitalName</p>
+                <div class="col-sm-6 mb-2">
+                    <div class="card bg-light border border-dark h-100">
+                        <div class="card-header text-center">
+                            <span><i class="fas fa-hospital-alt fa-3x text-left" style="color:purple"></i></span>
+                            <h5 class="text-center"> Информация за Болницата </h5>
+                            <hr class=" bg-primary w-auto">
+                        </div>
+                        <div class="card-body">
+                            <div class="card-text text-center">
+                                <label asp-for="@Model.HospitalName"></label>
+                                <p class="btn btn-block btn-icon btn-primary">@Model.HospitalName</p>
 
-                                    <label asp-for="@Model.HospitalWard"></label>
-                                    <p class="btn btn-block btn-icon btn-primary">@Model.HospitalWard</p>
+                                <label asp-for="@Model.HospitalWard"></label>
+                                <p class="btn btn-block btn-icon btn-primary">@Model.HospitalWard</p>
 
-                                    <label asp-for="@Model.HospitalCity"></label>
-                                    <p class="btn btn-block btn-icon btn-primary">@Model.HospitalCity</p>
+                                <label asp-for="@Model.HospitalCity"></label>
+                                <p class="btn btn-block btn-icon btn-primary">@Model.HospitalCity</p>
 
-                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-sm-12">
-                        <div class="card bg-light border border-dark mb-2">
-                            <div class="card-header text-center">
-                                <span><i class="fas fa-info-circle fa-3x text-left" style="color:purple"></i></span>
-                                <h5>Допълнителна информация</h5>
-                                <hr class=" bg-primary w-auto">
-                            </div>
-                            <div class="card-body">
-                                <div class="card-text text-center">
-                                    <label asp-for="@Model.SendingAddressInfo"></label>
-                                    <p class="btn btn-block btn-icon btn-primary">@Model.SendingAddressInfo</p>
+                <div class="col-sm-12">
+                    <div class="card bg-light border border-dark mb-2">
+                        <div class="card-header text-center">
+                            <span><i class="fas fa-info-circle fa-3x text-left" style="color:purple"></i></span>
+                            <h5>Допълнителна информация</h5>
+                            <hr class=" bg-primary w-auto">
+                        </div>
+                        <div class="card-body">
+                            <div class="card-text text-center">
+                                <label asp-for="@Model.SendingAddressInfo"></label>
+                                <p class="btn btn-block btn-icon btn-primary">@Model.SendingAddressInfo</p>
 
-                                    <label asp-for="@Model.AdditionalInfo"></label>
-                                    <p class="btn btn-block btn-icon btn-primary">@Model.AdditionalInfo</p>
+                                <label asp-for="@Model.AdditionalInfo"></label>
+                                <p class="btn btn-block btn-icon btn-primary">@Model.AdditionalInfo</p>
 
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <hr class=" bg-primary w-auto">
-
+        <hr class=" bg-primary w-auto">
+        @if (this.User.IsInRole(GlobalConstants.DonorRoleName))
+        {
             <p>
                 Натискайки бутона "<u>Отзови се на молбата</u>", вие потвърждавате, че сте запознати и съгласни с нашата
                 <a asp-controller="Home" asp-action="Privacy">политика за опазване на личните данни</a>
@@ -151,6 +157,8 @@
             <div>
                 <a type="submit" asp-controller="Appointment" asp-action="TakeAppointmentByDonor" asp-route-id="@Model.Id" class="btn btn-success btn-icon btn-block">Отзови се на молбата</a>
             </div>
-        </div>
-    </form>
+        }
+
+    </div>
+</form>
 

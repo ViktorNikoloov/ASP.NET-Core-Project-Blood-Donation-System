@@ -1,5 +1,6 @@
 ﻿namespace BloodDonation.Services.Data.Recipient
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -8,21 +9,28 @@
     using BloodDonation.Data.Models.Enums;
     using BloodDonation.Services.Data.DTO;
     using BloodDonation.Services.Mapping;
+    using BloodDonation.Web.ViewModels.Recipient;
 
     public class RecipientsService : IRecipientsService
     {
         private readonly IDeletableEntityRepository<ApplicationUser> userRepository;
         private readonly IDeletableEntityRepository<Recipient> recipientRepository;
         private readonly IDeletableEntityRepository<Donor> donorRepository;
+        private readonly IDeletableEntityRepository<Appointment> appointmentRepository;
+        private readonly IRepository<AppointmetsDonors> appointmentsDonorsRepository;
 
         public RecipientsService(
             IDeletableEntityRepository<ApplicationUser> userRepository,
             IDeletableEntityRepository<Recipient> recipientRepository,
-            IDeletableEntityRepository<Donor> donorRepository)
+            IDeletableEntityRepository<Donor> donorRepository,
+            IDeletableEntityRepository<Appointment> appointmentRepository,
+            IRepository<AppointmetsDonors> appointmentsDonorsRepository)
         {
             this.userRepository = userRepository;
             this.recipientRepository = recipientRepository;
             this.donorRepository = donorRepository;
+            this.appointmentRepository = appointmentRepository;
+            this.appointmentsDonorsRepository = appointmentsDonorsRepository;
         }
 
         public ApplicationUser GetRecipientApplicationUser(string recipietId)
@@ -110,6 +118,38 @@
 
             await this.recipientRepository.SaveChangesAsync();
         }
+
+        public IEnumerable<AllAppointmentsInListViewModel> GetAll(string userId, int page, int itemsPerPage)
+        {
+            var recipientrId = this.GetRecipientIdByUserId(userId);
+            var appointmentsApplyByRecipient = this.appointmentsDonorsRepository.All()
+            .Where(x => x.Appointment.RecipientId == recipientrId)
+            .OrderByDescending(x => x.Appointment.DeadLine)
+            .Skip((page - 1) * itemsPerPage) // Pages formula
+            .Take(itemsPerPage)
+            .Select(x => new AllAppointmentsInListViewModel
+            {
+                Id = x.Appointment.Id,
+                DonorName = $"{x.Donor.FirstName} {x.Donor.LastName}",
+                StartDate = x.Appointment.StartDate,
+                DeadLine = x.Appointment.DeadLine,
+                BloodType = x.Donor.BloodType,
+                DonorPhone = x.Donor.PhoneNumber,
+                DonorEmail = x.Donor.User.Email,
+            })
+            .ToList();
+
+            return appointmentsApplyByRecipient;
+        }
+
+        public string GetRecipientIdByUserId(string userId)
+        => this.recipientRepository.All().FirstOrDefault(x => x.UserId == userId).Id;
+
+        public bool CheckRecipientExist(string userId)
+        => this.recipientRepository.All().Any(x => x.UserId == userId);
+
+        public int GetAllAppointmentsApllyByRecipientCount(string recipientId)
+        => this.appointmentRepository.AllAsNoTracking().Where(x => x.RecipientId == recipientId).Count();
 
         public string GetRecipientEmail(string userId)
         => this.GetRecipientrById(userId).Email;
