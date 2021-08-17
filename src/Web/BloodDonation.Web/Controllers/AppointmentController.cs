@@ -1,5 +1,6 @@
 ﻿namespace BloodDonation.Web.Controllers
 {
+    using System;
     using System.Threading.Tasks;
 
     using BloodDonation.Common;
@@ -79,15 +80,25 @@
 
         public IActionResult AppointmentById(int id)
         {
-            var viewModel = this.appointmnetsService.GetAppoinmentAllInfo(id);
-            var isDonorExistInDonorsAppointmetns = this.appointmnetsService.IsDonorExistInDonorsAppointmetns(id, this.CurrUserId());
-
-            if (isDonorExistInDonorsAppointmetns)
+            var donorLastDonation = this.donorsService.GetLastTimeDonorDonaton(this.CurrUserId());
+            var donorNextDonation = this.donorsService.GetWhenDonorCouldDonateAgain(donorLastDonation);
+            var daysRemaining = this.donorsService.GetDonorRemainingDaysToDonation(donorLastDonation);
+            if (donorNextDonation >= DateTime.UtcNow)
             {
-                this.TempData["NotFoundMessage"] = $"Вече сте се отзовали на тази молба.";
+                this.TempData["NotFoundMessage"] = $"Кръводарявал сте на \"{donorLastDonation.ToLocalTime().ToShortDateString()}\". Ще можете да кръводарявате отново след \"{daysRemaining}\" дни.";
+
                 return this.RedirectToAction(nameof(this.All));
             }
 
+            var isDonorExistInDonorsAppointmetns = this.appointmnetsService.IsDonorExistInDonorsAppointmetns(id, this.CurrUserId());
+            if (isDonorExistInDonorsAppointmetns)
+            {
+                this.TempData["NotFoundMessage"] = $"Вече сте се отзовали на тази молба.";
+
+                return this.RedirectToAction(nameof(this.All));
+            }
+
+            var viewModel = this.appointmnetsService.GetAppoinmentAllInfo(id);
             return this.View(viewModel);
         }
 

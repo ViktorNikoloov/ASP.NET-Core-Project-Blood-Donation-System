@@ -125,8 +125,8 @@
             currAppointment.DeadLine = model.DeadLine;
             currAppointment.BloodBankCount = model.BloodBankCount;
             currAppointment.Hospital.HospitalName = model.HospitalName;
-            currAppointment.Hospital.HospitalWardName = model.HospitalWardName;
-            currAppointment.Hospital.Town.Name = model.HospitalTownName;
+            currAppointment.Hospital.HospitalWardName = model.HospitalWard;
+            currAppointment.Hospital.Town.Name = model.HospitalCity;
             currAppointment.AdditionalInfo = model.AdditionalInfo;
             currAppointment.SendingAddressInfo = model.SendingAddressInfo;
 

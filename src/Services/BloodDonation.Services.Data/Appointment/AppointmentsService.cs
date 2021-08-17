@@ -188,8 +188,8 @@
                     DeadLine = x.DeadLine,
                     BloodBankCount = x.BloodBankCount,
                     HospitalName = x.Hospital.HospitalName,
-                    HospitalWardName = x.Hospital.HospitalWardName,
-                    HospitalTownName = x.Hospital.Town.Name,
+                    HospitalWard = x.Hospital.HospitalWardName,
+                    HospitalCity = x.Hospital.Town.Name,
                     AdditionalInfo = x.AdditionalInfo,
                     SendingAddressInfo = x.SendingAddressInfo,
                 })

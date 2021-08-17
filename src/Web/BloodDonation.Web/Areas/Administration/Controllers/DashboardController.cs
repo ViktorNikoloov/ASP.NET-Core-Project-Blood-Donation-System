@@ -7,6 +7,7 @@
     using BloodDonation.Data.Models;
     using BloodDonation.Services.Data.Administator;
     using BloodDonation.Services.Data.Appointment;
+    using BloodDonation.Services.Data.DTO;
     using BloodDonation.Services.Data.Email;
     using BloodDonation.Services.Data.Recipient;
     using BloodDonation.Services.Data.Settings;
@@ -186,7 +187,7 @@
 
             this.TempData["isApproved"] = $"Молбата беше одобрена.";
 
-            var recipientEmail = this.GetRecipientEmail();
+            var recipientEmail = this.appointmentsService.GetRecipientEmailByAppointmentId(id);
             var subject = "Вашата молба за кръв беше успешно одобрена.";
             var content = GlobalConstants.RecipientApprovedAppointmentResponse;
 
@@ -198,22 +199,44 @@
         [HttpPost]
         public async Task<IActionResult> RejectAppoinment(int id)
         {
-            await this.administratorService.RejectAppointmentAsync(id);
-
-            this.TempData["isRejected"] = $"Молбата беше Отхвърлена.";
-
-            var recipientEmail = this.GetRecipientEmail();
+            var recipientEmail = this.appointmentsService.GetRecipientEmailByAppointmentId(id);
             var subject = "Вашата молба за кръв беше отхвърлена";
             var content = GlobalConstants.RecipientRejectedAppointmentResponse;
 
+            await this.administratorService.RejectAppointmentAsync(id);
             await this.GenerateEmail(null, subject, content, "Appointment", recipientEmail);
 
+            this.TempData["isRejected"] = $"Молбата беше Отхвърлена.";
+
             return this.RedirectToAction(nameof(this.AllNotApproved));
+        }
+
+        public IActionResult UpdateAppoinment(int id)
+        {
+            var appointmentViewModel = this.appointmentsService.GetCurrentAppointment(id);
+
+            return this.View(appointmentViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateAppoinment(GetAppointmentById model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction(nameof(this.AppointmentById), model);
+            }
+
+            await this.administratorService.UpdateAppoinmentAsync(model);
+
+            this.TempData["isSuccessful"] = $"Молбата редактирана успешно.";
+
+            return this.RedirectToAction(nameof(this.AllApproved));
         }
 
         private async Task GenerateEmail(ApplicationUser? model, string subject, string content, string toWhom, string email = "")
         {
             var emailHtml = string.Empty;
+            var curremail = string.Empty;
             if (toWhom == "Applicant")
             {
                 emailHtml = this.emailsService.GenerateEmailApplicantResponseHtmlContent(model, subject, content);
@@ -223,14 +246,21 @@
                 emailHtml = this.emailsService.GenerateEmailAppoinmentResponseHtmlContent(model, subject, content);
             }
 
-            await this.emailSender.SendEmailAsync(GlobalConstants.SystemEmail, GlobalConstants.SystemName, model.Email, subject, emailHtml);
+            if (email != string.Empty)
+            {
+                curremail = email;
+            }
+            else
+            {
+                curremail = model.Email;
+
+            }
+
+            await this.emailSender.SendEmailAsync(GlobalConstants.SystemEmail, GlobalConstants.SystemName, curremail, subject, emailHtml);
         }
 
         private string GetRecipientEmail()
-        {
-            var currUser = this.userManager.FindByIdAsync(this.User.GetId()).GetAwaiter().GetResult();
+        => this.recipientsService.GetRecipientEmail(this.User.GetId());
 
-            return currUser.Email;
-        }
     }
 }
