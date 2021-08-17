@@ -1,10 +1,12 @@
 ﻿namespace BloodDonation.Services.Data.Donor
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using BloodDonation.Data.Models.Enums;
     using BloodDonation.Services.Data.DTO;
+    using BloodDonation.Web.ViewModels.Donor;
 
     public interface IDonorsService
     {
@@ -21,5 +23,13 @@
         int GetDonorRemainingDaysToDonation(DateTime lastDonation);
 
         DateTime GetWhenDonorCouldDonateAgain(DateTime lastDonation);
+
+        string GetDonorIdByUserId(string userId);
+
+        public bool CheckDonorExist(string userId);
+
+        public int GetAllAppointmentsTakeByDonorCount();
+
+        public IEnumerable<AllAppointmentsInListViewModel> GetAll(string userId, int page, int itemsPerPage);
     }
 }

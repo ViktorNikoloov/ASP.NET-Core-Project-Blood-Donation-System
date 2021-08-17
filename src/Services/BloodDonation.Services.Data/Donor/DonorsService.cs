@@ -1,6 +1,7 @@
 ﻿namespace BloodDonation.Services.Data.Donor
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -9,14 +10,22 @@
     using BloodDonation.Data.Models;
     using BloodDonation.Data.Models.Enums;
     using BloodDonation.Services.Data.DTO;
+    using BloodDonation.Web.ViewModels.Donor;
 
     public class DonorsService : IDonorsService
     {
         private readonly IDeletableEntityRepository<Donor> donorRepository;
+        private readonly IDeletableEntityRepository<Appointment> appointmentRepository;
+        private readonly IRepository<AppointmetsDonors> appointmentsDonorsRepository;
 
-        public DonorsService(IDeletableEntityRepository<Donor> donorRepository)
+        public DonorsService(
+            IDeletableEntityRepository<Donor> donorRepository,
+            IDeletableEntityRepository<Appointment> appointmentRepository,
+            IRepository<AppointmetsDonors> appointmentsDonorsRepository)
         {
             this.donorRepository = donorRepository;
+            this.appointmentRepository = appointmentRepository;
+            this.appointmentsDonorsRepository = appointmentsDonorsRepository;
         }
 
         public async Task FirstTimeDonorAddInfoAsync(string id, string firstName, string middleName, string lastName, string cityName, string streetName, int? postCode, string phoneNumber, Gender gender, BloodType bloodType, string imageUrl)
@@ -103,8 +112,36 @@
             await this.donorRepository.SaveChangesAsync();
         }
 
+        public IEnumerable<AllAppointmentsInListViewModel> GetAll(string userId, int page, int itemsPerPage)
+        {
+            var donorId = this.GetDonorIdByUserId(userId);
+            var appointmentsTakeByDonor = this.appointmentsDonorsRepository.All()
+            .Where(x => x.DonorId == donorId)
+            .Skip((page - 1) * itemsPerPage) // Pages formula
+            .Take(itemsPerPage)
+            .Select(x => new AllAppointmentsInListViewModel
+            {
+                Id = x.AppointmentId,
+                RecipientName = $"{x.Appointment.Recipient.FirstName} {x.Appointment.Recipient.LastName}",
+                StartDate = x.Appointment.StartDate,
+                DeadLine = x.Appointment.DeadLine,
+                RecipientBloodType = x.Appointment.Recipient.BloodType,
+                RecipientPhone = x.Appointment.Recipient.PhoneNumber,
+                RecipientEmail = x.Appointment.Recipient.User.Email,
+            })
+            .ToList();
+
+            return appointmentsTakeByDonor;
+        }
+
+        public int GetAllAppointmentsTakeByDonorCount()
+        => this.appointmentsDonorsRepository.AllAsNoTracking().Count();
+
         public string GetDonorIdByUserId(string userId)
         => this.donorRepository.All().FirstOrDefault(x => x.UserId == userId).Id;
+
+        public bool CheckDonorExist(string userId)
+        => this.donorRepository.All().Any(x => x.UserId == userId);
 
         public DateTime GetLastTimeDonorDonaton(string userId)
         => this.GetDonorById(userId).LastDonation;

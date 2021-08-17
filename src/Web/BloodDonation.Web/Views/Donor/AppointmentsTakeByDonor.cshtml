@@ -1,0 +1,84 @@
+﻿@using BloodDonation.Web.ViewModels.Donor
+@model AllAppointmentsListViewModel
+
+@{
+    ViewData["Title"] = "Молби взети от кръводарителя";
+
+}
+
+<div class="container bg-light p-2 table-bordered mb-3 mt-2">
+    <div class="text-center btn btn-primary btn-block"><h3 class="text-white">@ViewData["Title"]</h3></div>
+
+    <hr class=" bg-primary w-auto">
+
+    <div class="bs-example">
+        <div class="row">
+            <div class="col-sm-12">
+                @foreach (var appointment in @Model.Appointments)
+                {
+                <div class="card badge-info border border-dark mb-2">
+                    <div class="card-header text-center">
+                        <div class="col-sm">
+                            <p class="btn btn-block btn-icon btn-primary">Молба от @appointment.RecipientName</p>
+                        </div>
+
+                        <hr class=" bg-primary w-auto">
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col-sm text-center">
+                                <div class="col-sm">
+                                    <p class="btn btn-block btn-icon btn-primary">@appointment.EnumDisplayName</p>
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm text-center">
+                                <div class="col-sm">
+                                    <p class="btn btn-block btn-icon btn-primary">@appointment.StartDate</p>
+                                </div>
+                            </div>
+
+                            <div class="col-sm text-center">
+                                <div class="col-sm">
+                                    <p class="btn btn-block btn-icon btn-primary">@appointment.DeadLine</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-sm text-center">
+                                <div class="col-sm">
+                                    <p class="btn btn-block btn-icon btn-primary">@appointment.RecipientPhone</p>
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm text-center">
+                                <div class="col-sm">
+                                    <p class="btn btn-block btn-icon btn-primary">@appointment.RecipientEmail</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <hr class=" bg-primary w-auto">
+
+                    <div class="d-grid d-sm-flex justify-content-center">
+                        <a asp-action="AppointmentById" asp-controller="Appointment" asp-route-id="@appointment.Id" class="btn btn-outline-success btn-icon mb-3 ml-2 mr-2">Виж молбата</a>
+                    </div>
+                </div>
+
+                    
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class=" bg-primary w-auto">
+
+<partial name="_PagingPartial" model="@Model" />
