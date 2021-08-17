@@ -36,6 +36,13 @@
                 </button>
             </li>
 
+            <li class="nav-item">
+                <button type="button" class="btn btn-outline-danger btn-icon btn-sm  m-0 m-md-1">
+                    <a class="nav-link" asp-area="" asp-controller="Donor" asp-action="AppointmentsTakeByDonor">
+                        <i class="fas fa-hand-holding-heart"></i> Взети молби
+                    </a>
+                </button>
+            </li>
         }
 
     }
@@ -57,7 +64,7 @@
             var whenDonorCouldDonateAgain = DonorsService.GetDonorRemainingDaysToDonation(donorLastDonation);
             <li class="nav-item">
                 <i class="btn btn-success btn-icon btn-pill m-md-2 p-2">
-                    Последно кръводаряване на: <span class="badge bg-success text-primary">@donorLastDonation.ToShortDateString()</span>
+                    Последно кръводаряване на: <span class="badge bg-primary text-success">@donorLastDonation.ToShortDateString()</span>
                 </i>
             </li>
 
