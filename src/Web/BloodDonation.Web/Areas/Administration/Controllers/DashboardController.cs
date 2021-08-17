@@ -228,7 +228,7 @@
 
             await this.administratorService.UpdateAppoinmentAsync(model);
 
-            this.TempData["isSuccessful"] = $"Молбата редактирана успешно.";
+            this.TempData["IsSuccessful"] = $"Молбата беше редактирана успешно.";
 
             return this.RedirectToAction(nameof(this.AllApproved));
         }

@@ -99,7 +99,7 @@
             var isDonorExistInDonorsAppointmetns = this.appointmnetsService.IsDonorExistInDonorsAppointmetns(id, this.CurrUserId());
             if (isDonorExistInDonorsAppointmetns)
             {
-                this.TempData["NotFoundMessage"] = $"Вече сте се отзовали на тази.";
+                this.TempData["NotFoundMessage"] = $"Вече сте се отзовали на тази обява.";
 
                 return this.Redirect("/Donor/All");
             }

@@ -1,8 +1,9 @@
 ﻿namespace BloodDonation.Services.Data.DTO
 {
-    using BloodDonation.Web.Infrastructure;
     using System;
     using System.ComponentModel.DataAnnotations;
+
+    using BloodDonation.Web.Infrastructure;
 
     public class GetAppointmentById
     {
@@ -20,15 +21,13 @@
 
         [Display(Name = "Необходимо от")]
         [DataType(DataType.Date)]
-        [DateValidation]
+        //[DateValidation]
         public DateTime StartDate { get; set; }
 
         [Display(Name = "Краен срок")]
         [DataType(DataType.Date)]
         [EndTimeValidation("StartDate")]
         public DateTime DeadLine { get; set; }
-
-        public bool IsApproved { get; set; }
 
         public string AdditionalInfo { get; set; }
     }
