@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using BloodDonation.Data.Common.Repositories;
     using BloodDonation.Data.Models;
     using BloodDonation.Services.Mapping;
@@ -39,7 +40,6 @@
         {
             var article = new Article
             {
-                Id = input.ArticleId,
                 UserId = userId,
                 Title = input.Title,
                 Description = input.Description,

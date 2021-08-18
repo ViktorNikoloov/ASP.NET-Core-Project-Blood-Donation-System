@@ -4,8 +4,6 @@
 
     public class ArticleCreateInputModel
     {
-        public int ArticleId { get; set; }
-
         [Display(Name = "Име на статията")]
         [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
         [RegularExpression(@"[А-я]+.*\s*[А-я]*", ErrorMessage = "Полето \"{0}\" трябва да е на кирилица")]
