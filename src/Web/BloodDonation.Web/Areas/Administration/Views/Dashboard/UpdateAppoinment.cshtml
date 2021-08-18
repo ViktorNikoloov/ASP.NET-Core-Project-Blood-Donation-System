@@ -1,16 +1,17 @@
-﻿@using BloodDonation.Web.ViewModels.Administration.Dashboard
-@model AppointmentViewModel
+﻿@using BloodDonation.Services.Data.DTO
+@model GetAppointmentById
 
 @{
     ViewData["Title"] = "Молба за кръв";
 
 }
 
+<form method="post">
     <div class="container bg-light p-2 table-bordered mb-3 mt-2">
         <div class="text-center btn btn-primary btn-block"><h3 class="text-white">@ViewData["Title"] на <u>@Model.RecipientFullName</u></h3></div>
 
         <hr class=" bg-primary w-auto">
-
+        <div asp-validation-summary="All" class=" alert-danger" role="alert"></div>
         <div class="bs-example">
             <div class="row">
                 <div class="col-sm-12">
@@ -39,11 +40,13 @@
                                 <div class="col-sm text-center">
                                     <div class="col-sm">
                                         <label asp-for="@Model.DeadLine"></label>
-                                        <p class="btn btn-block btn-icon btn-primary">@Model.DeadLine.ToLocalTime().ToShortDateString()</p>
+                                        <input asp-for="@Model.DeadLine" class="form-control" />
+                                        <span asp-validation-for="@Model.DeadLine" class="text-danger"></span>
                                     </div>
                                     <div class="col-sm">
                                         <label asp-for="@Model.BloodBankCount"></label>
-                                        <p class="btn btn-block btn-icon btn-primary">@Model.BloodBankCount/бр.</p>
+                                        <input asp-for="@Model.BloodBankCount" class="form-control" />
+                                        <span asp-validation-for="@Model.BloodBankCount" class="text-danger"></span>
                                     </div>
                                 </div>
 
@@ -63,15 +66,18 @@
                             <div class="card-text text-center">
                                 <div class="col form-group">
                                     <label asp-for="@Model.HospitalName"></label>
-                                    <p class="btn btn-block btn-icon btn-primary">@Model.HospitalName</p>
+                                    <input asp-for="@Model.HospitalName" class="form-control" />
+                                    <span asp-validation-for="@Model.HospitalName" class="text-danger"></span>
                                 </div>
                                 <div class="col form-group">
                                     <label asp-for="@Model.HospitalWard"></label>
-                                    <p class="btn btn-block btn-icon btn-primary">@Model.HospitalWard</p>
+                                    <input asp-for="@Model.HospitalWard" class="form-control" />
+                                    <span asp-validation-for="@Model.HospitalWard" class="text-danger"></span>
                                 </div>
                                 <div class="col form-group">
                                     <label asp-for="@Model.HospitalCity"></label>
-                                    <p class="btn btn-block btn-icon btn-primary">@Model.HospitalCity</p>
+                                    <input asp-for="@Model.HospitalCity" class="form-control" />
+                                    <span asp-validation-for="@Model.HospitalCity" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
@@ -90,7 +96,8 @@
 
                                 <div class="col form-group">
                                     <label asp-for="@Model.SendingAddressInfo"></label>
-                                    <p class="btn btn-block btn-icon btn-primary">@Model.SendingAddressInfo</p>
+                                    <textarea asp-for="@Model.SendingAddressInfo" class="form-control" placeholder="Пример: гр.Пловдив, oфис на Спиди - 2-ра градска болница."> </textarea>
+                                    <span asp-validation-for="@Model.SendingAddressInfo" class="text-danger"></span>
                                 </div>
 
                             </div>
@@ -98,7 +105,8 @@
 
                                 <div class="col form-group">
                                     <label asp-for="@Model.AdditionalInfo"></label>
-                                    <p class="btn btn-block btn-icon btn-primary">@Model.AdditionalInfo</p>
+                                    <textarea asp-for="@Model.AdditionalInfo" class="form-control " placeholder="Пример: Здавейте, мили хора, вчера на посочета по-горе дата ще ме приемат в болница за спешна операция и се нуждая от описаното количество банки кръв. Сърдечно Ви благодаря !"> </textarea>
+                                    <span asp-validation-for="@Model.AdditionalInfo" class="text-danger"></span>
                                 </div>
 
                             </div>
@@ -111,69 +119,40 @@
         <hr class=" bg-primary w-auto">
 
         <div class="col text-center bg-light s2 right">
-            <a asp-area="Administration" asp-controller="Dashboard" asp-action="AllNotApproved" class="btn btn-outline-info btn-icon btn-md" type="submit" name="action">
+            <a asp-area="Administration" asp-controller="Dashboard" asp-action="AllApproved" class="btn btn-outline-info btn-icon btn-md" type="submit" name="action">
                 <i class="fas fa-arrow-left">Назад</i>
             </a>
 
-            @*Modal Reject*@
-            <button type="button" class="btn btn btn-outline-danger btn-icon" data-toggle="modal" data-target="#rejectButton">
-                <i class="fas fa-user-slash">Отхвърли</i>
+            @*Modal Update*@
+            <button type="button" class="btn btn btn-outline-secondary btn-icon" data-toggle="modal" data-target="#updateButton">
+                <i class="fas fa-user-edit">Редактирай</i>
             </button>
 
-            @*Modal Accept*@
-            <button type="button" class="btn btn-outline-success btn-icon" data-toggle="modal" data-target="#acceptButton">
-                <i class="fas fa-user-check">Одобри</i>
-            </button>
 
         </div>
 
-        @*Modal Reject*@
-        <div class="modal fade" id="rejectButton" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        @*Modal Update*@
+        <div class="modal fade" id="updateButton" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog ">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-titlete text-center" id="staticBackdropLabel" style="color:darkred"><u>Изтриване на Молба!</u></h5>
+                        <h5 class="modal-titlete text-center" id="staticBackdropLabel" style="color:darkred"><u>Редактиране на Молба!</u></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p class="bg-light">Сигурни ли сте, че искате да изтриете молбата на "@Model.RecipientFullName".</p>
+                        <p class="bg-light">Сигурни ли сте, че искате да редактирате молбата на "@Model.RecipientFullName".</p>
+                        <p class="bg-light text-danger">Веднъж нанесени промените не могат да се върнат !</p>
                     </div>
                     <div class="modal-footer">
-                        <form method="post" asp-action="RejectAppoinment" asp-route-id="@Model.Id">
+                        <div>
                             <button type="button" class="btn btn-info btn-icon" data-dismiss="modal">Затвори</button>
-                            <button type="submit" class="btn btn-danger btn-icon">Изтрий</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        @*Modal Accept*@
-        <div class="modal fade" id="acceptButton" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-titlete text-center" id="staticBackdropLabel" style="color:seagreen"><u>Одобряване на Молба!</u></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p class="bg-light">Сигурни ли сте, че искате да одобрите Молбата на "@Model.RecipientFullName".</p>
-                    </div>
-                    <div class="modal-footer">
-                        <form method="post" asp-action="ApproveAppoinment" asp-route-id="@Model.Id">
-                            <button type="button" class="btn btn-info btn-icon" data-dismiss="modal">Затвори</button>
-                            <button type="submit" class="btn btn-success btn-icon">Одобри</button>
-                        </form>
+                            <button asp-area="Administration" asp-controller="Dashboard" asp-action="UpdateAppoinment" asp-route-id="@Model.Id" type="submit" class="btn btn-secondary btn-icon">Редактирай</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+</form>

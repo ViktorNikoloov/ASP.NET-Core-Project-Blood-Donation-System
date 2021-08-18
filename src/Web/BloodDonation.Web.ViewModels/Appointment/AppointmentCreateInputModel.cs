@@ -1,8 +1,9 @@
 ﻿namespace BloodDonation.Web.ViewModels.Appointment
 {
-    using BloodDonation.Web.Infrastructure;
     using System;
     using System.ComponentModel.DataAnnotations;
+
+    using BloodDonation.Web.Infrastructure;
 
     using static BloodDonation.Common.DataGlobalConstants.AppointmentConstants;
 

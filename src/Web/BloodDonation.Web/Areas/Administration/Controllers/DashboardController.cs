@@ -15,9 +15,12 @@
     using BloodDonation.Web.Infrastructure;
     using BloodDonation.Web.ViewModels.Administration.Dashboard;
     using BloodDonation.Web.ViewModels.Appointment;
+
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
+    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class DashboardController : AdministrationController
     {
         private readonly ISettingsService settingsService;
@@ -154,9 +157,7 @@
                 Appointments = this.appointmentsService.GetAll(id, ItemPerPage, appointmentStatus),
             };
 
-            this.TempData["ForApproval"] = appointmentStatus;
-
-            return this.View("All", viewModel);
+            return this.View(viewModel);
         }
 
         public IActionResult AllApproved(int id = GlobalConstants.PaginationStartPageNumber)
@@ -170,7 +171,7 @@
                 Appointments = this.appointmentsService.GetAll(id, ItemPerPage, "Approved"),
             };
 
-            return this.View("All", viewModel);
+            return this.View(viewModel);
         }
 
         public IActionResult AppointmentById(int id)
@@ -221,14 +222,23 @@
         [HttpPost]
         public async Task<IActionResult> UpdateAppoinment(GetAppointmentById model)
         {
+            //var userId = this.User.GetId();
+            //var isDonorExist = this.donorsService.CheckDonorExist(userId);
+            //var donorId = this.donorsService.GetDonorIdByUserId(userId);
+
+            //if (!isDonorExist)
+            //{
+            //    return this.Redirect("/Home/StatusCodeError");
+            //}
+
             if (!this.ModelState.IsValid)
             {
-                return this.RedirectToAction(nameof(this.AppointmentById), model);
+                return this.View(model);
             }
 
             await this.administratorService.UpdateAppoinmentAsync(model);
 
-            this.TempData["IsSuccessful"] = $"Молбата беше редактирана успешно.";
+            this.TempData["isApproved"] = $"Молбата беше редактирана успешно.";
 
             return this.RedirectToAction(nameof(this.AllApproved));
         }

@@ -121,7 +121,6 @@
         public async Task UpdateAppoinmentAsync(GetAppointmentById model)
         {
             var currAppointment = this.GetCurrentAppointment(model.Id);
-            currAppointment.StartDate = model.StartDate;
             currAppointment.DeadLine = model.DeadLine;
             currAppointment.BloodBankCount = model.BloodBankCount;
             currAppointment.Hospital.HospitalName = model.HospitalName;

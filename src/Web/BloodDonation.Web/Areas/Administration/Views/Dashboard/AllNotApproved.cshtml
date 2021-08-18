@@ -28,7 +28,7 @@
 
 <div class="container container-fluid bg-neutral ">
 
-    <h3 class="display-4 text-md-center">@ViewData["Title"]</h3>
+    <h2 class="text-md-center">Всички неодобрени @ViewData["Title"]</h2>
 
     <hr class="bg-primary w-auto">
 
@@ -66,6 +66,12 @@
             </div>
         }
 
+    </div>
+
+    <div class="col text-center bg-light s2 right">
+        <a asp-area="Administration" asp-controller="Dashboard" asp-action="RegulationPage" class="btn btn-outline-info btn-icon btn-md btn-block" type="submit" name="action">
+            <i class="fas fa-arrow-left">Назад</i>
+        </a>
     </div>
 </div>
 

@@ -4,7 +4,6 @@
     using System.ComponentModel.DataAnnotations;
 
     using BloodDonation.Data.Models.Enums;
-    using BloodDonation.Web.Infrastructure;
 
     public class AppointmentViewModel
     {
@@ -15,12 +14,10 @@
 
         [Display(Name = "Необходимо от")]
         [DataType(DataType.Date)]
-        [DateValidation]
         public DateTime StartDate { get; set; }
 
         [Display(Name = "Краен срок")]
         [DataType(DataType.Date)]
-        [EndTimeValidation("StartDate")]
         public DateTime DeadLine { get; set; }
 
         [Display(Name = "Кръвна група")]
