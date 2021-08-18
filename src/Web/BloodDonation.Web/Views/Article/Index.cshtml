@@ -1,0 +1,31 @@
+﻿@using BloodDonation.Common
+@using BloodDonation.Web.ViewModels.Article
+@model ArticlesListViewModel
+
+@{
+    ViewData["Title"] = "Форум Статии";
+
+}
+
+<div class="text-center">
+
+</div>
+
+<div class="container-fluid bg-transparent">
+    <div class="text-center btn btn-primary btn-block"><h3 class="text-white">@ViewData["Title"]</h3></div>
+
+    <div class="row row-cols-6 row-cols-sm-2 g-4">
+
+        @foreach (var article in Model.Articles)
+        {
+            <div class="media col text-center mt-2">
+                <img class="align-self-start" src="@article.ImageUrl" alt="article.Title">
+                <div class="media-body bg-primary">
+                    <h5 class="mt-0"><a href="@article.Url">@article.Title (@article.CommentCount)</a></h5>
+                    <p class="text-white">@article.Discription.Substring(0, 60)</p>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

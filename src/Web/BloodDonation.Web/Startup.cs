@@ -11,6 +11,7 @@
     using BloodDonation.Data.Seeding;
     using BloodDonation.Services.Data.Administator;
     using BloodDonation.Services.Data.Appointment;
+    using BloodDonation.Services.Data.Article;
     using BloodDonation.Services.Data.Cloudinary;
     using BloodDonation.Services.Data.Donor;
     using BloodDonation.Services.Data.Email;
@@ -131,6 +132,7 @@
             services.AddTransient<IAppointmentsService, AppointmentsService>();
             services.AddTransient<IEmailsService, EmailsService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
+            services.AddTransient<IArticlesService, ArticlesService>();
             services.AddTransient<IViewRenderService, ViewRenderService>();
         }
 
