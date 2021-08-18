@@ -1,26 +1,24 @@
-﻿namespace BloodDonation.Services.Data.Article
+﻿namespace BloodDonation.Services.Data.Blog
 {
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
     using BloodDonation.Data.Common.Repositories;
     using BloodDonation.Data.Models;
     using BloodDonation.Services.Mapping;
-    using BloodDonation.Web.ViewModels.Article;
 
-    public class ArticlesService : IArticlesService
+    public class BlogService : IBlogService
     {
-        private readonly IDeletableEntityRepository<Blog> articlesRepository;
+        private readonly IDeletableEntityRepository<Blog> blogRepository;
 
-        public ArticlesService(IDeletableEntityRepository<Blog> articlesRepository)
+        public BlogService(IDeletableEntityRepository<Blog> blogRepository)
         {
-            this.articlesRepository = articlesRepository;
+            this.blogRepository = blogRepository;
         }
 
         public IEnumerable<T> GetAll<T>(int? count = null)
         {
-            IQueryable<Blog> query = this.articlesRepository.All().OrderBy(x => x.CreatedOn);
+            IQueryable<Blog> query = this.blogRepository.All().OrderBy(x => x.CreatedOn);
 
             if (count.HasValue)
             {
@@ -31,7 +29,7 @@
         }
 
         public T GetByName<T>(string name)
-        => this.articlesRepository
+        => this.blogRepository
                 .All()
                 .Where(x => x.Title == name)
                .To<T>().FirstOrDefault();

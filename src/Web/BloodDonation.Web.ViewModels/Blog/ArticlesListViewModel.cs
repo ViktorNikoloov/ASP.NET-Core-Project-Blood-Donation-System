@@ -1,4 +1,4 @@
-﻿namespace BloodDonation.Web.ViewModels.Article
+﻿namespace BloodDonation.Web.ViewModels.Blog
 {
     using System.Collections.Generic;
 

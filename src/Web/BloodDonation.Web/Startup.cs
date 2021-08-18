@@ -132,7 +132,7 @@
             services.AddTransient<IAppointmentsService, AppointmentsService>();
             services.AddTransient<IEmailsService, EmailsService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
-            services.AddTransient<IArticlesService, ArticlesService>();
+            services.AddTransient<IBlogService, ArticlesService>();
             services.AddTransient<IViewRenderService, ViewRenderService>();
         }
 

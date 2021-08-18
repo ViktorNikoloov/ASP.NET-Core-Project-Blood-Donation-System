@@ -1,8 +1,8 @@
-﻿namespace BloodDonation.Services.Data.Article
+﻿namespace BloodDonation.Services.Data.Blog
 {
     using System.Collections.Generic;
 
-    public interface IArticlesService
+    public interface IBlogService
     {
         IEnumerable<T> GetAll<T>(int? count = null);
 

@@ -1,4 +1,4 @@
-﻿namespace BloodDonation.Web.ViewModels.Article
+﻿namespace BloodDonation.Web.ViewModels.Blog
 {
     using System;
     using System.Collections.Generic;
@@ -14,6 +14,8 @@
         public string Title { get; set; }
 
         public string Description { get; set; }
+
+        public string ShortDescription => this.Description?.Length > 60 ? this.Description?.Substring(0, 50) + "..." : this.Description;
 
         public string ImageUrl { get; set; }
 

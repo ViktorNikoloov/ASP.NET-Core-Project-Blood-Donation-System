@@ -1,15 +1,20 @@
 ﻿@using BloodDonation.Common
-@using BloodDonation.Web.ViewModels.Article
+@using BloodDonation.Web.ViewModels.Blog
 @model ArticleByName
+
+@{
+    this.ViewData["Title"] = Model.Title;
+
+}
 
 <div class="container m-2">
 
-    <p><img class="img-fluid" src="https://i.pik.bg/news/933/660_14ad8b2c3c08ebe5b98e8faa49fa61f9.jpg" alt="@Model.Title"></p>
+    <p><img class="img-fluid" src="https://i.pik.bg/news/933/660_14ad8b2c3c08ebe5b98e8faa49fa61f9.jpg" alt="@this.ViewData["Title"]"></p>
 
     <div class="row">
         <div class="col-lg-9">
             <div class="bloglist singlepost">
-                <h1>@Model.Title</h1>
+                <h1>@this.ViewData["Title"]</h1>
                 <div>
                     <ul class="row">
                         <li class="col">
@@ -18,7 +23,7 @@
                         </li>
                         <li class="col">
                             <i class="fa fa-user"></i>
-                            @Model.UserUserName.Substring(0, 5)
+                            @Model.ShortDescription
                         </li>
                         <li class="col">
                             <i class="fa fa-comment"></i>
@@ -48,7 +53,7 @@
                     </div>
                     <div class="row ml-2">
                         <i class="fa fa-calendar"></i>
-                       @comment.CreatedOn.ToLocalTime().ToShortDateString()
+                        @comment.CreatedOn.ToLocalTime().ToShortDateString()
                     </div>
 
                 </li>
