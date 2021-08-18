@@ -26,6 +26,11 @@
 
     <div class="text-center btn btn-primary btn-block"><h3 class="text-white">@ViewData["Title"]</h3></div>
 
+    <div class="row text-center">
+        <div class="col"><span class="dot bg-success mt-2"></span>Активни молби</div>
+        <div class="col"><span class="dot bg-info mt-2"></span>Неактивни молби</div>
+    </div>
+
     <hr class=" bg-primary w-auto">
 
     <div class="bs-example">
@@ -113,3 +118,7 @@
 <hr class=" bg-primary w-auto">
 
 <partial name="_PagingPartial" model="@Model" />
+
+@section Scripts{
+    <link href="~/css/formAndColorCircle.css" rel="stylesheet" />
+}

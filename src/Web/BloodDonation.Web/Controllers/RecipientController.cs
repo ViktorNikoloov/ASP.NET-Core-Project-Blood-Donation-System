@@ -21,7 +21,7 @@
         {
             var userId = this.User.GetId();
             var isRecipientExist = this.recipientsService.CheckRecipientExist(userId);
-            var RecipientId = this.recipientsService.GetRecipientIdByUserId(userId);
+            var recipientId = this.recipientsService.GetRecipientIdByUserId(userId);
 
             if (!isRecipientExist)
             {
@@ -33,7 +33,7 @@
             {
                 ItemPerPage = ItemPerPage,
                 PageNumber = id,
-                AppointmentsCount = this.recipientsService.GetAllAppointmentsApllyByRecipientCount(RecipientId),
+                AppointmentsCount = this.recipientsService.GetAllAppointmentsApllyByRecipientCount(recipientId),
                 Appointments = this.recipientsService.GetAll(userId, id, ItemPerPage),
             };
 
