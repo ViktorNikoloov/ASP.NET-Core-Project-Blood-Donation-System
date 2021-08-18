@@ -10,11 +10,12 @@
 * SendGrid 
 * Cloudinary -> Save Images at the Cloud service
 * Facebook and Google login
-* HtmlSanitizer -> Clear Incoming HTML from the chat for XSS
+* Tinymce
+* HtmlSanitizer -> Clear Incoming HTML from the creation of articles
 * HangFire for Administrator
 
 ## <u>Hosted on</u>:
-* Azure
+* Azure - https://blooddonationbg.azurewebsites.net/
 
 ## <u>Author</u>
 * Viktor Nikolov
@@ -74,6 +75,12 @@ There is a [information on the navigation bar](https://res.cloudinary.com/dvvbab
 
 - Once the appointment request has been took, to the recipient will be sending a email that the appointment is taken and a little information about the donor.
 
+* ### 4. Blog articles
+* Create an [articles](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629315304/Recipients/README/table_a4qfq6.jpg)
+* All blog [articles](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629318198/Recipients/README/AllArticle_sc76vj.jpg)
+* Every read the [article](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629317891/Recipients/README/Article_imibcd.jpg)
+* Create ot read [comments](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629318021/Recipients/README/Comments_cflspn.jpg) on the article's page
+* A few articles [in home page](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629317317/Recipients/README/Homearticles_abfevm.jpg)
 
 * ### 3. Admin panel
 The admin have an [Admin panel](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629214471/Recipients/README/Admin_panel_candidates_approved_message_zwu3sw.jpg).
@@ -82,7 +89,7 @@ The admin could:
 * Take a look of the donor's control questions and take care of approve or reject the applicants.
 * Take a look of every new applyed blood appointment and decide to aprove or reject it.
 * Could Edit all blood appointment
-* Could write new blog post or edit the old one
+* Could write new blog articles or edit the old one
 * Have access to HangFire statistics
 
 
