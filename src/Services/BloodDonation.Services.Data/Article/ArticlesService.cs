@@ -11,16 +11,16 @@
 
     public class ArticlesService : IArticlesService
     {
-        private readonly IDeletableEntityRepository<Article> articlesRepository;
+        private readonly IDeletableEntityRepository<Blog> articlesRepository;
 
-        public ArticlesService(IDeletableEntityRepository<Article> articlesRepository)
+        public ArticlesService(IDeletableEntityRepository<Blog> articlesRepository)
         {
             this.articlesRepository = articlesRepository;
         }
 
         public IEnumerable<T> GetAll<T>(int? count = null)
         {
-            IQueryable<Article> query = this.articlesRepository.All().OrderBy(x => x.CreatedOn);
+            IQueryable<Blog> query = this.articlesRepository.All().OrderBy(x => x.CreatedOn);
 
             if (count.HasValue)
             {
@@ -29,5 +29,11 @@
 
             return query.To<T>().ToList();
         }
+
+        public T GetByName<T>(string name)
+        => this.articlesRepository
+                .All()
+                .Where(x => x.Title == name)
+               .To<T>().FirstOrDefault();
     }
 }

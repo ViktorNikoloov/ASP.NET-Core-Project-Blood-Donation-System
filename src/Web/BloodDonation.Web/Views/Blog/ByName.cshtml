@@ -1,0 +1,80 @@
+﻿@using BloodDonation.Common
+@using BloodDonation.Web.ViewModels.Article
+@model ArticleByName
+
+<div class="container m-2">
+
+    <p><img class="img-fluid" src="https://i.pik.bg/news/933/660_14ad8b2c3c08ebe5b98e8faa49fa61f9.jpg" alt="@Model.Title"></p>
+
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="bloglist singlepost">
+                <h1>@Model.Title</h1>
+                <div>
+                    <ul class="row">
+                        <li class="col">
+                            <i class="fa fa-calendar"></i>
+                            @Model.CreatedOn.ToLocalTime().ToShortDateString()
+                        </li>
+                        <li class="col">
+                            <i class="fa fa-user"></i>
+                            @Model.UserUserName.Substring(0, 5)
+                        </li>
+                        <li class="col">
+                            <i class="fa fa-comment"></i>
+                            @Model.Comments.Count()
+                        </li>
+                    </ul>
+                </div>
+                <div class="post-content break-text eee-ul-blog-posts">
+                    @Model.Description
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+
+    <div class="eee-break-all" id="comments">
+        <h3 class="text-center">Коментари</h3>
+        <ul sclass="list-unstyled border border-danger">
+            @foreach (var comment in Model.Comments)
+            {
+                <li class="row ml-3">
+                    <div class="row mr-1">
+                        <i class="fa fa-user"></i> @comment.UserUserName
+                    </div>
+                    <div class="row ml-2">
+                        <i class="fa fa-calendar"></i>
+                       @comment.CreatedOn.ToLocalTime().ToShortDateString()
+                    </div>
+
+                </li>
+
+                <li class="media border border-info p-1">
+                    <img class="mr-3" src="@GlobalConstants.DefaulPicturetUrl" alt="Generic placeholder image">
+                    <div class="media-body">
+                        <h6 class="text-center">Съдържание:</h6>
+                        <p class="border border-info p-1">@comment.Content</p>
+                    </div>
+                </li>
+
+                <hr class="bg-info">
+            }
+
+        </ul>
+
+    </div>
+
+
+    <form method="post" action="/BlogComments/Comment">
+        <div class="form-group mt-3">
+            <h5 class="text-center">Напиши коментар:</h5>
+            <textarea class="form-control" rows="10" data-val="true" data-val-length="fsfefsfs"></textarea>
+            <span class="text-danger field-validation-valid" data-valmsg-for="CommentContent" data-valmsg-replace="true"></span>
+        </div>
+        <button type="submit" id="submit2" class="btn btn-info form-control mb-2">Изпрати</button>
+    </form>
+</div>

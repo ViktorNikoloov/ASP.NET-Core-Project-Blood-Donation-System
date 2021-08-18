@@ -15,13 +15,13 @@
         private readonly IDeletableEntityRepository<Appointment> appointmetsRepository;
         private readonly IDeletableEntityRepository<Recipient> recipientRepository;
         private readonly IDeletableEntityRepository<Donor> donorRepository;
-        private readonly IRepository<AppointmetsDonors> appointmentsDonorsRepository;
+        private readonly IRepository<AppointmentsDonors> appointmentsDonorsRepository;
 
         public AppointmentsService(
             IDeletableEntityRepository<Appointment> appointmetsRepository,
             IDeletableEntityRepository<Recipient> recipientRepository,
             IDeletableEntityRepository<Donor> donorRepository,
-            IRepository<AppointmetsDonors> appointmentsDonorsRepository)
+            IRepository<AppointmentsDonors> appointmentsDonorsRepository)
         {
             this.appointmetsRepository = appointmetsRepository;
             this.recipientRepository = recipientRepository;
@@ -132,7 +132,7 @@
             var curruntDonor = this.donorRepository.All().FirstOrDefault(x => x.Id == currentDonorId);
             var currAppointment = this.appointmetsRepository.All().FirstOrDefault(x => x.Id == appointmentId);
 
-            var appointmetsDonors = new AppointmetsDonors
+            var appointmetsDonors = new AppointmentsDonors
             {
                 DonorId = currentDonorId,
                 AppointmentId = appointmentId,

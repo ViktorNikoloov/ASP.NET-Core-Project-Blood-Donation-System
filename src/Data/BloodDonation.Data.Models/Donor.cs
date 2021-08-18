@@ -15,7 +15,7 @@
         {
             this.Id = Guid.NewGuid().ToString();
 
-            this.Appointments = new HashSet<AppointmetsDonors>();
+            this.Appointments = new HashSet<AppointmentsDonors>();
             this.Massages = new HashSet<Massage>();
         }
 
@@ -50,7 +50,7 @@
 
         public virtual ApplicationUser User { get; set; }
 
-        public virtual ICollection<AppointmetsDonors> Appointments { get; set; }
+        public virtual ICollection<AppointmentsDonors> Appointments { get; set; }
 
         public virtual ICollection<Massage> Massages { get; set; }
     }

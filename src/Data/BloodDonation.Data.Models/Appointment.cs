@@ -12,7 +12,7 @@
     {
         public Appointment()
         {
-            this.Appointments = new HashSet<AppointmetsDonors>();
+            this.Appointments = new HashSet<AppointmentsDonors>();
         }
 
         public virtual Hospital Hospital { get; set; }
@@ -36,7 +36,7 @@
 
         public virtual Recipient Recipient { get; set; }
 
-        public virtual ICollection<AppointmetsDonors> Appointments { get; set; }
+        public virtual ICollection<AppointmentsDonors> Appointments { get; set; }
 
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace BloodDonation.Data.Models
 {
-   public class AppointmetsDonors
+   public class AppointmentsDonors
     {
         public int Id { get; set; }
 

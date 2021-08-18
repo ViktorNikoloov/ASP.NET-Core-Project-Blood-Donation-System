@@ -47,9 +47,9 @@
 
         public DbSet<ContactFormEntry> ContactFormEntry { get; set; }
 
-        public DbSet<AppointmetsDonors> AppointmetsDonors { get; set; }
+        public DbSet<AppointmentsDonors> AppointmetsDonors { get; set; }
 
-        public DbSet<Article> Articles { get; set; }
+        public DbSet<Blog> Articles { get; set; }
 
         public DbSet<Comment> Comments { get; set; }
 

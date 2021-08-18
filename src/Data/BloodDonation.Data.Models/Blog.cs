@@ -4,16 +4,16 @@
 
     using BloodDonation.Data.Common.Models;
 
-    public class Article : BaseDeletableModel<int>
+    public class Blog : BaseDeletableModel<int>
     {
-        public Article()
+        public Blog()
         {
             this.Comments = new HashSet<Comment>();
         }
 
         public string Title { get; set; }
 
-        public string Discription { get; set; }
+        public string Description { get; set; }
 
         public string ImageUrl { get; set; }
 

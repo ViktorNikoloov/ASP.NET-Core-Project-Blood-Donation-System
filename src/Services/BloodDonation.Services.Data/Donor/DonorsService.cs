@@ -16,12 +16,12 @@
     {
         private readonly IDeletableEntityRepository<Donor> donorRepository;
         private readonly IDeletableEntityRepository<Appointment> appointmentRepository;
-        private readonly IRepository<AppointmetsDonors> appointmentsDonorsRepository;
+        private readonly IRepository<AppointmentsDonors> appointmentsDonorsRepository;
 
         public DonorsService(
             IDeletableEntityRepository<Donor> donorRepository,
             IDeletableEntityRepository<Appointment> appointmentRepository,
-            IRepository<AppointmetsDonors> appointmentsDonorsRepository)
+            IRepository<AppointmentsDonors> appointmentsDonorsRepository)
         {
             this.donorRepository = donorRepository;
             this.appointmentRepository = appointmentRepository;

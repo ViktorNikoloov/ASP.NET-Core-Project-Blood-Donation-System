@@ -1,75 +1,31 @@
-﻿<link rel="stylesheet" href="/lib/fontawesome/css/all.min.css?v=2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y" />
-@*<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css?v=T_zFmO5s_0aSwc6ics2KLxlfbewyRz6UNw1s3Ppf5gE" />*@
-<link rel="stylesheet" href="/css/site.min.css?v=2Swx5JjzZSrDowcskJ3B9caeF_3bzm76Cbf3M1vT69g" />
+﻿@using BloodDonation.Common
+@using BloodDonation.Web.ViewModels.Article
+@model ArticlesListViewModel
 
-<div class="bg_color_1">
-    <div class="container margin_120_95">
-        <div class="main_title_2">
-            <span><em></em></span>
-            <h2>Блог статии</h2>
-        </div>
-        <div class="row break-text">
-            <div class="col-lg-6">
-                <a class="box_news" href="/Blog/pythagoras">
-                    <figure>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Kapitolinischer_Pythagoras_adjusted.jpg/250px-Kapitolinischer_Pythagoras_adjusted.jpg" alt="&#x41A;&#x43E;&#x439; &#x435; &#x41F;&#x438;&#x442;&#x430;&#x433;&#x43E;&#x440; &#x438; &#x43A;&#x430;&#x43A;&#x432;&#x43E; &#x437;&#x43D;&#x430;&#x435;&#x43C; &#x437;&#x430; &#x43D;&#x435;&#x433;&#x43E;?" title="&#x41A;&#x43E;&#x439; &#x435; &#x41F;&#x438;&#x442;&#x430;&#x433;&#x43E;&#x440; &#x438; &#x43A;&#x430;&#x43A;&#x432;&#x43E; &#x437;&#x43D;&#x430;&#x435;&#x43C; &#x437;&#x430; &#x43D;&#x435;&#x433;&#x43E;?">
-                        <figcaption><strong>8</strong>Jul</figcaption>
-                    </figure>
-                    <ul>
-                        <li>7/8/2021</li>
-                    </ul>
-                    <h4>&#x41A;&#x43E;&#x439; &#x435; &#x41F;&#x438;&#x442;&#x430;&#x433;&#x43E;&#x440; &#x438; &#x43A;&#x430;&#x43A;&#x432;&#x43E; &#x437;&#x43D;&#x430;&#x435;&#x43C; &#x437;&#x430; &#x43D;&#x435;&#x433;&#x43E;?</h4>
-                    <p>&#x41F;&#x438;&#x442;&#x430;&#x433;&#x43E;&#x440; - &#x438;&#x437;&#x43F;&#x440;&#x430;&#x442;&#x435;&#x43D;&#x438;&#x44F;&#x442; &#x43E;&#x442; &#x410;&#x43F;&#x43E;&#x43B;&#x43E;&#x43D; &#x447;&#x443;&#x434;&#x43E;&#x442;&#x432;&#x43E;&#x440;&#x435;&#x446;, &#x43A;&#x43E;&#x439;&#x442;&#x43E; &#x435; &#x43F;&#x43E;&#x441;&#x432;&#x435;&#x442;&#x435;&#x43D; &#x432;&#x44A;&#x432; &#x432;&#x441;&#x438;&#x447;&#x43A;&#x438; &#x442;&#x430;&#x439;&#x43D;&#x438;. &#x422;&#x43E;&#x447;&#x43D;&#x43E; &#x442;&#x430;&#x43A;&#x430; &#x432;&#x44A;&#x437;&#x43F;&#x440;&#x438;&#x435;&#x43C;&#x430;&#x43B;...</p>
-                </a>
-            </div>
-            <div class="col-lg-6">
-                <a class="box_news" href="/Blog/george-boole">
-                    <figure>
-                        <img src="/images/upload/9/3/93d61215-9ec5-4e19-879d-0eae586e7534.jpg" alt="&#x41A;&#x43E;&#x439; &#x435; &#x414;&#x436;&#x43E;&#x440;&#x434;&#x436; &#x411;&#x443;&#x43B;?" title="&#x41A;&#x43E;&#x439; &#x435; &#x414;&#x436;&#x43E;&#x440;&#x434;&#x436; &#x411;&#x443;&#x43B;?">
-                        <figcaption><strong>15</strong>Jun</figcaption>
-                    </figure>
-                    <ul>
-                        <li>6/15/2021</li>
-                    </ul>
-                    <h4>&#x41A;&#x43E;&#x439; &#x435; &#x414;&#x436;&#x43E;&#x440;&#x434;&#x436; &#x411;&#x443;&#x43B;?</h4>
-                    <p>&#x41D;&#x435; &#x435; &#x43D;&#x443;&#x436;&#x43D;&#x43E; &#x434;&#x430; &#x431;&#x44A;&#x434;&#x435;&#x442;&#x435; &#x43A;&#x43E;&#x43C;&#x43F;&#x44E;&#x442;&#x44A;&#x440;&#x43D;&#x438; &#x441;&#x43F;&#x435;&#x446;&#x438;&#x430;&#x43B;&#x438;&#x441;&#x442;&#x438;, &#x437;&#x430; &#x434;&#x430; &#x43E;&#x442;&#x433;&#x43E;&#x432;&#x43E;&#x440;&#x438;&#x442;&#x435; &#x43D;&#x430; &#x432;&#x44A;&#x43F;&#x440;&#x43E;&#x441;&#x430; &#x43A;&#x43E;&#x433;&#x430; &#x441;&#x435; &#x43F;&#x43E;&#x44F;&#x432;&#x44F;&#x432;&#x430;&#x442; &#x43F;&#x44A;&#x440;&#x432;&#x438;&#x442;&#x435; &#x43A;&#x43E;...</p>
-                </a>
-            </div>
-            <div class="col-lg-6">
-                <a class="box_news" href="/Blog/sieve-of-eratosthenes">
-                    <figure>
-                        <img src="/images/upload/6/c/6cbfa9a6-e88d-477d-81cd-14aaf692fce7.jpg" alt="&#x420;&#x435;&#x448;&#x435;&#x442;&#x43E; &#x43D;&#x430; &#x415;&#x440;&#x430;&#x442;&#x43E;&#x441;&#x442;&#x435;&#x43D;" title="&#x420;&#x435;&#x448;&#x435;&#x442;&#x43E; &#x43D;&#x430; &#x415;&#x440;&#x430;&#x442;&#x43E;&#x441;&#x442;&#x435;&#x43D;">
-                        <figcaption><strong>23</strong>May</figcaption>
-                    </figure>
-                    <ul>
-                        <li>5/23/2021</li>
-                    </ul>
-                    <h4>&#x420;&#x435;&#x448;&#x435;&#x442;&#x43E;&#x442;&#x43E; &#x43D;&#x430; &#x415;&#x440;&#x430;&#x442;&#x43E;&#x441;&#x442;&#x435;&#x43D;</h4>
-                    <p>&#x41F;&#x440;&#x43E;&#x433;&#x440;&#x430;&#x43C;&#x438;&#x440;&#x430;&#x43D;&#x435;&#x442;&#x43E; &#x435; &#x43D;&#x435;&#x43C;&#x438;&#x441;&#x43B;&#x438;&#x43C;&#x43E; &#x434;&#x430; &#x441;&#x44A;&#x449;&#x435;&#x441;&#x442;&#x432;&#x443;&#x432;&#x430; &#x431;&#x435;&#x437; &#x43E;&#x441;&#x43D;&#x43E;&#x432;&#x43D;&#x438;&#x442;&#x435; &#x43F;&#x440;&#x438;&#x43D;&#x446;&#x438;&#x43F;&#x438; &#x438; &#x442;&#x435;&#x43E;&#x440;&#x438;&#x438; &#x43D;&#x430; &#x43F;&#x440;&#x438;&#x43B;&#x43E;&#x436;&#x43D;&#x430;&#x442;&#x430; &#x43C;&#x430;&#x442;&#x435;&#x43C;&#x430;&#x442;&#x438;&#x43A;&#x430;. &#x422;...</p>
-                </a>
-            </div>
-            <div class="col-lg-6">
-                <a class="box_news" href="/Blog/math-in-everyday-life">
-                    <figure>
-                        <img src="/images/upload/c/4/c4e66fa6-d246-4e71-817c-458920dd4358.jpg" alt="M&#x430;&#x442;&#x435;&#x43C;&#x430;&#x442;&#x438;&#x43A;&#x430;&#x442;&#x430; &#x43A;&#x430;&#x442;&#x43E; &#x447;&#x430;&#x441;&#x442; &#x43E;&#x442; &#x435;&#x436;&#x435;&#x434;&#x43D;&#x435;&#x432;&#x438;&#x435;&#x442;&#x43E; &#x432; 10 &#x43F;&#x440;&#x438;&#x43C;&#x435;&#x440;&#x430;" title="M&#x430;&#x442;&#x435;&#x43C;&#x430;&#x442;&#x438;&#x43A;&#x430;&#x442;&#x430; &#x43A;&#x430;&#x442;&#x43E; &#x447;&#x430;&#x441;&#x442; &#x43E;&#x442; &#x435;&#x436;&#x435;&#x434;&#x43D;&#x435;&#x432;&#x438;&#x435;&#x442;&#x43E; &#x432; 10 &#x43F;&#x440;&#x438;&#x43C;&#x435;&#x440;&#x430;">
-                        <figcaption><strong>27</strong>Apr</figcaption>
-                    </figure>
-                    <ul>
-                        <li>4/27/2021</li>
-                    </ul>
-                    <h4>M&#x430;&#x442;&#x435;&#x43C;&#x430;&#x442;&#x438;&#x43A;&#x430;&#x442;&#x430; &#x43A;&#x430;&#x442;&#x43E; &#x447;&#x430;&#x441;&#x442; &#x43E;&#x442; &#x435;&#x436;&#x435;&#x434;&#x43D;&#x435;&#x432;&#x438;&#x435;&#x442;&#x43E; &#x432; 10 &#x43F;&#x440;&#x438;&#x43C;&#x435;&#x440;&#x430;</h4>
-                    <p>&#x412;&#x441;&#x435;&#x43A;&#x438; &#x43E;&#x442; &#x43D;&#x430;&#x441;, &#x440;&#x435;&#x448;&#x430;&#x432;&#x430;&#x439;&#x43A;&#x438; &#x442;&#x440;&#x443;&#x434;&#x43D;&#x430; &#x43C;&#x430;&#x442;&#x435;&#x43C;&#x430;&#x442;&#x438;&#x447;&#x435;&#x441;&#x43A;&#x430; &#x437;&#x430;&#x434;&#x430;&#x447;&#x430; &#x432; &#x443;&#x447;&#x438;&#x43B;&#x438;&#x449;&#x435; &#x438;&#x43B;&#x438; &#x43F;&#x43E;-&#x43A;&#x44A;&#x441;&#x43D;&#x43E;, &#x441;&#x438; &#x435; &#x437;&#x430;&#x434;&#x430;&#x432;&#x430;&#x43B; &#x43F;&#x43E;&#x43D;&#x435; &#x432;&#x435;&#x434;&#x43D;&#x44A;&#x436;...</p>
-                </a>
-            </div>
-        </div>
-        <p class="btn_home_align"><a class="btn_1 rounded" href="/Blog">Вижте всички блог статии</a></p>
-    </div>
+@{
+    ViewData["Title"] = "Форум Статии";
+
+}
+
+<div class="text-center">
+
 </div>
 
-<script src="/lib/jquery/dist/jquery.min.js?v=_xUj-3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej_m4"></script>
-<script src="/lib/jquery-validation/dist/jquery.validate.min.js?v=TAzGN4WNZQPLqSYvi-dXQMKehTYFoVOnveRqbi42frA"></script>
-<script src="/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js?v=H8OdhvNWpxCHXd9Osw8R7yOsWj9CQKGDMlujYVBsYMw"></script>
-<script src="/lib/bootstrap/dist/js/bootstrap.min.js?v=7dA7lq5P94hkBsWdff7qobYkp9ope_L5LQy2t_ljPLo"></script>
-<script src="/lib/moment/min/moment-with-locales.min.js?v=E3Snwx6F4t7DiA_L3DgPk6In2M1747JSau-3PWjtS5I"></script>
-<script src="/js/site.min.js?v=RKKGU8j1ab3I_6i22Deezdg4zSxpliScSaxjx4ozAxg"></script>
+<div class="container-fluid bg-transparent">
+    <div class="text-center btn btn-primary btn-block"><h3 class="text-white">@ViewData["Title"]</h3></div>
 
+    <div class="row row-cols-6 row-cols-sm-2 g-4">
+
+        @foreach (var article in Model.Articles)
+        {
+            <div class="media col text-center mt-2">
+                <img class="align-self-center mr-3" src="@article.ImageUrl" alt="article.Title">
+                <div class="media-body bg-primary">
+                    <h5 class="mt-0"><a href="@article.Url">@article.Title (@article.CommentCount)</a></h5>
+                    <p class="text-white">@article.Description.Substring(0, 60)</p>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

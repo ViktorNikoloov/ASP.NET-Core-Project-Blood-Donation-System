@@ -4,14 +4,16 @@ using BloodDonation.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BloodDonation.Data.Migrations
 {
     [DbContext(typeof(BloodDonationDbContext))]
-    partial class BloodDonationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210818144742_CorrectWrongTableAndColumnNames")]
+    partial class CorrectWrongTableAndColumnNames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -248,7 +250,7 @@ namespace BloodDonation.Data.Migrations
                     b.ToTable("AppointmetsDonors");
                 });
 
-            modelBuilder.Entity("BloodDonation.Data.Models.Blog", b =>
+            modelBuilder.Entity("BloodDonation.Data.Models.Article", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -808,7 +810,7 @@ namespace BloodDonation.Data.Migrations
                     b.Navigation("Donor");
                 });
 
-            modelBuilder.Entity("BloodDonation.Data.Models.Blog", b =>
+            modelBuilder.Entity("BloodDonation.Data.Models.Article", b =>
                 {
                     b.HasOne("BloodDonation.Data.Models.ApplicationUser", "User")
                         .WithMany("Articles")
@@ -819,7 +821,7 @@ namespace BloodDonation.Data.Migrations
 
             modelBuilder.Entity("BloodDonation.Data.Models.Comment", b =>
                 {
-                    b.HasOne("BloodDonation.Data.Models.Blog", "Article")
+                    b.HasOne("BloodDonation.Data.Models.Article", "Article")
                         .WithMany("Comments")
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -979,7 +981,7 @@ namespace BloodDonation.Data.Migrations
                     b.Navigation("Appointments");
                 });
 
-            modelBuilder.Entity("BloodDonation.Data.Models.Blog", b =>
+            modelBuilder.Entity("BloodDonation.Data.Models.Article", b =>
                 {
                     b.Navigation("Comments");
                 });
