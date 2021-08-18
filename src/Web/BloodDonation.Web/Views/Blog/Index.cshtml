@@ -18,13 +18,15 @@
 
         @foreach (var article in Model.Articles)
         {
-            <div class="media col text-center mt-2">
-                <img class="align-self-center mr-3" src="@article.ImageUrl" alt="article.Title">
-                <div class="media-body bg-primary">
-                    <h5 class="mt-0"><a href="@article.Url">@article.Title (@article.CommentCount)</a></h5>
-                    <p class="text-white">@article.Description.Substring(0, 60)</p>
-                </div>
+        <div class="media col text-center mt-2">
+            @*<img class="align-self-center mr-3" src="@article.ImageUrl" alt="@article.Title">*@
+            <img src="@article.ImageUrl" alt="@article.Title" class=" tox-image-tools__image" style='width:30%;height:100%'>
+
+            <div class="media-body bg-primary">
+                <h5 class="mt-0"><a href="@article.Url">@article.Title (@article.CommentCount)</a></h5>
+                <p class="text-white">@article.Description.Substring(0, 60)</p>
             </div>
+        </div>
         }
 
     </div>

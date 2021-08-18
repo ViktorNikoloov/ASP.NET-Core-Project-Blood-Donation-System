@@ -88,7 +88,7 @@
             services.AddControllersWithViews(
                 options =>
                     {
-                        options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                        options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()); // CSRF
                     }).AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
@@ -132,7 +132,7 @@
             services.AddTransient<IAppointmentsService, AppointmentsService>();
             services.AddTransient<IEmailsService, EmailsService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
-            services.AddTransient<IBlogService, ArticlesService>();
+            services.AddTransient<IArticlesService, ArticlesService>();
             services.AddTransient<IViewRenderService, ViewRenderService>();
         }
 

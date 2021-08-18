@@ -8,7 +8,7 @@
 
         public int ArticleId { get; set; }
 
-        public virtual Blog Article { get; set; }
+        public virtual Article Article { get; set; }
 
         public string UserId { get; set; }
 

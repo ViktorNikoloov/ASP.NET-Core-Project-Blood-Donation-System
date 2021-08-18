@@ -19,7 +19,7 @@ namespace BloodDonation.Data.Models
 
             // Application questions if the registered user or recipient is applying for Donor position
             this.QuestionsAnswers = new HashSet<QuestionAnswer>();
-            this.Articles = new HashSet<Blog>();
+            this.Articles = new HashSet<Article>();
         }
 
         // Audit info
@@ -38,7 +38,7 @@ namespace BloodDonation.Data.Models
 
         public virtual ICollection<QuestionAnswer> QuestionsAnswers { get; set; }
 
-        public virtual ICollection<Blog> Articles { get; set; }
+        public virtual ICollection<Article> Articles { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 

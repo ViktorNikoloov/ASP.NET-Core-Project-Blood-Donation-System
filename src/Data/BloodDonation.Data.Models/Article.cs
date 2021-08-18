@@ -4,9 +4,9 @@
 
     using BloodDonation.Data.Common.Models;
 
-    public class Blog : BaseDeletableModel<int>
+    public class Article : BaseDeletableModel<int>
     {
-        public Blog()
+        public Article()
         {
             this.Comments = new HashSet<Comment>();
         }
@@ -22,6 +22,5 @@
         public virtual ApplicationUser User { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
-
     }
 }

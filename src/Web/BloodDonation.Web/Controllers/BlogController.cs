@@ -1,9 +1,14 @@
 ﻿namespace BloodDonation.Web.Controllers
 {
+    using BloodDonation.Data.Models;
     using BloodDonation.Services.Data.Article;
-    using BloodDonation.Web.ViewModels.Article;
+    using BloodDonation.Web.ViewModels.Blog;
 
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authorization;
+
+    using BloodDonation.Common;
+    using BloodDonation.Web.Infrastructure;
 
     public class BlogController : Controller
     {
@@ -24,10 +29,36 @@
             return this.View(viewModel);
         }
 
+        public IActionResult ById()
+        {
+            return this.View();
+        }
+
         public IActionResult ByName(string name)
         {
             var viewModel = this.articlesService.GetByName<ArticleByName>(name);
             return this.View(viewModel);
+        }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        [Authorize]
+        public IActionResult CreateArticle()
+        {
+            return this.View();
+        }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        [HttpPost]
+        public IActionResult CreateArticle(ArticleCreateInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            var articleId = this.articlesService.CreateActicleAsync(input, this.User.GetId());
+
+            return this.RedirectToAction(nameof(this.ById), new { id = articleId });
         }
     }
 }

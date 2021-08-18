@@ -49,7 +49,7 @@
             return this.View();
         }
 
-        [Authorize(Roles = Common.GlobalConstants.RecipientRoleName)]
+        [Authorize(Roles = GlobalConstants.RecipientRoleName)]
         [HttpPost]
         public async Task<IActionResult> Create(AppointmentCreateInputModel model)
         {

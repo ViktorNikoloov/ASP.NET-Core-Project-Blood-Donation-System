@@ -7,14 +7,14 @@
 
 }
 
-<div class="container m-2">
+<div class="container">
 
-    <p><img class="img-fluid" src="https://i.pik.bg/news/933/660_14ad8b2c3c08ebe5b98e8faa49fa61f9.jpg" alt="@this.ViewData["Title"]"></p>
+    <p><img class="img-fluid m-0" src="@Model.ImageUrl" alt="@this.ViewData["Title"]"></p>
 
     <div class="row">
-        <div class="col-lg-9">
+        <div class="col-lg-12">
             <div class="bloglist singlepost">
-                <h1>@this.ViewData["Title"]</h1>
+                <h1 class="text-center">@this.ViewData["Title"]</h1>
                 <div>
                     <ul class="row">
                         <li class="col">
@@ -23,7 +23,7 @@
                         </li>
                         <li class="col">
                             <i class="fa fa-user"></i>
-                            @Model.ShortDescription
+                            @Model.UserUserName.Substring(0, 5)
                         </li>
                         <li class="col">
                             <i class="fa fa-comment"></i>
@@ -31,8 +31,8 @@
                         </li>
                     </ul>
                 </div>
-                <div class="post-content break-text eee-ul-blog-posts">
-                    @Model.Description
+                <div class="post-content">
+                    <text>@Model.Description</text>
                 </div>
             </div>
 

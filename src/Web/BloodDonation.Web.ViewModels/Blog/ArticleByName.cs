@@ -5,7 +5,7 @@
 
     using BloodDonation.Services.Mapping;
 
-    public class ArticleByName : IMapFrom<BloodDonation.Data.Models.Blog>
+    public class ArticleByName : IMapFrom<BloodDonation.Data.Models.Article>
     {
         public int Id { get; set; }
 
