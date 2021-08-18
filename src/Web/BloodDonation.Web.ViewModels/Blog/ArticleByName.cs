@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     using BloodDonation.Services.Mapping;
 
@@ -16,6 +17,8 @@
         public string Description { get; set; }
 
         public string ShortDescription => this.Description?.Length > 60 ? this.Description?.Substring(0, 50) + "..." : this.Description;
+
+        public string SanitizedContent => new HtmlSanitizer().Sanitize(Description);
 
         public string ImageUrl { get; set; }
 

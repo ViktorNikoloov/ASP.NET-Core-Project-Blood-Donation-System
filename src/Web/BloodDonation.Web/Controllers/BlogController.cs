@@ -36,6 +36,11 @@
         public IActionResult ByName(string name)
         {
             var viewModel = this.articlesService.GetByName<ArticleByName>(name);
+            if (viewModel == null)
+            {
+                return this.Redirect("/Home/StatusCodeError");
+            }
+
             return this.View(viewModel);
         }
 

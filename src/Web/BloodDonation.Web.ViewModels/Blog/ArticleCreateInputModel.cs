@@ -1,5 +1,6 @@
 ﻿namespace BloodDonation.Web.ViewModels.Blog
 {
+    using Ganss.XSS;
     using System.ComponentModel.DataAnnotations;
 
     public class ArticleCreateInputModel
@@ -20,5 +21,7 @@
         [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
         [Url(ErrorMessage = "Полето \"{0}\" не е валидно.")]
         public string ImageUrl { get; set; }
+
+        public string SanitizedContent => new HtmlSanitizer().Sanitize(Description);
     }
 }
