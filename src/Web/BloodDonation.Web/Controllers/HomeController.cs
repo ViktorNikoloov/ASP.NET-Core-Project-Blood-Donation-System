@@ -2,21 +2,28 @@
 {
     using System.Diagnostics;
 
+    using BloodDonation.Services.Data.Article;
     using BloodDonation.Web.ViewModels;
+    using BloodDonation.Web.ViewModels.Blog;
 
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
+        private readonly IArticlesService articlesService;
 
-        public HomeController()
+        public HomeController(IArticlesService articlesService)
         {
+            this.articlesService = articlesService;
         }
 
         public IActionResult Index()
         {
-
-            return this.View();
+            var viewModel = new ArticlesListViewModel
+            {
+                Articles = this.articlesService.GetAll<ArticleViewModel>(),
+            };
+            return this.View(viewModel);
         }
 
         public IActionResult Privacy()

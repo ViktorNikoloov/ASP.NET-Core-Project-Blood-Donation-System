@@ -2,6 +2,8 @@
 @using BloodDonation.Data.Models
 @using BloodDonation.Data.Models.Enums
 @using Microsoft.AspNetCore.Identity
+@using BloodDonation.Web.ViewModels.Blog
+@model ArticlesListViewModel
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
@@ -54,9 +56,10 @@
 }
 
 
-<h1 class="display-5 text-md-center bgw">Добре дошли в @GlobalConstants.SystemName!</h1>
+<h1 class="display-5 text-md-center bgw">Добре дошли в GlobalConstants.SystemName!</h1>
 
 <hr class="bg-primary w-auto">
+
 <div class="container-fluid">
     <div class="text-body">
 
@@ -126,76 +129,9 @@
     </div>
 </div>
 
-
 <hr class="bg-primary w-auto">
 
-
-<div class="container container-fluid bg-neutral ">
-
-    <h3 class="display-4 text-md-center">Блог статии</h3>
-    <div class="row row-cols-1 row-cols-md-4 g-4">
-        <div class="col mb-3">
-            <div class="card h-100 m-auto bg-primary">
-                <img src="https://www.villageoflombard.org/ImageRepository/Document?documentId=3297" class="card-img-top  mr-3 pb-2 pl-2 pr-2 pt-2" alt="...">
-                <div class="card-body text-center text-white">
-                    <h5 class="card-title text-center text-muted">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-                <div class="d-grid d-md-flex justify-content-center">
-                    <a href="#" class="btn btn-outline-danger btn-icon mb-3 ml-2 mr-2">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="col mb-3">
-            <div class="card h-100 m-auto bg-primary">
-                <img src="https://www.villageoflombard.org/ImageRepository/Document?documentId=3297" class="card-img-top  mr-3 pb-2 pl-2 pr-2 pt-2" alt="...">
-                <div class="card-body text-center text-white">
-                    <h5 class="card-title text-center text-muted">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-                <div class="d-grid d-md-flex justify-content-center">
-                    <a href="#" class="btn btn-outline-danger btn-icon mb-3 ml-2 mr-2">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="col mb-3">
-            <div class="card h-100 m-auto bg-primary">
-                <img src="https://www.villageoflombard.org/ImageRepository/Document?documentId=3297" class="card-img-top  mr-3 pb-2 pl-2 pr-2 pt-2" alt="...">
-                <div class="card-body text-center text-white">
-                    <h5 class="card-title text-center text-muted">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-                <div class="d-grid d-md-flex justify-content-center">
-                    <a href="#" class="btn btn-outline-danger btn-icon mb-3 ml-2 mr-2">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="col mb-3">
-            <div class="card h-100 m-auto bg-primary">
-                <img src="https://www.villageoflombard.org/ImageRepository/Document?documentId=3297" class="card-img-top  mr-3 pb-2 pl-2 pr-2 pt-2" alt="...">
-                <div class="card-body text-center text-white">
-                    <h5 class="card-title text-center text-muted">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-                <div class="d-grid d-md-flex justify-content-center">
-                    <a href="#" class="btn btn-outline-danger btn-icon mb-3 ml-2 mr-2">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<partial name="_BlogArticlesPartial" model="@Model" />
 
 
 @section Scripts{
