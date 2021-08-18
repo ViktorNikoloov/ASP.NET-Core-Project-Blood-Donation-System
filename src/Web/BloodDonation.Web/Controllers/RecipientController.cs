@@ -20,10 +20,10 @@
         public IActionResult All(int id = GlobalConstants.PaginationStartPageNumber)
         {
             var userId = this.User.GetId();
-            var isDonorExist = this.recipientsService.CheckRecipientExist(userId);
-            var donorId = this.recipientsService.GetRecipientIdByUserId(userId);
+            var isRecipientExist = this.recipientsService.CheckRecipientExist(userId);
+            var RecipientId = this.recipientsService.GetRecipientIdByUserId(userId);
 
-            if (!isDonorExist)
+            if (!isRecipientExist)
             {
                 return this.Redirect("/Home/StatusCodeError");
             }
@@ -33,7 +33,7 @@
             {
                 ItemPerPage = ItemPerPage,
                 PageNumber = id,
-                AppointmentsCount = this.recipientsService.GetAllAppointmentsApllyByRecipientCount(donorId),
+                AppointmentsCount = this.recipientsService.GetAllAppointmentsApllyByRecipientCount(RecipientId),
                 Appointments = this.recipientsService.GetAll(userId, id, ItemPerPage),
             };
 
