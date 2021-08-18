@@ -14,8 +14,10 @@
     using BloodDonation.Web.Infrastructure;
     using BloodDonation.Web.ViewModels.Appointment;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    [Authorize]
     public class AppointmentController : Controller
     {
         private readonly IAppointmentsService appointmnetsService;
@@ -47,15 +49,22 @@
             return this.View();
         }
 
+        [Authorize(Roles = Common.GlobalConstants.RecipientRoleName)]
         [HttpPost]
         public async Task<IActionResult> Create(AppointmentCreateInputModel model)
         {
+            var userId = this.User.GetId();
+            var isRecipientExist = this.recipientsService.CheckRecipientExist(userId);
+            var recipientId = this.GetCurrentRecipientId();
+            if (!isRecipientExist)
+            {
+                return this.Redirect("/Home/StatusCodeError");
+            }
+
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
             }
-
-            var recipientId = this.GetCurrentRecipientId();
 
             await this.appointmnetsService.CreateAsync(model, recipientId);
 
@@ -64,8 +73,16 @@
             return this.Redirect("/");
         }
 
+        [Authorize(Roles = GlobalConstants.DonorRoleName)]
         public IActionResult All(int id = GlobalConstants.PaginationStartPageNumber)
         {
+            var userId = this.User.GetId();
+            var isDonorExist = this.donorsService.CheckDonorExist(userId);
+            if (!isDonorExist)
+            {
+                return this.Redirect("/Home/StatusCodeError");
+            }
+
             var donorLastDonation = this.donorsService.GetLastTimeDonorDonaton(this.CurrUserId());
             var donorNextDonation = this.donorsService.GetWhenDonorCouldDonateAgain(donorLastDonation);
             var daysRemaining = this.donorsService.GetDonorRemainingDaysToDonation(donorLastDonation);
@@ -73,7 +90,7 @@
             {
                 this.TempData["NotFoundMessage"] = $"Кръводарявал сте на \"{donorLastDonation.ToLocalTime().ToShortDateString()}\". Ще можете да кръводарявате отново след \"{daysRemaining}\" дни.";
 
-                return this.Redirect("/");
+                return this.Redirect("/Donor/All");
             }
 
             const int ItemPerPage = 4;
@@ -88,14 +105,26 @@
             return this.View(viewModel);
         }
 
+        [Authorize(Roles = GlobalConstants.DonorRoleName)]
         public IActionResult AppointmentById(int id)
         {
+            if (id == 0)
+            {
+                return this.Redirect("/Home/StatusCodeError");
+            }
+
             var viewModel = this.appointmnetsService.GetAppoinmentAllInfo(id);
             return this.View(viewModel);
         }
 
+        [Authorize(Roles = GlobalConstants.DonorRoleName)]
         public async Task<IActionResult> TakeAppointmentByDonor(int id)
         {
+            if (id == 0)
+            {
+                return this.Redirect("/Home/StatusCodeError");
+            }
+
             var isDonorExistInDonorsAppointmetns = this.appointmnetsService.IsDonorExistInDonorsAppointmetns(id, this.CurrUserId());
             if (isDonorExistInDonorsAppointmetns)
             {
@@ -116,6 +145,7 @@
             return this.Redirect("/");
         }
 
+        [Authorize(Roles = GlobalConstants.DonorRoleName)]
         public async Task<IActionResult> SendToEmail(int id)
         {
             // var email = this.viewRenderService.RenderToStringAsync(); //string viewName, object model
