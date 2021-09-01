@@ -155,6 +155,7 @@
                 PageNumber = id,
                 AppointmentsCount = this.appointmentsService.GetCount(false),
                 Appointments = this.appointmentsService.GetAll(id, ItemPerPage, appointmentStatus),
+                ActionName = nameof(this.AllNotApproved),
             };
 
             return this.View(viewModel);
@@ -169,6 +170,7 @@
                 PageNumber = id,
                 AppointmentsCount = this.appointmentsService.GetCount(false),
                 Appointments = this.appointmentsService.GetAll(id, ItemPerPage, "Approved"),
+                ActionName = nameof(this.AllApproved),
             };
 
             return this.View(viewModel);

@@ -35,6 +35,7 @@
                 PageNumber = id,
                 AppointmentsCount = this.recipientsService.GetAllAppointmentsApllyByRecipientCount(recipientId),
                 Appointments = this.recipientsService.GetAll(userId, id, ItemPerPage),
+                ActionName = nameof(this.All),
             };
 
             return this.View(viewModel);

@@ -100,6 +100,7 @@
                 PageNumber = id,
                 AppointmentsCount = this.appointmnetsService.GetCount(true),
                 Appointments = this.appointmnetsService.GetAll(id, ItemPerPage),
+                ActionName = nameof(this.All),
             };
 
             return this.View(viewModel);

@@ -1,10 +1,9 @@
 ﻿namespace BloodDonation.Web.Controllers
 {
-    using BloodDonation.Services.Data.Article;
-    using BloodDonation.Web.ViewModels.Blog;
-
     using BloodDonation.Common;
+    using BloodDonation.Services.Data.Article;
     using BloodDonation.Web.Infrastructure;
+    using BloodDonation.Web.ViewModels.Blog;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;

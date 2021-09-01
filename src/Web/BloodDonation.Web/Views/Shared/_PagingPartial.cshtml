@@ -4,16 +4,16 @@
 <nav aria-label="...">
     <ul class="pagination justify-content-center">
         <li class="page-item active  @if (Model.PageNumber == 1) { <text>disabled</text> }">
-            <a class="page-link" asp-action="All" asp-route-id="1">Първа</a>
+            <a class="page-link" asp-action="@Model.ActionName" asp-route-id="1">Първа</a>
         </li>
         <li class="page-item @if (!Model.HasPreviousPage) { <text>disabled</text> }">
-            <a class="page-link" asp-action="All" asp-route-id="@Model.PreviousPageNumber">Предходна</a>
+            <a class="page-link" asp-action="@Model.ActionName" asp-route-id="@Model.PreviousPageNumber">Предходна</a>
         </li>
         @for (int i = Model.PageNumber - 2; i < Model.PageNumber; i++)
         {
             if (i > 0)
             {
-                <li class="page-item"><a class="page-link" asp-action="All" asp-route-id="@i">@i</a></li>
+                <li class="page-item"><a class="page-link" asp-action="@Model.ActionName" asp-route-id="@i">@i</a></li>
             }
         }
         <li class="page-item active" aria-current="page">
@@ -26,15 +26,15 @@
         {
             if (i <= Model.PagesCount)
             {
-                <li class="page-item"><a class="page-link" asp-action="All" asp-route-id="@i">@i</a></li>
+                <li class="page-item"><a class="page-link" asp-action="@Model.ActionName" asp-route-id="@i">@i</a></li>
                 counter++;
             }
         }
         <li class="page-item @if (!Model.HasNextPage) { <text>disabled</text> }">
-            <a class="page-link" asp-action="All" asp-route-id="@Model.NextPageNumber">Следваща</a>
+            <a class="page-link" asp-action="@Model.ActionName" asp-route-id="@Model.NextPageNumber">Следваща</a>
         </li>
         <li class="page-item active  @if (!Model.HasNextPage) { <text>disabled</text> }">
-            <a class="page-link" asp-action="All" asp-route-id="@Model.PagesCount">Последна</a>
+            <a class="page-link" asp-action="@Model.ActionName" asp-route-id="@Model.PagesCount">Последна</a>
         </li>
     </ul>
 </nav>

@@ -24,5 +24,7 @@
         public int AppointmentsCount { get; set; }
 
         public int ItemPerPage { get; set; }
+
+        public string ActionName { get; set; }
     }
 }
