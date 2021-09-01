@@ -1,0 +1,41 @@
+﻿@using BloodDonation.Common
+@using Microsoft.AspNetCore.Identity
+@using BloodDonation.Data.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject BloodDonation.Services.Data.Donor.IDonorsService DonorsService
+
+<ul>
+    @if (SignInManager.IsSignedIn(this.User))
+    {
+        if (this.User.IsInRole(GlobalConstants.DonorRoleName))
+        {
+            var currUserId = UserManager.GetUserId(this.User);
+            var donorLastDonation = DonorsService.GetLastTimeDonorDonaton(currUserId);
+
+
+            if (donorLastDonation != DateTime.MinValue)
+            {
+
+                var donorNextDonation = DonorsService.GetWhenDonorCouldDonateAgain(donorLastDonation);
+                var whenDonorCouldDonateAgain = DonorsService.GetDonorRemainingDaysToDonation(donorLastDonation);
+
+                <li class="nav-item d-inline">
+                    <i class="btn btn-success btn-icon ml-1 mt-1 m-md-2 p-2">
+                        Последно кръводаряване на: <span class="badge bg-primary text-white">@donorLastDonation.ToShortDateString()</span>
+                    </i>
+                </li>
+
+                @if (donorNextDonation >= DateTime.UtcNow)
+                {
+                    <li class="nav-item d-inline">
+                        <i class="btn btn-secondary btn-pill btn-icon ml-1 mt-1 m-md-2 p-2">
+                            Следващо кръводаряване след: <span class="badge bg-success text-white">@whenDonorCouldDonateAgain дни</span>
+                        </i>
+                    </li>
+
+                }
+            }
+        }
+    }
+</ul>

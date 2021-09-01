@@ -1,5 +1,4 @@
-﻿@using BloodDonation.Common
-@{
+﻿@{
     this.Layout = "_BaseLayout";
 }
 
@@ -7,8 +6,11 @@
     <partial name="_CookieConsentPartial" />
     <main role="main" class="pb-3">
         <div class="row">
-            <div class="col-md-8 g-mb-30 g-mb-0--lg">
+            <div class="col-md-8 g-mb-30 g-mb-0--lg ">
+
+               <partial name="_LastTimeDonationInfoPartial" />
                 @this.RenderBody()
+
             </div>
 
             <div class="col-md-4">
@@ -26,7 +28,7 @@
                         <cache expires-after="@TimeSpan.FromMinutes(5)">
                             <partial name="_WeatherWidgetPartial" />
                         </cache>
-                        
+
                     </div>
 
                 </div>
