@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{E389DEB6-5F90-444B-A054-12A10D39C76F}"
+	ProjectSection(SolutionItems) = preProject
+		Web\BloodDonation.Web\obj\Release\net5.0\PubTmp\Out\web.Release.config = Web\BloodDonation.Web\obj\Release\net5.0\PubTmp\Out\web.Release.config
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BloodDonation.Web", "Web\BloodDonation.Web\BloodDonation.Web.csproj", "{B90D1067-FE4C-400E-BA78-5413E30AB9ED}"
 EndProject
@@ -39,7 +42,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BloodDonation.Web.Tests", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BloodDonation.Web.ViewModels", "Web\BloodDonation.Web.ViewModels\BloodDonation.Web.ViewModels.csproj", "{13B7AACB-9C85-4409-8D4B-95A67D0DFFF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CronJobs", "CronJobs\CronJobs.csproj", "{158FC09C-41B9-4DD3-A900-15003C2FAE6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CronJobs", "CronJobs\CronJobs.csproj", "{158FC09C-41B9-4DD3-A900-15003C2FAE6B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

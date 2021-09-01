@@ -71,14 +71,14 @@
                                 <div class="col-sm text-center">
                                     <div class="col-sm">
                                         <label asp-for=" @appointment.StartDate"></label>
-                                        <p class="btn btn-block btn-icon btn-primary">@appointment.StartDate.Date</p>
+                                        <p class="btn btn-block btn-icon btn-primary">@appointment.StartDate.Date.ToLocalTime().ToShortDateString()</p>
                                     </div>
                                 </div>
 
                                 <div class="col-sm text-center">
                                     <div class="col-sm">
                                         <label asp-for=" @appointment.DeadLine"></label>
-                                        <p class="btn btn-block btn-icon btn-primary">@appointment.DeadLine.Date</p>
+                                        <p class="btn btn-block btn-icon btn-primary">@appointment.DeadLine.Date.ToLocalTime().ToShortDateString()</p>
                                     </div>
                                 </div>
 

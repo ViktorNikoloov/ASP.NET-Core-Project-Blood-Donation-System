@@ -1,5 +1,4 @@
-﻿@using BloodDonation.Common
-@using BloodDonation.Web.ViewModels.Blog
+﻿@using BloodDonation.Web.ViewModels.Blog
 @model ArticleCreateInputModel
 
 @{
@@ -37,7 +36,7 @@
 
                     <div class="form-group">
                         <label asp-for="@Model.Title"></label>
-                        <input asp-for="@Model.Title" class="form-control" placeholder="Колко често можем да даряваме кръв" />
+                        <input asp-for="@Model.Title" class="form-control" placeholder="Кръвта спасява животи." />
                         <span asp-validation-for="@Model.Title" class="text-primary"></span>
                     </div>
 
@@ -46,14 +45,14 @@
 
                     <div class="form-group">
                         <label asp-for="@Model.Description"></label>
-                        <textarea asp-for="@Model.Description" class="form-control" placeholder="Пример: Вътрешно отделение"> </textarea>
+                        <textarea asp-for="@Model.Description" class="form-control" placeholder="Пример: Текст минимум 100 символа."> </textarea>
                         <span asp-validation-for="@Model.Description" class="text-danger"></span>
                     </div>
 
                 </div>
             </div>
             <div class="form-group">
-                <button asp-controller="Blog" type="submit" class="btn btn-block btn-primary">Публикувай</button>
+                <button asp-controller="Blog" asp-action="CreateArticle" type="submit" class="btn btn-block btn-primary">Публикувай</button>
             </div>
         </div>
     </div>

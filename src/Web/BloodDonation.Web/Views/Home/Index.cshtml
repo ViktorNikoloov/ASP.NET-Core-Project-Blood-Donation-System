@@ -11,6 +11,8 @@
 @{
     this.ViewData["Title"] = GlobalConstants.MainPageName;
 
+    var url = @Url.Content("~/");
+
     if (this.TempData.ContainsKey("Message"))
     {
         <div class="alert alert-success alert-dismissible fade show">
@@ -56,7 +58,7 @@
 }
 
 
-<h1 class="display-5 text-md-center bgw">Добре дошли в GlobalConstants.SystemName!</h1>
+<h1 class="display-5 text-md-center bgw">Добре дошли в @GlobalConstants.SystemName!</h1>
 
 <hr class="bg-primary w-auto">
 
@@ -66,11 +68,9 @@
         <p style="font-size: 24px; font-style: italic;">
             <ul>
                 <li> <h5 class="text-center text-white bg-primary rounded"> "Най-бързо развиващият се сайт за безвъзмездно кръводаряване в България."</h5></li>
-                <li> <h5 class="text-center text-white bg-primary rounded">"Нуждаете от кръв ? Тук ще намерите вашите герои, които чакат за да Ви помогнат !"</h5></li>
+                <li> <h5 class="text-center text-white bg-primary rounded">"Нуждаете се от кръв ? Тук ще намерите вашите герои, които чакат за да Ви помогнат !"</h5></li>
                 <li> <h5 class="text-center text-white bg-primary rounded">"Искате да бъдете нечии герой ? Направете го тук, кръводерете безвъзмездно на нуждаещ се !."</h5></li>
             </ul>
-
-
         </p>
     </div>
     <hr class="bg-white w-auto">
@@ -90,12 +90,10 @@
                             <span class="small text-uppercase text-danger">Потърси помощ.</span>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <button type="button" class="btn btn-outline-success btn-icon btn-sm">
-                            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/RegisterRecipient">
-                                <i class="fas fa-syringe"></i> Стани Реципиент
-                            </a>
-                        </button>
+                    <div class="card-footer d-grid d-md-flex justify-content-center">
+                        <a class="btn btn-outline-success btn-icon btn-sm text-white mb-3 ml-2 mr-2" asp-area="Identity" asp-page="/Account/RegisterRecipient">
+                            <i class="fas fa-syringe"></i> Стани Реципиент
+                        </a>
                     </div>
                 </div>
             </div>
@@ -113,20 +111,16 @@
                             <span class="small text-uppercase text-danger">Бъди нечии герой !</span>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <button type="button" class="btn btn-outline-success btn-icon btn-sm">
-                            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/RegisterDonor">
-                                <i class="fas fa-hand-holding-heart"></i> Стани Кръводарител
-                            </a>
-                        </button>
+                    <div class="card-footer d-grid d-md-flex justify-content-center">
+                        <a class="btn btn-outline-success btn-icon btn-sm text-white mb-3 ml-2 mr-2" asp-area="Identity" asp-page="/Account/RegisterDonor" asp-route-returnUrl="@url">
+                            <i class="fas fa-hand-holding-heart"></i> Стани Кръводарител
+                        </a>
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     </div>
+
 </div>
 
 <hr class="bg-primary w-auto">

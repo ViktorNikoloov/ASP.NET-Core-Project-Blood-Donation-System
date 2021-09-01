@@ -14,7 +14,7 @@
 
         public string ImageUrl { get; set; }
 
-        public int CommentCount { get; set; }
+        public int CommentsCount { get; set; }
 
         public DateTime? ModifiedOn { get; set; }
 

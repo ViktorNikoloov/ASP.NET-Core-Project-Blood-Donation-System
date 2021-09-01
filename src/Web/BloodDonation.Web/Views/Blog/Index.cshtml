@@ -14,7 +14,7 @@
 <div class="container-fluid bg-transparent">
     <div class="text-center btn btn-primary btn-block"><h3 class="text-white">@ViewData["Title"]</h3></div>
 
-    <div class="row row-cols-6 row-cols-sm-2 g-4">
+    <div class="row row-cols-12 row-cols-sm-2 g-4">
 
         @foreach (var article in Model.Articles)
         {
@@ -23,7 +23,7 @@
             <img src="@article.ImageUrl" alt="@article.Title" class=" tox-image-tools__image" style='width:30%;height:100%'>
 
             <div class="media-body bg-primary">
-                <h5 class="mt-0"><a href="@article.Url">@article.Title (@article.CommentCount)</a></h5>
+                <h5 class="mt-0"><a href="@article.Url">@article.Title (@article.CommentsCount)</a></h5>
                 <p class="text-white">@article.Description.Substring(0, 60)</p>
             </div>
         </div>

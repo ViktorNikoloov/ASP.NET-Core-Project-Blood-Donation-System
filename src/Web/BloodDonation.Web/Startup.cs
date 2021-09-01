@@ -24,10 +24,13 @@
     using BloodDonation.Services.Messaging;
     using BloodDonation.Web.Infrastructure.Filters;
     using BloodDonation.Web.ViewModels;
+
     using CloudinaryDotNet;
     using CronJobs;
+
     using Hangfire;
     using Hangfire.SqlServer;
+
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;

@@ -105,7 +105,7 @@
             return this.View(viewModel);
         }
 
-        [Authorize(Roles = GlobalConstants.DonorRoleName)]
+        [Authorize(Roles = GlobalConstants.DonorRoleName + "," + GlobalConstants.RecipientRoleName)]
         public IActionResult AppointmentById(int id)
         {
             if (id == 0)
