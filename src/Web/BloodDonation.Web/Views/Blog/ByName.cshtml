@@ -1,5 +1,9 @@
 ﻿@using BloodDonation.Common
 @using BloodDonation.Web.ViewModels.Blog
+@using Microsoft.AspNetCore.Identity
+@using BloodDonation.Data.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
 @model ArticleByName
 
 @{
@@ -13,7 +17,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="bloglist singlepost">
+            <div class="blog-posts">
                 <h1 class="text-center">@this.ViewData["Title"]</h1>
                 <div>
                     <ul class="row">
@@ -42,12 +46,14 @@
 
 <div class="container mt-5">
 
-    <div class="eee-break-all" id="comments">
+    <div class="container-fluid">
+
         <h3 class="text-center">Коментари</h3>
-        <ul sclass="list-unstyled border border-danger">
+
+        <ul class="list-unstyled">
             @foreach (var comment in Model.Comments)
             {
-                <li class="row ml-3">
+                <li class="row ml-3 mt-1">
                     <div class="row mr-1">
                         <i class="fa fa-user"></i> @comment.UserUserName
                     </div>
@@ -65,21 +71,25 @@
                         <p class="border border-info p-1">@comment.Content</p>
                     </div>
                 </li>
-
-                <hr class="bg-info">
             }
 
         </ul>
 
     </div>
 
+    @if (this.SignInManager.IsSignedIn(this.User))
+    {
+        <hr class="bg-info">
 
-    <form method="post" action="/BlogComments/Comment">
-        <div class="form-group mt-3">
-            <h5 class="text-center">Напиши коментар:</h5>
-            <textarea class="form-control" rows="10" data-val="true" data-val-length="fsfefsfs"></textarea>
-            <span class="text-danger field-validation-valid" data-valmsg-for="CommentContent" data-valmsg-replace="true"></span>
-        </div>
-        <button type="submit" id="submit2" class="btn btn-info form-control mb-2">Изпрати</button>
-    </form>
+        <form method="post" action="/Comment">
+            <div class="form-group mt-3">
+                <h5 class="text-center">Напиши коментар:</h5>
+                <textarea class="form-control" rows="10" data-val="true" data-val-length="fsfefsfs"></textarea>
+                <span class="text-danger field-validation-valid" data-valmsg-for="CommentContent" data-valmsg-replace="true"></span>
+            </div>
+
+            <button type="submit" id="submit2" class="btn btn-info form-control mb-2">Изпрати</button>
+        </form>
+    }
+
 </div>
