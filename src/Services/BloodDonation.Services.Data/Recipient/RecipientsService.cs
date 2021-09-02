@@ -123,7 +123,7 @@
         {
             var recipientrId = this.GetRecipientIdByUserId(userId);
             var appointmentsApplyByRecipient = this.appointmentsDonorsRepository.All()
-            .Where(x => x.Appointment.RecipientId == recipientrId)
+            .Where(x => x.Appointment.RecipientId == recipientrId && x.Appointment.IsDeleted == false && x.Appointment.IsApproved == true)
             .OrderByDescending(x => x.Appointment.DeadLine)
             .Skip((page - 1) * itemsPerPage) // Pages formula
             .Take(itemsPerPage)
@@ -149,7 +149,7 @@
         => this.recipientRepository.All().Any(x => x.UserId == userId);
 
         public int GetAllAppointmentsApllyByRecipientCount(string recipientId)
-        => this.appointmentRepository.AllAsNoTracking().Where(x => x.RecipientId == recipientId).Count();
+        => this.appointmentRepository.AllAsNoTracking().Where(x => x.RecipientId == recipientId && x.IsDeleted == false && x.IsApproved == true).Count();
 
         public string GetRecipientEmail(string userId)
         => this.GetRecipientrById(userId).Email;

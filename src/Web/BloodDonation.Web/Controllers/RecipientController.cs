@@ -17,7 +17,7 @@
             this.recipientsService = recipientsService;
         }
 
-        public IActionResult All(int id = GlobalConstants.PaginationStartPageNumber)
+        public IActionResult AllAppointmentsTookByDonor(int id = GlobalConstants.PaginationStartPageNumber)
         {
             var userId = this.User.GetId();
             var isRecipientExist = this.recipientsService.CheckRecipientExist(userId);
@@ -35,10 +35,12 @@
                 PageNumber = id,
                 AppointmentsCount = this.recipientsService.GetAllAppointmentsApllyByRecipientCount(recipientId),
                 Appointments = this.recipientsService.GetAll(userId, id, ItemPerPage),
-                ActionName = nameof(this.All),
+                ActionName = nameof(this.AllAppointmentsTookByDonor),
             };
 
             return this.View(viewModel);
         }
+
+        
     }
 }
