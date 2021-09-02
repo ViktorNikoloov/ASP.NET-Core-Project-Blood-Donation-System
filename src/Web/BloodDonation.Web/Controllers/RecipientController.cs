@@ -29,18 +29,40 @@
             }
 
             const int ItemPerPage = 2;
-            var viewModel = new AllAppointmentsListViewModel
+            var viewModel = new AllAppointmentsTookByDonorListViewModel
             {
                 ItemPerPage = ItemPerPage,
                 PageNumber = id,
                 AppointmentsCount = this.recipientsService.GetAllAppointmentsApllyByRecipientCount(recipientId),
-                Appointments = this.recipientsService.GetAll(userId, id, ItemPerPage),
+                Appointments = this.recipientsService.GetAllAppointmentsTookByDonor(userId, id, ItemPerPage),
                 ActionName = nameof(this.AllAppointmentsTookByDonor),
             };
 
             return this.View(viewModel);
         }
 
-        
+        public IActionResult AllAppointmentsApllyByRecipient(int id = GlobalConstants.PaginationStartPageNumber)
+        {
+            var userId = this.User.GetId();
+            var isRecipientExist = this.recipientsService.CheckRecipientExist(userId);
+            var recipientId = this.recipientsService.GetRecipientIdByUserId(userId);
+
+            if (!isRecipientExist)
+            {
+                return this.Redirect("/Home/StatusCodeError");
+            }
+
+            const int ItemPerPage = 2;
+            var viewModel = new AllAppointmentsApplyByRecipientListViewModel
+            {
+                ItemPerPage = ItemPerPage,
+                PageNumber = id,
+                AppointmentsCount = this.recipientsService.GetAllAppointmentsApllyByRecipientCount(recipientId),
+                Appointments = this.recipientsService.GetAllAppointmentsApplyByRecipient(userId, id, ItemPerPage),
+                ActionName = nameof(this.AllAppointmentsApllyByRecipient),
+            };
+
+            return this.View(viewModel);
+        }
     }
 }

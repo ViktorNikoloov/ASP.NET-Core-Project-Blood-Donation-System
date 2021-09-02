@@ -5,12 +5,9 @@
 
     using BloodDonation.Data.Models.Enums;
 
-    public class AllAppointmentsInListViewModel
+    public class AllAppointmentsApplyByRecipientInListViewModel
     {
         public int Id { get; set; }
-
-        [Display(Name = "Име на кръводарител")]
-        public string DonorName { get; set; }
 
         [Display(Name = "Кръвна група")]
         public BloodType BloodType { get; set; }
@@ -21,11 +18,11 @@
         [Display(Name = "Краен срок")]
         public DateTime DeadLine { get; set; }
 
-        [Display(Name = "Телефон на кръводарител")]
-        public string DonorPhone { get; set; }
+        [Display(Name = "Информация за изпращане")]
+        public string SendingAddressInfo { get; set; }
 
-        [Display(Name = "Имейл на кръводарител")]
-        public string DonorEmail { get; set; }
+        [Display(Name = "Допълнителна информация ")]
+        public string AdditionalInfo { get; set; }
 
         public string EnumDisplayName
            => this.EnumHelperDisplayName(this.BloodType);

@@ -24,7 +24,9 @@
 
         int GetAllAppointmentsApllyByRecipientCount(string recipientId);
 
-        IEnumerable<AllAppointmentsInListViewModel> GetAll(string userId, int page, int itemsPerPage);
+        IEnumerable<AllAppointmentsTookByDonorInListViewModel> GetAllAppointmentsTookByDonor(string userId, int page, int itemsPerPage);
+
+        IEnumerable<AllAppointmentsApplyByRecipientInListViewModel> GetAllAppointmentsApplyByRecipient(string userId, int page, int itemsPerPage);
 
         string GetRecipientEmail(string userId);
     }

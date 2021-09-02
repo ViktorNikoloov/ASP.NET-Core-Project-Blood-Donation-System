@@ -119,7 +119,7 @@
             await this.recipientRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<AllAppointmentsInListViewModel> GetAll(string userId, int page, int itemsPerPage)
+        public IEnumerable<AllAppointmentsTookByDonorInListViewModel> GetAllAppointmentsTookByDonor(string userId, int page, int itemsPerPage)
         {
             var recipientrId = this.GetRecipientIdByUserId(userId);
             var appointmentsApplyByRecipient = this.appointmentsDonorsRepository.All()
@@ -127,7 +127,7 @@
             .OrderByDescending(x => x.Appointment.DeadLine)
             .Skip((page - 1) * itemsPerPage) // Pages formula
             .Take(itemsPerPage)
-            .Select(x => new AllAppointmentsInListViewModel
+            .Select(x => new AllAppointmentsTookByDonorInListViewModel
             {
                 Id = x.Appointment.Id,
                 DonorName = $"{x.Donor.FirstName} {x.Donor.LastName}",
@@ -136,6 +136,28 @@
                 BloodType = x.Donor.BloodType,
                 DonorPhone = x.Donor.PhoneNumber,
                 DonorEmail = x.Donor.User.Email,
+            })
+            .ToList();
+
+            return appointmentsApplyByRecipient;
+        }
+
+        public IEnumerable<AllAppointmentsApplyByRecipientInListViewModel> GetAllAppointmentsApplyByRecipient(string userId, int page, int itemsPerPage)
+        {
+            var recipientrId = this.GetRecipientIdByUserId(userId);
+            var appointmentsApplyByRecipient = this.appointmentRepository.All()
+            .Where(x => x.RecipientId == recipientrId && x.IsDeleted == false && x.IsApproved == true)
+            .OrderByDescending(x => x.DeadLine)
+            .Skip((page - 1) * itemsPerPage) // Pages formula
+            .Take(itemsPerPage)
+            .Select(x => new AllAppointmentsApplyByRecipientInListViewModel
+            {
+                Id = x.Id,
+                StartDate = x.StartDate,
+                DeadLine = x.DeadLine,
+                BloodType = x.Recipient.BloodType,
+                SendingAddressInfo = x.SendingAddressInfo,
+                AdditionalInfo = x.AdditionalInfo,
             })
             .ToList();
 

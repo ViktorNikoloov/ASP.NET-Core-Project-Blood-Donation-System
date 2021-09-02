@@ -1,5 +1,5 @@
 ﻿@using BloodDonation.Web.ViewModels.Recipient
-@model AllAppointmentsTookByDonorListViewModel
+@model AllAppointmentsApplyByRecipientListViewModel
 
 @{
     ViewData["Title"] = "Молби взети от кръводарителя";
@@ -37,7 +37,7 @@
         @if (@Model.Appointments.Count() == 0)
         {
             <div class="d-grid d-sm-flex justify-content-center">
-                <a class="btn btn-outline-danger btn-icon btn-block mb-3 ml-2 mr-2">Все още нямате взета молба от кръводарител!</a>
+                <a asp-action="Create" asp-controller="Appointment" class="btn btn-outline-danger btn-icon btn-block mb-3 ml-2 mr-2">Все още нямате подадена молба. Направете го тук !</a>
             </div>
         }
 
@@ -50,14 +50,6 @@
 
                     <div class="card border border-dark mb-2 badge-@if (isOver <= 0) { <text>info</text> } else { <text>success</text> }">
                         <div class="card-header text-center">
-                            <div class="col-sm">
-                                <label asp-for=" @appointment.DonorName"></label>
-                                <p class="btn btn-block btn-icon btn-primary">Молбата е взета от @appointment.DonorName</p>
-                            </div>
-
-                            <hr class=" bg-primary w-auto">
-                        </div>
-                        <div class="card-body">
                             <div class="row">
 
                                 <div class="col-sm text-center">
@@ -84,20 +76,25 @@
 
                             </div>
 
+                            <hr class=" bg-primary w-auto">
+                        </div>
+                        <div class="card-body">
+                           
+
                             <div class="row">
 
                                 <div class="col-sm text-center">
                                     <div class="col-sm">
-                                        <label asp-for=" @appointment.DonorPhone"></label>
-                                        <p class="btn btn-block btn-icon btn-primary">@appointment.DonorPhone</p>
+                                        <label asp-for=" @appointment.SendingAddressInfo"></label>
+                                        <p class="btn btn-block btn-icon btn-primary">@appointment.SendingAddressInfo</p>
                                     </div>
 
                                 </div>
 
                                 <div class="col-sm text-center">
                                     <div class="col-sm">
-                                        <label asp-for=" @appointment.DonorEmail"></label>
-                                        <p class="btn btn-block btn-icon btn-primary">@appointment.DonorEmail</p>
+                                        <label asp-for=" @appointment.AdditionalInfo"></label>
+                                        <p class="btn btn-block btn-icon btn-primary">@appointment.AdditionalInfo</p>
                                     </div>
                                 </div>
 
