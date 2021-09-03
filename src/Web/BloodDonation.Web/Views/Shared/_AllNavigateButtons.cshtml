@@ -18,22 +18,22 @@
     {
         if (this.User.IsInRole(GlobalConstants.RecipientRoleName))
         {
-            <li class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                <button type="button" class="btn btn-outline-danger btn-icon btn-sm mt-2 mb-1 text-white-50">Молби</button>
+            <li class="btn-group btn-sm" role="group" aria-label="Button group with nested dropdown">
+                <button type="button" class="btn btn-outline-danger btn-icon btn-sm p-2 mt-1 text-white-50">Молби</button>
                 <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="btn btn-outline-danger btn-icon btn-sm dropdown-toggle mt-2 mb-1 mr-1 text-white-50" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></button>
+                    <button id="btnGroupDrop1" type="button" class="btn btn-outline-danger btn-icon btn-sm dropdown-toggle mt-1 mr-1 text-white-50" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                     <div class="dropdown-menu bg-primary text-info" aria-labelledby="btnGroupDrop1">
 
                         <a class="dropdown-item" asp-area="" asp-controller="Appointment" asp-action="Create">
-                            <i class="fas fa-hand-holding-heart"></i> Молба за кръв
+                            <i class="fas fa-hand-holding-heart text-info">Молба за кръв</i>
                         </a>
 
                         <a class="dropdown-item" asp-area="" asp-controller="Recipient" asp-action="AllAppointmentsApllyByRecipient">
-                            <i class="fas fa-tasks"></i> Пуснати молби
+                            <i class="fas fa-tasks text-info">Пуснати молби</i>
                         </a>
 
                         <a class="dropdown-item" asp-area="" asp-controller="Recipient" asp-action="AllAppointmentsTookByDonor">
-                            <i class="fas fa-tasks"></i> Взети молби
+                            <i class="fas fa-tasks  text-info">Взети молби</i>
                         </a>
                     </div>
                 </div>
@@ -42,20 +42,22 @@
         }
         else if (this.User.IsInRole(GlobalConstants.DonorRoleName))
         {
-            <li class="nav-item  mt-1 mr-1">
-                <button type="button" class="btn btn-outline-danger btn-icon btn-sm  m-0 m-md-1 text-white-50">
-                    <a class="nav-link" asp-area="" asp-controller="Appointment" asp-action="All">
-                        <i class="fas fa-tasks"></i>> Всички молби
-                    </a>
-                </button>
-            </li>
 
-            <li class="nav-item  mt-1 mr-1">
-                <button type="button" class="btn btn-outline-danger btn-icon btn-sm  m-0 m-md-1 text-white-50">
-                    <a class="nav-link" asp-area="" asp-controller="Donor" asp-action="All">
-                        <i class="fas fa-hand-holding-heart"></i> Взети молби
-                    </a>
-                </button>
+            <li class="btn-group btn-sm" role="group" aria-label="Button group with nested dropdown">
+                <button type="button" class="btn btn-outline-danger btn-icon btn-sm p-2 mt-1 text-white-50">Молби</button>
+                <div class="btn-group" role="group">
+                    <button id="btnGroupDrop1" type="button" class="btn btn-outline-danger btn-icon btn-sm dropdown-toggle mt-1 mr-1 text-white-50" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                    <div class="dropdown-menu bg-primary text-info" aria-labelledby="btnGroupDrop1">
+
+                        <a class="dropdown-item text-info" asp-area="" asp-controller="Appointment" asp-action="All">
+                            <i class="fas fa-tasks text-info"> Всички молби</i>
+                        </a>
+
+                        <a class="dropdown-item" asp-area="" asp-controller="Donor" asp-action="All">
+                            <i class="fas fa-hand-holding-heart text-info">Взети молби</i>
+                        </a>
+                    </div>
+                </div>
             </li>
         }
 
