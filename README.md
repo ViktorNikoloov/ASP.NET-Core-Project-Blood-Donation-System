@@ -46,13 +46,8 @@ Recipient can [Create an account](https://res.cloudinary.com/dvvbab0fs/image/upl
 >Once the blood appointment is aplly the recipient could edit only "Additional info and Sending info" fields. If he/she want to edit something else he/she need to write a requiest to the Admin.
 
 > :warning: **Note**: Donors should be approved by a third party! 
-> :warning: **Note**: Donors receive an [email](https://res.cloudinary.com/dvvbab0fs/image/upload/v1632393759/Recipients/README/DonorEmail_gbumm8.jpg) when they are approved or rejected! 
-
-The admin user have acces to [All applicants](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629214471/Recipients/README/Admin_panel_candidates_approved_message_zwu3sw.jpg). He could see all [question's answers](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629214471/Recipients/README/Admin_panel_candidates_correct_answer_n8jjnn.jpg) and he takes care of [approval](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629214471/Recipients/README/Admin_panel_candidates_approved_lrap8p.jpg) :thumbsup: or [rejection](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629214471/Recipients/README/Admin_panel_candidates_delete_nqtgak.jpg) :thumbsdown: of applicants).
-
-**Note**: The Donors recieving an email if his/her applicant is approved or rejected.
-
-Once approved by the admin the user is officially a **donor** and can access their profile :heavy_check_mark:.
+> :warning: **Note**: Donors receive an [email](https://res.cloudinary.com/dvvbab0fs/image/upload/v1632393759/Recipients/README/DonorEmail_gbumm8.jpg) when his/her applicant is approved or rejected
+> :warning: **Note**: Once approved by the admin the user is officially a **donor** and can access their profile :heavy_check_mark:.
 
 >:warning: **Note**: A donor should fill their [Profile](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629217823/Recipients/README/DonorProfile_gb7hza.jpg) info after approval :bust_in_silhouette: in order to could take recipient's blood appointments.
 
