@@ -11,11 +11,12 @@
 
     using BloodDonation.Common;
     using BloodDonation.Data.Models;
+    using BloodDonation.Services.Data.Email;
     using BloodDonation.Services.Data.User;
+    using BloodDonation.Services.Messaging;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.WebUtilities;
@@ -30,6 +31,7 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<RegisterModel> logger;
         private readonly IEmailSender emailSender;
+        private readonly IEmailsService emailsService;
         private readonly IUsersService usersService;
 
         public RegisterDonorModel(
@@ -37,12 +39,14 @@
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
+            IEmailsService emailsService,
             IUsersService usersService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
             this.emailSender = emailSender;
+            this.emailsService = emailsService;
             this.usersService = usersService;
         }
 
@@ -125,8 +129,8 @@
                         values: new { area = "Identity", userId = user.Id, code = code },
                         protocol: this.Request.Scheme);
 
-                    await this.emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                         $"Моля потвърдете вашият имейл адрес.<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'></a>.");
+                    //await this.emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //     $"Моля потвърдете вашият имейл адрес.<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'></a>.");
 
                     if (this.userManager.Options.SignIn.RequireConfirmedAccount)
                     {
@@ -159,7 +163,12 @@
                             }
                         }
 
+                        var emailHtml = this.emailsService.GenerateEmailDonorSendApplication(user);
+                        var subject = "Нова кандидатура за кръводарител";
+                        await this.emailSender.SendEmailAsync(GlobalConstants.SystemEmail, GlobalConstants.SystemName, GlobalConstants.SystemEmail, subject, emailHtml);
+
                         this.TempData["Message"] = "Вашата заявка за \"Кръводарител\" се изпрати успешно, моля изчакайте получаването на имейл за одобрение от \"Администратор\"";
+
                         return this.LocalRedirect(returnUrl);
                     }
                 }

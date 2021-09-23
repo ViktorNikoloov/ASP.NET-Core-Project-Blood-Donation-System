@@ -62,6 +62,26 @@
             return htmlContent.ToString();
         }
 
+        public string GenerateEmailDonorSendApplication(ApplicationUser user)
+        {
+            var htmlContent = new StringBuilder();
+            var subject = "Получена е нова кандидатура за дарител";
+            htmlContent.AppendLine($"<h1>{subject}</h1>")
+                .AppendLine("<hr>")
+                .AppendLine($"<h3>Информация за кръводарителя:</h3>")
+                .AppendLine($"<h5>Имейл адрес: {user.Email}</h5>")
+                .AppendLine($"<h5>Телефонен номер: {user.PhoneNumber}</h5>")
+                .AppendLine("<hr>")
+                .AppendLine($"<h3>Въпроси и отговори:</h5>");
+            foreach (var questionAnswer in user.QuestionsAnswers)
+            {
+                var translateAnswer = questionAnswer.Answer == "True" ? "Да" : "Не";
+                htmlContent.AppendLine($"<h5>-{questionAnswer.Question} - {translateAnswer}</h5>");
+            }
+
+            return htmlContent.ToString();
+        }
+
         public string GenerateEmailDonorTakeAnAppointmentHtmlContent(GetDonorByIdDto model, string subject)
         {
             var htmlContent = new StringBuilder();

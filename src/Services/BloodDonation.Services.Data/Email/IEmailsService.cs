@@ -13,5 +13,7 @@
         string GenerateEmailApplicantResponseHtmlContent(ApplicationUser? model, string subject, string content, string email = "");
 
         string GenerateEmailAppoinmentResponseHtmlContent(ApplicationUser? model, string subject, string content, string email = "");
+
+        string GenerateEmailDonorSendApplication(ApplicationUser user);
     }
 }
