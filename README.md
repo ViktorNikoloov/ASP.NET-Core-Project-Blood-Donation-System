@@ -45,7 +45,8 @@ Recipient can [Create an account](https://res.cloudinary.com/dvvbab0fs/image/upl
 
 >Once the blood appointment is aplly the recipient could edit only "Additional info and Sending info" fields. If he/she want to edit something else he/she need to write a requiest to the Admin.
 
-> :warning: **Note**: A donors should be approved by a third party! 
+> :warning: **Note**: Donors should be approved by a third party! 
+> :warning: **Note**: Donors receive an [email](https://res.cloudinary.com/dvvbab0fs/image/upload/v1632393759/Recipients/README/DonorEmail_gbumm8.jpg) when they are approved or rejected! 
 
 The admin user have acces to [All applicants](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629214471/Recipients/README/Admin_panel_candidates_approved_message_zwu3sw.jpg). He could see all [question's answers](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629214471/Recipients/README/Admin_panel_candidates_correct_answer_n8jjnn.jpg) and he takes care of [approval](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629214471/Recipients/README/Admin_panel_candidates_approved_lrap8p.jpg) :thumbsup: or [rejection](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629214471/Recipients/README/Admin_panel_candidates_delete_nqtgak.jpg) :thumbsdown: of applicants).
 
@@ -76,21 +77,23 @@ There is a [information on the navigation bar](https://res.cloudinary.com/dvvbab
 - Once the appointment request has been took, to the recipient will be sending a email that the appointment is taken and a little information about the donor.
 
 * ### 4. Blog articles
-* Create an [articles](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629315304/Recipients/README/table_a4qfq6.jpg)
-* All blog [articles](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629318198/Recipients/README/AllArticle_sc76vj.jpg)
-* Every read the [article](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629317891/Recipients/README/Article_imibcd.jpg)
-* Create ot read [comments](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629318021/Recipients/README/Comments_cflspn.jpg) on the article's page
-* A few articles [in home page](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629317317/Recipients/README/Homearticles_abfevm.jpg)
+* Create an [articles](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629315304/Recipients/README/table_a4qfq6.jpg).
+* All blog's articles [articles](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629318198/Recipients/README/AllArticle_sc76vj.jpg).
+* Everyone could choose and read the [article](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629317891/Recipients/README/Article_imibcd.jpg).
+* Create or read [comments](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629318021/Recipients/README/Comments_cflspn.jpg) on the article's page.
+* A few articles [in home page](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629317317/Recipients/README/Homearticles_abfevm.jpg).
 
 * ### 3. Admin panel
-The admin have an [Admin panel](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629214471/Recipients/README/Admin_panel_candidates_approved_message_zwu3sw.jpg).
+The admin have an [Admin panel](https://res.cloudinary.com/dvvbab0fs/image/upload/v1632391834/Recipients/README/AdminPanel_c5iyrh.jpg).
 
 The admin could:
-* Take a look of the donor's control questions and take care of approve or reject the applicants.
-* Take a look of every new applyed blood appointment and decide to aprove or reject it.
-* Could Edit all blood appointment
-* Could write new blog articles or edit the old one
-* Have access to HangFire statistics
+* see all donor [applications](https://res.cloudinary.com/dvvbab0fs/image/upload/v1632392096/Recipients/README/AllApllications_ixs4sq.jpg).
+* take a look of the donor's control [questions](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629214471/Recipients/README/Admin_panel_candidates_correct_answer_n8jjnn.jpg) and take care of [approve](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629214471/Recipients/README/Admin_panel_candidates_approved_lrap8p.jpg) or [reject](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629214471/Recipients/README/Admin_panel_candidates_delete_nqtgak.jpg) the applicants.
+* take a look of [all not approved](https://res.cloudinary.com/dvvbab0fs/image/upload/v1632392903/Recipients/README/AllNotApprovedBloodApp_r0rz3h.jpg) and [see all info](https://res.cloudinary.com/dvvbab0fs/image/upload/v1632392973/Recipients/README/BloodApplication_ajvtmi.jpg) And decide to [aprove](https://res.cloudinary.com/dvvbab0fs/image/upload/v1632393128/Recipients/README/BloodApplicationApprove_bp8idj.jpg) or [reject](https://res.cloudinary.com/dvvbab0fs/image/upload/v1632393128/Recipients/README/BloodApplicationApprove_bp8idj.jpg) it.
+* could [Edit](https://res.cloudinary.com/dvvbab0fs/image/upload/v1632393258/Recipients/README/BloodApplicationEdit_jjirkn.jpg) all blood appointment
+* Receive an [email](https://res.cloudinary.com/dvvbab0fs/image/upload/v1632393445/Recipients/README/AdminEmail_juvubx.jpg) when a new blood application is applyed.
+* could write new blog articles or edit the old one
+* have access to HangFire statistics
 
 
 ## And more, and more...
