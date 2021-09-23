@@ -40,12 +40,10 @@
 
     @this.RenderBody()
 
-    <footer class="border-top bott footer text-muted bg-primary">
-        <div class="container">
-            <div class="card-body">
-                <div class="float-left"><a href="/">@GlobalConstants.SystemName</a> - <a asp-area="" asp-controller="Home" asp-action="Privacy">Политика за поверителност</a>  &copy; 2021-@(DateTime.UtcNow.Year) - <a href="https://github.com/ViktorNikoloov/ASP.NET-Core-Project-Blood-Donation-System" target="_blank">Open source system</a></div>
+    <footer class=" footer text-muted bg-primary " >
+            <div class="card-body" >
+                <div class="float-left"><a href="/">@GlobalConstants.SystemName</a> - <a asp-area="" asp-controller="Home" asp-action="Privacy">Политика за поверителност</a>  &copy; 2021-@(DateTime.UtcNow.Year) - <a href="https://github.com/ViktorNikoloov/ASP.NET-Core-Project-Blood-Donation-System">Open source system</a></div>
             </div>
-        </div>
     </footer>
 
 </body>

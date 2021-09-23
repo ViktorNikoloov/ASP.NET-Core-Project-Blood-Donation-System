@@ -76,57 +76,60 @@
     </div>
     <hr class="bg-white w-auto">
 
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-xl-6 col-sm-6 mb-5">
-                <div class="card  bg-primary rounded shadow-sm py-5 px-4 h-100">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <img src="~/BeRecipientHomePicture.gif" alt="Be a recipient home picture" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+    @if (!SignInManager.IsSignedIn(this.User))
+    {
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-xl-6 col-sm-6 mb-5">
+                    <div class="card  bg-primary rounded shadow-sm py-5 px-4 h-100">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <img src="~/BeRecipientHomePicture.gif" alt="Be a recipient home picture" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-text">
-                            <h5 class="mb-0 text-info">Стани Реципиент</h5>
-                            <span class="small text-uppercase text-danger">Потърси помощ.</span>
+                        <div class="card-body">
+                            <div class="card-text">
+                                <h5 class="mb-0 text-info">Стани Реципиент</h5>
+                                <span class="small text-uppercase text-danger">Потърси помощ.</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-footer d-grid d-md-flex justify-content-center">
-                        <a class="btn btn-outline-success btn-icon btn-sm text-white mb-3 ml-2 mr-2" asp-area="Identity" asp-page="/Account/RegisterRecipient">
-                            <i class="fas fa-syringe"></i> Стани Реципиент
-                        </a>
-                        <a class="btn btn-outline-success btn-icon btn-sm text-white mb-3 ml-2 mr-2" asp-area="Identity" asp-page="/Account/LoginRecipient">
-                            <i class="fas fa-sign-in-alt"></i> Вход
-                        </a>
+                        <div class="card-footer d-grid d-md-flex justify-content-center">
+                            <a class="btn btn-outline-success btn-icon btn-sm text-white mb-3 ml-2 mr-2" asp-area="Identity" asp-page="/Account/RegisterRecipient">
+                                <i class="fas fa-syringe"></i> Стани Реципиент
+                            </a>
+                            <a class="btn btn-outline-success btn-icon btn-sm text-white mb-3 ml-2 mr-2" asp-area="Identity" asp-page="/Account/LoginRecipient">
+                                <i class="fas fa-sign-in-alt"></i> Вход
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-xl-6 col-sm-6 mb-5">
-                <div class="card  bg-primary rounded shadow-sm py-5 px-4 h-100">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <img src="~/BeDonorHomePicture.gif" alt="Be a donor home picture" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                <div class="col-xl-6 col-sm-6 mb-5">
+                    <div class="card  bg-primary rounded shadow-sm py-5 px-4 h-100">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <img src="~/BeDonorHomePicture.gif" alt="Be a donor home picture" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-">
-                            <h5 class="mb-0 text-info">Стани Кръводарител</h5>
-                            <span class="small text-uppercase text-danger">Бъди нечии герой !</span>
+                        <div class="card-body">
+                            <div class="card-">
+                                <h5 class="mb-0 text-info">Стани Кръводарител</h5>
+                                <span class="small text-uppercase text-danger">Бъди нечии герой !</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-footer d-grid d-md-flex justify-content-center">
-                        <a class="btn btn-outline-success btn-icon btn-sm text-white mb-3 ml-2 mr-2" asp-area="Identity" asp-page="/Account/RegisterDonor" asp-route-returnUrl="@url">
-                            <i class="fas fa-hand-holding-heart"></i> Стани Кръводарител
-                        </a>
-                        <a class="btn btn-outline-success btn-icon btn-sm text-white mb-3 ml-2 mr-2" asp-area="Identity" asp-page="/Account/LoginDonor">
-                            <i class="fas fa-sign-in-alt"></i></i> Вход
-                        </a>
+                        <div class="card-footer d-grid d-md-flex justify-content-center">
+                            <a class="btn btn-outline-success btn-icon btn-sm text-white mb-3 ml-2 mr-2" asp-area="Identity" asp-page="/Account/RegisterDonor" asp-route-returnUrl="@url">
+                                <i class="fas fa-hand-holding-heart"></i> Стани Кръводарител
+                            </a>
+                            <a class="btn btn-outline-success btn-icon btn-sm text-white mb-3 ml-2 mr-2" asp-area="Identity" asp-page="/Account/LoginDonor">
+                                <i class="fas fa-sign-in-alt"></i> Вход
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    }
 
 </div>
 
