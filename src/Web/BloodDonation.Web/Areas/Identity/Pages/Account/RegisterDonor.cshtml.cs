@@ -163,8 +163,8 @@
                             }
                         }
 
-                        var emailHtml = this.emailsService.GenerateEmailDonorSendApplication(user);
                         var subject = "Нова кандидатура за кръводарител";
+                        var emailHtml = this.emailsService.GenerateEmailDonorSendApplication(user, subject);
                         await this.emailSender.SendEmailAsync(GlobalConstants.SystemEmail, GlobalConstants.SystemName, GlobalConstants.SystemEmail, subject, emailHtml);
 
                         this.TempData["Message"] = "Вашата заявка за \"Кръводарител\" се изпрати успешно, моля изчакайте получаването на имейл за одобрение от \"Администратор\"";

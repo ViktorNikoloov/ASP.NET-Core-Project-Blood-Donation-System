@@ -11,13 +11,13 @@
     using BloodDonation.Data.Models;
     using BloodDonation.Data.Models.Enums;
     using BloodDonation.Services.Data.Cloudinary;
+    using BloodDonation.Services.Data.Email;
     using BloodDonation.Services.Data.Recipient;
-
+    using BloodDonation.Services.Messaging;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.WebUtilities;
@@ -35,6 +35,7 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<RegisterModel> logger;
         private readonly IEmailSender emailSender;
+        private readonly IEmailsService emailsService;
         private readonly IRecipientsService recipientsService;
         private readonly ICloudinaryService cloudinaryService;
 
@@ -43,6 +44,7 @@
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
+            IEmailsService emailsService,
             IRecipientsService recipientsService,
             ICloudinaryService cloudinaryService)
         {
@@ -50,6 +52,7 @@
             this.signInManager = signInManager;
             this.logger = logger;
             this.emailSender = emailSender;
+            this.emailsService = emailsService;
             this.recipientsService = recipientsService;
             this.cloudinaryService = cloudinaryService;
         }
@@ -191,14 +194,13 @@
                         values: new { area = "Identity", userId = user.Id, code = code },
                         protocol: this.Request.Scheme);
 
-                    await this.emailSender.SendEmailAsync(this.Input.Email, "Confirm your email",
-                        $"Моля потвърдете вашият имейл адрес.<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'></a>.");
+                    //await this.emailSender.SendEmailAsync(this.Input.Email, "Confirm your email",
+                    //    $"Моля потвърдете вашият имейл адрес.<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'></a>.");
 
                     this.TempData["Message"] = "Вашият акаунт беше създаден успешно.";
 
                     if (this.userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-
                         return this.RedirectToPage("RegisterConfirmation", new { email = this.Input.Email });
                     }
                     else
@@ -206,6 +208,10 @@
                         await this.userManager.AddToRoleAsync(user, GlobalConstants.RecipientRoleName);
                         await this.signInManager.SignInAsync(user, isPersistent: false);
                         await this.recipientsService.CreateRecipientAsync(user, user.Id, this.Input.FirstName, this.Input.MiddleName, this.Input.LastName, this.Input.CityName, this.Input.StreetName, this.Input.PostCode, this.Input.Gender, this.Input.BloodType, imageUrl, this.Input.PhoneNumber);
+
+                        var subject = "Нов регистриран реципиент";
+                        var emailHtml = this.emailsService.GenerateEmailRecipientNewRegistration(user, subject);
+                        await this.emailSender.SendEmailAsync(GlobalConstants.SystemEmail, GlobalConstants.SystemName, GlobalConstants.SystemEmail, subject, emailHtml);
 
                         return this.LocalRedirect(returnUrl);
                     }

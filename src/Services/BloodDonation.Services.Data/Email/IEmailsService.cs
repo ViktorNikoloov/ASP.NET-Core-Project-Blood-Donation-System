@@ -14,6 +14,8 @@
 
         string GenerateEmailAppoinmentResponseHtmlContent(ApplicationUser? model, string subject, string content, string email = "");
 
-        string GenerateEmailDonorSendApplication(ApplicationUser user);
+        string GenerateEmailDonorSendApplication(ApplicationUser user, string subject);
+
+        string GenerateEmailRecipientNewRegistration(ApplicationUser user, string subject);
     }
 }

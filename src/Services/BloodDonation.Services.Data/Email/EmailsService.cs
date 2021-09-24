@@ -3,6 +3,7 @@
     using System.Text;
 
     using BloodDonation.Data.Models;
+    using BloodDonation.Data.Models.Enums;
     using BloodDonation.Services.Data.DTO;
     using BloodDonation.Web.ViewModels.Appointment;
 
@@ -62,10 +63,9 @@
             return htmlContent.ToString();
         }
 
-        public string GenerateEmailDonorSendApplication(ApplicationUser user)
+        public string GenerateEmailDonorSendApplication(ApplicationUser user, string subject)
         {
             var htmlContent = new StringBuilder();
-            var subject = "Получена е нова кандидатура за дарител";
             htmlContent.AppendLine($"<h1>{subject}</h1>")
                 .AppendLine("<hr>")
                 .AppendLine($"<h3>Информация за кръводарителя:</h3>")
@@ -95,6 +95,70 @@
                 .AppendLine($"<h5>Град: {model.CityName}</h5>");
 
             return htmlContent.ToString();
+        }
+
+        public string GenerateEmailRecipientNewRegistration(ApplicationUser user, string subject)
+        {
+            var htmlContent = new StringBuilder();
+            var genderInBulgarian = user.Recipient.Gender == Gender.Male ? "Мъж" : "Жена";
+            var enumDisplayName = this.EnumHelperDisplayName(user.Recipient.BloodType);
+
+            htmlContent.AppendLine($"<h1>{subject}</h1>")
+                .AppendLine("<hr>")
+                .AppendLine($"<h3>Информация за реципиента:</h3>")
+                .AppendLine($"<h5>Имена: {user.Recipient.FirstName} {user.Recipient.MiddleName} {user.Recipient.LastName}</h5>")
+                .AppendLine($"<h5>Кръвна група: {enumDisplayName}</h5>")
+                .AppendLine($"<h5>Пол: {genderInBulgarian}</h5>")
+                .AppendLine($"<h5>Град: {user.Recipient.Address.Town.Name}</h5>")
+                .AppendLine($"<h5>Улица: {user.Recipient.Address.Town.Street.Name}</h5>")
+                .AppendLine($"<h5>Телефонен номер: {user.PhoneNumber}</h5>")
+                .AppendLine($"<h5>Имейл адрес: {user.Email}</h5>");
+
+            return htmlContent.ToString();
+        }
+
+        private string EnumHelperDisplayName(BloodType bloodType)
+        {
+            string enumDisplayName = string.Empty;
+
+            if (bloodType == BloodType.Unknown)
+            {
+                enumDisplayName = "Липсва";
+            }
+            else if (bloodType == BloodType.APositive)
+            {
+                enumDisplayName = "A(+)";
+            }
+            else if (bloodType == BloodType.ANegative)
+            {
+                enumDisplayName = "A(-)";
+            }
+            else if (bloodType == BloodType.BPositive)
+            {
+                enumDisplayName = "B(+)";
+            }
+            else if (bloodType == BloodType.BNegative)
+            {
+                enumDisplayName = "B(-)";
+            }
+            else if (bloodType == BloodType.ABPositive)
+            {
+                enumDisplayName = "AB(+)";
+            }
+            else if (bloodType == BloodType.ABNegative)
+            {
+                enumDisplayName = "AB(-)";
+            }
+            else if (bloodType == BloodType.ZeroPositive)
+            {
+                enumDisplayName = "0(+)";
+            }
+            else if (bloodType == BloodType.ZeroNegative)
+            {
+                enumDisplayName = "0(-)";
+            }
+
+            return enumDisplayName;
         }
     }
 }
