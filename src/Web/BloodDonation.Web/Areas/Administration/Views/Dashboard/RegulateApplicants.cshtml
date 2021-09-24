@@ -35,10 +35,10 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var applicant in Model.Applicants)
+        @foreach (var applicant in Model.Applicants.OrderByDescending(x=>x.CreatedOn))
         {
             <tr>
-                <td>@applicant.CreatedOn</td>
+                <td>@applicant.CreatedOn.ToLocalTime()</td>
                 <td>@applicant.Email</td>
                 <td>@applicant.PhoneNumber</td>
                 <td>
