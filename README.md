@@ -1,4 +1,4 @@
-# Blood-Donation-System
+# [Blood-Donation-System](https://blooddonationbg.azurewebsites.net/)
 
 ## <u>Build with</u>:
 * [ASP .NET Core](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-5.0)
@@ -13,6 +13,11 @@
 * [HtmlSanitizer](https://csharp.hotexamples.com/examples/Ganss.XSS/HtmlSanitizer/-/php-htmlsanitizer-class-examples.html)
 * [Facebook and Google login](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/social/?view=aspnetcore-5.0&tabs=visual-studio)
 * [HangFire](https://www.hangfire.io/) for Administrator role olny
+ 
+## <u>SQL Server Database Diagram</u>:
+* [SQL Server Database Diagram with good image resolution](https://res.cloudinary.com/dvvbab0fs/image/upload/v1632857132/Recipients/README/BloodDonationDiagram_gmdhlh.png)
+
+ <img src="https://res.cloudinary.com/dvvbab0fs/image/upload/v1632857132/Recipients/README/BloodDonationDiagram_gmdhlh.png" alt="SQL Server Database Diagram" width="500" height="600"> 
 
 ## <u>Hosted on</u>:
 * [Azure](https://portal.azure.com/) - https://blooddonationbg.azurewebsites.net/
