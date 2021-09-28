@@ -51,7 +51,7 @@ Recipient can [Create an account](https://res.cloudinary.com/dvvbab0fs/image/upl
 >Once the blood appointment is aplly the recipient could edit only "Additional info and Sending info" fields. If he/she want to edit something else he/she needs to write a request to the Admin.
 
 > :warning: **Note**: Donors should be approved by a third party! 
-> :warning: **Note**: Donors receive an [email](https://res.cloudinary.com/dvvbab0fs/image/upload/v1632393759/Recipients/README/DonorEmail_gbumm8.jpg) when his/her applicant is approved or rejected
+> :warning: **Note**: Donors receive an [email](https://res.cloudinary.com/dvvbab0fs/image/upload/v1632866528/Recipients/README/DonorApprovalEmail_ffxewq.png) when his/her applicant is approved or rejected
 > :warning: **Note**: Donor will receive an [approval](https://res.cloudinary.com/dvvbab0fs/image/upload/v1632858581/Recipients/README/DonorRecieveEmail_mwtwki.png) or rejected email.
 > :warning: **Note**: Once approved by the admin the user is officially a **donor** and can access their profile :heavy_check_mark:.
 
@@ -68,7 +68,7 @@ Once both sides have completely set up their profiles then the donor have a choi
 When the donor finds a recipient he/she could click on that recipient's appointment card and [See](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629218481/Recipients/README/DonorSeeApp1_ghiw5h.jpg) detailed information about the appointment. 
 And if he/she wants to [Take](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629218561/Recipients/README/DonorSeeApp2_usbtcc.jpg) it just need to click on the button.
 
-**Note**: The Donor also could Send all blood appointment's information to its email only by clicking the *Send* button or *Printing* it if he/she needs to save the information about the recipient.
+**Note**: The Donor also could Send all blood appointment's information to its email only by clicking the [Send] button(https://res.cloudinary.com/dvvbab0fs/image/upload/v1632393759/Recipients/README/DonorEmail_gbumm8.jpg) or *Printing* it.
 
 >:warning: **Note**: Donors could take only 1 blood appointment every two mounths.
 There is an [information](https://res.cloudinary.com/dvvbab0fs/image/upload/v1629219467/Recipients/README/DonordonationInfo_iihhxm.jpg) with last donataion and ramaining time to the next one.
